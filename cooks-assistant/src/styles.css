@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0px;
+  --lightwhite: #ffffff;
+  --white: #f8f9fa;
+  --darkwhite: #eff0f1;
+  --main1000: #012a4a;
+  --main900: #013a63;
+  --main800: #01497c;
+  --main700: #014f86;
+  --main600: #2a6f97;
+  --main500: #2c7da0;
+  --main400: #468faf;
+  --main300: #61a5c2;
+  --main200: #89c2d9;
+  --main100: #a9d6e5;
+
+  --black: #000;
+
+  --pastel-green: #2a9d8f;
+  --pastel-yellow: #e9c46a;
+  --pastel-orange: #f4a261;
+  --pastel-dark-orange: #e76f51;
+  --pastel-red: #e63946;
+  --pastel-blue: #3d405b;
+
+  --darkblack: #000;
+  --black: rgb(22, 21, 21);
+  --lightblack: rgb(11, 11, 11);
+  --google-font: "Playfair Display", serif;
+  --base: 16;
+
+  --r64: calc((64 / var(--base) * 1rem));
+  --r48: calc((48 / var(--base) * 1rem));
+  --r32: calc((32 / var(--base) * 1rem));
+  --r28: calc((28 / var(--base) * 1rem));
+  --r24: calc((24 / var(--base) * 1rem));
+  --r22: calc((22 / var(--base) * 1rem));
+  --r20: calc((20 / var(--base) * 1rem));
+  --r16: calc((16 / var(--base) * 1rem));
+}

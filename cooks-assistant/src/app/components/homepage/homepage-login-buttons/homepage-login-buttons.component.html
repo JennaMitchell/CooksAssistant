@@ -1,0 +1,57 @@
+<div class="homepage-user-bar">
+  <button
+    class="homepage-login-button homepage-login-button-round-left-corner"
+    (mouseenter)="onLoginButtonHover()"
+    (mouseleave)="onLoginButtonHover()"
+  >
+    <img
+      src="assets/images/homepage/user-white.png"
+      alt="Chef Hat Logo"
+      class="homepage-login-button-logo"
+      id="chef-hat-logo-white"
+      [ngClass]="{
+        homepagehidelogo: loginButtonHover === true,
+        homepageshowlogo: loginButtonHover === false
+      }"
+    />
+    <img
+      src="assets/images/homepage/user-black.png"
+      alt="Chef Hat Logo"
+      class="homepage-login-button-logo"
+      id="chef-hat-logo-black"
+      [ngClass]="{
+        homepagehidelogo: loginButtonHover === false,
+        homepageshowlogo: loginButtonHover === true
+      }"
+    />
+    Login
+
+    <div class="homepage-nav-login-break"></div>
+  </button>
+
+  <button
+    class="homepage-login-button homepage-login-button-round-right-corner"
+    (mouseenter)="onRegisterButtonHover()"
+    (mouseleave)="onRegisterButtonHover()"
+  >
+    Register
+    <img
+      src="assets/images/homepage/chef-hat-white.png"
+      alt="Chef Hat Logo"
+      class="homepage-login-button-logo"
+      [ngClass]="{
+        homepagehidelogo: registerButtonHover === true,
+        homepageshowlogo: registerButtonHover === false
+      }"
+    />
+    <img
+      src="assets/images/homepage/chef-hat-black.png"
+      alt="Chef Hat Logo"
+      class="homepage-login-button-logo"
+      [ngClass]="{
+        homepagehidelogo: registerButtonHover === false,
+        homepageshowlogo: registerButtonHover === true
+      }"
+    />
+  </button>
+</div>
