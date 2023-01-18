@@ -38,4 +38,6 @@ body {
   --r22: calc((22 / var(--base) * 1rem));
   --r20: calc((20 / var(--base) * 1rem));
   --r16: calc((16 / var(--base) * 1rem));
+  --r12: calc((12 / var(--base) * 1rem));
+  --r10: calc((10 / var(--base) * 1rem));
 }

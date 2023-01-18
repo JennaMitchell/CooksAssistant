@@ -21,9 +21,9 @@
   justify-content: center;
   border: 0px;
 
-  font-size: var(--r22);
-  line-height: var(--r22);
-  font-family: var(--font-family);
+  font-size: var(--r20);
+  line-height: var(--r20);
+  font-family: var(--google-font);
   color: var(--main800);
   background-color: inherit;
   position: relative;
@@ -77,19 +77,25 @@
   margin: 0px;
   padding: 0px;
   position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .homepage-nav-button-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: max(140%, 140%);
-  height: max(140%, 140%);
+  max-height: max-content;
+  max-width: max-content;
   z-index: 3;
   font-size: inherit;
   line-height: inherit;
   color: inherit;
   font-family: inherit;
+  margin: 0px;
+  padding: 0px;
 }
 
 .homepage-nav-button-highlight {

@@ -17,9 +17,9 @@
 .homepage-login-button {
   max-width: max-content;
   max-height: max-content;
-  font-size: var(--r16);
+  font-size: var(--r12);
   color: #fff;
-  font-family: var(--font-family);
+  font-family: var(--google-font);
   background-color: var(--main700);
   border: 0px;
   padding: 10px 20px;
