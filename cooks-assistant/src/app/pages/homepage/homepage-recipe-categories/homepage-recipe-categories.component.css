@@ -1,0 +1,93 @@
+.homepage-recipe-categories-main-container {
+  width: max(200px, 200px);
+  min-height: calc(1275 / var(--base) * 1rem);
+  max-height: calc(1275 / var(--base) * 1rem);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: max-content max-content 1fr;
+
+  align-items: center;
+  justify-items: center;
+
+  background-color: var(--main800);
+
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 3;
+  position: relative;
+}
+.homepage-recipe-categories-title {
+  font-family: var(--google-font);
+  color: var(--white);
+  font-size: var(--r28);
+  padding: 0px;
+  margin: 0px;
+  grid-row: 1 / span 1;
+}
+.homepage-recipe-categories-sub-title {
+  font-family: var(--google-font);
+  color: var(--white);
+  font-size: var(--r28);
+  padding: 0px;
+  margin: 0px;
+  grid-column: 1 / span 2;
+  justify-self: center;
+}
+
+.homepage-recipe-categories-underline {
+  width: max(80%, 80%);
+  height: max(25px, 25px);
+  object-fit: fill;
+  grid-row: 2 / span 1;
+}
+.homepage-recipe-categories-sub-underline {
+  width: max(80%, 80%);
+  height: max(25px, 25px);
+  object-fit: fill;
+  grid-column: 1 / span 2;
+  justify-self: center;
+}
+.homepage-recipe-categories-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: max(100%, 100%);
+  height: max(100%, 100%);
+  box-sizing: border-box;
+
+  padding: 0px 20px;
+  gap: 10px;
+}
+.homepage-category-button-container {
+  display: flex;
+  flex-direction: column;
+
+  width: max(100%, 100%);
+  height: max(100%, 100%);
+  align-items: center;
+  justify-content: center;
+  transition: all 1s;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+
+  color: var(--white);
+}
+.homepage-category-button-container:hover {
+  background-color: var(--main100);
+  color: black;
+}
+.homepage-category-button-logo {
+  width: max(65%, 65%);
+  height: max(65%, 65%);
+  object-fit: contain;
+}
+.homepage-category-button-text {
+  margin: 0px;
+  padding: 0px;
+  font-family: var(--google-font);
+  font-size: var(--r12);
+  color: inherit;
+}
