@@ -12,12 +12,15 @@
     />
     <div class="new-recipe-slideshow-category-container">
       <div class="new-recipe-slideshows-container">
-        <homepage-new-recipe-slideshow></homepage-new-recipe-slideshow>
+        <homepage-preference-slideshow></homepage-preference-slideshow>
         <homepage-cuisines-section></homepage-cuisines-section>
         <homepage-cooking-time-slideshow></homepage-cooking-time-slideshow>
       </div>
       <homepage-recipe-categories></homepage-recipe-categories>
     </div>
+    <homepage-social-media-section></homepage-social-media-section>
     <homepage-footer></homepage-footer>
   </div>
+  <login-popup *ngIf="lockWebpageViewPort"></login-popup>
+  <signup-popup></signup-popup>
 </div>

@@ -21,6 +21,7 @@ export class HomepageCuisinesSection {
   constructor(private tagFilterService: RecipeTagFilter) {}
   renderReadyIcon = [];
   dataTagArray: string[][] = [];
+
   tempData: DataEntryInterface[] = [
     {
       title: 'Roasted Chicken breast with cherry',

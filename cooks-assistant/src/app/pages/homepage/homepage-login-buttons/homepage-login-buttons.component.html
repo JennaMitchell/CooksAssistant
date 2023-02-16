@@ -3,10 +3,11 @@
     class="homepage-login-button homepage-login-button-round-left-corner"
     (mouseenter)="onLoginButtonHover()"
     (mouseleave)="onLoginButtonHover()"
+    (click)="loginButtonHandler()"
   >
     <img
       src="assets/images/homepage/user-white.png"
-      alt="Chef Hat Logo"
+      alt="User Icon"
       class="homepage-login-button-logo"
       id="chef-hat-logo-white"
       [ngClass]="{
@@ -16,7 +17,7 @@
     />
     <img
       src="assets/images/homepage/user-black.png"
-      alt="Chef Hat Logo"
+      alt="User Icon"
       class="homepage-login-button-logo"
       id="chef-hat-logo-black"
       [ngClass]="{

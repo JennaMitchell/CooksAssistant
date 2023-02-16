@@ -21,7 +21,5 @@ export class LargeSlideShowCard {
       this.cookingTimeStringConverterService.cookingTimeStringConverter(
         +this.cookingTime
       );
-
-    console.log(this.cookingTime);
   }
 }

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 
 @Component({
-  selector: 'homepage-new-recipe-card',
-  templateUrl: './new-recipe-card.component.html',
-  styleUrls: ['./new-recipe-card.component.css'],
+  selector: 'homepage-preference-card',
+  templateUrl: './preference-card.component.html',
+  styleUrls: ['./preference-card.component.css'],
   providers: [],
 })
-export class HomepageNewRecipeCard {
+export class HomepagePreferenceCard {
   @Input('recipeTitle') recipeTitle = '';
   @Input('recipeTags') recipeTags: string[] = [];
   @Input('recipeDescription') recipeDescription = '';

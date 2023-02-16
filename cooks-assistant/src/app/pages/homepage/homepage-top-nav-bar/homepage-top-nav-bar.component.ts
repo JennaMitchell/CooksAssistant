@@ -25,6 +25,5 @@ export class HomepageTopNavBar {
     this.searchButtonHover = !this.searchButtonHover;
   }
 
-  constructor() {}
   ngOnInit() {}
 }

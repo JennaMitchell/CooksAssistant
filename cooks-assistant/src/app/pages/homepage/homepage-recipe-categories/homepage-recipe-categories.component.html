@@ -10,6 +10,8 @@
       class="homepage-category-button-container"
       *ngFor="let dataEntry of preferenceButtonData; let i = index"
       key="homepage-category-button-i"
+      id="{{ dataEntry.id }}"
+      (click)="categoryButtonClickHandler($event)"
     >
       <img
         class="homepage-category-button-logo"
@@ -30,6 +32,8 @@
       class="homepage-category-button-container"
       *ngFor="let nationalityButtonDataEntry of nationalityButtonData"
       key="homepage-category-button-i"
+      id="{{ nationalityButtonDataEntry.id }}"
+      (click)="categoryButtonClickHandler($event)"
     >
       <img
         class="homepage-category-button-logo"
@@ -51,6 +55,8 @@
       class="homepage-category-button-container"
       *ngFor="let mealsButtonDataEntry of mealsTimesButtonData"
       key="homepage-category-button-i"
+      id="{{ mealsButtonDataEntry.id }}"
+      (click)="categoryButtonClickHandler($event)"
     >
       <img
         class="homepage-category-button-logo"

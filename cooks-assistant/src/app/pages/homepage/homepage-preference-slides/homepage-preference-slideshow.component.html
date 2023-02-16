@@ -1,5 +1,5 @@
 <div class="homepage-new-recipe-slideshow-backdrop">
-  <homepage-new-recipe-card
+  <homepage-preference-card
     recipeTitle="{{ tempData[currentlySelectedRecipeNumber].title }}"
     [recipeTags]="tempData[currentlySelectedRecipeNumber].tags"
     recipeDescription="{{ tempData[currentlySelectedRecipeNumber].title }}"
@@ -11,7 +11,7 @@
     [halfStarActive]="halfStarActive"
     flagLocation="{{ flagLocation }}"
     nationOrigin="{{ nationOrigin }}"
-  ></homepage-new-recipe-card>
+  ></homepage-preference-card>
 
   <div class="homepage-new-recipe-slideshow-slide-tracker">
     <svg

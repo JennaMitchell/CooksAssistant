@@ -3,6 +3,9 @@ import { RecipeTagFilter } from 'src/app/utilities/recipe-tag-filter/recipe-tag-
 import { CookingTimeStringConverterService } from 'src/app/utilities/cooking-time-string-converter/cooking-time-string-converter.service';
 import { NumberOfViewsReturnStringService } from 'src/app/utilities/number-of-views-converter/number-of-views-converter.service';
 import { NationFlagImageRetrieverService } from 'src/app/utilities/nation-flag-image-retriever/nation-flag-image-retriever.service';
+
+// used toselect
+
 interface DataEntryInterface {
   title: string;
   cookingTimeInMinutes: string;
@@ -14,9 +17,9 @@ interface DataEntryInterface {
   countryMadeIn: string;
 }
 @Component({
-  selector: 'homepage-new-recipe-slideshow',
-  templateUrl: './homepage-new-recipe-slideshow.component.html',
-  styleUrls: ['./homepage-new-recipe-slideshow.component.css'],
+  selector: 'homepage-preference-slideshow',
+  templateUrl: './homepage-preference-slideshow.component.html',
+  styleUrls: ['./homepage-preference-slideshow.component.css'],
   providers: [
     RecipeTagFilter,
     CookingTimeStringConverterService,
@@ -24,7 +27,7 @@ interface DataEntryInterface {
     NationFlagImageRetrieverService,
   ],
 })
-export class HomepageNewRecipeSlideshow {
+export class HomepagePreferenceSlideshow {
   currentlySelectedRecipeNumber = 0;
   numberOfMakesArray: string[] = [];
   rightDotsActive = false;
@@ -46,6 +49,7 @@ export class HomepageNewRecipeSlideshow {
     private numberOfViewsReturnStringService: NumberOfViewsReturnStringService,
     private nationFlagImageRetrieverService: NationFlagImageRetrieverService
   ) {}
+  // this.store.dispatch(HomepageActions.loadData())
 
   tempData: DataEntryInterface[] = [
     {

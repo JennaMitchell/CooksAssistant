@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { PopupActions } from 'libs/store/popups/popup.actions';
+import { Store } from '@ngrx/store';
+
 @Component({
   selector: 'homepage-login-buttons',
   templateUrl: './homepage-login-buttons.component.html',
@@ -16,6 +18,13 @@ export class HomepageLoginButtons {
     this.registerButtonHover = !this.registerButtonHover;
   }
 
-  constructor() {}
+  constructor(private store: Store) {}
+  loginButtonHandler() {
+    this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
+  }
+  signupButtonHandler() {
+    this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
+  }
+
   ngOnInit() {}
 }

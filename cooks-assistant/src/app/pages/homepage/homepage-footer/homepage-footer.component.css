@@ -30,6 +30,10 @@
   font-size: var(--r18);
   text-decoration: none;
   background-color: inherit;
+  transition: all 1s;
+}
+.homepage-footer-company-info-link:hover {
+  color: var(--main1000);
 }
 .homepage-footer-company-social-media-link {
   width: calc((20 / var(--base) * 1rem));
@@ -37,4 +41,11 @@
   height: calc((20 / var(--base) * 1rem));
   max-height: calc((20 / var(--base) * 1rem));
   object-fit: fill;
+
+  padding: 5px;
+  border-radius: 50%;
+  transition: all 1s;
+}
+.homepage-footer-company-social-media-link:hover {
+  background-color: var(--main200);
 }

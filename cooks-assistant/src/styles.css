@@ -24,6 +24,9 @@ body {
   --pastel-red: #e63946;
   --pastel-blue: #3d405b;
 
+  --input-error-color: rgb(255, 97, 97);
+  --input-active-color: rgb(27, 27, 255);
+
   --darkblack: #000;
   --black: rgb(22, 21, 21);
   --lightblack: rgb(11, 11, 11);
@@ -40,4 +43,18 @@ body {
   --r16: calc((16 / var(--base) * 1rem));
   --r12: calc((12 / var(--base) * 1rem));
   --r10: calc((10 / var(--base) * 1rem));
+
+  --login-popup-backdrop-z-index: 12;
+  --login-popup-main-container-z-index: 13;
+  --login-popup-input-label-z-index: 14;
+
+  --homepage-nav-button-text-z-index: 3;
+  --homepage-nav-button-highlight-z-index: 2;
+}
+.app-lock-viewport {
+  height: 100vh;
+  max-height: 100vh;
+  width: max(100vw, 100vw);
+  overflow-x: hidden;
+  overflow-y: hidden;
 }

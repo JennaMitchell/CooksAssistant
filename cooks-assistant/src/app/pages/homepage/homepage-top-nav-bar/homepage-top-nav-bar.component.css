@@ -89,7 +89,7 @@
   transform: translate(-50%, -50%);
   max-height: max-content;
   max-width: max-content;
-  z-index: 3;
+  z-index: var(--homepage-nav-button-text-z-index);
   font-size: inherit;
   line-height: inherit;
   color: inherit;
@@ -105,7 +105,7 @@
   transform: translate(-50%, -50%);
   width: max(160%, 160%);
   height: max(110%, 110%);
-  z-index: 2;
+  z-index: var(--homepage-nav-button-highlight-z-index);
   transition: all 0.5s;
 }
 .homepage-nav-button-stack-recipe {
