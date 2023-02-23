@@ -3,7 +3,12 @@ import { Component } from '@angular/core';
 import { HomepageApiCallServiceFunctions } from '../../utilities/api-call-functions/homepage-api-call-functions/homepage-api-call-functions.service';
 import { Store } from '@ngrx/store';
 
-import { lockWebpageViewPortSelector } from 'libs/store/popups/popup-selectors';
+import {
+  lockWebpageViewPortSelector,
+  loginPopupActiveSelector,
+  signupPopupActiveSelector,
+} from 'libs/store/popups/popup-selectors';
+import { loggedInSelector } from 'libs/store/auth/auth-selectors';
 
 @Component({
   selector: 'homepage',
@@ -12,21 +17,18 @@ import { lockWebpageViewPortSelector } from 'libs/store/popups/popup-selectors';
   providers: [HomepageApiCallServiceFunctions],
 })
 export class Homepage {
-  lockWebpageViewPortStoreValue$ = this.store.select(
-    lockWebpageViewPortSelector
-  );
-  lockWebpageViewPort: boolean = true;
+  loginPopupActiveObserver$ = this.store.select(loginPopupActiveSelector);
+  signupPopupActiveObserver$ = this.store.select(signupPopupActiveSelector);
+  loggedInObserver$ = this.store.select(loggedInSelector);
+
+  signupPopupActive: any;
+  loginPopupActive: any;
+  loggedIn: any;
 
   constructor(
     private homepageApiActions: HomepageApiCallServiceFunctions,
     private store: Store
   ) {}
-
-  loginPopupActive: any;
-
-  getValueFromSubscript(value: boolean) {
-    this.lockWebpageViewPort = value;
-  }
 
   tempButtonHandler() {
     this.homepageApiActions
@@ -44,8 +46,15 @@ export class Homepage {
       });
   }
   ngOnInit() {
-    this.lockWebpageViewPortStoreValue$.subscribe((value) => {
-      this.lockWebpageViewPort = value;
+    this.signupPopupActiveObserver$.subscribe((value) => {
+      this.signupPopupActive = value;
+    });
+
+    this.loginPopupActiveObserver$.subscribe((value) => {
+      this.loginPopupActive = value;
+    });
+    this.loggedInObserver$.subscribe((value) => {
+      this.loggedIn = value;
     });
   }
 }

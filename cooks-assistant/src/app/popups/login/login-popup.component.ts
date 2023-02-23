@@ -222,6 +222,9 @@ export class LoginPopupComponent {
     this.store.dispatch(
       PopupActions.updateLockwebpageviewport({ lock: false })
     );
+    this.store.dispatch(
+      PopupActions.updateLoginpopupactive({ loginPopupActive: false })
+    );
   }
 
   loginButtonHandler() {}

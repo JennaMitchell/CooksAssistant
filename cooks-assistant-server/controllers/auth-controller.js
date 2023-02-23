@@ -30,9 +30,19 @@ exports.signup = async (req, res, next) => {
     });
     const result = await newUser.save();
 
+    const token = jwt.sign(
+      {
+        email: recievedEmail,
+        userId: result._id,
+      },
+      process.env.JSW_PASS,
+      { expiresIn: "1h" }
+    );
+
     res.status(201).json({
       message: "User created!",
       userId: result._id,
+      token: token,
       status: 201,
     });
   } catch (err) {
@@ -88,7 +98,6 @@ exports.login = async (req, res, next) => {
       token: token,
       userId: loadedUser._id.toString(),
       email: loadedUser.email,
-      isSeller: loadedUser.isSeller,
       message: "Logged In",
       username: loadedUser.username,
     });

@@ -81,6 +81,11 @@
   background-color: var(--main100);
   color: black;
 }
+
+.homepage-category-button-container-active {
+  background-color: var(--main100);
+  color: black;
+}
 .homepage-category-button-logo {
   width: max(65%, 65%);
   height: max(65%, 65%);

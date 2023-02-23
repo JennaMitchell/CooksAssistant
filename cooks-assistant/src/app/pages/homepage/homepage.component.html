@@ -1,5 +1,8 @@
 <div class="homepage-backdrop">
-  <homepage-login-buttons></homepage-login-buttons>
+  <homepage-login-buttons *ngIf="!loggedIn"></homepage-login-buttons>
+  <homepage-logged-in-user-buttons
+    *ngIf="loggedIn"
+  ></homepage-logged-in-user-buttons>
   <div class="homepage-main-container">
     <homepage-top-nav-bar></homepage-top-nav-bar>
     <homepage-recipe-slideshow></homepage-recipe-slideshow>
@@ -21,6 +24,6 @@
     <homepage-social-media-section></homepage-social-media-section>
     <homepage-footer></homepage-footer>
   </div>
-  <login-popup *ngIf="lockWebpageViewPort"></login-popup>
-  <signup-popup></signup-popup>
+  <login-popup *ngIf="loginPopupActive"></login-popup>
+  <signup-popup *ngIf="signupPopupActive"></signup-popup>
 </div>

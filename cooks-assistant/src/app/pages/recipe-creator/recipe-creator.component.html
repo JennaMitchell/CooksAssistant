@@ -1,0 +1,54 @@
+<div class="recipe-creator-backdrop">
+  <img
+    class="recipe-creator-backdrop-image"
+    src="{{ selectedBackgroundImageUrl }}"
+    alt="{{ selectedBackgroundAltText }}"
+  />
+
+  <background-changer-popup *ngIf="backgroundChangerActiveValue">
+  </background-changer-popup>
+  <div class="recipe-creator-title-container">
+    <h6 class="recipe-creator-title-text">Recipe Creator</h6>
+    <img
+      src="../../../assets/images/chalk-highlights/chalk-underline.png"
+      alt="chalk underline"
+      class="recipe-creator-title-chalk-underline"
+    />
+  </div>
+  <div class="recipe-creator-main-container">
+    <button
+      class="recipe-creator-user-button recipe-creator-background-button"
+      (mouseenter)="backgroundButtonHoverHandler()"
+      (mouseleave)="backgroundButtonHoverHandler()"
+      (click)="backgroundButtonHandler()"
+    >
+      <img
+        class="recipe-creator-user-button-icon"
+        src="../../../assets/images/recipe-creator/icons/background/background-white.png"
+        *ngIf="!backgroundButtonHover"
+      />
+      <img
+        class="recipe-creator-user-button-icon"
+        src="../../../assets/images/recipe-creator/icons/background/background.png"
+        *ngIf="backgroundButtonHover"
+      />
+    </button>
+    <button
+      class="recipe-creator-user-button recipe-creator-card-button"
+      (mouseenter)="recipeCardButtonHoverHandler()"
+      (mouseleave)="recipeCardButtonHoverHandler()"
+    >
+      <img
+        class="recipe-creator-user-button-icon"
+        src="../../../assets/images/recipe-creator/icons/recipe-cards/recipe-cards-white.png"
+        *ngIf="!recipeCardHover"
+      />
+      <img
+        class="recipe-creator-user-button-icon"
+        src="../../../assets/images/recipe-creator/icons/recipe-cards/recipe-cards.png"
+        *ngIf="recipeCardHover"
+      />
+    </button>
+    <recipe-template-one></recipe-template-one>
+  </div>
+</div>

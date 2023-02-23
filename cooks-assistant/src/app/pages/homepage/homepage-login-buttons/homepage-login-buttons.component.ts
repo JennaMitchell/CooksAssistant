@@ -21,9 +21,15 @@ export class HomepageLoginButtons {
   constructor(private store: Store) {}
   loginButtonHandler() {
     this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
+    this.store.dispatch(
+      PopupActions.updateLoginpopupactive({ loginPopupActive: true })
+    );
   }
   signupButtonHandler() {
     this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
+    this.store.dispatch(
+      PopupActions.updateSignuppopupactive({ signupPopupActive: true })
+    );
   }
 
   ngOnInit() {}

@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { PopupActions } from 'libs/store/popups/popup.actions';
 import { RandomStringGeneratorsService } from 'src/app/utilities/random-string-generator/random-string-generators.service';
 import { SignupApiCallsService } from 'src/app/utilities/api-call-functions/signup-api-call-functions/signup-api-calls.service';
+import { AuthActions } from 'libs/store/auth/auth.actions';
+
 @Component({
   selector: 'signup-popup',
   templateUrl: './signup-popup.component.html',
@@ -179,13 +181,50 @@ export class SignupPopupComponent {
     this.store.dispatch(
       PopupActions.updateLockwebpageviewport({ lock: false })
     );
+    this.store.dispatch(
+      PopupActions.updateSignuppopupactive({ signupPopupActive: false })
+    );
   }
 
   signupButtonHandler() {
-    this.signupApiCallsService.signupCall({
-      email: this.generatedEmail,
-      username: this.generatedUsername,
-      password: this.generatedPassword,
-    });
+    this.signupApiCallsService
+      .signupCall({
+        email: this.generatedEmail,
+        username: this.generatedUsername,
+        password: this.generatedPassword,
+      })
+      .then((data) => {
+        if (data !== 'ERROR') {
+          console.log(data);
+          return data?.json();
+        } else {
+          console.log('ERROR');
+          throw Error('Database Error');
+        }
+      })
+      .then((jsonedData: any) => {
+        console.log(jsonedData);
+        this.store.dispatch(
+          AuthActions.updateEmail({ email: this.generatedEmail })
+        );
+        this.store.dispatch(AuthActions.updateLoggedin({ loggedIn: true }));
+
+        this.store.dispatch(
+          AuthActions.updateToken({ token: jsonedData.token })
+        );
+
+        this.store.dispatch(
+          AuthActions.updateUserid({ userId: jsonedData.userId })
+        );
+
+        this.store.dispatch(
+          AuthActions.updateUsername({ username: this.generatedUsername })
+        );
+
+        this.closingButtonHandler();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }

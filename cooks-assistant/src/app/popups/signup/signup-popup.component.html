@@ -185,7 +185,9 @@
         value="{{ generatedPassword }}"
       />
     </div>
-    <button class="signup-popup-signup-button">Signup</button>
+    <button class="signup-popup-signup-button" (click)="signupButtonHandler()">
+      Signup
+    </button>
     <div class="signup-popup-login-container">
       <p class="signup-popup-or-text">-or-</p>
       <button class="signup-popup-login-text-button">Login</button>

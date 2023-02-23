@@ -1,0 +1,98 @@
+<div class="recipe-template-one-main-container">
+  <div class="recipe-template-one-image-container">
+    <img
+      class="recipe-template-one-food-image"
+      src="assets/images/food/chicken-salad.jpg"
+      alt="chicken-salad"
+    />
+    <div class="recipe-template-one-title-container">
+      <textarea
+        class="recipe-template-one-title"
+        id="recipe-template-one-recipe-title"
+        (input)="textAreaInputHandler($event)"
+        >{{ templateData.title }}</textarea
+      >
+      <p class="recipe-template-one-quote-text">{{ templateData.quote }}</p>
+    </div>
+  </div>
+  <div class="recipe-template-one-info-container">
+    <div class="recipe-template-one-info-bar">
+      <div class="recipe-template-one-info-bar-info-container">
+        <p class="recipe-template-info-bar-info-text">SERVINGS:</p>
+        <input
+          class="recipe-template-info-bar-info-input recipe-template-info-bar-servings-input"
+          value="3"
+          maxlength="3"
+        />
+      </div>
+      <div class="recipe-template-one-info-bar-info-container">
+        <p class="recipe-template-info-bar-info-text">PREPPING TIME:</p>
+        <input
+          class="recipe-template-info-bar-info-input recipe-template-info-bar-prep-time-input"
+          value="3 MIN"
+          maxlength="16"
+        />
+      </div>
+      <div class="recipe-template-one-info-bar-info-container">
+        <p class="recipe-template-info-bar-info-text">COOKING TIME:</p>
+        <input
+          class="recipe-template-info-bar-info-input recipe-template-info-bar-prep-time-input"
+          value="3 MIN"
+          maxlength="16"
+        />
+      </div>
+    </div>
+
+    <div class="recipe-template-one-ingredients-directions-container">
+      <div class="recipe-template-one-ingredients-container">
+        <button
+          class="recipe-template-one-add-ingredient-button recipe-template-one-add-text-button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 recipe-template-one-add-ingredient-button-icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+        </button>
+        <h6 class="recipe-template-one-ingredients-title">Ingredients</h6>
+        <input
+          class="recipe-template-one-ingredient-input"
+          value="300ml Milk"
+        />
+      </div>
+      <div class="recipe-template-one-direction-container">
+        <button
+          class="recipe-template-one-add-ingredient-button recipe-template-one-add-text-button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 recipe-template-one-add-ingredient-button-icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+        </button>
+        <h6 class="recipe-template-one-ingredients-title">Directions</h6>
+        <textarea class="recipe-template-one-direction-input" maxlength="100">
+1. This line of text needs to break onto the next line</textarea
+        >
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('../pages/homepage/homepage.module').then((m) => m.HomepageModule),
   },
+  {
+    path: 'recipe-creator',
+    loadChildren: () =>
+      import('../pages/recipe-creator/recipe-creator.module').then(
+        (m) => m.RecipeCreatorModule
+      ),
+  },
 ];
 
 @NgModule({

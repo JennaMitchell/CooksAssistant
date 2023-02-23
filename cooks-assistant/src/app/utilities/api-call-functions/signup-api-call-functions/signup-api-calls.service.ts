@@ -10,7 +10,6 @@ export class SignupApiCallsService {
         body: JSON.stringify(signupData),
       });
 
-      console.log(fetchedResponse);
       return fetchedResponse;
     } catch (err) {
       console.log(err);

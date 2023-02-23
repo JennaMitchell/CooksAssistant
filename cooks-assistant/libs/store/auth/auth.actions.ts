@@ -6,5 +6,7 @@ export const AuthActions = createActionGroup({
     'Update Username': props<{ username: string }>(),
     'Update Token': props<{ token: string }>(),
     'Update LoggedIn': props<{ loggedIn: boolean }>(),
+    'Update Email': props<{ email: string }>(),
+    'Update UserId': props<{ userId: string }>(),
   },
 });

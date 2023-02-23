@@ -2,6 +2,16 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HomepageStateInterface } from 'libs/store/homepage/homepage-reducers';
 import { HomepageActions } from 'libs/store/homepage/homepage.actions';
+import {
+  selectedHomepageMealPreferenceSelector,
+  selectedHomepageMealTimeSelector,
+  selectedHomepageMealNationalitySelector,
+} from 'libs/store/homepage/homepage-selectors';
+interface ButtonData {
+  title: string;
+  logoLocation: string;
+  id: string;
+}
 @Component({
   selector: 'homepage-recipe-categories',
   templateUrl: './homepage-recipe-categories.component.html',
@@ -14,11 +24,26 @@ export class HomepageRecipeCategories {
   prefrenceButtonTitles: string[] = [];
   nationalityButtonTitles: string[] = [];
   mealsTimesButtonTitles: string[] = [];
+  allButtonsTitles: string[] = [];
+
+  selectedHomepageMealTimeObserver$ = this.store.select(
+    selectedHomepageMealTimeSelector
+  );
+  selectedHomepageMealPreferenceObserver$ = this.store.select(
+    selectedHomepageMealPreferenceSelector
+  );
+  selectedHomepageMealNationalityObserver$ = this.store.select(
+    selectedHomepageMealNationalitySelector
+  );
+
+  selectedHomepageMealTimeValue: string = '';
+  selectedHomepageMealPreferenceValue = '';
+  selectedHomepageMealNationalityValue = '';
 
   preferenceButtonData = [
     {
       title: 'Chicken',
-      logoLocation: 'assets/images/recipe-icons/meat.png',
+      logoLocation: 'assets/images/recipe-icons/chicken-leg.png',
       id: 'homepage-chicken-button',
     },
     {
@@ -33,7 +58,7 @@ export class HomepageRecipeCategories {
     },
     {
       title: 'Vegan',
-      logoLocation: 'assets/images/recipe-icons/leaf.png',
+      logoLocation: 'assets/images/recipe-icons/vegan.png',
       id: 'homepage-vegan-button',
     },
     {
@@ -52,17 +77,17 @@ export class HomepageRecipeCategories {
     {
       title: 'Chinense',
       logoLocation: 'assets/images/flags/chinese-flag.png',
-      id: 'homepage-china-button',
+      id: 'homepage-chinense-button',
     },
     {
       title: 'French',
       logoLocation: 'assets/images/flags/france-flag.png',
-      id: 'homepage-france-button',
+      id: 'homepage-french-button',
     },
     {
       title: 'Indian',
       logoLocation: 'assets/images/flags/india-flag.png',
-      id: 'homepage-india-button',
+      id: 'homepage-indian-button',
     },
     {
       title: 'Japanense',
@@ -72,17 +97,17 @@ export class HomepageRecipeCategories {
     {
       title: 'Mexican',
       logoLocation: 'assets/images/flags/mexico-flag.png',
-      id: 'homepage-mexico-button',
+      id: 'homepage-mexican-button',
     },
     {
       title: 'Russian',
       logoLocation: 'assets/images/flags/russia-flag.png',
-      id: 'homepage-russia-button',
+      id: 'homepage-russian-button',
     },
     {
       title: 'Korean',
       logoLocation: 'assets/images/flags/south-korea-flag.png',
-      id: 'homepage-sk-button',
+      id: 'homepage-korean-button',
     },
     {
       title: 'USA',
@@ -136,6 +161,100 @@ export class HomepageRecipeCategories {
     this.mealsTimesButtonTitles = this.mealsTimesButtonData.map((catData) => {
       return catData['title'].toLowerCase();
     });
+
+    this.allButtonsTitles = this.prefrenceButtonTitles.concat(
+      this.nationalityButtonTitles,
+      this.mealsTimesButtonTitles
+    );
+
+    // extracting values from the store
+
+    this.selectedHomepageMealTimeObserver$.subscribe((value) => {
+      this.selectedHomepageMealTimeValue = value;
+    });
+
+    this.selectedHomepageMealPreferenceObserver$.subscribe((value) => {
+      this.selectedHomepageMealPreferenceValue = value;
+    });
+
+    this.selectedHomepageMealNationalityObserver$.subscribe((value) => {
+      this.selectedHomepageMealNationalityValue = value;
+    });
+  }
+
+  buttonCheckHandler(
+    arrayOfTitle: string[],
+    data: ButtonData[],
+    clickedId: string
+  ) {
+    for (
+      let indexOfArrayOfTitle = 0;
+      indexOfArrayOfTitle < arrayOfTitle.length;
+      indexOfArrayOfTitle++
+    ) {
+      const idToSelect = data[indexOfArrayOfTitle].id;
+      const titleToCheck = data[indexOfArrayOfTitle].title.toLowerCase();
+
+      const buttonToCheck = document.getElementById(
+        idToSelect
+      ) as HTMLDivElement;
+
+      if (clickedId === titleToCheck) {
+        buttonToCheck.classList.toggle(
+          'homepage-category-button-container-active'
+        );
+      } else {
+        buttonToCheck.classList.remove(
+          'homepage-category-button-container-active'
+        );
+      }
+    }
+  }
+
+  updateActiveButtonFunction(clickedButtonId: string) {
+    let buttonCat = '';
+
+    if (this.prefrenceButtonTitles.includes(clickedButtonId)) {
+      buttonCat = 'Preference';
+    } else if (this.nationalityButtonTitles.includes(clickedButtonId)) {
+      buttonCat = 'Nationality';
+    } else if (this.mealsTimesButtonTitles.includes(clickedButtonId)) {
+      buttonCat = 'Times';
+    }
+
+    switch (buttonCat) {
+      case 'Preference':
+        this.buttonCheckHandler(
+          this.prefrenceButtonTitles,
+          this.preferenceButtonData,
+          clickedButtonId
+        );
+        break;
+      case 'Nationality':
+        this.buttonCheckHandler(
+          this.nationalityButtonTitles,
+          this.nationalityButtonData,
+          clickedButtonId
+        );
+        break;
+      case 'Times':
+        this.buttonCheckHandler(
+          this.mealsTimesButtonTitles,
+          this.mealsTimesButtonData,
+          clickedButtonId
+        );
+        break;
+      default:
+        break;
+    }
+  }
+
+  buttonIdExtractor(id: string) {
+    const indexOfFirstIdDash = id.indexOf('-');
+    const firstDashRemovedId = id.slice(indexOfFirstIdDash + 1, id.length);
+    const indexOfSecondIdDash = firstDashRemovedId.indexOf('-');
+    const extractedId = firstDashRemovedId.slice(0, indexOfSecondIdDash);
+    return extractedId;
   }
 
   categoryButtonClickHandler(event: any) {
@@ -147,36 +266,33 @@ export class HomepageRecipeCategories {
       targetId = event.target.parentNode.id;
     }
 
-    const indexOfFirstIdDash = targetId.indexOf('-');
-    const firstDashRemovedId = targetId.slice(
-      indexOfFirstIdDash + 1,
-      targetId.length
-    );
-    const indexOfSecondIdDash = firstDashRemovedId.indexOf('-');
-    const extractedId = firstDashRemovedId.slice(0, indexOfSecondIdDash);
+    const extractedId = this.buttonIdExtractor(targetId);
+
+    // target.classList.toggle('homepage-category-button-container-active');
+    this.updateActiveButtonFunction(extractedId);
 
     // Filtering by cat
 
-    if (this.prefrenceButtonTitles.includes(extractedId)) {
-      return;
-    }
-    if (this.nationalityButtonTitles.includes(extractedId)) {
-      this.store.dispatch(
-        HomepageActions.updateSelectedhomepagemealnationality({
-          selectedMealNationality: extractedId,
-        })
-      );
-
-      return;
-    }
-
-    if (this.mealsTimesButtonTitles.includes(extractedId)) {
-      this.store.dispatch(
-        HomepageActions.updateSelectedhomepagemealtime({
-          selectedMealTime: extractedId,
-        })
-      );
-      return;
+    if (this.allButtonsTitles.includes(extractedId)) {
+      if (this.prefrenceButtonTitles.includes(extractedId)) {
+        this.store.dispatch(
+          HomepageActions.updateSelectedhomepagemealpreference({
+            selectedHomepageMealPreference: extractedId,
+          })
+        );
+      } else if (this.nationalityButtonTitles.includes(extractedId)) {
+        this.store.dispatch(
+          HomepageActions.updateSelectedhomepagemealnationality({
+            selectedMealNationality: extractedId,
+          })
+        );
+      } else if (this.mealsTimesButtonTitles.includes(extractedId)) {
+        this.store.dispatch(
+          HomepageActions.updateSelectedhomepagemealtime({
+            selectedMealTime: extractedId,
+          })
+        );
+      }
     }
   }
 }

@@ -36,4 +36,4 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use("/recipes", recipeRoute);
 app.use("/auth", authRoutes);
-app.listen(process.env.PORT, () => {});
+app.listen(+process.env.PORT, () => {});

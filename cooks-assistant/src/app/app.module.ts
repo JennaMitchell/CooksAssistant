@@ -12,6 +12,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { homepageReducers } from 'libs/store/homepage/homepage-reducers';
 import { popupReducers } from 'libs/store/popups/popup-reducers';
+import { authReducers } from 'libs/store/auth/auth-reducers';
+import { recipeCreatorReducers } from 'libs/store/recipe-creator/recipe-creator-reducers';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -20,7 +22,12 @@ import { popupReducers } from 'libs/store/popups/popup-reducers';
     HomepageModule,
     CommonModule,
 
-    StoreModule.forRoot({ homepage: homepageReducers, popup: popupReducers }),
+    StoreModule.forRoot({
+      homepage: homepageReducers,
+      popup: popupReducers,
+      auth: authReducers,
+      recipeCreator: recipeCreatorReducers,
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
     EffectsModule.forRoot([]),
   ],

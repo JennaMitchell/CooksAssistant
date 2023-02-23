@@ -15,8 +15,15 @@ import { HomepageFooterModule } from './homepage-footer/homepage-footer.module';
 import { StoreModule } from '@ngrx/store';
 import { LoginPopupModule } from 'src/app/popups/login/login-popup.module';
 import { SignupPopupModule } from 'src/app/popups/signup/signup-popup.module';
+import { HomepageLoggedInUserButtons } from './homepage-logged-in-user-buttons/homepage-logged-in-user-buttons.component';
+
 @NgModule({
-  declarations: [Homepage, HomepageLoginButtons, HomepageTopNavBar],
+  declarations: [
+    Homepage,
+    HomepageLoginButtons,
+    HomepageTopNavBar,
+    HomepageLoggedInUserButtons,
+  ],
 
   imports: [
     RouterModule.forChild([{ path: '', component: Homepage }]),

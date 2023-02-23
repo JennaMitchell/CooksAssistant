@@ -7,23 +7,29 @@ import { lockWebpageViewPortSelector } from 'libs/store/popups/popup-selectors';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  lockWebpageViewPortStoreValue$ = this.store.select(
-    lockWebpageViewPortSelector
-  );
-  lockWebpageViewPort: boolean = true;
   constructor(private store: Store) {}
   title = 'Cooks Assistant';
+  lockWebpageViewPortSelectorObserver$ = this.store.select(
+    lockWebpageViewPortSelector
+  );
 
   ngOnInit() {
-    this.lockWebpageViewPortStoreValue$.subscribe((value) => {
-      this.lockWebpageViewPort = value;
-      const appElement = document.getElementsByTagName(
-        'body'
-      )[0] as HTMLBodyElement;
+    this.lockWebpageViewPortSelectorObserver$.subscribe((value) => {
       if (value) {
-        appElement?.classList.add('app-lock-viewport');
+        window.scrollTo(0, 0);
+        document
+          .getElementsByTagName('body')[0]
+          .classList.add('app-lock-viewport');
       } else {
-        appElement?.classList.remove('app-lock-viewport');
+        if (
+          document
+            .getElementsByTagName('body')[0]
+            .classList.contains('app-lock-viewport')
+        ) {
+          document
+            .getElementsByTagName('body')[0]
+            .classList.remove('app-lock-viewport');
+        }
       }
     });
   }

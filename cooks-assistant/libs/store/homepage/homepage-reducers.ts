@@ -4,13 +4,13 @@ import { HomepageActions } from './homepage.actions';
 
 export interface HomepageStateInterface {
   selectedHomepageMealTime: string;
-  selectedHomepageMealType: string;
+  selectedHomepageMealPreference: string;
   selectedHomepageMealNationality: string;
 }
 
 export const initialHomepageState: HomepageStateInterface = {
   selectedHomepageMealTime: '',
-  selectedHomepageMealType: '',
+  selectedHomepageMealPreference: '',
   selectedHomepageMealNationality: '',
 };
 
@@ -25,10 +25,11 @@ export const homepageReducers = createReducer(
     }
   ),
   on(
-    HomepageActions.updateSelectedhomepagemealtype,
-    (_state, { selectedMealType }) => {
+    HomepageActions.updateSelectedhomepagemealpreference,
+    (_state, { selectedHomepageMealPreference }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
-      tempObject['selectedHomepageMealType'] = selectedMealType;
+      tempObject['selectedHomepageMealPreference'] =
+        selectedHomepageMealPreference;
       return tempObject;
     }
   ),
