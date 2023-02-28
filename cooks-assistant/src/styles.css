@@ -31,7 +31,10 @@ body {
   --black: rgb(22, 21, 21);
   --lightblack: rgb(11, 11, 11);
   --google-font: "Playfair Display", serif;
+  --recipe-template-two-font: "Shantell Sans", serif;
   --base: 16;
+
+  --pixelToRem: calc((1 / var(--base) * 1rem));
 
   --r64: calc((64 / var(--base) * 1rem));
   --r48: calc((48 / var(--base) * 1rem));

@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { updateTemplateTextPopupDataSelector } from 'libs/store/popups/popup-selectors';
+import { RecipeCreatorActions } from 'libs/store/recipe-creator/recipe-creator-actions.actions';
 
 import {
   RecipeCreatorFunctions,
   ReturnedCreatorRecipeDataAndIdsInterface,
 } from '../../../../utilities/recipe-creator-functions/recipe-creator-function.service';
-
 interface TextAreaContainersIdsObjectInterface {
   [key: string]: string;
 }
 @Component({
-  selector: 'recipe-template-one',
-  templateUrl: './recipe-template-1.component.html',
-  styleUrls: ['./recipe-template-1.component.css'],
+  selector: 'recipe-template-two',
+  templateUrl: './recipe-template-2.component.html',
+  styleUrls: ['./recipe-template-2.component.css'],
   providers: [RecipeCreatorFunctions],
 })
-export class RecipeTemplateOne {
+export class RecipeTemplateTwo {
   constructor(
     private store: Store,
     private recipeCreatorFunctions: RecipeCreatorFunctions
@@ -27,19 +27,19 @@ export class RecipeTemplateOne {
   activeTextAreaId = '';
 
   textAreaContainersIdsObject: TextAreaContainersIdsObjectInterface = {
-    ingredients: 'recipe-template-one-ingredients-textarea-',
-    directions: 'recipe-template-one-directions-textarea-',
-    notes: 'recipe-template-one-notes-textarea-',
+    ingredients: 'recipe-template-two-ingredients-textarea-',
+    directions: 'recipe-template-two-directions-textarea-',
+    notes: 'recipe-template-two-notes-textarea-',
   };
-  ingredientListIds = ['recipe-template-one-ingredients-textarea-0'];
-  directionsListIds = ['recipe-template-one-directions-textarea-0'];
-  notesListIds = ['recipe-template-one-notes-textarea-0'];
+  ingredientListIds = ['recipe-template-two-ingredients-textarea-0'];
+  directionsListIds = ['recipe-template-two-directions-textarea-0'];
+  notesListIds = ['recipe-template-two-notes-textarea-0'];
 
   acceptedListIdTypes = ['ingredients', 'directions', 'notes'];
 
   templateData = {
-    title: 'Chicken Salad',
-    quote: 'Perfect for an easy lunch',
+    title: 'Savory French Toast',
+    quote: 'A gluten-free version of French Toast',
     servings: '3',
     prepTime: '3 MIN',
     cookingTime: '3 MIN',

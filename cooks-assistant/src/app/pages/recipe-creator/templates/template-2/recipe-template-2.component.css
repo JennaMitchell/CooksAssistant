@@ -1,0 +1,187 @@
+.recipe-template-two-main-container {
+  width: max(1000px, 1000px);
+  height: 100%;
+  max-height: max-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+
+  box-sizing: border-box;
+  position: relative;
+  background-color: #fef6e1;
+}
+.recipe-template-two-title-half-container,
+.recipe-template-two-recipe-half-container {
+  min-width: 100%;
+  max-width: 100%;
+  height: max-content;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+
+  padding: 60px 30px;
+}
+.recipe-template-two-title-half-container {
+  grid-column: 1 / span 1;
+
+  background-image: url("../../../../../assets/images/recipe-creator/recipe-cards/curved-background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-position: 100%;
+}
+.recipe-template-two-recipe-half-container {
+  grid-column: 2 / span 1;
+  background-color: #fef6e1;
+  height: max(100%, 100%);
+  justify-content: space-evenly;
+}
+.recipe-template-two-title-container {
+  display: flex;
+  flex-direction: column;
+  max-height: max-content;
+
+  gap: 10px;
+  align-items: flex-start;
+  justify-items: flex-start;
+  background-color: none;
+}
+.recipe-template-two-title {
+  padding: 0px;
+  margin: 0px;
+  font-family: var(--recipe-template-two-font);
+  font-size: var(--r32);
+  font-weight: bold;
+  resize: none;
+
+  border: none;
+  background-color: inherit;
+  color: #361e14;
+}
+
+.recipe-template-two-quote {
+  padding: 0px;
+  margin: 0px;
+  font-family: var(--recipe-template-two-font);
+  font-size: var(--r26);
+  font-style: italic;
+  resize: none;
+  max-width: max-content;
+  border: none;
+  background-color: inherit;
+  color: #361e14;
+}
+.recipe-template-two-food-image {
+  width: calc(250 * var(--pixelToRem));
+  max-width: calc(250 * var(--pixelToRem));
+  max-height: calc(250 * var(--pixelToRem));
+  border-radius: 51% 49% 54% 46% / 46% 37% 63% 54%;
+  object-fit: cover;
+  align-self: center;
+  margin-top: 40px;
+}
+.recipe-template-two-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: max(100%, 100%);
+  position: relative;
+}
+.recipe-template-two-info-title {
+  padding: 0px;
+  padding-bottom: 10px;
+  margin: 0px;
+  font-family: var(--recipe-template-two-font);
+  font-size: var(--r32);
+  color: rgb(152, 40, 12);
+  text-align: center;
+}
+
+.recipe-template-two-info-text-area-container {
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  gap: 10px;
+  max-height: max-content;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-right: 20px;
+  width: max(100%, 100%);
+}
+.recipe-template-two-text-area {
+  padding: 0px;
+  margin: 0px;
+  font-family: var(--recipe-template-two-font);
+  font-size: var(--r18);
+  color: rgb(152, 40, 12);
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  width: max(100%, 100%);
+}
+.recipe-template-two-directions-text-area {
+  text-align: left;
+}
+.recipe-template-two-stamp-image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  max-width: calc(150 * var(--pixelToRem));
+  max-height: calc(150 * var(--pixelToRem));
+  object-fit: fill;
+}
+
+.recipe-template-two-text-area-delete-icon {
+  width: max(20px, 20px);
+  height: max(20px, 20px);
+  transition: all 1s;
+  border-radius: 50%;
+  padding: 2.5px;
+  box-sizing: border-box;
+}
+.recipe-template-two-text-area-delete-icon:hover {
+  background-color: black;
+  color: white;
+}
+.recipe-template-two-add-text-button {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 2.5px;
+  width: max(20px, 20px);
+  height: max(20px, 20px);
+  background-color: rgb(152, 40, 12);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  transition: all 0.5s;
+}
+.recipe-template-two-add-text-button:hover {
+  background-color: black;
+  color: white;
+}
+.recipe-template-two-add-text-button-directions,
+.recipe-template-two-add-text-button-ingredients {
+  top: 10px;
+  right: 10px;
+}
+.recipe-template-two-add-notes-button {
+  top: 10px;
+  right: 10px;
+}
+.recipe-template-two-add-button-icon {
+  color: white;
+  width: max(100%, 100%);
+  height: max(100%, 100%);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1px;
+  padding-right: 1px;
+}
