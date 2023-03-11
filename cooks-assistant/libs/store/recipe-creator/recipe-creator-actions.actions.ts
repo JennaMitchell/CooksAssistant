@@ -9,5 +9,7 @@ export const RecipeCreatorActions = createActionGroup({
       recipeTemplateUserData: RecipeTemplateUserDataInterface;
     }>(),
     'Update UserHasEnteredData': props<{ userHasEnteredData: boolean }>(),
+    'Update SelectedTemplateIndex': props<{ selectedTemplateIndex: number }>(),
+    'Update SelectedTags': props<{ selectedTags: string[] }>(),
   },
 });

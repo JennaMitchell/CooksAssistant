@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { Homepage } from './homepage.component';
-import { HomepageLoginButtons } from './homepage-login-buttons/homepage-login-buttons.component';
+
 import { RouterModule } from '@angular/router';
 import { HomepageTopNavBar } from './homepage-top-nav-bar/homepage-top-nav-bar.component';
 import { CommonModule } from '@angular/common';
@@ -15,15 +15,12 @@ import { HomepageFooterModule } from './homepage-footer/homepage-footer.module';
 import { StoreModule } from '@ngrx/store';
 import { LoginPopupModule } from 'src/app/popups/login/login-popup.module';
 import { SignupPopupModule } from 'src/app/popups/signup/signup-popup.module';
-import { HomepageLoggedInUserButtons } from './homepage-logged-in-user-buttons/homepage-logged-in-user-buttons.component';
 
+import { ErrorPopupModule } from 'src/app/popups/error/error-popup.module';
+import { LoggedInNavBarModule } from 'src/app/nav-bar/logged-in-nav-bar/logged-in-nav-bar.module';
+import { LoggedOutNavBarModule } from 'src/app/nav-bar/logged-out-nav-bar/logged-out-nav-bar.module';
 @NgModule({
-  declarations: [
-    Homepage,
-    HomepageLoginButtons,
-    HomepageTopNavBar,
-    HomepageLoggedInUserButtons,
-  ],
+  declarations: [Homepage, HomepageTopNavBar],
 
   imports: [
     RouterModule.forChild([{ path: '', component: Homepage }]),
@@ -38,6 +35,9 @@ import { HomepageLoggedInUserButtons } from './homepage-logged-in-user-buttons/h
     StoreModule,
     LoginPopupModule,
     SignupPopupModule,
+    ErrorPopupModule,
+    LoggedInNavBarModule,
+    LoggedOutNavBarModule,
   ],
 })
 export class HomepageModule {}

@@ -11,12 +11,15 @@ export interface RecipeTemplateUserDataInterface {
   ingredientsList: string[];
   directionsList: string[];
   notes: string[];
+  description: string;
 }
 
 export interface RecipeCreatorStateInterface {
   selectedBackground: number;
   recipeTemplateUserData: RecipeTemplateUserDataInterface;
   userHasEnteredData: boolean;
+  selectedTemplateIndex: number;
+  selectedTags: string[];
 }
 
 export const initialRecipeCreatorState: RecipeCreatorStateInterface = {
@@ -30,8 +33,11 @@ export const initialRecipeCreatorState: RecipeCreatorStateInterface = {
     ingredientsList: [''],
     directionsList: [''],
     notes: [''],
+    description: '',
   },
   userHasEnteredData: false,
+  selectedTemplateIndex: 0,
+  selectedTags: [],
 };
 
 export const recipeCreatorReducers = createReducer(
@@ -40,7 +46,8 @@ export const recipeCreatorReducers = createReducer(
     RecipeCreatorActions.updateBackgroundselected,
     (_state, { selectedBackground }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
-      tempObject['selectedHomepageMealTime'] = selectedBackground;
+      tempObject['selectedBackground'] = selectedBackground;
+      console.log(selectedBackground);
       return tempObject;
     }
   ),
@@ -59,5 +66,18 @@ export const recipeCreatorReducers = createReducer(
       tempObject['userHasEnteredData'] = userHasEnteredData;
       return tempObject;
     }
-  )
+  ),
+  on(
+    RecipeCreatorActions.updateSelectedtemplateindex,
+    (_state, { selectedTemplateIndex }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['selectedTemplateIndex'] = selectedTemplateIndex;
+      return tempObject;
+    }
+  ),
+  on(RecipeCreatorActions.updateSelectedtags, (_state, { selectedTags }) => {
+    const tempObject = JSON.parse(JSON.stringify(_state));
+    tempObject['selectedTags'] = selectedTags;
+    return tempObject;
+  })
 );

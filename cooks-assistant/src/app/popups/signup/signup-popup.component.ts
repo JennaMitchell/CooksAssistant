@@ -194,12 +194,10 @@ export class SignupPopupComponent {
         password: this.generatedPassword,
       })
       .then((data) => {
-        if (data !== 'ERROR') {
-          console.log(data);
-          return data?.json();
+        if (data.error.length === 0) {
+          return data.response?.json();
         } else {
-          console.log('ERROR');
-          throw Error('Database Error');
+          throw new Error(`${data.error}`);
         }
       })
       .then((jsonedData: any) => {
@@ -224,7 +222,20 @@ export class SignupPopupComponent {
         this.closingButtonHandler();
       })
       .catch((err) => {
-        console.log(err);
+        this.store.dispatch(
+          PopupActions.updateErrormessage({ errorMessage: err.toString() })
+        );
+        this.store.dispatch(
+          PopupActions.updateErrorpopupactive({ errorPopupActive: true })
+        );
       });
+  }
+  loginButtonHandler() {
+    this.store.dispatch(
+      PopupActions.updateLoginpopupactive({ loginPopupActive: true })
+    );
+    this.store.dispatch(
+      PopupActions.updateSignuppopupactive({ signupPopupActive: false })
+    );
   }
 }

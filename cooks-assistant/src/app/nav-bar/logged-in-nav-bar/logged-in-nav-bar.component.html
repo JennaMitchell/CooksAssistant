@@ -31,7 +31,7 @@
   </button>
 
   <button
-    class="homepage-login-button homepage-login-button-round-right-corner"
+    class="homepage-login-button"
     (mouseenter)="onRegisterButtonHover()"
     (mouseleave)="onRegisterButtonHover()"
     (click)="signupButtonHandler()"
@@ -55,5 +55,37 @@
         homepageshowlogo: registerButtonHover === true
       }"
     />
+    <div class="homepage-nav-login-break"></div>
   </button>
+  <a
+    class="homepage-nav-link"
+    routerLink="../recipe-creator"
+    (click)="createButtonClickHandler()"
+  >
+    <button
+      class="homepage-login-button homepage-login-button-round-right-corner"
+      (mouseenter)="onCreateButtonHover()"
+      (mouseleave)="onCreateButtonHover()"
+    >
+      Create
+      <img
+        src="assets/images/homepage/new-recipe-icon-white.png"
+        alt="Create Logo"
+        class="homepage-login-button-logo"
+        [ngClass]="{
+          homepagehidelogo: registerButtonHover === true,
+          homepageshowlogo: registerButtonHover === false
+        }"
+      />
+      <img
+        src="assets/images/homepage/new-recipe-icon.png"
+        alt="Create Logo"
+        class="homepage-login-button-logo"
+        [ngClass]="{
+          homepagehidelogo: registerButtonHover === false,
+          homepageshowlogo: registerButtonHover === true
+        }"
+      />
+    </button>
+  </a>
 </div>

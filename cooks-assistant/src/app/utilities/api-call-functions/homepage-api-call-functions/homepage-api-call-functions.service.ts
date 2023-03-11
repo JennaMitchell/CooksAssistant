@@ -28,7 +28,7 @@ export class HomepageApiCallServiceFunctions {
       });
       console.log(fetchedResponse);
       return fetchedResponse;
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       return 'ERROR';
     }

@@ -9,11 +9,11 @@ export const PopupActions = createActionGroup({
     'Update RecipeCreatorBackgroundPopupActive': props<{
       recipeCreatorBackgroundPopupActive: boolean;
     }>(),
-    'Update TemplateTextPopupActive': props<{
-      updateTemplateTextPopupActive: boolean;
+    'Update ChangeRecipeTemplatePopupActive': props<{
+      changeRecipeTemplatePopupActive: boolean;
     }>(),
-    'Update TemplateTextPopupData': props<{
-      templateTextPopupData: TemplateTextPopupDataInterface;
-    }>(),
+    'Update ErrorPopupActive': props<{ errorPopupActive: boolean }>(),
+    'Update ErrorMessage': props<{ errorMessage: string }>(),
+    'Update RecipeTagsPopupActive': props<{ recipeTagsPopupActive: boolean }>(),
   },
 });

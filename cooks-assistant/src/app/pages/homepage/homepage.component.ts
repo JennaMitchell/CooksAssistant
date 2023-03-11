@@ -4,6 +4,7 @@ import { HomepageApiCallServiceFunctions } from '../../utilities/api-call-functi
 import { Store } from '@ngrx/store';
 
 import {
+  errorPopupActiveSelector,
   lockWebpageViewPortSelector,
   loginPopupActiveSelector,
   signupPopupActiveSelector,
@@ -20,10 +21,12 @@ export class Homepage {
   loginPopupActiveObserver$ = this.store.select(loginPopupActiveSelector);
   signupPopupActiveObserver$ = this.store.select(signupPopupActiveSelector);
   loggedInObserver$ = this.store.select(loggedInSelector);
+  errorPopupActiveObserver$ = this.store.select(errorPopupActiveSelector);
 
   signupPopupActive: any;
   loginPopupActive: any;
   loggedIn: any;
+  errorPopupActive: any;
 
   constructor(
     private homepageApiActions: HomepageApiCallServiceFunctions,
@@ -55,6 +58,10 @@ export class Homepage {
     });
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;
+    });
+    this.errorPopupActiveObserver$.subscribe((value) => {
+      this.errorPopupActive = value;
+      console.log(value);
     });
   }
 }

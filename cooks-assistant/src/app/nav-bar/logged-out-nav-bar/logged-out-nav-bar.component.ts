@@ -3,11 +3,11 @@ import { PopupActions } from 'libs/store/popups/popup.actions';
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'homepage-logged-in-user-buttons',
-  templateUrl: './homepage-logged-in-user-buttons.component.html',
-  styleUrls: ['./homepage-logged-in-user-buttons.component.css'],
+  selector: 'logged-out-nav-bar',
+  templateUrl: './logged-out-nav-bar.component.html',
+  styleUrls: ['./logged-out-nav-bar.component.css'],
 })
-export class HomepageLoggedInUserButtons {
+export class LoggedOutNavBar {
   loginButtonHover = false;
   registerButtonHover = false;
 

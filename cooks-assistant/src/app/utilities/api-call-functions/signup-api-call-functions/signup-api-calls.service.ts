@@ -10,10 +10,12 @@ export class SignupApiCallsService {
         body: JSON.stringify(signupData),
       });
 
-      return fetchedResponse;
+      return { response: fetchedResponse, error: '' };
     } catch (err) {
-      console.log(err);
-      return 'ERROR';
+      const returnedError = err as Object;
+      console.log(returnedError.toString());
+
+      return { error: returnedError.toString() };
     }
   };
 }

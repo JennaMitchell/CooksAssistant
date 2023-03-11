@@ -10,6 +10,66 @@ export interface ReturnedCreatorRecipeDataAndIdsInterface {
 }
 
 export class RecipeCreatorFunctions {
+  updateLocalRecipeData(
+    localRecipeData: RecipeTemplateUserDataInterface,
+    textAreaType: string,
+    changeEvent: Event
+  ) {
+    const copyOfLocalRecipeData = JSON.parse(JSON.stringify(localRecipeData));
+    let targetElement = changeEvent.target as HTMLTextAreaElement;
+
+    let targetId = targetElement.id;
+
+    const elementTextValue = targetElement?.value;
+
+    let ingredientIndex = -1;
+    let splitId: string[] = targetId.split('-');
+    if (splitId.length === 0) {
+      const parentElement = targetElement.parentElement as HTMLElement;
+      targetId = targetElement.id;
+      splitId = parentElement.id.split('-');
+    }
+
+    if (splitId.length !== 0) {
+      ingredientIndex = +splitId[splitId.length - 1];
+    }
+
+    switch (textAreaType) {
+      case 'ingredient':
+        copyOfLocalRecipeData.ingredientsList[ingredientIndex] =
+          elementTextValue;
+        break;
+      case 'direction':
+        copyOfLocalRecipeData.directionsList[ingredientIndex] =
+          elementTextValue;
+        break;
+
+      case 'note':
+        copyOfLocalRecipeData.notes[ingredientIndex] = elementTextValue;
+        break;
+
+      case 'title':
+        copyOfLocalRecipeData.title = elementTextValue;
+        break;
+      case 'quote':
+        copyOfLocalRecipeData.quote = elementTextValue;
+        break;
+      case 'prepTime':
+        copyOfLocalRecipeData.prepTime = elementTextValue;
+        break;
+      case 'cookingTime':
+        copyOfLocalRecipeData.cookingTime = elementTextValue;
+        break;
+      case 'description':
+        copyOfLocalRecipeData.description = elementTextValue;
+        break;
+
+      default:
+        break;
+    }
+    return copyOfLocalRecipeData;
+  }
+
   listTextAreaInputHandler(
     event: Event,
     acceptedListIdTypes: string[],
@@ -40,17 +100,14 @@ export class RecipeCreatorFunctions {
         case 'ingredients':
           templateDataCopy.ingredientsList[textAreaListNumber - 1] =
             targetElement.innerText;
-
           break;
         case 'directions':
           templateDataCopy.directionsList[textAreaListNumber - 1] =
             targetElement.innerText;
-
           break;
         case 'notes':
           templateDataCopy.notes[textAreaListNumber - 1] =
             targetElement.innerText;
-
           break;
         default:
           break;
@@ -86,30 +143,30 @@ export class RecipeCreatorFunctions {
         tempList = tempObject.ingredientsList;
         tempList.push('New Ingredient');
         copyOfIdsArray.push(
-          `recipe-template-one-ingredients-textarea-${
-            copyOfIdsArray.length + 1
-          }`
+          `recipe-template-one-ingredients-textarea-${copyOfIdsArray.length}`
         );
+        tempObject.ingredientsList = tempList;
         break;
       case 'directions':
         tempList = tempObject.directionsList;
         tempList.push(`${tempObject.directionsList.length + 1}. New Direction`);
         copyOfIdsArray.push(
-          `recipe-template-one-directions-textarea-${copyOfIdsArray.length + 1}`
+          `recipe-template-one-directions-textarea-${copyOfIdsArray.length}`
         );
+        tempObject.directionsList = tempList;
+
         break;
       case 'notes':
         tempList = tempObject.notes;
         tempList.push(`-  New Note Added`);
         copyOfIdsArray.push(
-          `recipe-template-one-notes-textarea-${copyOfIdsArray.length + 1}`
+          `recipe-template-one-notes-textarea-${copyOfIdsArray.length}`
         );
+        tempObject.notesList = tempList;
         break;
       default:
         break;
     }
-
-    tempObject.ingredientsList = tempList;
 
     return { templateData: tempObject, idsArray: copyOfIdsArray };
   }

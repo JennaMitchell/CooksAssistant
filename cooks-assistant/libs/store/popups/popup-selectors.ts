@@ -31,17 +31,29 @@ export const recipeCreatorBackgroundPopupActiveSelector = createSelector(
     return state.recipeCreatorBackgroundPopupActive;
   }
 );
-
-export const updateTemplateTextPopupActiveSelector = createSelector(
+export const changeRecipeTemplatePopupActiveSelector = createSelector(
   selectPopupStateSlice,
   (state) => {
-    return state.updateTemplateTextPopupActive;
+    return state.changeRecipeTemplatePopupActive;
   }
 );
 
-export const updateTemplateTextPopupDataSelector = createSelector(
+export const errorPopupActiveSelector = createSelector(
   selectPopupStateSlice,
   (state) => {
-    return state.updateTemplateTextPopupData;
+    return state.errorPopupActive;
+  }
+);
+
+export const errorMessageSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.errorMessage;
+  }
+);
+export const recipeTagsPopupActiveSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.recipeTagsPopupActive;
   }
 );

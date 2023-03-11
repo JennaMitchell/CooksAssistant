@@ -129,7 +129,7 @@
 }
 .recipe-template-two-stamp-image {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   right: 10px;
   max-width: calc(150 * var(--pixelToRem));
   max-height: calc(150 * var(--pixelToRem));
@@ -184,4 +184,96 @@
   display: inline-block;
   padding-bottom: 1px;
   padding-right: 1px;
+}
+.recipe-template-two-tags-container {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: max(200px, 200px);
+  height: max(50px, 50px);
+  border: 2px solid rgb(152, 40, 12);
+  border-radius: 10px;
+  padding: 15px;
+  flex-wrap: wrap;
+  gap: 2.5px;
+  overflow-y: scroll;
+}
+.recipe-template-two-tags-title {
+  font-size: var(--r12);
+  font-family: var(--recipe-template-two-font);
+  position: absolute;
+  top: -10.5px;
+  right: 200px;
+  background-color: #fef6e1;
+  padding: 2px 10px;
+  color: rgb(152, 40, 12);
+  z-index: 2;
+}
+.recipe-template-two-tag-button {
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  max-width: max-content;
+  height: max-content;
+  max-height: max-content;
+
+  background-color: rgb(152, 40, 12);
+  color: #fef6e1;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  border: none;
+}
+.recipe-template-two-tag-text {
+  color: inherit;
+  background-color: inherit;
+  font-family: var(--recipe-template-two-font);
+  font-size: var(--r12);
+  padding: 0px;
+  margin: 0px;
+}
+.recipe-template-two-delete-tag-button {
+  background-color: inherit;
+  color: #fef6e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: none;
+  width: max(20px, 20px);
+  height: max(20px, 20px);
+}
+.recipe-template-two-closing-icon {
+  width: max(100%, 100%);
+  height: max(100%, 100%);
+  object-fit: cover;
+}
+.recipe-template-two-tags-edit-button {
+  width: max(22.5px, 22.5px);
+  height: max(22.5px, 22.5px);
+  padding: 5px;
+  position: absolute;
+  top: 1px;
+  right: 30px;
+  background-color: #fef6e1;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: all 0.25s;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.recipe-template-two-tags-edit-button:hover {
+  background-color: black;
+}
+.recipe-template-two-edit-button-icon {
+  width: max(100%, 100%);
+  height: max(100%, 100%);
+  object-fit: cover;
+  display: inline;
 }

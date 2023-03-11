@@ -38,13 +38,16 @@ export class BackgroundChangerPopupComponent {
   imageButtonHandler(event: MouseEvent) {
     let targetElement = event.target as HTMLButtonElement;
     let targetId = targetElement.id;
-
-    this.activeButton = +targetId[-1];
+    let splitId = targetId.split('-');
 
     if (targetId.length === 0) {
       targetElement = targetElement.parentElement as HTMLButtonElement;
       targetId = targetElement.id;
+
+      splitId = targetId.split('-');
     }
+
+    this.activeButton = +splitId[splitId.length - 1];
 
     for (
       let indexOfImportedData = 0;

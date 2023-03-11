@@ -46,7 +46,7 @@
         'background-changer-submit-button-disabled':
           submitButtonEnabled === false
       }"
-      disabled="{{ !submitButtonEnabled }}"
+      [disabled]="!submitButtonEnabled"
       (click)="submitButtonHandler()"
       (mouseenter)="submitButtonHoverHandler($event)"
       (mouseleave)="submitButtonHoverHandler($event)"

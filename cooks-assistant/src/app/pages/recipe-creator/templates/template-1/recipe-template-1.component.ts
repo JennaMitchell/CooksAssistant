@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { updateTemplateTextPopupDataSelector } from 'libs/store/popups/popup-selectors';
 
 import {
   RecipeCreatorFunctions,
   ReturnedCreatorRecipeDataAndIdsInterface,
 } from '../../../../utilities/recipe-creator-functions/recipe-creator-function.service';
+import { changeRecipeTemplatePopupActiveSelector } from '../../../../../../libs/store/popups/popup-selectors';
+import { RecipeCreatorActions } from 'libs/store/recipe-creator/recipe-creator-actions.actions';
+import {
+  userHasEnteredDataSelector,
+  selectedRecipeTemplateUserData,
+  selectedTagsSelector,
+} from 'libs/store/recipe-creator/recipe-creator-selectors';
+import { PopupActions } from 'libs/store/popups/popup.actions';
 
 interface TextAreaContainersIdsObjectInterface {
   [key: string]: string;
@@ -21,10 +28,35 @@ export class RecipeTemplateOne {
     private store: Store,
     private recipeCreatorFunctions: RecipeCreatorFunctions
   ) {}
-  updateTemplateTextPopupDataObserver$ = this.store.select(
-    updateTemplateTextPopupDataSelector
+
+  selectedTagsObserver$ = this.store.select(selectedTagsSelector);
+  selectedTags: string[] = [];
+  selectedTagsButtonIds: string[] = [];
+
+  changeRecipeTemplatePopupActiveSelectorObserver$ = this.store.select(
+    changeRecipeTemplatePopupActiveSelector
   );
+  selectedRecipeTemplateUserDataObserver$ = this.store.select(
+    selectedRecipeTemplateUserData
+  );
+
   activeTextAreaId = '';
+  userEnteredData = false;
+  userHasEnteredDataSelectorObserver$ = this.store.select(
+    userHasEnteredDataSelector
+  );
+  selectedRecipeTemplateUserDataFromStore = {
+    title: '',
+    quote: '',
+    servings: '',
+    prepTime: '',
+    cookingTime: '',
+    ingredientsList: [''],
+    directionsList: [''],
+    notes: [''],
+    description: '',
+  };
+  userEnteredDataFromStore = false;
 
   textAreaContainersIdsObject: TextAreaContainersIdsObjectInterface = {
     ingredients: 'recipe-template-one-ingredients-textarea-',
@@ -46,11 +78,54 @@ export class RecipeTemplateOne {
     ingredientsList: ['300ml'],
     directionsList: ['1. This line of text needs to break onto the next line'],
     notes: ['- Add notes to your recipe to add any addition details'],
+    description: '',
   };
 
-  textAreaInputHandler(event: Event) {
+  editTagsButtonMouseEnter = false;
+
+  deleteTagButtonHandler(event: MouseEvent) {
+    let targetElement = event.target as HTMLElement;
+    let targetId = targetElement.id;
+
+    if (targetId.length === 0) {
+      targetElement = targetElement.parentElement as HTMLButtonElement;
+      targetId = targetElement.id;
+    }
+
+    const splitId = targetId.split('-');
+
+    const selectedTag = splitId[splitId.length - 2];
+
+    const indexOfSelectedTag = this.selectedTags.indexOf(selectedTag);
+    this.selectedTags.splice(indexOfSelectedTag, 1);
+
+    this.store.dispatch(
+      RecipeCreatorActions.updateSelectedtags({
+        selectedTags: this.selectedTags,
+      })
+    );
+  }
+
+  editTagButtonMouseEnterHandler() {
+    this.editTagsButtonMouseEnter = !this.editTagsButtonMouseEnter;
+  }
+
+  editTagsButtonHandler() {
+    this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
+    this.store.dispatch(
+      PopupActions.updateRecipetagspopupactive({ recipeTagsPopupActive: true })
+    );
+  }
+
+  textAreaInputHandler(event: Event, textAreaType: string) {
     const targetElement = event.target as HTMLTextAreaElement;
     this.recipeCreatorFunctions.textAreaInputHandler(targetElement);
+    this.userEnteredData = true;
+    this.templateData = this.recipeCreatorFunctions.updateLocalRecipeData(
+      this.templateData,
+      textAreaType,
+      event
+    );
   }
 
   deleteTextAreaHandler(event: MouseEvent) {
@@ -86,7 +161,7 @@ export class RecipeTemplateOne {
           type
         );
         this.templateData = retrievedData.templateData;
-        this.ingredientListIds = retrievedData.idsArray;
+        this.directionsListIds = retrievedData.idsArray;
 
         break;
       case 'notes':
@@ -96,12 +171,43 @@ export class RecipeTemplateOne {
           type
         );
         this.templateData = retrievedData.templateData;
-        this.ingredientListIds = retrievedData.idsArray;
+        this.notesListIds = retrievedData.idsArray;
 
         break;
       default:
         break;
     }
+  }
+
+  ngOnInit() {
+    this.changeRecipeTemplatePopupActiveSelectorObserver$.subscribe((value) => {
+      if (value) {
+        this.store.dispatch(
+          RecipeCreatorActions.updateRecipetemplateuserdata({
+            recipeTemplateUserData: this.templateData,
+          })
+        );
+      }
+    });
+    this.selectedRecipeTemplateUserDataObserver$.subscribe((value) => {
+      this.selectedRecipeTemplateUserDataFromStore = value;
+    });
+
+    this.userHasEnteredDataSelectorObserver$.subscribe((value) => {
+      this.userEnteredDataFromStore = value;
+      if (value) {
+        this.templateData = this.selectedRecipeTemplateUserDataFromStore;
+      }
+    });
+
+    this.selectedTagsObserver$.subscribe((value: string[]) => {
+      this.selectedTags = value.map((tag: string) => {
+        return tag.charAt(0).toUpperCase() + tag.slice(1);
+      });
+      this.selectedTagsButtonIds = value.map((tag: string) => {
+        return 'recipe-template-1-' + tag + '-button';
+      });
+    });
   }
 
   ngAfterViewInit() {

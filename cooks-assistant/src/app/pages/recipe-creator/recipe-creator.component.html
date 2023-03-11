@@ -4,6 +4,8 @@
     src="{{ selectedBackgroundImageUrl }}"
     alt="{{ selectedBackgroundAltText }}"
   />
+  <logged-in-nav-bar *ngIf="loggedIn"></logged-in-nav-bar>
+  <logged-out-nav-bar *ngIf="!loggedIn"></logged-out-nav-bar>
 
   <background-changer-popup *ngIf="backgroundChangerActiveValue">
   </background-changer-popup>
@@ -37,6 +39,7 @@
       class="recipe-creator-user-button recipe-creator-card-button"
       (mouseenter)="recipeCardButtonHoverHandler()"
       (mouseleave)="recipeCardButtonHoverHandler()"
+      (click)="changeTemplateButtonHandler()"
     >
       <img
         class="recipe-creator-user-button-icon"
@@ -49,6 +52,23 @@
         *ngIf="recipeCardHover"
       />
     </button>
-    <recipe-template-two></recipe-template-two>
+
+    <!-- <recipe-template-one
+      *ngIf="selectedTemplateIndexSelector === 0"
+    ></recipe-template-one>
+    <recipe-template-two
+      *ngIf="selectedTemplateIndexSelector === 1"
+    ></recipe-template-two>
+    <recipe-template-three
+      *ngIf="selectedTemplateIndexSelector === 2"
+    ></recipe-template-three> -->
+    <recipe-template-three></recipe-template-three>
   </div>
+  <template-selector-popup
+    *ngIf="changeRecipeTemplatePopupActive"
+  ></template-selector-popup>
+  <error-popup *ngIf="errorPopupActive"></error-popup>
+  <login-popup *ngIf="loginPopupActive"></login-popup>
+  <signup-popup *ngIf="signupPopupActive"></signup-popup>
+  <tags-selector-popup *ngIf="tagsPopupActive"></tags-selector-popup>
 </div>

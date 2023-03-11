@@ -227,5 +227,12 @@ export class LoginPopupComponent {
     );
   }
 
-  loginButtonHandler() {}
+  signupButtonHandler() {
+    this.store.dispatch(
+      PopupActions.updateLoginpopupactive({ loginPopupActive: false })
+    );
+    this.store.dispatch(
+      PopupActions.updateSignuppopupactive({ signupPopupActive: true })
+    );
+  }
 }

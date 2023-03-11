@@ -15,3 +15,16 @@ export const selectedRecipeTemplateUserData = createSelector(
   selectRecipeCreatorStore,
   (state: RecipeCreatorStateInterface) => state.recipeTemplateUserData
 );
+
+export const userHasEnteredDataSelector = createSelector(
+  selectRecipeCreatorStore,
+  (state: RecipeCreatorStateInterface) => state.userHasEnteredData
+);
+export const selectedTemplateIndexSelector = createSelector(
+  selectRecipeCreatorStore,
+  (state: RecipeCreatorStateInterface) => state.selectedTemplateIndex
+);
+export const selectedTagsSelector = createSelector(
+  selectRecipeCreatorStore,
+  (state: RecipeCreatorStateInterface) => state.selectedTags
+);

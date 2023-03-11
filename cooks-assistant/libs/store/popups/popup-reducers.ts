@@ -14,8 +14,10 @@ export interface PopupStateInterface {
   loginPopupActive: boolean;
   signupPopupActive: boolean;
   recipeCreatorBackgroundPopupActive: boolean;
-  updateTemplateTextPopupActive: boolean;
-  updateTemplateTextPopupData: TemplateTextPopupDataInterface;
+  changeRecipeTemplatePopupActive: boolean;
+  errorPopupActive: boolean;
+  errorMessage: string;
+  recipeTagsPopupActive: boolean;
 }
 
 export const initialPopupState: PopupStateInterface = {
@@ -23,14 +25,10 @@ export const initialPopupState: PopupStateInterface = {
   loginPopupActive: false,
   signupPopupActive: false,
   recipeCreatorBackgroundPopupActive: false,
-  updateTemplateTextPopupActive: false,
-  updateTemplateTextPopupData: {
-    fieldType: 'title',
-    fieldIndex: 0,
-    currentValue: 'Chicken Salad',
-    newValue: '',
-    popupTitle: 'Update Title',
-  },
+  changeRecipeTemplatePopupActive: false,
+  errorPopupActive: false,
+  errorMessage: '',
+  recipeTagsPopupActive: false,
 };
 
 export const popupReducers = createReducer(
@@ -60,19 +58,29 @@ export const popupReducers = createReducer(
     }
   ),
   on(
-    PopupActions.updateTemplatetextpopupdata,
-    (_state, { templateTextPopupData }) => {
+    PopupActions.updateChangerecipetemplatepopupactive,
+    (_state, { changeRecipeTemplatePopupActive }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
-      tempObject['updateTemplateTextPopupData'] = templateTextPopupData;
+      tempObject['changeRecipeTemplatePopupActive'] =
+        changeRecipeTemplatePopupActive;
       return tempObject;
     }
   ),
+  on(PopupActions.updateErrorpopupactive, (_state, { errorPopupActive }) => {
+    const tempObject = JSON.parse(JSON.stringify(_state));
+    tempObject['errorPopupActive'] = errorPopupActive;
+    return tempObject;
+  }),
+  on(PopupActions.updateErrormessage, (_state, { errorMessage }) => {
+    const tempObject = JSON.parse(JSON.stringify(_state));
+    tempObject['errorMessage'] = errorMessage;
+    return tempObject;
+  }),
   on(
-    PopupActions.updateTemplatetextpopupactive,
-    (_state, { updateTemplateTextPopupActive }) => {
+    PopupActions.updateRecipetagspopupactive,
+    (_state, { recipeTagsPopupActive }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
-      tempObject['updateTemplateTextPopupActive'] =
-        updateTemplateTextPopupActive;
+      tempObject['recipeTagsPopupActive'] = recipeTagsPopupActive;
       return tempObject;
     }
   )

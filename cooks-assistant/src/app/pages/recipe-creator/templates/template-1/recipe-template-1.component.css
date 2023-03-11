@@ -19,19 +19,6 @@
   justify-content: flex-start;
 }
 
-.recipe-template-one-create-recipe-button {
-  position: absolute;
-  top: -100px;
-  right: -40px;
-  font-size: var(--r24);
-  box-sizing: border-box;
-  background-color: var(--main800);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: none;
-  box-shadow: 0px 0px 10px white;
-}
 .recipe-template-one-food-image {
   width: max(60%, 60%);
   height: max(500px, 500px);
@@ -53,6 +40,117 @@
   box-sizing: border-box;
   border-radius: 10px;
 }
+
+.recipe-template-one-tags-container {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  width: max(300px, 300px);
+  min-height: 50px;
+  height: max-content;
+  max-height: 200px;
+
+  display: flex;
+  gap: 2.5px;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 15px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+.recipe-template-one-tags-title {
+  position: absolute;
+  top: 10px;
+  right: 245px;
+  padding: 0px;
+  margin: 0px;
+  font-family: var(--google-font);
+  font-size: var(--r16);
+  color: black;
+  background-color: white;
+  padding: 0px 10px;
+  z-index: 2;
+}
+.recipe-template-one-tag-container {
+  display: flex;
+  width: max-content;
+  max-width: max-content;
+  height: max-content;
+  max-height: max-content;
+  padding: 0px;
+  margin: 0px;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: black;
+  box-sizing: border-box;
+  padding: 5px 10px;
+}
+
+.recipe-template-one-tags-edit-button {
+  width: max(30px, 30px);
+  height: max(30px, 30px);
+  padding: 7.5px;
+  position: absolute;
+  top: 7.5px;
+  right: 30px;
+  background-color: white;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: all 0.25s;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.recipe-template-one-tags-edit-button:hover {
+  background-color: black;
+}
+.recipe-template-one-edit-button-icon {
+  width: max(100%, 100%);
+  height: max(100%, 100%);
+  object-fit: cover;
+  display: inline;
+}
+
+.recipe-template-one-tag-text {
+  padding: 0px;
+  margin: 0px;
+  font-family: var(--google-font);
+  font-size: var(--r16);
+  color: inherit;
+}
+
+.recipe-template-one-closing-icon {
+  width: max(15px, 15px);
+  height: max(15px, 15px);
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.recipe-template-one-delete-tag-button {
+  width: max-content;
+  max-width: max-content;
+  max-height: max-content;
+  background-color: black;
+  border-radius: 50%;
+  transition: all 0.25s;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+.recipe-template-one-delete-tag-button:hover {
+  background-color: white;
+  color: black;
+}
+
 .recipe-template-one-edit-button {
   width: max(30px, 30px);
   height: max(30px, 30px);
@@ -68,6 +166,7 @@
   color: white;
   transition: all 0.5s;
 }
+
 .recipe-template-one-edit-button:hover {
   background-color: white;
   color: black;
@@ -231,7 +330,7 @@
 
 .recipe-template-one-text-area-container {
   display: grid;
-  grid-template-columns: 1fr 20px;
+  grid-template-columns: 1fr;
   gap: 10px;
   max-height: max-content;
   width: 100%;
@@ -239,17 +338,23 @@
   justify-content: center;
   box-sizing: border-box;
   padding-right: 20px;
+  position: relative;
+  padding-left: 20px;
 }
 
-.recipe-template-one-ingredients-delete-icon {
+.recipe-template-one-text-area-delete-icon {
   width: max(20px, 20px);
   height: max(20px, 20px);
   transition: all 1s;
   border-radius: 50%;
   padding: 2.5px;
   box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
 }
-.recipe-template-one-ingredients-delete-icon:hover {
+.recipe-template-one-text-area-delete-icon:hover {
   background-color: black;
   color: white;
 }
@@ -268,7 +373,7 @@
   height: max-content;
   border: none;
   resize: none;
-  width: max(100%, 100%);
+  width: max(95%, 95%);
 }
 .recipe-template-one-direction-container {
   width: max(100%, 100%);
@@ -279,6 +384,7 @@
   align-items: center;
   justify-content: flex-start;
   position: relative;
+  text-align: left;
 }
 
 .recipe-template-one-notes-top-container {
@@ -310,7 +416,7 @@
 }
 
 .recipe-template-one-notes-area {
-  width: max(100%, 100%);
+  width: max(98%, 98%);
   max-height: max-content;
   display: flex;
 

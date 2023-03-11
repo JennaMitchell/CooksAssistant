@@ -1,12 +1,16 @@
 <div class="recipe-template-two-main-container">
   <div class="recipe-template-two-title-half-container">
     <div class="recipe-template-two-title-container">
-      <textarea class="recipe-template-two-title">{{
-        templateData.title
-      }}</textarea>
-      <textarea class="recipe-template-two-quote">{{
-        templateData.quote
-      }}</textarea>
+      <textarea
+        class="recipe-template-two-title"
+        (change)="textAreaInputHandler($event, 'title')"
+        >{{ templateData.title }}</textarea
+      >
+      <textarea
+        class="recipe-template-two-quote"
+        (change)="textAreaInputHandler($event, 'quote')"
+        >{{ templateData.quote }}</textarea
+      >
     </div>
 
     <img
@@ -16,6 +20,57 @@
     />
   </div>
   <div class="recipe-template-two-recipe-half-container">
+    <p class="recipe-template-two-tags-title">Tags</p>
+    <button
+      class="recipe-template-two-tags-edit-button"
+      (click)="editTagsButtonHandler()"
+      (mouseenter)="editTagButtonMouseEnterHandler()"
+      (mouseleave)="editTagButtonMouseEnterHandler()"
+    >
+      <img
+        class="recipe-template-two-edit-button-icon"
+        alt="tags button icon"
+        src="../../../../../assets/images/homepage/new-recipe-icon.png"
+        *ngIf="!editTagsButtonMouseEnter"
+      />
+      <img
+        class="recipe-template-two-edit-button-icon"
+        alt="tags button icon"
+        src="../../../../../assets/images/homepage/new-recipe-icon-white.png"
+        *ngIf="editTagsButtonMouseEnter"
+      />
+    </button>
+    <div class="recipe-template-two-tags-container">
+      <button
+        class="recipe-template-two-tag-button"
+        *ngFor="
+          let selectedTagsEntry of selectedTags;
+          let indexOfSelectedTags = index
+        "
+        id="{{ selectedTagsButtonIds[indexOfSelectedTags] }}"
+      >
+        <p class="recipe-template-two-tag-text">{{ selectedTagsEntry }}</p>
+        <button
+          class="recipe-template-two-delete-tag-button"
+          (click)="deleteTagButtonHandler($event)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 recipe-template-two-closing-icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </button>
+    </div>
     <div class="recipe-template-two-info-container">
       <p class="recipe-template-two-info-title">Ingredients</p>
       <button
@@ -48,9 +103,10 @@
       >
         <textarea
           class="recipe-template-two-text-area"
-          (input)="textAreaInputHandler($event)"
+          (change)="textAreaInputHandler($event, 'ingredient')"
           >{{ ingredientsText }}</textarea
         >
+
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -100,7 +156,7 @@
       >
         <textarea
           class="recipe-template-two-text-area recipe-template-two-directions-text-area"
-          (input)="textAreaInputHandler($event)"
+          (change)="textAreaInputHandler($event, 'direction')"
           >{{ directionsText }}</textarea
         >
         <svg
