@@ -28,3 +28,7 @@ export const selectedTagsSelector = createSelector(
   selectRecipeCreatorStore,
   (state: RecipeCreatorStateInterface) => state.selectedTags
 );
+export const userSelectedRecipeDishImageIndexSelector = createSelector(
+  selectRecipeCreatorStore,
+  (state: RecipeCreatorStateInterface) => state.userSelectedRecipeDishImageIndex
+);

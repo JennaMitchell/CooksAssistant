@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { PopupActions } from 'libs/store/popups/popup.actions';
+import { PopupActions } from 'libs/store/popups/popup-actions.actions';
 import { RandomStringGeneratorsService } from 'src/app/utilities/random-string-generator/random-string-generators.service';
 import { SignupApiCallsService } from 'src/app/utilities/api-call-functions/signup-api-call-functions/signup-api-calls.service';
 import { AuthActions } from 'libs/store/auth/auth.actions';

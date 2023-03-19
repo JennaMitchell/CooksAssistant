@@ -1,28 +1,28 @@
 const acceptedRecipePreferenceTags = [
-  "Chicken",
-  "Beef",
-  "Fish",
-  "Vegan",
-  "Vegetarian",
-  "Spicy",
+  "chicken",
+  "beef",
+  "fish",
+  "vegan",
+  "vegetarian",
+  "spicy",
 ];
 const acceptedRecipeCuisineTags = [
-  "Chinense",
-  "French",
-  "Indian",
-  "Japanense",
-  "Mexican",
-  "Russian",
-  "Korean",
-  "USA",
+  "chinense",
+  "french",
+  "indian",
+  "japanense",
+  "mexican",
+  "russian",
+  "korean",
+  "usa",
 ];
 const acceptedRecipeTimes = [
-  "Breakfast",
-  "Lunch",
-  "Dinner",
-  "Dessert",
-  "Appetizer",
-  "Beverage",
+  "breakfast",
+  "lunch",
+  "dinner",
+  "dessert",
+  "appetizer",
+  "beverage",
 ];
 exports.acceptedRecipeCuisineTags = acceptedRecipeCuisineTags;
 exports.acceptedRecipePreferenceTags = acceptedRecipePreferenceTags;

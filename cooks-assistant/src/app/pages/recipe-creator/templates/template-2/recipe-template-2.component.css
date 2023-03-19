@@ -250,13 +250,11 @@
   height: max(100%, 100%);
   object-fit: cover;
 }
-.recipe-template-two-tags-edit-button {
+.recipe-template-two-edit-button {
   width: max(22.5px, 22.5px);
   height: max(22.5px, 22.5px);
   padding: 5px;
   position: absolute;
-  top: 1px;
-  right: 30px;
   background-color: #fef6e1;
   box-sizing: border-box;
   display: flex;
@@ -268,7 +266,15 @@
   z-index: 2;
 }
 
-.recipe-template-two-tags-edit-button:hover {
+.recipe-template-two-tags-edit-button {
+  top: 1px;
+  right: 30px;
+}
+.recipe-template-two-photo-edit-button {
+  top: 200px;
+  left: 340px;
+}
+.recipe-template-two-edit-button:hover {
   background-color: black;
 }
 .recipe-template-two-edit-button-icon {

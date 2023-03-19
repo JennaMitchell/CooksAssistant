@@ -10,11 +10,12 @@ export class LoginApiCallsService {
         body: JSON.stringify(signupData),
       });
 
-      console.log(fetchedResponse);
       return fetchedResponse;
     } catch (err) {
-      console.log(err);
-      return 'ERROR';
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
     }
   };
 
@@ -27,11 +28,13 @@ export class LoginApiCallsService {
         },
         body: JSON.stringify(loginData),
       });
-      console.log(fetchedResponse);
+
       return fetchedResponse;
-    } catch (error) {
-      console.log(error);
-      return 'ERROR';
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
     }
   };
 

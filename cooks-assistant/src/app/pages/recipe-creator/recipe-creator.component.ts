@@ -6,8 +6,9 @@ import {
   recipeCreatorBackgroundPopupActiveSelector,
   signupPopupActiveSelector,
   recipeTagsPopupActiveSelector,
+  recipeChangeImagePopupActiveSelector,
 } from 'libs/store/popups/popup-selectors';
-import { PopupActions } from 'libs/store/popups/popup.actions';
+import { PopupActions } from 'libs/store/popups/popup-actions.actions';
 import {
   selectedRecipeCreatorBackground,
   selectedTemplateIndexSelector,
@@ -24,6 +25,11 @@ import { loggedInSelector } from 'libs/store/auth/auth-selectors';
 })
 export class RecipeCreatorComponent {
   constructor(private store: Store) {}
+
+  recipeChangeImagePopupActiveObserver$ = this.store.select(
+    recipeChangeImagePopupActiveSelector
+  );
+  recipeChangeImagePopupActive = false;
 
   tagsPopupActiveObserver$ = this.store.select(recipeTagsPopupActiveSelector);
   tagsPopupActive = false;
@@ -131,6 +137,9 @@ export class RecipeCreatorComponent {
     });
     this.tagsPopupActiveObserver$.subscribe((value) => {
       this.tagsPopupActive = value;
+    });
+    this.recipeChangeImagePopupActiveObserver$.subscribe((value: boolean) => {
+      this.recipeChangeImagePopupActive = value;
     });
   }
 }

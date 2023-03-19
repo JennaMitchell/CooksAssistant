@@ -1,5 +1,24 @@
 <div class="recipe-template-two-main-container">
   <div class="recipe-template-two-title-half-container">
+    <button
+      class="recipe-template-two-photo-edit-button recipe-template-two-edit-button"
+      (click)="dishImageEditButtonHandler()"
+      (mouseenter)="editPhotoButtonMouseEnterHandler()"
+      (mouseleave)="editPhotoButtonMouseEnterHandler()"
+    >
+      <img
+        class="recipe-template-two-edit-button-icon"
+        alt="tags button icon"
+        src="../../../../../assets/images/homepage/new-recipe-icon.png"
+        *ngIf="!editPhotoButtonMouseEnter"
+      />
+      <img
+        class="recipe-template-two-edit-button-icon"
+        alt="tags button icon"
+        src="../../../../../assets/images/homepage/new-recipe-icon-white.png"
+        *ngIf="editPhotoButtonMouseEnter"
+      />
+    </button>
     <div class="recipe-template-two-title-container">
       <textarea
         class="recipe-template-two-title"
@@ -15,14 +34,16 @@
 
     <img
       class="recipe-template-two-food-image"
-      src="assets/images/food/french-toast.jpg"
-      alt="french toast"
+      [alt]="dishImagesData[templateData.selectedRecipeDishImageIndex].altText"
+      [src]="
+        dishImagesData[templateData.selectedRecipeDishImageIndex].imageLocation
+      "
     />
   </div>
   <div class="recipe-template-two-recipe-half-container">
     <p class="recipe-template-two-tags-title">Tags</p>
     <button
-      class="recipe-template-two-tags-edit-button"
+      class="recipe-template-two-tags-edit-button recipe-template-two-edit-button"
       (click)="editTagsButtonHandler()"
       (mouseenter)="editTagButtonMouseEnterHandler()"
       (mouseleave)="editTagButtonMouseEnterHandler()"
@@ -40,6 +61,7 @@
         *ngIf="editTagsButtonMouseEnter"
       />
     </button>
+
     <div class="recipe-template-two-tags-container">
       <button
         class="recipe-template-two-tag-button"

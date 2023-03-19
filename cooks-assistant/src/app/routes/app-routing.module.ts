@@ -15,6 +15,13 @@ const routes: Routes = [
         (m) => m.RecipeCreatorModule
       ),
   },
+  {
+    path: 'recipe-browser',
+    loadChildren: () =>
+      import('../pages/recipe-browser/recipe-browser.module').then(
+        (m) => m.RecipeBrowserModule
+      ),
+  },
 ];
 
 //      canActivate:[AuthGuard]

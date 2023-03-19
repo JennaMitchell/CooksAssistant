@@ -193,3 +193,71 @@ export const mealsTimesButtonData = [
     altText: 'beverage icon',
   },
 ];
+export const dishImagesData = [
+  {
+    title: 'Basamic Chicken',
+    imageLocation: 'assets/images/food/basamic-chicken.jpg',
+    altText: 'Basamic Chicken',
+  },
+  {
+    title: 'Chicken Salad',
+    imageLocation: 'assets/images/food/chicken-salad.jpg',
+    altText: 'chicken salad',
+  },
+  {
+    title: 'French Toast',
+    imageLocation: 'assets/images/food/french-toast.jpg',
+    altText: 'French Toast',
+  },
+  {
+    title: 'Meat Plater',
+    imageLocation: 'assets/images/food/meat-plater.jpg',
+    altText: 'Basamic Chicken',
+  },
+  {
+    title: 'Veggie Salad',
+    imageLocation: 'assets/images/food/veggie-salad.jpg',
+    altText: 'veggie salad',
+  },
+];
+export const recipeCourseTagData = [
+  {
+    title: 'Main Course',
+  },
+  {
+    title: 'Side Dish',
+  },
+  {
+    title: 'Appetizers',
+  },
+  {
+    title: 'Desserts',
+  },
+];
+
+export const mainIngredientsData = [
+  {
+    title: 'Beans',
+  },
+  {
+    title: 'Vegetables',
+  },
+  {
+    title: 'Pork',
+  },
+  {
+    title: 'Beef',
+  },
+  { title: 'Grains' },
+  { title: 'Cheese' },
+  {
+    title: 'Pasta',
+  },
+  {
+    title: 'Fish & Seafood',
+  },
+  {
+    title: 'Chicken',
+  },
+  { title: 'Rice' },
+];

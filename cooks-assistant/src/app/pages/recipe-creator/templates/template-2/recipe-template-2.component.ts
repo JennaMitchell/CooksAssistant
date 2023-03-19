@@ -6,13 +6,16 @@ import {
   userHasEnteredDataSelector,
   selectedRecipeTemplateUserData,
   selectedTagsSelector,
+  userSelectedRecipeDishImageIndexSelector,
 } from 'libs/store/recipe-creator/recipe-creator-selectors';
 import { changeRecipeTemplatePopupActiveSelector } from '../../../../../../libs/store/popups/popup-selectors';
 import {
   RecipeCreatorFunctions,
   ReturnedCreatorRecipeDataAndIdsInterface,
 } from '../../../../utilities/recipe-creator-functions/recipe-creator-function.service';
-import { PopupActions } from 'libs/store/popups/popup.actions';
+import { PopupActions } from 'libs/store/popups/popup-actions.actions';
+import { dishImagesData } from '../../../../constants/constants';
+import { ActivatePopupService } from '../../../../utilities/activate-popup-functions/activate-popup-functions.service';
 interface TextAreaContainersIdsObjectInterface {
   [key: string]: string;
 }
@@ -20,13 +23,18 @@ interface TextAreaContainersIdsObjectInterface {
   selector: 'recipe-template-two',
   templateUrl: './recipe-template-2.component.html',
   styleUrls: ['./recipe-template-2.component.css'],
-  providers: [RecipeCreatorFunctions],
+  providers: [RecipeCreatorFunctions, ActivatePopupService],
 })
 export class RecipeTemplateTwo {
   constructor(
     private store: Store,
-    private recipeCreatorFunctions: RecipeCreatorFunctions
+    private recipeCreatorFunctions: RecipeCreatorFunctions,
+    private activatePopupService: ActivatePopupService
   ) {}
+  dishImagesData = dishImagesData;
+
+  editPhotoButtonMouseEnter = false;
+
   selectedTagsObserver$ = this.store.select(selectedTagsSelector);
   selectedTags: string[] = [];
   selectedTagsButtonIds: string[] = [];
@@ -53,8 +61,12 @@ export class RecipeTemplateTwo {
     directionsList: [''],
     notes: [''],
     description: '',
+    selectedRecipeDishImageIndex: 0,
   };
   userEnteredDataFromStore = false;
+  userSelectedRecipeDishImageIndexObserver$ = this.store.select(
+    userSelectedRecipeDishImageIndexSelector
+  );
 
   textAreaContainersIdsObject: TextAreaContainersIdsObjectInterface = {
     ingredients: 'recipe-template-two-ingredients-textarea-',
@@ -77,10 +89,17 @@ export class RecipeTemplateTwo {
     directionsList: ['1. This line of text needs to break onto the next line'],
     notes: ['- Add notes to your recipe to add any addition details'],
     description: '',
+    selectedRecipeDishImageIndex: 2,
   };
 
   editTagsButtonMouseEnter = false;
+  editPhotoButtonMouseEnterHandler() {
+    this.editPhotoButtonMouseEnter = !this.editPhotoButtonMouseEnter;
+  }
 
+  dishImageEditButtonHandler() {
+    this.activatePopupService.activateRecipeCreatorDishImagePopup();
+  }
   deleteTagButtonHandler(event: MouseEvent) {
     let targetElement = event.target as HTMLElement;
     let targetId = targetElement.id;
@@ -206,6 +225,13 @@ export class RecipeTemplateTwo {
         return 'recipe-template-1-' + tag + '-button';
       });
     });
+    this.userSelectedRecipeDishImageIndexObserver$.subscribe(
+      (value: number) => {
+        if (value !== -1) {
+          this.templateData.selectedRecipeDishImageIndex = value;
+        }
+      }
+    );
   }
 
   ngAfterViewInit() {

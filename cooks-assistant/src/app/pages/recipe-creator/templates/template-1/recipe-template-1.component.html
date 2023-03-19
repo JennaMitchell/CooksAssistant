@@ -1,9 +1,31 @@
 <div class="recipe-template-one-main-container">
+  <create-recipe-button [templateData]="templateData"></create-recipe-button>
   <div class="recipe-template-one-image-container">
+    <button
+      class="recipe-template-one-photo-edit-button recipe-template-one-edit-button"
+      (click)="dishImageEditButtonHandler()"
+      (mouseenter)="editPhotoButtonMouseEnterHandler()"
+      (mouseleave)="editPhotoButtonMouseEnterHandler()"
+    >
+      <img
+        class="recipe-template-one-edit-button-icon"
+        alt="tags button icon"
+        src="../../../../../assets/images/homepage/new-recipe-icon.png"
+        *ngIf="!editPhotoButtonMouseEnter"
+      />
+      <img
+        class="recipe-template-one-edit-button-icon"
+        alt="tags button icon"
+        src="../../../../../assets/images/homepage/new-recipe-icon-white.png"
+        *ngIf="editPhotoButtonMouseEnter"
+      />
+    </button>
     <img
       class="recipe-template-one-food-image"
-      src="assets/images/food/chicken-salad.jpg"
-      alt="chicken-salad"
+      [alt]="dishImagesData[templateData.selectedRecipeDishImageIndex].altText"
+      [src]="
+        dishImagesData[templateData.selectedRecipeDishImageIndex].imageLocation
+      "
     />
     <div class="recipe-template-one-title-container">
       <textarea
@@ -23,7 +45,7 @@
 
   <p class="recipe-template-one-tags-title">Tags</p>
   <button
-    class="recipe-template-one-tags-edit-button"
+    class="recipe-template-one-edit-button recipe-template-one-tags-edit-button"
     (click)="editTagsButtonHandler()"
     (mouseenter)="editTagButtonMouseEnterHandler()"
     (mouseleave)="editTagButtonMouseEnterHandler()"
@@ -106,7 +128,7 @@
     <div class="recipe-template-one-ingredients-directions-container">
       <div class="recipe-template-one-ingredients-container">
         <button
-          class="recipe-template-one-add-ingredient-direction-button recipe-template-one-add-text-button"
+          class="recipe-template-one-add-ingredient-direction-button recipe-template-one-add-entry-button"
           (click)="addTextAreaHandler('ingredients')"
         >
           <svg
@@ -157,7 +179,7 @@
       </div>
       <div class="recipe-template-one-direction-container">
         <button
-          class="recipe-template-one-add-ingredient-direction-button recipe-template-one-add-text-button"
+          class="recipe-template-one-add-ingredient-direction-button recipe-template-one-add-entry-button"
           (click)="addTextAreaHandler('directions')"
         >
           <svg
@@ -210,7 +232,7 @@
     <div class="recipe-template-one-notes-top-container">
       <h6 class="recipe-template-one-notes-title">Notes</h6>
       <button
-        class="recipe-template-one-add-notes-button recipe-template-one-add-text-button"
+        class="recipe-template-one-add-notes-button recipe-template-one-add-entry-button"
         (click)="addTextAreaHandler('notes')"
       >
         <svg

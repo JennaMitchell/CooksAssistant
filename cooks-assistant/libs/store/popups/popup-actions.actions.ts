@@ -1,5 +1,5 @@
 import { props, createActionGroup } from '@ngrx/store';
-import { TemplateTextPopupDataInterface } from './popup-reducers';
+
 export const PopupActions = createActionGroup({
   source: 'popup',
   events: {
@@ -15,5 +15,10 @@ export const PopupActions = createActionGroup({
     'Update ErrorPopupActive': props<{ errorPopupActive: boolean }>(),
     'Update ErrorMessage': props<{ errorMessage: string }>(),
     'Update RecipeTagsPopupActive': props<{ recipeTagsPopupActive: boolean }>(),
+    'Update RecipeChangeImagePopupActive': props<{
+      recipeChangeImagePopupActive: boolean;
+    }>(),
+    'Update SuccessPopupActive': props<{ successPopupActive: boolean }>(),
+    'Update SuccessPopupText': props<{ successPopupText: string }>(),
   },
 });

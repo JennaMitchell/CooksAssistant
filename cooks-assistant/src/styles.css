@@ -27,6 +27,8 @@ body {
   --input-error-color: rgb(255, 97, 97);
   --input-active-color: rgb(27, 27, 255);
 
+  --popup-choice-button-active-color: rgb(2, 238, 2);
+
   --darkblack: #000;
   --black: rgb(22, 21, 21);
   --lightblack: rgb(11, 11, 11);
@@ -41,6 +43,7 @@ body {
   --r48: calc((48 / var(--base) * 1rem));
   --r32: calc((32 / var(--base) * 1rem));
   --r28: calc((28 / var(--base) * 1rem));
+  --r26: calc((26 / var(--base) * 1rem));
   --r24: calc((24 / var(--base) * 1rem));
   --r22: calc((22 / var(--base) * 1rem));
   --r20: calc((20 / var(--base) * 1rem));

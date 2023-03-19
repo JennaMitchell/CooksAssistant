@@ -2,17 +2,23 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { RecipeCreatorActions } from 'libs/store/recipe-creator/recipe-creator-actions.actions';
-import { changeRecipeTemplatePopupActiveSelector } from '../../../../../../libs/store/popups/popup-selectors';
+import {
+  changeRecipeTemplatePopupActiveSelector,
+  recipeChangeImagePopupActiveSelector,
+} from '../../../../../../libs/store/popups/popup-selectors';
 import {
   userHasEnteredDataSelector,
   selectedRecipeTemplateUserData,
   selectedTagsSelector,
+  userSelectedRecipeDishImageIndexSelector,
 } from 'libs/store/recipe-creator/recipe-creator-selectors';
 import {
   RecipeCreatorFunctions,
   ReturnedCreatorRecipeDataAndIdsInterface,
 } from '../../../../utilities/recipe-creator-functions/recipe-creator-function.service';
-import { PopupActions } from 'libs/store/popups/popup.actions';
+import { PopupActions } from 'libs/store/popups/popup-actions.actions';
+import { dishImagesData } from '../../../../constants/constants';
+import { ActivatePopupService } from '../../../../utilities/activate-popup-functions/activate-popup-functions.service';
 interface TextAreaContainersIdsObjectInterface {
   [key: string]: string;
 }
@@ -20,18 +26,29 @@ interface TextAreaContainersIdsObjectInterface {
   selector: 'recipe-template-three',
   templateUrl: './recipe-template-3.component.html',
   styleUrls: ['./recipe-template-3.component.css'],
-  providers: [RecipeCreatorFunctions],
+  providers: [RecipeCreatorFunctions, ActivatePopupService],
 })
 export class RecipeTemplateThree {
   constructor(
     private store: Store,
-    private recipeCreatorFunctions: RecipeCreatorFunctions
+    private recipeCreatorFunctions: RecipeCreatorFunctions,
+    private activatePopupService: ActivatePopupService
   ) {}
+  dishImagesData = dishImagesData;
 
+  userSelectedRecipeDishImageIndexObserver$ = this.store.select(
+    userSelectedRecipeDishImageIndexSelector
+  );
+
+  recipeChangeImagePopupActiveObserver$ = this.store.select(
+    recipeChangeImagePopupActiveSelector
+  );
+  recipeChangeImagePopupActive = false;
   selectedTagsObserver$ = this.store.select(selectedTagsSelector);
   selectedTags: string[] = [];
   selectedTagsButtonIds: string[] = [];
   editTagsButtonMouseEnter = false;
+  editPhotoButtonMouseEnter = false;
   activeTextAreaId = '';
   changeRecipeTemplatePopupActiveSelectorObserver$ = this.store.select(
     changeRecipeTemplatePopupActiveSelector
@@ -54,6 +71,7 @@ export class RecipeTemplateThree {
     directionsList: [''],
     notes: [''],
     description: '',
+    selectedRecipeDishImageIndex: 0,
   };
   userEnteredDataFromStore = false;
 
@@ -78,6 +96,7 @@ export class RecipeTemplateThree {
     directionsList: ['1. This line of text needs to break onto the next line'],
     notes: ['- Add notes to your recipe to add any addition details'],
     description: '',
+    selectedRecipeDishImageIndex: 3,
   };
   deleteTagButtonHandler(event: MouseEvent) {
     let targetElement = event.target as HTMLElement;
@@ -102,8 +121,18 @@ export class RecipeTemplateThree {
     );
   }
 
+  editPhotoButtonMouseEnterHandler() {
+    this.editPhotoButtonMouseEnter = !this.editPhotoButtonMouseEnter;
+  }
+
   editTagButtonMouseEnterHandler() {
     this.editTagsButtonMouseEnter = !this.editTagsButtonMouseEnter;
+  }
+  editPhotoButtonMouseHandler() {
+    this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
+    this.store.dispatch(
+      PopupActions.updateRecipetagspopupactive({ recipeTagsPopupActive: true })
+    );
   }
 
   editTagsButtonHandler() {
@@ -203,6 +232,18 @@ export class RecipeTemplateThree {
         return 'recipe-template-1-' + tag + '-button';
       });
     });
+
+    this.userSelectedRecipeDishImageIndexObserver$.subscribe(
+      (value: number) => {
+        if (value !== -1) {
+          this.templateData.selectedRecipeDishImageIndex = value;
+        }
+      }
+    );
+  }
+
+  dishImageEditButtonHandler() {
+    this.activatePopupService.activateRecipeCreatorDishImagePopup();
   }
 
   ngAfterViewInit() {

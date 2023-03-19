@@ -57,3 +57,22 @@ export const recipeTagsPopupActiveSelector = createSelector(
     return state.recipeTagsPopupActive;
   }
 );
+export const recipeChangeImagePopupActiveSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.recipeChangeImagePopupActive;
+  }
+);
+export const successPopupActiveSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.successPopupActive;
+  }
+);
+
+export const successPopupTextSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.successPopupText;
+  }
+);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PopupActions } from 'libs/store/popups/popup.actions';
+import { PopupActions } from 'libs/store/popups/popup-actions.actions';
 import { Store } from '@ngrx/store';
 
 @Component({

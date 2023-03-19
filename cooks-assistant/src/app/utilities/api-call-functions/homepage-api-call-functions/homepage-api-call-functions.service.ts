@@ -11,9 +11,11 @@ export class HomepageApiCallServiceFunctions {
       );
       console.log(fetchedResponse);
       return fetchedResponse;
-    } catch (error) {
-      console.log(error);
-      return 'ERROR';
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
     }
   };
 
@@ -28,9 +30,11 @@ export class HomepageApiCallServiceFunctions {
       });
       console.log(fetchedResponse);
       return fetchedResponse;
-    } catch (error: any) {
-      console.log(error);
-      return 'ERROR';
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
     }
   };
 }

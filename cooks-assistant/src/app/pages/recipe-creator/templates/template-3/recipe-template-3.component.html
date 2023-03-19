@@ -106,8 +106,10 @@
   <div class="recipe-template-three-description-top-container">
     <img
       class="recipe-template-three-food-image"
-      alt="made-food"
-      src="../../../../../assets/images/food/meat-plater.jpg"
+      [alt]="dishImagesData[templateData.selectedRecipeDishImageIndex].altText"
+      [src]="
+        dishImagesData[templateData.selectedRecipeDishImageIndex].imageLocation
+      "
     />
     <textarea
       class="recipe-template-three-recipe-title"
@@ -116,7 +118,7 @@
     >
     <p class="recipe-template-three-tags-title">Tags</p>
     <button
-      class="recipe-template-three-tags-edit-button"
+      class="recipe-template-three-tags-edit-button recipe-template-three-edit-button"
       (click)="editTagsButtonHandler()"
       (mouseenter)="editTagButtonMouseEnterHandler()"
       (mouseleave)="editTagButtonMouseEnterHandler()"
@@ -132,6 +134,25 @@
         alt="tags button icon"
         src="../../../../../assets/images/homepage/new-recipe-icon-white.png"
         *ngIf="editTagsButtonMouseEnter"
+      />
+    </button>
+    <button
+      class="recipe-template-three-photo-edit-button recipe-template-three-edit-button"
+      (click)="dishImageEditButtonHandler()"
+      (mouseenter)="editPhotoButtonMouseEnterHandler()"
+      (mouseleave)="editPhotoButtonMouseEnterHandler()"
+    >
+      <img
+        class="recipe-template-three-edit-button-icon"
+        alt="tags button icon"
+        src="../../../../../assets/images/homepage/new-recipe-icon.png"
+        *ngIf="!editPhotoButtonMouseEnter"
+      />
+      <img
+        class="recipe-template-three-edit-button-icon"
+        alt="tags button icon"
+        src="../../../../../assets/images/homepage/new-recipe-icon-white.png"
+        *ngIf="editPhotoButtonMouseEnter"
       />
     </button>
     <div class="recipe-template-three-tags-container">

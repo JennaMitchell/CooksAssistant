@@ -13,6 +13,8 @@ import { LoggedInNavBarModule } from 'src/app/nav-bar/logged-in-nav-bar/logged-i
 import { LoginPopupModule } from 'src/app/popups/login/login-popup.module';
 import { SignupPopupModule } from 'src/app/popups/signup/signup-popup.module';
 import { TagsSelectorPopupModule } from 'src/app/popups/recipe-creator/tags-selector/tags-selector-popup.module';
+import { DishImageChangerPopupModule } from 'src/app/popups/recipe-creator/dish-image-changer/dish-image-changer.module';
+
 @NgModule({
   declarations: [RecipeCreatorComponent],
 
@@ -30,6 +32,7 @@ import { TagsSelectorPopupModule } from 'src/app/popups/recipe-creator/tags-sele
     LoginPopupModule,
     SignupPopupModule,
     TagsSelectorPopupModule,
+    DishImageChangerPopupModule,
   ],
 })
 export class RecipeCreatorModule {}

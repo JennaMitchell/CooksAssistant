@@ -11,5 +11,8 @@ export const RecipeCreatorActions = createActionGroup({
     'Update UserHasEnteredData': props<{ userHasEnteredData: boolean }>(),
     'Update SelectedTemplateIndex': props<{ selectedTemplateIndex: number }>(),
     'Update SelectedTags': props<{ selectedTags: string[] }>(),
+    'Update UserSelectedRecipeDishImageIndex': props<{
+      userSelectedRecipeDishImageIndex: number;
+    }>(),
   },
 });

@@ -8,6 +8,7 @@ import {
   lockWebpageViewPortSelector,
   loginPopupActiveSelector,
   signupPopupActiveSelector,
+  successPopupActiveSelector,
 } from 'libs/store/popups/popup-selectors';
 import { loggedInSelector } from 'libs/store/auth/auth-selectors';
 
@@ -22,11 +23,13 @@ export class Homepage {
   signupPopupActiveObserver$ = this.store.select(signupPopupActiveSelector);
   loggedInObserver$ = this.store.select(loggedInSelector);
   errorPopupActiveObserver$ = this.store.select(errorPopupActiveSelector);
+  successPopupActiveObserver$ = this.store.select(successPopupActiveSelector);
 
   signupPopupActive: any;
   loginPopupActive: any;
   loggedIn: any;
   errorPopupActive: any;
+  successPopupActive = false;
 
   constructor(
     private homepageApiActions: HomepageApiCallServiceFunctions,
@@ -61,7 +64,9 @@ export class Homepage {
     });
     this.errorPopupActiveObserver$.subscribe((value) => {
       this.errorPopupActive = value;
-      console.log(value);
+    });
+    this.successPopupActiveObserver$.subscribe((value) => {
+      this.successPopupActive = value;
     });
   }
 }

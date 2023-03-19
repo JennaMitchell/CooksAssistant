@@ -1,0 +1,18 @@
+<div class="recipe-browser-recipe-card">
+  <div class="recipe-browser-recipe-card-recipe-image-contianer">
+    <img
+      class="recipe-browser-recipe-card-tags-recipe-image"
+      alt="{{ dishImagesData[dataEntry.selectedRecipeDishImageIndex].altText }}"
+      src="{{ dishImageLocation }}"
+    />
+    <div
+      class="recipe-browser-recipe-card-tags-container"
+      *ngFor="let tagsOfDataEntry of dataEntry.tags"
+    >
+      <p class="recipe-browser-recipe-card-tag">{{ tagsOfDataEntry }}</p>
+    </div>
+  </div>
+
+  <p class="recipe-browser-recipe-card-recipe-title">{{ dataEntry.title }}</p>
+  <p class="recipe-browser-recipe-card-recipe-text">Recipe</p>
+</div>

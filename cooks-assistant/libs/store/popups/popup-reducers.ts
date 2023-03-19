@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 // import { HomepageApiActions } from './homepage.actions';
-import { PopupActions } from './popup.actions';
+import { PopupActions } from './popup-actions.actions';
 export interface TemplateTextPopupDataInterface {
   fieldType: string;
   fieldIndex: number;
@@ -18,6 +18,9 @@ export interface PopupStateInterface {
   errorPopupActive: boolean;
   errorMessage: string;
   recipeTagsPopupActive: boolean;
+  recipeChangeImagePopupActive: boolean;
+  successPopupActive: boolean;
+  successPopupText: string;
 }
 
 export const initialPopupState: PopupStateInterface = {
@@ -29,6 +32,9 @@ export const initialPopupState: PopupStateInterface = {
   errorPopupActive: false,
   errorMessage: '',
   recipeTagsPopupActive: false,
+  recipeChangeImagePopupActive: false,
+  successPopupActive: false,
+  successPopupText: '',
 };
 
 export const popupReducers = createReducer(
@@ -83,5 +89,26 @@ export const popupReducers = createReducer(
       tempObject['recipeTagsPopupActive'] = recipeTagsPopupActive;
       return tempObject;
     }
-  )
+  ),
+  on(
+    PopupActions.updateRecipechangeimagepopupactive,
+    (_state, { recipeChangeImagePopupActive }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['recipeChangeImagePopupActive'] = recipeChangeImagePopupActive;
+      return tempObject;
+    }
+  ),
+  on(
+    PopupActions.updateSuccesspopupactive,
+    (_state, { successPopupActive }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['successPopupActive'] = successPopupActive;
+      return tempObject;
+    }
+  ),
+  on(PopupActions.updateSuccesspopuptext, (_state, { successPopupText }) => {
+    const tempObject = JSON.parse(JSON.stringify(_state));
+    tempObject['successPopupText'] = successPopupText;
+    return tempObject;
+  })
 );

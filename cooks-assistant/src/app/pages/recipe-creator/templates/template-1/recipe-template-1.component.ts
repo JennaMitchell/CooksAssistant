@@ -11,8 +11,11 @@ import {
   userHasEnteredDataSelector,
   selectedRecipeTemplateUserData,
   selectedTagsSelector,
+  userSelectedRecipeDishImageIndexSelector,
 } from 'libs/store/recipe-creator/recipe-creator-selectors';
-import { PopupActions } from 'libs/store/popups/popup.actions';
+import { PopupActions } from 'libs/store/popups/popup-actions.actions';
+import { dishImagesData } from '../../../../constants/constants';
+import { ActivatePopupService } from '../../../../utilities/activate-popup-functions/activate-popup-functions.service';
 
 interface TextAreaContainersIdsObjectInterface {
   [key: string]: string;
@@ -21,14 +24,24 @@ interface TextAreaContainersIdsObjectInterface {
   selector: 'recipe-template-one',
   templateUrl: './recipe-template-1.component.html',
   styleUrls: ['./recipe-template-1.component.css'],
-  providers: [RecipeCreatorFunctions],
+  providers: [RecipeCreatorFunctions, ActivatePopupService],
 })
 export class RecipeTemplateOne {
   constructor(
     private store: Store,
-    private recipeCreatorFunctions: RecipeCreatorFunctions
+    private recipeCreatorFunctions: RecipeCreatorFunctions,
+    private activatePopupService: ActivatePopupService
   ) {}
+  dishImagesData = dishImagesData;
 
+  editPhotoButtonMouseEnter = false;
+  userSelectedRecipeDishImageIndexObserver$ = this.store.select(
+    userSelectedRecipeDishImageIndexSelector
+  );
+
+  editPhotoButtonMouseEnterHandler() {
+    this.editPhotoButtonMouseEnter = !this.editPhotoButtonMouseEnter;
+  }
   selectedTagsObserver$ = this.store.select(selectedTagsSelector);
   selectedTags: string[] = [];
   selectedTagsButtonIds: string[] = [];
@@ -55,6 +68,7 @@ export class RecipeTemplateOne {
     directionsList: [''],
     notes: [''],
     description: '',
+    selectedRecipeDishImageIndex: 0,
   };
   userEnteredDataFromStore = false;
 
@@ -79,9 +93,13 @@ export class RecipeTemplateOne {
     directionsList: ['1. This line of text needs to break onto the next line'],
     notes: ['- Add notes to your recipe to add any addition details'],
     description: '',
+    selectedRecipeDishImageIndex: 1,
   };
 
   editTagsButtonMouseEnter = false;
+  dishImageEditButtonHandler() {
+    this.activatePopupService.activateRecipeCreatorDishImagePopup();
+  }
 
   deleteTagButtonHandler(event: MouseEvent) {
     let targetElement = event.target as HTMLElement;
@@ -208,6 +226,13 @@ export class RecipeTemplateOne {
         return 'recipe-template-1-' + tag + '-button';
       });
     });
+    this.userSelectedRecipeDishImageIndexObserver$.subscribe(
+      (value: number) => {
+        if (value !== -1) {
+          this.templateData.selectedRecipeDishImageIndex = value;
+        }
+      }
+    );
   }
 
   ngAfterViewInit() {

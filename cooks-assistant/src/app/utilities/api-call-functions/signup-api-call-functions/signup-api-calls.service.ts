@@ -12,10 +12,10 @@ export class SignupApiCallsService {
 
       return { response: fetchedResponse, error: '' };
     } catch (err) {
-      const returnedError = err as Object;
-      console.log(returnedError.toString());
-
-      return { error: returnedError.toString() };
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
     }
   };
 }

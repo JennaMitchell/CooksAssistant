@@ -12,6 +12,7 @@ export interface RecipeTemplateUserDataInterface {
   directionsList: string[];
   notes: string[];
   description: string;
+  selectedRecipeDishImageIndex: number;
 }
 
 export interface RecipeCreatorStateInterface {
@@ -20,6 +21,7 @@ export interface RecipeCreatorStateInterface {
   userHasEnteredData: boolean;
   selectedTemplateIndex: number;
   selectedTags: string[];
+  userSelectedRecipeDishImageIndex: number;
 }
 
 export const initialRecipeCreatorState: RecipeCreatorStateInterface = {
@@ -34,10 +36,12 @@ export const initialRecipeCreatorState: RecipeCreatorStateInterface = {
     directionsList: [''],
     notes: [''],
     description: '',
+    selectedRecipeDishImageIndex: 0,
   },
   userHasEnteredData: false,
   selectedTemplateIndex: 0,
   selectedTags: [],
+  userSelectedRecipeDishImageIndex: -1,
 };
 
 export const recipeCreatorReducers = createReducer(
@@ -79,5 +83,14 @@ export const recipeCreatorReducers = createReducer(
     const tempObject = JSON.parse(JSON.stringify(_state));
     tempObject['selectedTags'] = selectedTags;
     return tempObject;
-  })
+  }),
+  on(
+    RecipeCreatorActions.updateUserselectedrecipedishimageindex,
+    (_state, { userSelectedRecipeDishImageIndex }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['userSelectedRecipeDishImageIndex'] =
+        userSelectedRecipeDishImageIndex;
+      return tempObject;
+    }
+  )
 );
