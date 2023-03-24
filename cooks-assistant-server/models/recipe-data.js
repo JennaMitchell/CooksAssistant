@@ -14,6 +14,8 @@ const RecipeCardSchema = new mongoose.Schema({
   selectedTemplateIndex: { type: String, required: true },
   description: { type: String },
   selectedRecipeDishImageIndex: { type: Number, required: true },
+  rating: { type: Number, required: true },
+  numberOfMakes: { type: Number, require: true },
 });
 
 module.exports = mongoose.model("RecipeCardSchema", RecipeCardSchema);

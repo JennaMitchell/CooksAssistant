@@ -10,7 +10,7 @@ export class LoginApiCallsService {
         body: JSON.stringify(signupData),
       });
 
-      return fetchedResponse;
+      return await fetchedResponse.json();
     } catch (err) {
       let message;
       if (err instanceof Error) message = err.message;

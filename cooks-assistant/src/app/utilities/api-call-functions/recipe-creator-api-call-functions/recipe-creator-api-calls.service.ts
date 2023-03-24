@@ -10,6 +10,9 @@ export class RecipeCreatorApiService {
         },
         body: JSON.stringify(signupData),
       });
+      if (fetchedResponse.status === 401 || fetchedResponse.status === 500) {
+        throw new Error('Internal Error');
+      }
 
       return fetchedResponse;
     } catch (err) {

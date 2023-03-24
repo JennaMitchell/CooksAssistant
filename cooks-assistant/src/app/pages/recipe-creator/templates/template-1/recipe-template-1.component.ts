@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import {
@@ -27,6 +27,7 @@ interface TextAreaContainersIdsObjectInterface {
   providers: [RecipeCreatorFunctions, ActivatePopupService],
 })
 export class RecipeTemplateOne {
+  @Input('editButtonsActive') editButtonsActive = true;
   constructor(
     private store: Store,
     private recipeCreatorFunctions: RecipeCreatorFunctions,

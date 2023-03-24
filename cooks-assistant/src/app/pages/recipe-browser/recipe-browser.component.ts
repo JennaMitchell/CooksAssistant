@@ -22,6 +22,38 @@ export class RecipeBrowerComponent {
     private recipeDataApiCalls: RecipeDataApiCalls,
     private activatePopupService: ActivatePopupService
   ) {}
+
+  userClickedMenuTagsHandler(userClickedTags: string[]) {
+    const lowerCaseSelectedTags = userClickedTags.map((tag: string) => {
+      return tag.toLowerCase();
+    });
+
+    if (lowerCaseSelectedTags.length === 0) {
+      this.recipeDataApiCalls
+        .getAllRecipeData()
+        .then((data: GetRecipeDataSuccessfulResponseInterface) => {
+          this.retrievedRecipeCards = data.retrievedData;
+          console.log(data.retrievedData);
+          return data;
+        })
+
+        .catch((err: Error) => {
+          this.activatePopupService.errorPopupHandler(err.message);
+        });
+    } else {
+      this.recipeDataApiCalls
+        .getRecipeDataWithFilter(JSON.stringify(lowerCaseSelectedTags))
+        .then((data: GetRecipeDataSuccessfulResponseInterface) => {
+          this.retrievedRecipeCards = data.retrievedData;
+
+          return data;
+        })
+        .catch((err: Error) => {
+          this.activatePopupService.errorPopupHandler(err.message);
+        });
+    }
+  }
+
   loggedInObserver$ = this.store.select(loggedInSelector);
   loggedIn = false;
 
@@ -34,15 +66,6 @@ export class RecipeBrowerComponent {
   recipeNavMenuActive = false;
 
   retrievedRecipeCards: RecipeTemplateSavedDataInterface[] = [];
-
-  tempButtonHandler() {
-    this.recipeDataApiCalls
-      .getRecipeDataWithFilter('chicken')
-      .then((data: GetRecipeDataSuccessfulResponseInterface | 'ERROR') => {})
-      .catch((err: Error) => {
-        this.activatePopupService.errorPopupHandler(err.message);
-      });
-  }
 
   ngOnInit() {
     this.loggedInObserver$.subscribe((value) => {

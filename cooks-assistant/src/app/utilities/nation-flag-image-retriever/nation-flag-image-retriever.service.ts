@@ -3,28 +3,29 @@ export class NationFlagImageRetrieverService {
     let returnedImageLocation = '';
     switch (nation) {
       case 'France':
-        returnedImageLocation = 'assets/images/flags/france-flag.png';
+        returnedImageLocation = 'assets/images/icons/flags/france-flag.png';
         break;
       case 'Chinese':
-        returnedImageLocation = 'assets/images/flags/chinese-flag.png';
+        returnedImageLocation = 'assets/images/icons/flags/chinese-flag.png';
         break;
       case 'India':
-        returnedImageLocation = 'assets/images/flags/india-flag.png';
+        returnedImageLocation = 'assets/images/icons/flags/india-flag.png';
         break;
       case 'Japan':
-        returnedImageLocation = 'assets/images/flags/japan-flag.png';
+        returnedImageLocation = 'assets/images/icons/flags/japan-flag.png';
         break;
       case 'Mexico':
-        returnedImageLocation = 'assets/images/flags/mexico-flag.png';
+        returnedImageLocation = 'assets/images/icons/flags/mexico-flag.png';
         break;
       case 'Russia':
-        returnedImageLocation = 'assets/images/flags/russia-flag.png';
+        returnedImageLocation = 'assets/images/icons/flags/russia-flag.png';
         break;
       case 'South Korea':
-        returnedImageLocation = 'assets/images/flags/south-korea-flag.png';
+        returnedImageLocation =
+          'assets/images/icons/flags/south-korea-flag.png';
         break;
       case 'USA':
-        returnedImageLocation = 'assets/images/flags/usa-flag.png';
+        returnedImageLocation = 'assets/images/icons/flags/usa-flag.png';
         break;
 
       default:

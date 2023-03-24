@@ -18,9 +18,9 @@ exports.getAllRecipeData = async (req, res) => {
 
 exports.getRecipeDataWithFilter = async (req, res) => {
   try {
-    const filter = req.params.filter;
-
-    const result = await RecipeCardSchema.find({ tags: [filter] });
+    const filter = JSON.parse(req.params.filter);
+    const result = await RecipeCardSchema.find({ tags: { $all: filter } });
+    console.log(result);
     return res.status(201).json({
       message: "Data Retrieved!",
       retrievedData: result,
@@ -38,15 +38,11 @@ exports.createNewRecipe = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.log("25 ERRORS FROM DATA");
-    console.log(errors.array());
     return res.status(401).send({
       error: errors.array(),
       message: `${errors["errors"][0].msg}`,
     });
   }
-  console.log("BODY");
-  console.log(req.body);
 
   try {
     const newRecipeCard = new RecipeCardSchema({
@@ -63,6 +59,8 @@ exports.createNewRecipe = async (req, res, next) => {
       selectedTemplateIndex: req.body.selectedRecipeDishImageIndex,
       description: "",
       selectedRecipeDishImageIndex: req.body.selectedRecipeDishImageIndex,
+      rating: req.body.rating,
+      numberOfMakes: req.body.numberOfMakes,
     });
     await newRecipeCard.save();
 

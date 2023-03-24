@@ -4,12 +4,16 @@ import { PopupActions } from 'libs/store/popups/popup-actions.actions';
 import { RandomStringGeneratorsService } from 'src/app/utilities/random-string-generator/random-string-generators.service';
 import { SignupApiCallsService } from 'src/app/utilities/api-call-functions/signup-api-call-functions/signup-api-calls.service';
 import { AuthActions } from 'libs/store/auth/auth.actions';
-
+import { ActivatePopupService } from 'src/app/utilities/activate-popup-functions/activate-popup-functions.service';
 @Component({
   selector: 'signup-popup',
   templateUrl: './signup-popup.component.html',
   styleUrls: ['./signup-popup.component.css'],
-  providers: [RandomStringGeneratorsService, SignupApiCallsService],
+  providers: [
+    RandomStringGeneratorsService,
+    SignupApiCallsService,
+    ActivatePopupService,
+  ],
 })
 export class SignupPopupComponent {
   activeInputObject = {
@@ -24,7 +28,8 @@ export class SignupPopupComponent {
   constructor(
     private store: Store,
     private randomStringGenerators: RandomStringGeneratorsService,
-    private signupApiCallsService: SignupApiCallsService
+    private signupApiCallsService: SignupApiCallsService,
+    private activatePopupService: ActivatePopupService
   ) {}
 
   ngOnInit() {
@@ -195,13 +200,12 @@ export class SignupPopupComponent {
       })
       .then((data) => {
         if (data.error.length === 0) {
-          return data.response?.json();
+          return data.response.json();
         } else {
           throw new Error(`${data.error}`);
         }
       })
       .then((jsonedData: any) => {
-        console.log(jsonedData);
         this.store.dispatch(
           AuthActions.updateEmail({ email: this.generatedEmail })
         );
@@ -218,6 +222,8 @@ export class SignupPopupComponent {
         this.store.dispatch(
           AuthActions.updateUsername({ username: this.generatedUsername })
         );
+
+        this.activatePopupService.successPopupHandler('Success: User Created');
 
         this.closingButtonHandler();
       })

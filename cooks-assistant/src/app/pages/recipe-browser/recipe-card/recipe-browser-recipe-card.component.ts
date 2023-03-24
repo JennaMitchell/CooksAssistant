@@ -25,6 +25,8 @@ export class RecipeBrowerRecipeCardComponent {
     username: '',
     selectedTemplateIndex: 0,
     tags: [''],
+    rating: 0,
+    numberOfMakes: 0,
   };
   constructor(private store: Store) {}
   dishImagesData = dishImagesData;
@@ -32,6 +34,8 @@ export class RecipeBrowerRecipeCardComponent {
   dishImageLocation = `../../../../../${
     dishImagesData[this.dataEntry.selectedRecipeDishImageIndex].imageLocation
   }`;
+
+  newTagActive = false;
 
   ngOnInit() {
     const topCardElements = document.getElementsByClassName(
@@ -47,6 +51,9 @@ export class RecipeBrowerRecipeCardComponent {
       parentELement.style.width = 'max(100%,100%)';
       parentELement.style.height = 'max(100%,100%)';
     }
-    console.log();
+
+    if (this.dataEntry.rating === 0 || this.dataEntry.numberOfMakes === 0) {
+      this.newTagActive = true;
+    }
   }
 }

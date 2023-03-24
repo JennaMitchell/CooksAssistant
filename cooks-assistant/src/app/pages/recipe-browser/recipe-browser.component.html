@@ -1,9 +1,7 @@
 <div class="recipe-browser-backdrop">
   <error-popup *ngIf="errorPopupActive"></error-popup>
   <success-popup *ngIf="successPopupActive"></success-popup>
-  <button class="delete-temp-get-data-button" (click)="tempButtonHandler()">
-    Get
-  </button>
+
   <logged-in-nav-bar *ngIf="loggedIn"></logged-in-nav-bar>
   <logged-out-nav-bar *ngIf="!loggedIn"></logged-out-nav-bar>
   <div class="recipe-browser-main-container">
@@ -36,6 +34,9 @@
       />
     </svg>
   </button>
-  <recipe-browser-nav-menu [menuMoveOut]="recipeNavMenuActive">
+  <recipe-browser-nav-menu
+    [menuMoveOut]="recipeNavMenuActive"
+    (userSelectedTagsEvent)="userClickedMenuTagsHandler($event)"
+  >
   </recipe-browser-nav-menu>
 </div>

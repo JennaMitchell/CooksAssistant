@@ -26,6 +26,8 @@ import { loggedInSelector } from 'libs/store/auth/auth-selectors';
 export class RecipeCreatorComponent {
   constructor(private store: Store) {}
 
+  hideEditButtonsActive = false;
+
   recipeChangeImagePopupActiveObserver$ = this.store.select(
     recipeChangeImagePopupActiveSelector
   );
@@ -74,6 +76,10 @@ export class RecipeCreatorComponent {
 
   backgroundButtonHover = false;
   recipeCardHover = false;
+
+  hideEditButtonsButtonhandler() {
+    this.hideEditButtonsActive = !this.hideEditButtonsActive;
+  }
 
   backgroundButtonHoverHandler() {
     this.backgroundButtonHover = !this.backgroundButtonHover;

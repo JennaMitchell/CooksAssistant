@@ -68,7 +68,7 @@
 .tag-selector-popup-closing-button:hover,
 .tag-selector-popup-submit-button:hover {
   color: black;
-  background-color: var(--main200);
+  background-color: var(--main100);
 }
 .tag-selector-popup-sub-title {
   margin: 0px;
@@ -85,37 +85,41 @@
   object-fit: fill;
 }
 .tag-selector-sub-container {
-  width: max(225px, 225px);
+  width: max(100%, 100%);
 
   height: max-content;
+  max-height: max-content;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-auto-flow: row;
 
-  gap: 10px;
   box-sizing: border-box;
 
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+
+  gap: 10px;
+  column-gap: 20px;
 }
 .tag-selector-tag-button {
   width: max(100%, 100%);
-  height: max(100%, 100%);
+
+  height: max-content;
+  max-height: max-content;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: var(--main800);
   border: 4px solid transparent;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 5px 10px;
   color: white;
   transition: all 0.5s;
 }
 .tag-selector-tag-button:hover {
-  background-color: var(--main200);
+  background-color: var(--main100);
   color: black;
   border: 4px solid var(--popup-choice-button-active-color);
 }
@@ -124,19 +128,23 @@
   border: 4px solid var(--popup-choice-button-active-color);
 }
 .tag-selector-tag-icon {
-  width: max(70%, 70%);
-  height: max(70%, 70%);
+  width: max(22.5px, 22.5px);
+  height: max(22.5px, 22.5px);
 
   object-fit: contain;
 }
 .tag-selector-button-text {
   font-family: var(--google-font);
-  font-size: var(--r12);
+  font-size: var(--r14);
+  line-height: var(--r14);
   padding: 0px;
   margin: 0px;
   color: inherit;
-  word-wrap: break-word;
-  width: max(100%, 100%);
+
+  width: max-content;
+  max-width: max-content;
+  height: max-content;
+  max-height: max-content;
 }
 .tag-selector-submit-button {
   display: flex;
@@ -153,7 +161,7 @@
 }
 
 .tag-selector-submit-button:hover {
-  background-color: var(--main200);
+  background-color: var(--main100);
   color: black;
 }
 

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
 import {
   preferenceButtonData,
   nationalityButtonData,
@@ -8,16 +8,18 @@ import {
   mainIngredientsData,
 } from '../../../constants/constants';
 
+import { RecipeDataApiCalls } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 @Component({
   selector: 'recipe-browser-nav-menu',
   templateUrl: './recipe-browser-nav-menu.component.html',
   styleUrls: ['./recipe-browser-nav-menu.component.css'],
-  providers: [],
+  providers: [RecipeDataApiCalls],
 })
 export class RecipeBrowerNavBarComponent {
-  constructor(private store: Store) {}
+  constructor() {}
 
   @Input('menuMoveOut') menuMoveOut = false;
+  @Output() userSelectedTagsEvent = new EventEmitter<string[]>();
 
   recipeCourseTagData = recipeCourseTagData;
   recipeCourseTitles: string[] = [];
@@ -78,6 +80,7 @@ export class RecipeBrowerNavBarComponent {
     selectedTitle: string,
     topCategoryTitle: string
   ) {
+    let tagRemoved = false;
     switch (topCategoryTitle) {
       case 'preferences':
         if (this.preferenceButtonTitles.includes(selectedTitle)) {
@@ -96,10 +99,12 @@ export class RecipeBrowerNavBarComponent {
               );
 
               this.selectedSubDropDownsTags.splice(indexOfFoundEntry, 1);
+              tagRemoved = true;
             }
           }
-
-          this.selectedSubDropDownsTags.push(selectedTitle);
+          if (!tagRemoved) {
+            this.selectedSubDropDownsTags.push(selectedTitle);
+          }
         }
 
         break;
@@ -120,10 +125,13 @@ export class RecipeBrowerNavBarComponent {
               );
 
               this.selectedSubDropDownsTags.splice(indexOfFoundEntry, 1);
+              tagRemoved = true;
             }
           }
 
-          this.selectedSubDropDownsTags.push(selectedTitle);
+          if (!tagRemoved) {
+            this.selectedSubDropDownsTags.push(selectedTitle);
+          }
         }
 
         break;
@@ -144,10 +152,13 @@ export class RecipeBrowerNavBarComponent {
               );
 
               this.selectedSubDropDownsTags.splice(indexOfFoundEntry, 1);
+              tagRemoved = true;
             }
           }
 
-          this.selectedSubDropDownsTags.push(selectedTitle);
+          if (!tagRemoved) {
+            this.selectedSubDropDownsTags.push(selectedTitle);
+          }
         }
         break;
       case 'courses':
@@ -167,14 +178,16 @@ export class RecipeBrowerNavBarComponent {
               );
 
               this.selectedSubDropDownsTags.splice(indexOfFoundEntry, 1);
+              tagRemoved = true;
             }
           }
 
-          this.selectedSubDropDownsTags.push(selectedTitle);
+          if (!tagRemoved) {
+            this.selectedSubDropDownsTags.push(selectedTitle);
+          }
         }
         break;
       case 'mainIngredient':
-        console.log('mainIngredient');
         if (this.mainIngredientTitles.includes(selectedTitle)) {
           for (
             let indexOfMainIngredientTitles = 0;
@@ -191,14 +204,19 @@ export class RecipeBrowerNavBarComponent {
               );
 
               this.selectedSubDropDownsTags.splice(indexOfFoundEntry, 1);
+              tagRemoved = true;
             }
           }
-          this.selectedSubDropDownsTags.push(selectedTitle);
+          if (!tagRemoved) {
+            this.selectedSubDropDownsTags.push(selectedTitle);
+          }
         }
         break;
 
       default:
         break;
     }
+
+    this.userSelectedTagsEvent.emit(this.selectedSubDropDownsTags);
   }
 }

@@ -7,7 +7,7 @@ import { HomepageTopNavBar } from './homepage-top-nav-bar/homepage-top-nav-bar.c
 import { CommonModule } from '@angular/common';
 import { HomepageRecipeSlideshowModule } from './homepage-recipe-slideshow/homepage-recipe-slideshow.module';
 import { HomepagePreferenceSlideshowModule } from './homepage-preference-slides/homepage-preference-slideshow.module';
-import { HomepageRecipeCategoriesModule } from './homepage-recipe-categories/homepage-recipe-categories.module';
+import { HomepageRecipeCategories } from './homepage-recipe-categories/homepage-recipe-categories.component';
 import { HomepageCuisineSectionModule } from './homepage-cuisines-section/homepage-cuisines-section.module';
 import { HomepageCookingTimeSlideshowModule } from './homepage-cooking-times-slideshow/homepage-cooking-time-recipe-slideshow.module';
 import { HomepageSocialMediaSectionModule } from './homepage-social-media-section/homepage-social-media-section.module';
@@ -21,14 +21,14 @@ import { LoggedInNavBarModule } from 'src/app/nav-bar/logged-in-nav-bar/logged-i
 import { LoggedOutNavBarModule } from 'src/app/nav-bar/logged-out-nav-bar/logged-out-nav-bar.module';
 import { SuccessPopupModule } from 'src/app/popups/success/success-popup.module';
 @NgModule({
-  declarations: [Homepage, HomepageTopNavBar],
+  declarations: [Homepage, HomepageTopNavBar, HomepageRecipeCategories],
 
   imports: [
     RouterModule.forChild([{ path: '', component: Homepage }]),
     CommonModule,
     HomepageRecipeSlideshowModule,
     HomepagePreferenceSlideshowModule,
-    HomepageRecipeCategoriesModule,
+
     HomepageCuisineSectionModule,
     HomepageCookingTimeSlideshowModule,
     HomepageFooterModule,

@@ -22,6 +22,13 @@ const routes: Routes = [
         (m) => m.RecipeBrowserModule
       ),
   },
+  {
+    path: 'recipe-viewer',
+    loadChildren: () =>
+      import('../pages/recipe-viewer/recipe-viewer.module').then(
+        (m) => m.RecipeViewerModule
+      ),
+  },
 ];
 
 //      canActivate:[AuthGuard]

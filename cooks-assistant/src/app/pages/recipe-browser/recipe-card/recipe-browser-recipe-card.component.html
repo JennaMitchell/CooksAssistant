@@ -5,14 +5,46 @@
       alt="{{ dishImagesData[dataEntry.selectedRecipeDishImageIndex].altText }}"
       src="{{ dishImageLocation }}"
     />
-    <div
-      class="recipe-browser-recipe-card-tags-container"
-      *ngFor="let tagsOfDataEntry of dataEntry.tags"
-    >
-      <p class="recipe-browser-recipe-card-tag">{{ tagsOfDataEntry }}</p>
+    <div class="recipe-browser-recipe-card-tags-container">
+      <p
+        class="recipe-browser-recipe-card-tag"
+        *ngFor="let tagsOfDataEntry of dataEntry.tags"
+      >
+        {{ tagsOfDataEntry }}
+      </p>
     </div>
+    <p
+      class="recipe-browser-recipe-card-tag recipe-browser-recipe-card-new-tag"
+      *ngIf="newTagActive"
+    >
+      new
+    </p>
   </div>
 
   <p class="recipe-browser-recipe-card-recipe-title">{{ dataEntry.title }}</p>
   <p class="recipe-browser-recipe-card-recipe-text">Recipe</p>
+  <div class="recipe-browser-recipe-card-rating-makes-container">
+    <div
+      class="recipe-browser-recipe-card-rating-container"
+      *ngIf="dataEntry.rating !== 0"
+    >
+      <img
+        class="recipe-browser-recipe-card-user-interaction-icon"
+        alt="star icon"
+        src="assets/images/rating-star/full-star-rating.png"
+      />
+      <p class="recipe-browser-recipe-card-recipe-text">( 4.5 )</p>
+    </div>
+    <div
+      class="recipe-browser-recipe-card-number-of-makes-container"
+      *ngIf="dataEntry.numberOfMakes !== 0"
+    >
+      <img
+        class="recipe-browser-recipe-card-user-interaction-icon"
+        alt="star icon"
+        src="assets/images/icons/homepage/number-of-makes-icon.png"
+      />
+      <p class="recipe-browser-recipe-card-recipe-text">300</p>
+    </div>
+  </div>
 </div>

@@ -6,7 +6,7 @@
     src="assets/images/chalk-highlights/chalk-underline-white.png"
   />
   <div class="homepage-recipe-categories-container">
-    <div
+    <button
       class="homepage-category-button-container"
       *ngFor="let dataEntry of preferenceButtonData; let i = index"
       key="homepage-category-button-i"
@@ -19,16 +19,18 @@
         src="{{ dataEntry.logoLocation }}"
       />
       <p class="homepage-category-button-text">{{ dataEntry.title }}</p>
-    </div>
+    </button>
+  </div>
 
-    <h6 class="homepage-recipe-categories-sub-title">Cuisines</h6>
+  <h6 class="homepage-recipe-categories-sub-title">Cuisines</h6>
 
-    <img
-      class="homepage-recipe-categories-sub-underline"
-      alt="dashed-line"
-      src="assets/images/chalk-highlights/chalk-underline-white.png"
-    />
-    <div
+  <img
+    class="homepage-recipe-categories-sub-underline"
+    alt="dashed-line"
+    src="assets/images/chalk-highlights/chalk-underline-white.png"
+  />
+  <div class="homepage-recipe-categories-container">
+    <button
       class="homepage-category-button-container"
       *ngFor="let nationalityButtonDataEntry of nationalityButtonData"
       key="homepage-category-button-i"
@@ -43,15 +45,17 @@
       <p class="homepage-category-button-text">
         {{ nationalityButtonDataEntry.title }}
       </p>
-    </div>
-    <h6 class="homepage-recipe-categories-sub-title">Times</h6>
+    </button>
+  </div>
+  <h6 class="homepage-recipe-categories-sub-title">Times</h6>
 
-    <img
-      class="homepage-recipe-categories-sub-underline"
-      alt="dashed-line"
-      src="assets/images/chalk-highlights/chalk-underline-white.png"
-    />
-    <div
+  <img
+    class="homepage-recipe-categories-sub-underline"
+    alt="dashed-line"
+    src="assets/images/chalk-highlights/chalk-underline-white.png"
+  />
+  <div class="homepage-recipe-categories-container">
+    <button
       class="homepage-category-button-container"
       *ngFor="let mealsButtonDataEntry of mealsTimesButtonData"
       key="homepage-category-button-i"
@@ -66,6 +70,6 @@
       <p class="homepage-category-button-text">
         {{ mealsButtonDataEntry.title }}
       </p>
-    </div>
+    </button>
   </div>
 </div>

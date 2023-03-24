@@ -1,0 +1,11 @@
+<div class="recipe-viewer-backdrop">
+  <logged-in-nav-bar *ngIf="loggedIn"></logged-in-nav-bar>
+  <logged-out-nav-bar *ngIf="!loggedIn"></logged-out-nav-bar>
+  <login-popup *ngIf="loginPopupActive"></login-popup>
+  <signup-popup *ngIf="signupPopupActive"></signup-popup>
+
+  <div class="recipe-viewer-main-container">
+    <recipe-template-one-viewer></recipe-template-one-viewer>
+    <recipe-viewer-review-bar></recipe-viewer-review-bar>
+  </div>
+</div>

@@ -14,6 +14,8 @@ export interface RecipeTemplateSavedDataInterface {
   username: string;
   selectedTemplateIndex: number;
   tags: string[];
+  rating: number;
+  numberOfMakes: number;
 }
 
 export interface GetRecipeDataSuccessfulResponseInterface {

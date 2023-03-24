@@ -8,6 +8,7 @@
   padding: 0px;
   margin: 0px;
   transition: all 0.5s;
+  padding: 10px 10px;
 }
 
 .recipe-browser-recipe-card:hover {
@@ -19,6 +20,7 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
+  gap: 0px;
 
   width: max(100%, 100%);
   height: max(200px, 200px);
@@ -41,18 +43,27 @@
   width: max(100%, 100%);
   max-height: max-content;
   gap: 5px;
-  align-items: flex-start;
-  justify-content: flex-start;
   z-index: 3;
 }
 .recipe-browser-recipe-card-tag {
   padding: 0px 5px;
   width: max-content;
+  max-width: max-content;
   font-family: var(--google-font);
   font-size: var(--r12);
   color: white;
   background-color: rgba(0, 0, 0, 0.7);
   text-align: center;
+  margin: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.recipe-browser-recipe-card-new-tag {
+  background-color: rgba(255, 0, 0, 0.9);
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  z-index: 3;
 }
 
 .recipe-browser-recipe-card-recipe-title {
@@ -72,4 +83,36 @@
   padding: 0px;
   margin: 0px;
   padding: 2.5px;
+}
+.recipe-browser-recipe-card-rating-makes-container {
+  width: max(100%, 100%);
+  height: max-content;
+  max-height: max-content;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.recipe-browser-recipe-card-rating-container,
+.recipe-browser-recipe-card-number-of-makes-container {
+  display: flex;
+  max-height: max-content;
+  width: max-content;
+  max-width: max-content;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.recipe-browser-recipe-card-user-interaction-icon {
+  width: max(20px, 20px);
+  height: max(20px, 20px);
+  object-fit: contain;
+}
+.recipe-browser-recipe-card-recipe-text {
+  font-size: var(--r12);
+  color: black;
+  font-family: var(--google-font);
+  max-width: max-content;
+  width: max-content;
+  max-height: max-content;
 }

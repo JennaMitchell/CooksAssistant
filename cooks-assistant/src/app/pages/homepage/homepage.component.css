@@ -63,13 +63,16 @@
   display: inline-block;
 }
 .new-recipe-slideshow-category-container {
-  display: flex;
+  display: grid;
   width: max(1000px, 1000px);
   padding: 0px 40px;
   max-height: max-content;
   align-items: flex-start;
   justify-content: space-between;
   box-sizing: border-box;
+  grid-template-columns: max-content 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
 }
 .new-recipe-slideshows-container {
   max-width: max-content;

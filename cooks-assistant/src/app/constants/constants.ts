@@ -68,37 +68,37 @@ export const backgroundImageData = [
 export const preferenceButtonData = [
   {
     title: 'Chicken',
-    logoLocation: 'assets/images/recipe-icons/chicken-leg.png',
+    logoLocation: 'assets/images/icons/food/chicken-icon.png',
     id: 'category-chicken-button',
     altText: 'chicken icon',
   },
   {
     title: 'Beef',
-    logoLocation: 'assets/images/recipe-icons/meat.png',
+    logoLocation: 'assets/images/icons/food/beef-icon.png',
     id: 'category-beef-button',
     altText: 'beef icon',
   },
   {
     title: 'Fish',
-    logoLocation: 'assets/images/recipe-icons/fish.png',
+    logoLocation: 'assets/images/icons/food/fish-icon.png',
     id: 'category-fish-button',
     altText: 'fish icon',
   },
   {
     title: 'Vegan',
-    logoLocation: 'assets/images/recipe-icons/vegan.png',
+    logoLocation: 'assets/images/icons/food/vegan-icon.png',
     id: 'category-vegan-button',
     altText: 'vegan icon',
   },
   {
     title: 'Vegetarian',
-    logoLocation: 'assets/images/recipe-icons/leaf.png',
+    logoLocation: 'assets/images/icons/food/vegetarian-icon.png',
     id: 'category-vegetarian-button',
     altText: 'vegetarian icon',
   },
   {
     title: 'Spicy',
-    logoLocation: 'assets/images/recipe-icons/red-chili-pepper.png',
+    logoLocation: 'assets/images/icons/food/spicy-icon.png',
     id: 'category-spicy-button',
     altText: 'spicy icon',
   },
@@ -107,49 +107,49 @@ export const preferenceButtonData = [
 export const nationalityButtonData = [
   {
     title: 'Chinense',
-    logoLocation: 'assets/images/flags/chinese-flag.png',
+    logoLocation: 'assets/images/icons/flags/chinese-flag.png',
     id: 'category-chinense-button',
     altText: 'chinese icon',
   },
   {
     title: 'French',
-    logoLocation: 'assets/images/flags/france-flag.png',
+    logoLocation: 'assets/images/icons/flags/france-flag.png',
     id: 'category-french-button',
     altText: 'french icon',
   },
   {
     title: 'Indian',
-    logoLocation: 'assets/images/flags/india-flag.png',
+    logoLocation: 'assets/images/icons/flags/india-flag.png',
     id: 'category-indian-button',
     altText: 'india icon',
   },
   {
     title: 'Japanense',
-    logoLocation: 'assets/images/flags/japan-flag.png',
+    logoLocation: 'assets/images/icons/flags/japan-flag.png',
     id: 'category-japanense-button',
     altText: 'japanense icon',
   },
   {
     title: 'Mexican',
-    logoLocation: 'assets/images/flags/mexico-flag.png',
+    logoLocation: 'assets/images/icons/flags/mexico-flag.png',
     id: 'category-mexican-button',
     altText: 'mexican icon',
   },
   {
     title: 'Russian',
-    logoLocation: 'assets/images/flags/russia-flag.png',
+    logoLocation: 'assets/images/icons/flags/russia-flag.png',
     id: 'category-russian-button',
     altText: 'russisa icon',
   },
   {
     title: 'Korean',
-    logoLocation: 'assets/images/flags/south-korea-flag.png',
+    logoLocation: 'assets/images/icons/flags/south-korea-flag.png',
     id: 'category-korean-button',
     altText: 'korea icon',
   },
   {
     title: 'USA',
-    logoLocation: 'assets/images/flags/usa-flag.png',
+    logoLocation: 'assets/images/icons/flags/usa-flag.png',
     id: 'category-usa-button',
     altText: 'usa icon',
   },
@@ -157,38 +157,25 @@ export const nationalityButtonData = [
 export const mealsTimesButtonData = [
   {
     title: 'Breakfast',
-    logoLocation: 'assets/images/meal-times/breakfast.png',
+    logoLocation: 'assets/images/icons/meal-times/breakfast.png',
     id: 'category-breakfast-button',
     altText: 'breakfast icon',
   },
   {
     title: 'Lunch',
-    logoLocation: 'assets/images/meal-times/lunch.png',
+    logoLocation: 'assets/images/icons/meal-times/lunch.png',
     id: 'category-lunch-button',
     altText: 'lunch icon',
   },
   {
     title: 'Dinner',
-    logoLocation: 'assets/images/meal-times/dinner.png',
+    logoLocation: 'assets/images/icons/meal-times/dinner.png',
     id: 'category-dinner-button',
     altText: 'dinner icon',
   },
-
-  {
-    title: 'Dessert',
-    logoLocation: 'assets/images/meal-times/dessert.png',
-    id: 'category-dessert-button',
-    altText: 'dessert icon',
-  },
-  {
-    title: 'Appetizer',
-    logoLocation: 'assets/images/meal-times/appetizers.png',
-    id: 'category-appetizer-button',
-    altText: 'appetizer icon',
-  },
   {
     title: 'Beverage',
-    logoLocation: 'assets/images/meal-times/beverages.png',
+    logoLocation: 'assets/images/icons/meal-times/beverages.png',
     id: 'category-beverage-button',
     altText: 'beverage icon',
   },
@@ -222,42 +209,91 @@ export const dishImagesData = [
 ];
 export const recipeCourseTagData = [
   {
-    title: 'Main Course',
+    title: 'Entree',
+    id: 'category-entree-button',
+    imageLocation: 'assets/images/icons/meal-times/entree.png',
+    altText: 'entree icon',
   },
   {
-    title: 'Side Dish',
+    title: 'Sides',
+    id: 'category-sides-button',
+    imageLocation: 'assets/images/icons/meal-times/side-dish.png',
+    altText: 'main course icon',
   },
   {
     title: 'Appetizers',
+    id: 'category-appetizers-button',
+    imageLocation: 'assets/images/icons/meal-times/appetizers.png',
+    altText: 'appetizer icon',
   },
   {
     title: 'Desserts',
+    id: 'category-desserts-button',
+    imageLocation: 'assets/images/icons/meal-times/dessert.png',
+    altText: 'desserts icon',
   },
 ];
 
 export const mainIngredientsData = [
   {
     title: 'Beans',
+    id: 'category-beans-button',
+    imageLocation: 'assets/images/icons/food/bean-icon.png',
+    altText: 'bean icon',
   },
   {
     title: 'Vegetables',
+    id: 'category-vegetables-button',
+    imageLocation: 'assets/images/icons/food/vegetable-icon.png',
+    altText: 'vegetable icon',
   },
   {
     title: 'Pork',
+    id: 'category-pork-button',
+    imageLocation: 'assets/images/icons/food/pork-icon.png',
+    altText: 'pork icon',
   },
   {
     title: 'Beef',
+    id: 'category-beef-button',
+    imageLocation: 'assets/images/icons/food/beef-icon.png',
+    altText: 'beef icon',
   },
-  { title: 'Grains' },
-  { title: 'Cheese' },
+  {
+    title: 'Grains',
+    id: 'category-grains-button',
+    imageLocation: 'assets/images/icons/food/grain-icon.png',
+    altText: 'wheat icon',
+  },
+
+  {
+    title: 'Cheese',
+    id: 'category-cheese-button',
+    imageLocation: 'assets/images/icons/food/cheese-icon.png',
+    altText: 'cheese icon',
+  },
   {
     title: 'Pasta',
+    id: 'category-pasta-button',
+    imageLocation: 'assets/images/icons/food/pasta-icon.png',
+    altText: 'pasta icon',
   },
   {
-    title: 'Fish & Seafood',
+    title: 'Seafood',
+    id: 'category-seafood-button',
+    imageLocation: 'assets/images/icons/food/seafood-icon.png',
+    altText: 'seafood icon',
   },
   {
     title: 'Chicken',
+    id: 'category-chicken-button',
+    imageLocation: 'assets/images/icons/food/chicken-icon.png',
+    altText: 'chicken icon',
   },
-  { title: 'Rice' },
+  {
+    title: 'Rice',
+    id: 'category-rice-button',
+    imageLocation: 'assets/images/icons/food/rice-icon.png',
+    altText: 'rice icon',
+  },
 ];

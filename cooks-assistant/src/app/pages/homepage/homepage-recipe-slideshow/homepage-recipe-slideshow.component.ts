@@ -59,7 +59,6 @@ export class HomepageRecipeSlideshow {
     }
     copyOfActiveSlide[this.activeConfigurationNumber] = true;
     this.activeSlides = copyOfActiveSlide;
-    console.log(this.activeSlides);
   }
   onRightArrowClick() {
     const copyOfActiveSlide = this.allFalseSlides.slice(0);
@@ -71,7 +70,6 @@ export class HomepageRecipeSlideshow {
     copyOfActiveSlide[this.activeConfigurationNumber] = true;
 
     this.activeSlides = copyOfActiveSlide;
-    console.log(this.activeSlides);
   }
 
   ngOnInit() {

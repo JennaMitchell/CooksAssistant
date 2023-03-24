@@ -34,7 +34,7 @@
           let tempIndexPreferenceData = index
         "
         id="{{ preferenceData.id }}"
-        (click)="preferenceButtonClickHandler($event)"
+        (click)="singleActiveButtonHandler($event)"
         [ngClass]="{
           'tag-selector-tag-button-active':
             activePreferenceButtons[tempIndexPreferenceData]
@@ -76,7 +76,7 @@
         <p class="tag-selector-button-text">{{ nationalityData.title }}</p>
       </button>
     </div>
-    <p class="tag-selector-popup-sub-title">Meal Time</p>
+    <p class="tag-selector-popup-sub-title">Meal Times</p>
     <img
       src="../../../../assets/images/chalk-highlights/chalk-underline.png"
       alt="underline"
@@ -102,6 +102,64 @@
           src="{{ mealTimesData.logoLocation }}"
         />
         <p class="tag-selector-button-text">{{ mealTimesData.title }}</p>
+      </button>
+    </div>
+    <p class="tag-selector-popup-sub-title">Course</p>
+    <img
+      src="../../../../assets/images/chalk-highlights/chalk-underline.png"
+      alt="underline"
+      class="tag-selector-popup-sub-title-underline"
+    />
+    <div class="tag-selector-sub-container">
+      <button
+        class="tag-selector-tag-button"
+        *ngFor="
+          let recipeCourseData of recipeCourseTagData;
+          let tempRecipeCourseDataIndex = index
+        "
+        id="{{ recipeCourseData.id }}"
+        (click)="singleActiveButtonHandler($event)"
+        [ngClass]="{
+          'tag-selector-tag-button-active':
+            activeRecipeCourseButtons[tempRecipeCourseDataIndex]
+        }"
+      >
+        <img
+          class="tag-selector-tag-icon"
+          alt="{{ recipeCourseData.altText }}"
+          src="{{ recipeCourseData.imageLocation }}"
+        />
+        <p class="tag-selector-button-text">{{ recipeCourseData.title }}</p>
+      </button>
+    </div>
+    <p class="tag-selector-popup-sub-title">Main Ingredient</p>
+    <img
+      src="../../../../assets/images/chalk-highlights/chalk-underline.png"
+      alt="underline"
+      class="tag-selector-popup-sub-title-underline"
+    />
+    <div class="tag-selector-sub-container">
+      <button
+        class="tag-selector-tag-button"
+        *ngFor="
+          let mainIngredientsDataEntry of mainIngredientsData;
+          let tempMainIngredientsDataIndex = index
+        "
+        id="{{ mainIngredientsDataEntry.id }}"
+        (click)="singleActiveButtonHandler($event)"
+        [ngClass]="{
+          'tag-selector-tag-button-active':
+            activeMainIngrientButtons[tempMainIngredientsDataIndex]
+        }"
+      >
+        <img
+          class="tag-selector-tag-icon"
+          alt="{{ mainIngredientsDataEntry.altText }}"
+          src="{{ mainIngredientsDataEntry.imageLocation }}"
+        />
+        <p class="tag-selector-button-text">
+          {{ mainIngredientsDataEntry.title }}
+        </p>
       </button>
     </div>
 

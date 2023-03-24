@@ -23,4 +23,13 @@ export class ActivatePopupService {
       PopupActions.updateErrormessage({ errorMessage: message })
     );
   }
+
+  successPopupHandler(message: string) {
+    this.store.dispatch(
+      PopupActions.updateSuccesspopupactive({ successPopupActive: true })
+    );
+    this.store.dispatch(
+      PopupActions.updateSuccesspopuptext({ successPopupText: message })
+    );
+  }
 }

@@ -10,6 +10,10 @@ export class SignupApiCallsService {
         body: JSON.stringify(signupData),
       });
 
+      if (fetchedResponse.status === 401) {
+        throw new Error('Server Error');
+      }
+
       return { response: fetchedResponse, error: '' };
     } catch (err) {
       let message;

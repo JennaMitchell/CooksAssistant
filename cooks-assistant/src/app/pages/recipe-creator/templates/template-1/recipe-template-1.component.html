@@ -6,17 +6,18 @@
       (click)="dishImageEditButtonHandler()"
       (mouseenter)="editPhotoButtonMouseEnterHandler()"
       (mouseleave)="editPhotoButtonMouseEnterHandler()"
+      *ngIf="!editButtonsActive"
     >
       <img
         class="recipe-template-one-edit-button-icon"
         alt="tags button icon"
-        src="../../../../../assets/images/homepage/new-recipe-icon.png"
+        src="../../../../../assets/images/icons/homepage/new-recipe-icon.png"
         *ngIf="!editPhotoButtonMouseEnter"
       />
       <img
         class="recipe-template-one-edit-button-icon"
         alt="tags button icon"
-        src="../../../../../assets/images/homepage/new-recipe-icon-white.png"
+        src="../../../../../assets/images/icons/homepage/new-recipe-icon-white.png"
         *ngIf="editPhotoButtonMouseEnter"
       />
     </button>
@@ -49,17 +50,18 @@
     (click)="editTagsButtonHandler()"
     (mouseenter)="editTagButtonMouseEnterHandler()"
     (mouseleave)="editTagButtonMouseEnterHandler()"
+    *ngIf="!editButtonsActive"
   >
     <img
       class="recipe-template-one-edit-button-icon"
       alt="tags button icon"
-      src="../../../../../assets/images/homepage/new-recipe-icon.png"
+      src="../../../../../assets/images/icons/homepage/new-recipe-icon.png"
       *ngIf="!editTagsButtonMouseEnter"
     />
     <img
       class="recipe-template-one-edit-button-icon"
       alt="tags button icon"
-      src="../../../../../assets/images/homepage/new-recipe-icon-white.png"
+      src="../../../../../assets/images/icons/homepage/new-recipe-icon-white.png"
       *ngIf="editTagsButtonMouseEnter"
     />
   </button>
@@ -77,6 +79,7 @@
         class="recipe-template-one-delete-tag-button"
         [id]="selectedTagsButtonIds[indexOfSelectedTags]"
         (click)="deleteTagButtonHandler($event)"
+        *ngIf="!editButtonsActive"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -130,6 +133,7 @@
         <button
           class="recipe-template-one-add-ingredient-direction-button recipe-template-one-add-entry-button"
           (click)="addTextAreaHandler('ingredients')"
+          *ngIf="!editButtonsActive"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -181,6 +185,7 @@
         <button
           class="recipe-template-one-add-ingredient-direction-button recipe-template-one-add-entry-button"
           (click)="addTextAreaHandler('directions')"
+          *ngIf="!editButtonsActive"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -234,6 +239,7 @@
       <button
         class="recipe-template-one-add-notes-button recipe-template-one-add-entry-button"
         (click)="addTextAreaHandler('notes')"
+        *ngIf="!editButtonsActive"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

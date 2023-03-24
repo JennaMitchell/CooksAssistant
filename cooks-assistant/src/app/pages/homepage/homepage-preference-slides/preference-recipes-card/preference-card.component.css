@@ -106,6 +106,7 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  padding-left: 10px;
 }
 .homepage-new-recipe-count-icon {
   max-width: calc(30 / var(--base) * 1rem);
@@ -137,6 +138,11 @@
   align-items: center;
   justify-content: center;
   border: 1px solid white;
+  transition: all 0.5s;
+}
+.homepage-new-recipe-make-button:hover {
+  background-color: var(--main100);
+  color: black;
 }
 .homepage-new-recipe-card-cooking-time-container {
   display: flex;

@@ -6,6 +6,8 @@ import {
   preferenceButtonData,
   nationalityButtonData,
   mealsTimesButtonData,
+  recipeCourseTagData,
+  mainIngredientsData,
 } from '../../../constants/constants';
 
 @Component({
@@ -15,18 +17,23 @@ import {
   providers: [],
 })
 export class TagsSelectorPopupComponent {
+  constructor(private store: Store) {}
   preferenceButtonData = preferenceButtonData;
   nationalityButtonData = nationalityButtonData;
   mealsTimesButtonData = mealsTimesButtonData;
+  recipeCourseTagData = recipeCourseTagData;
+  mainIngredientsData = mainIngredientsData;
   acceptableTags: string[] = [];
   selectedTags: string[] = [];
-  constructor(private store: Store) {}
 
   preferenceButtonTags: string[] = [];
   nationalityButtonTags: string[] = [];
   mealsTimesTags: string[] = [];
-
+  recipeCourseTags: string[] = [];
+  mainIngredientsDataTags: string[] = [];
   activePreferenceButtons: boolean[] = [];
+  activeMainIngrientButtons: boolean[] = [];
+  activeRecipeCourseButtons: boolean[] = [];
 
   allFalseActiveNationalityButtonsData: boolean[] = [];
   allFalseActiveMealTimeButtonsData: boolean[] = [];
@@ -51,9 +58,18 @@ export class TagsSelectorPopupComponent {
       tempAllFalseMealTimeArray[index] = false;
       return data.title.toLowerCase();
     });
+
+    this.recipeCourseTags = recipeCourseTagData.map((data) => {
+      return data.title.toLowerCase();
+    });
+    this.mainIngredientsDataTags = mainIngredientsData.map((data) => {
+      return data.title.toLowerCase();
+    });
     this.acceptableTags = this.mealsTimesTags.concat(
       this.preferenceButtonTags,
-      this.nationalityButtonTags
+      this.nationalityButtonTags,
+      this.recipeCourseTags,
+      this.mainIngredientsDataTags
     );
   }
 
@@ -91,6 +107,34 @@ export class TagsSelectorPopupComponent {
         this.activePreferenceButtons = newActiveButtonArray;
       }
 
+      if (this.mainIngredientsDataTags.includes(selectedTag)) {
+        const newActiveButtonArray = this.mainIngredientsDataTags.map(
+          (value: string) => {
+            if (value === selectedTag) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+        );
+
+        this.activeMainIngrientButtons = newActiveButtonArray;
+      }
+
+      if (this.recipeCourseTags.includes(selectedTag)) {
+        const newActiveButtonArray = this.recipeCourseTags.map(
+          (value: string) => {
+            if (value === selectedTag) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+        );
+
+        this.activeRecipeCourseButtons = newActiveButtonArray;
+      }
+
       if (this.nationalityButtonTags.includes(selectedTag)) {
         const indexOfSelectedTag =
           this.nationalityButtonTags.indexOf(selectedTag);
@@ -116,7 +160,7 @@ export class TagsSelectorPopupComponent {
     );
   }
 
-  preferenceButtonClickHandler(event: MouseEvent) {
+  singleActiveButtonHandler(event: MouseEvent) {
     let targetElement = event.target as HTMLElement;
     let targetId = targetElement.id;
 
@@ -139,7 +183,7 @@ export class TagsSelectorPopupComponent {
     }
 
     if (selectedTag.length !== 0) {
-      // clearing so that there is only one preference button active at a time
+      let selectedTagFound = false;
       for (
         let indexOfPreferenceButtonTags = 0;
         indexOfPreferenceButtonTags < this.preferenceButtonTags.length;
@@ -154,14 +198,51 @@ export class TagsSelectorPopupComponent {
             this.preferenceButtonTags[indexOfPreferenceButtonTags]
           );
           this.selectedTags.splice(indexOfFoundTag, 1);
+          selectedTagFound = true;
         }
       }
-      // pushing the selected Tag
 
-      if (this.preferenceButtonTags.includes(selectedTag)) {
-        this.selectedTags.push(selectedTag);
+      if (!selectedTagFound) {
+        for (
+          let indexOfRecipeCourseTags = 0;
+          indexOfRecipeCourseTags < this.recipeCourseTags.length;
+          indexOfRecipeCourseTags++
+        ) {
+          if (
+            this.selectedTags.includes(
+              this.recipeCourseTags[indexOfRecipeCourseTags]
+            )
+          ) {
+            const indexOfFoundTag = this.selectedTags.indexOf(
+              this.recipeCourseTags[indexOfRecipeCourseTags]
+            );
+            this.selectedTags.splice(indexOfFoundTag, 1);
+            selectedTagFound = true;
+          }
+        }
       }
+      if (!selectedTagFound) {
+        for (
+          let indexOfMainIngredientsDataTags = 0;
+          indexOfMainIngredientsDataTags < this.mainIngredientsDataTags.length;
+          indexOfMainIngredientsDataTags++
+        ) {
+          if (
+            this.selectedTags.includes(
+              this.mainIngredientsDataTags[indexOfMainIngredientsDataTags]
+            )
+          ) {
+            const indexOfFoundTag = this.selectedTags.indexOf(
+              this.mainIngredientsDataTags[indexOfMainIngredientsDataTags]
+            );
+            this.selectedTags.splice(indexOfFoundTag, 1);
+            selectedTagFound = true;
+          }
+        }
+      }
+      this.selectedTags.push(selectedTag);
     }
+
     this.activeButtonChecker();
   }
 
