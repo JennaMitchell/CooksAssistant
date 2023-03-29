@@ -6,10 +6,15 @@
   <logged-out-nav-bar *ngIf="!loggedIn"></logged-out-nav-bar>
   <div class="recipe-browser-main-container">
     <recipe-browser-recipe-card
-      *ngFor="let entryOfRetrievedRecipeCards of retrievedRecipeCards"
-      [dataEntry]="entryOfRetrievedRecipeCards"
+      *ngFor="
+        let entryOfRetrievedRecipeCards of retrievedRecipeCards;
+        let indexOfCard = index
+      "
+      [recipeEntry]="entryOfRetrievedRecipeCards"
     ></recipe-browser-recipe-card>
-    <recipe-page-results-navigator></recipe-page-results-navigator>
+    <recipe-page-results-navigator
+      [numberOfPages]="numberOfPages"
+    ></recipe-page-results-navigator>
   </div>
 
   <button

@@ -52,12 +52,15 @@
 
   display: flex;
   gap: 2.5px;
+  row-gap: 2.5px;
   border: 2px solid black;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 15px;
   flex-wrap: wrap;
   overflow-y: scroll;
+  align-content: flex-start;
+  justify-content: flex-start;
 }
 .recipe-template-one-tags-title {
   position: absolute;

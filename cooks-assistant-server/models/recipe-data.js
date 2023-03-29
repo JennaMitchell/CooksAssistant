@@ -14,7 +14,7 @@ const RecipeCardSchema = new mongoose.Schema({
   selectedTemplateIndex: { type: String, required: true },
   description: { type: String },
   selectedRecipeDishImageIndex: { type: Number, required: true },
-  rating: { type: Number, required: true },
+  ratings: { type: Array, required: true },
   numberOfMakes: { type: Number, require: true },
 });
 

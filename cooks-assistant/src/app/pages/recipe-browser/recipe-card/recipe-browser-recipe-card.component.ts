@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { RecipeTemplateSavedDataInterface } from '../../../../app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
+import { RecipeTemplateSavedDataInterfaceWithId } from '../../../../app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 import { Input } from '@angular/core';
 import { dishImagesData } from '../../../constants/constants';
 
@@ -11,7 +11,7 @@ import { dishImagesData } from '../../../constants/constants';
   providers: [],
 })
 export class RecipeBrowerRecipeCardComponent {
-  @Input('dataEntry') dataEntry: RecipeTemplateSavedDataInterface = {
+  @Input('recipeEntry') recipeEntry: RecipeTemplateSavedDataInterfaceWithId = {
     title: '',
     quote: '',
     servings: '',
@@ -25,14 +25,15 @@ export class RecipeBrowerRecipeCardComponent {
     username: '',
     selectedTemplateIndex: 0,
     tags: [''],
-    rating: 0,
+    ratings: [],
     numberOfMakes: 0,
+    _id: '',
   };
   constructor(private store: Store) {}
   dishImagesData = dishImagesData;
 
   dishImageLocation = `../../../../../${
-    dishImagesData[this.dataEntry.selectedRecipeDishImageIndex].imageLocation
+    dishImagesData[this.recipeEntry.selectedRecipeDishImageIndex].imageLocation
   }`;
 
   newTagActive = false;
@@ -52,7 +53,10 @@ export class RecipeBrowerRecipeCardComponent {
       parentELement.style.height = 'max(100%,100%)';
     }
 
-    if (this.dataEntry.rating === 0 || this.dataEntry.numberOfMakes === 0) {
+    if (
+      this.recipeEntry.ratings.length === 0 ||
+      this.recipeEntry.numberOfMakes === 0
+    ) {
       this.newTagActive = true;
     }
   }

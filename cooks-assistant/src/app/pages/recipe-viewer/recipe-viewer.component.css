@@ -21,7 +21,6 @@
   min-height: max-content;
   height: max-content;
   max-height: max-content;
-  border-radius: 10px;
   position: relative;
   padding: 0px;
   margin: 0px auto;
@@ -31,5 +30,4 @@
   display: flex;
   flex-direction: column;
   z-index: 3;
-  gap: 10px;
 }

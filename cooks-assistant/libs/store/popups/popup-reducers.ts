@@ -21,6 +21,8 @@ export interface PopupStateInterface {
   recipeChangeImagePopupActive: boolean;
   successPopupActive: boolean;
   successPopupText: string;
+  searchPopupActive: boolean;
+  searchPopupInputText: string;
 }
 
 export const initialPopupState: PopupStateInterface = {
@@ -35,6 +37,8 @@ export const initialPopupState: PopupStateInterface = {
   recipeChangeImagePopupActive: false,
   successPopupActive: false,
   successPopupText: '',
+  searchPopupActive: false,
+  searchPopupInputText: '',
 };
 
 export const popupReducers = createReducer(

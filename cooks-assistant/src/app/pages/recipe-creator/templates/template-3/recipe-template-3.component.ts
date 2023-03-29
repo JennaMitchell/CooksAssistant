@@ -72,7 +72,7 @@ export class RecipeTemplateThree {
     directionsList: [''],
     notes: [''],
     description: '',
-    selectedRecipeDishImageIndex: 0,
+    selectedRecipeDishImageIndex: 3,
   };
   userEnteredDataFromStore = false;
 

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'recipe-page-results-navigator',
@@ -10,7 +11,7 @@ import { Store } from '@ngrx/store';
 export class RecipePageResultsNavigatorComponent {
   constructor(private store: Store) {}
 
-  @Input('numberOfPage') numberOfPages = 3;
+  @Input('numberOfPages') numberOfPages = 3;
   activePageNumber = 1;
   rightDotsActive = false;
   leftDotsActive = true;
@@ -19,18 +20,26 @@ export class RecipePageResultsNavigatorComponent {
 
   middlePageButtonValue = this.numberOfPages - 1;
 
+  ngOnChanges() {
+    this.numberOfPagesHandler(this.numberOfPages);
+  }
+
   ngOnInit() {
-    if (this.numberOfPages === 1) {
+    this.numberOfPagesHandler(this.numberOfPages);
+  }
+
+  numberOfPagesHandler(tempNumberOfPages: number) {
+    if (+tempNumberOfPages === 1) {
       this.rightDotsActive = false;
       this.leftDotsActive = false;
       this.arrowButtonsActive = false;
       this.middlePageButtonActive = false;
-    } else if (this.numberOfPages === 2) {
+    } else if (+tempNumberOfPages === 2) {
       this.rightDotsActive = false;
       this.leftDotsActive = false;
       this.arrowButtonsActive = true;
       this.middlePageButtonActive = false;
-    } else if (this.numberOfPages === 3) {
+    } else if (+tempNumberOfPages === 3) {
       this.middlePageButtonActive = true;
       this.rightDotsActive = true;
       this.leftDotsActive = false;

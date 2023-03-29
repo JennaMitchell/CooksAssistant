@@ -76,3 +76,17 @@ export const successPopupTextSelector = createSelector(
     return state.successPopupText;
   }
 );
+
+export const searchPopupActiveSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.searchPopupActive;
+  }
+);
+
+export const searchPopupInputTextSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.searchPopupInputText;
+  }
+);

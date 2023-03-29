@@ -51,7 +51,6 @@ export const recipeCreatorReducers = createReducer(
     (_state, { selectedBackground }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
       tempObject['selectedBackground'] = selectedBackground;
-      console.log(selectedBackground);
       return tempObject;
     }
   ),

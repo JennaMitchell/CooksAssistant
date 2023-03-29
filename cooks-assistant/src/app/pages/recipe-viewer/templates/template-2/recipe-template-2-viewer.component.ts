@@ -9,14 +9,14 @@ import { RecipeTemplateSavedDataInterface } from 'src/app/utilities/api-call-fun
 //   [key: string]: string;
 // }
 @Component({
-  selector: 'recipe-template-one-viewer',
-  templateUrl: './recipe-template-1-viewer.component.html',
+  selector: 'recipe-template-two-viewer',
+  templateUrl: './recipe-template-2-viewer.component.html',
   styleUrls: [
-    '../../../recipe-creator/templates/template-1/recipe-template-1.component.css',
+    '../../../recipe-creator/templates/template-2/recipe-template-2.component.css',
   ],
   providers: [RecipeCreatorFunctions, ActivatePopupService],
 })
-export class RecipeTemplateOneViewer {
+export class RecipeTemplateTwoViewer {
   @Input('recipeData') recipeData: RecipeTemplateSavedDataInterface = {
     title: '',
     quote: '',

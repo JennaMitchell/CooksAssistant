@@ -23,4 +23,6 @@ router.get(
   "/get-filtered-recipe-data/:filter",
   recipeController.getRecipeDataWithFilter
 );
+
+router.get("/get-recipe-by-id/:sentId", recipeController.getRecipeDataById);
 module.exports = router;

@@ -160,9 +160,30 @@ export class TagsSelectorPopupComponent {
     );
   }
 
+  selectedTagsRemover(arrayOfEntriesToRemove: string[]) {
+    for (
+      let indexOfEntriesToRemove = 0;
+      indexOfEntriesToRemove < arrayOfEntriesToRemove.length;
+      indexOfEntriesToRemove++
+    ) {
+      if (
+        this.selectedTags.includes(
+          arrayOfEntriesToRemove[indexOfEntriesToRemove]
+        )
+      ) {
+        const indexOfEntryToRemove = this.selectedTags.indexOf(
+          arrayOfEntriesToRemove[indexOfEntriesToRemove]
+        );
+        this.selectedTags.splice(indexOfEntryToRemove, 1);
+      }
+    }
+  }
+
   singleActiveButtonHandler(event: MouseEvent) {
     let targetElement = event.target as HTMLElement;
     let targetId = targetElement.id;
+
+    let selectedTag = '';
 
     if (targetId.length === 0) {
       targetElement = targetElement.parentElement as HTMLButtonElement;
@@ -170,7 +191,6 @@ export class TagsSelectorPopupComponent {
     }
 
     const splitId = targetId.split('-');
-    let selectedTag = '';
 
     for (
       let indexOfSplitId = 0;
@@ -182,64 +202,19 @@ export class TagsSelectorPopupComponent {
       }
     }
 
+    // identifying which array the selected tag belongs to
+
     if (selectedTag.length !== 0) {
-      let selectedTagFound = false;
-      for (
-        let indexOfPreferenceButtonTags = 0;
-        indexOfPreferenceButtonTags < this.preferenceButtonTags.length;
-        indexOfPreferenceButtonTags++
-      ) {
-        if (
-          this.selectedTags.includes(
-            this.preferenceButtonTags[indexOfPreferenceButtonTags]
-          )
-        ) {
-          const indexOfFoundTag = this.selectedTags.indexOf(
-            this.preferenceButtonTags[indexOfPreferenceButtonTags]
-          );
-          this.selectedTags.splice(indexOfFoundTag, 1);
-          selectedTagFound = true;
-        }
+      if (this.preferenceButtonTags.includes(selectedTag)) {
+        this.selectedTagsRemover(this.preferenceButtonTags);
+      }
+      if (this.recipeCourseTags.includes(selectedTag)) {
+        this.selectedTagsRemover(this.recipeCourseTags);
+      }
+      if (this.mainIngredientsDataTags.includes(selectedTag)) {
+        this.selectedTagsRemover(this.mainIngredientsDataTags);
       }
 
-      if (!selectedTagFound) {
-        for (
-          let indexOfRecipeCourseTags = 0;
-          indexOfRecipeCourseTags < this.recipeCourseTags.length;
-          indexOfRecipeCourseTags++
-        ) {
-          if (
-            this.selectedTags.includes(
-              this.recipeCourseTags[indexOfRecipeCourseTags]
-            )
-          ) {
-            const indexOfFoundTag = this.selectedTags.indexOf(
-              this.recipeCourseTags[indexOfRecipeCourseTags]
-            );
-            this.selectedTags.splice(indexOfFoundTag, 1);
-            selectedTagFound = true;
-          }
-        }
-      }
-      if (!selectedTagFound) {
-        for (
-          let indexOfMainIngredientsDataTags = 0;
-          indexOfMainIngredientsDataTags < this.mainIngredientsDataTags.length;
-          indexOfMainIngredientsDataTags++
-        ) {
-          if (
-            this.selectedTags.includes(
-              this.mainIngredientsDataTags[indexOfMainIngredientsDataTags]
-            )
-          ) {
-            const indexOfFoundTag = this.selectedTags.indexOf(
-              this.mainIngredientsDataTags[indexOfMainIngredientsDataTags]
-            );
-            this.selectedTags.splice(indexOfFoundTag, 1);
-            selectedTagFound = true;
-          }
-        }
-      }
       this.selectedTags.push(selectedTag);
     }
 
@@ -272,6 +247,7 @@ export class TagsSelectorPopupComponent {
 
       this.selectedTags.splice(indexOfFoundEntry, 1);
       this.activeButtonChecker();
+
       return;
     } else {
       this.selectedTags.push(selectedTag);

@@ -63,7 +63,7 @@ export class RecipeTemplateTwo {
     directionsList: [''],
     notes: [''],
     description: '',
-    selectedRecipeDishImageIndex: 0,
+    selectedRecipeDishImageIndex: 2,
   };
   userEnteredDataFromStore = false;
   userSelectedRecipeDishImageIndexObserver$ = this.store.select(

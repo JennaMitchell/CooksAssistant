@@ -9,10 +9,15 @@ import { SignupPopupModule } from 'src/app/popups/signup/signup-popup.module';
 import { LoginPopupModule } from 'src/app/popups/login/login-popup.module';
 import { RecipeTemplateOneViewer } from './templates/template-1/recipe-template-1-viewer.component';
 import { RecipeViewerReviewBar } from './review-bar/recipe-viewer-review-bar.component';
+import { ErrorPopupModule } from 'src/app/popups/error/error-popup.module';
+import { RecipeTemplateTwoViewer } from './templates/template-2/recipe-template-2-viewer.component';
+import { RecipeTemplateThreeViewer } from './templates/template-3/recipe-template-3-viewer.component';
 @NgModule({
   declarations: [
     RecipeViewerComponent,
     RecipeTemplateOneViewer,
+    RecipeTemplateTwoViewer,
+    RecipeTemplateThreeViewer,
     RecipeViewerReviewBar,
   ],
 
@@ -23,6 +28,7 @@ import { RecipeViewerReviewBar } from './review-bar/recipe-viewer-review-bar.com
     LoggedOutNavBarModule,
     SignupPopupModule,
     LoginPopupModule,
+    ErrorPopupModule,
   ],
 })
 export class RecipeViewerModule {}

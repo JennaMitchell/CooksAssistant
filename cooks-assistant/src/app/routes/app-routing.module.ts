@@ -23,12 +23,13 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'recipe-viewer',
+    path: 'recipe-viewer/:id',
     loadChildren: () =>
       import('../pages/recipe-viewer/recipe-viewer.module').then(
         (m) => m.RecipeViewerModule
       ),
   },
+  { path: '**', redirectTo: '/' },
 ];
 
 //      canActivate:[AuthGuard]

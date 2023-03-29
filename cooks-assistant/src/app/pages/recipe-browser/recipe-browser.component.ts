@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { loggedInSelector } from 'libs/store/auth/auth-selectors';
 import { RecipeDataApiCalls } from '../../utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 import { GetRecipeDataSuccessfulResponseInterface } from '../../../app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
-import { RecipeTemplateSavedDataInterface } from '../../../app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
+import { RecipeTemplateSavedDataInterfaceWithId } from '../../../app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 
 import { ActivatePopupService } from 'src/app/utilities/activate-popup-functions/activate-popup-functions.service';
 import {
@@ -23,37 +23,8 @@ export class RecipeBrowerComponent {
     private activatePopupService: ActivatePopupService
   ) {}
 
-  userClickedMenuTagsHandler(userClickedTags: string[]) {
-    const lowerCaseSelectedTags = userClickedTags.map((tag: string) => {
-      return tag.toLowerCase();
-    });
-
-    if (lowerCaseSelectedTags.length === 0) {
-      this.recipeDataApiCalls
-        .getAllRecipeData()
-        .then((data: GetRecipeDataSuccessfulResponseInterface) => {
-          this.retrievedRecipeCards = data.retrievedData;
-          console.log(data.retrievedData);
-          return data;
-        })
-
-        .catch((err: Error) => {
-          this.activatePopupService.errorPopupHandler(err.message);
-        });
-    } else {
-      this.recipeDataApiCalls
-        .getRecipeDataWithFilter(JSON.stringify(lowerCaseSelectedTags))
-        .then((data: GetRecipeDataSuccessfulResponseInterface) => {
-          this.retrievedRecipeCards = data.retrievedData;
-
-          return data;
-        })
-        .catch((err: Error) => {
-          this.activatePopupService.errorPopupHandler(err.message);
-        });
-    }
-  }
-
+  numberOfItemsPerPage = 9;
+  numberOfPages = 0;
   loggedInObserver$ = this.store.select(loggedInSelector);
   loggedIn = false;
 
@@ -65,7 +36,7 @@ export class RecipeBrowerComponent {
 
   recipeNavMenuActive = false;
 
-  retrievedRecipeCards: RecipeTemplateSavedDataInterface[] = [];
+  retrievedRecipeCards: RecipeTemplateSavedDataInterfaceWithId[] = [];
 
   ngOnInit() {
     this.loggedInObserver$.subscribe((value) => {
@@ -83,14 +54,54 @@ export class RecipeBrowerComponent {
       .getAllRecipeData()
       .then((data: GetRecipeDataSuccessfulResponseInterface) => {
         this.retrievedRecipeCards = data.retrievedData;
+        this.numberOfPagesCalculator(this.retrievedRecipeCards);
         return data;
       })
-
       .catch((err: Error) => {
         this.activatePopupService.errorPopupHandler(err.message);
       });
   }
 
+  numberOfPagesCalculator(
+    tempRetrievedRecipeCards: RecipeTemplateSavedDataInterfaceWithId[]
+  ) {
+    const numberOfCardsRetrieved = tempRetrievedRecipeCards.length;
+
+    this.numberOfPages = Math.ceil(
+      numberOfCardsRetrieved / this.numberOfItemsPerPage
+    );
+    console.log(this.numberOfPages);
+  }
+
+  userClickedMenuTagsHandler(userClickedTags: string[]) {
+    const lowerCaseSelectedTags = userClickedTags.map((tag: string) => {
+      return tag.toLowerCase();
+    });
+
+    if (lowerCaseSelectedTags.length === 0) {
+      this.recipeDataApiCalls
+        .getAllRecipeData()
+        .then((data: GetRecipeDataSuccessfulResponseInterface) => {
+          this.numberOfPagesCalculator(this.retrievedRecipeCards);
+          return data;
+        })
+
+        .catch((err: Error) => {
+          this.activatePopupService.errorPopupHandler(err.message);
+        });
+    } else {
+      this.recipeDataApiCalls
+        .getRecipeDataWithFilter(JSON.stringify(lowerCaseSelectedTags))
+        .then((data: GetRecipeDataSuccessfulResponseInterface) => {
+          this.retrievedRecipeCards = data.retrievedData;
+          this.numberOfPagesCalculator(this.retrievedRecipeCards);
+          return data;
+        })
+        .catch((err: Error) => {
+          this.activatePopupService.errorPopupHandler(err.message);
+        });
+    }
+  }
   recipeNavMenuClickHandler() {
     this.recipeNavMenuActive = !this.recipeNavMenuActive;
   }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { RecipeTemplateSavedDataInterface } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 
 // interface TextAreaContainersIdsObjectInterface {
 //   [key: string]: string;
@@ -12,6 +13,23 @@ import { Store } from '@ngrx/store';
 })
 export class RecipeViewerReviewBar {
   constructor(private store: Store) {}
+  @Input('recipeData') recipeData: RecipeTemplateSavedDataInterface = {
+    title: '',
+    quote: '',
+    servings: '',
+    prepTime: '',
+    cookingTime: '',
+    ingredientsList: [''],
+    directionsList: [''],
+    notes: [''],
+    description: '',
+    selectedRecipeDishImageIndex: 0,
+    username: '',
+    selectedTemplateIndex: 0,
+    tags: [''],
+    ratings: [],
+    numberOfMakes: 0,
+  };
 
   starButtonsIds = [
     'recipe-viewer-star-rating-0',
@@ -23,6 +41,8 @@ export class RecipeViewerReviewBar {
 
   activeStarButtonsArray = [false, false, false, false, false];
   starButtonMouseClickEventOccured = false;
+  starButtonIndexClicked = -1;
+  makeButtonHoverActive = false;
   makeButtonActive = false;
   makeButtonClickEventOccured = false;
 
@@ -45,36 +65,73 @@ export class RecipeViewerReviewBar {
     if (!this.starButtonMouseClickEventOccured) {
       this.activeStarButtonsArray[buttonIdIndex] =
         !this.activeStarButtonsArray[buttonIdIndex];
-    } else {
-      if (this.starButtonMouseClickEventOccured) {
-        this.starButtonMouseClickEventOccured = false;
-      }
     }
   }
 
   starButtonClickHandler(event: Event) {
     const buttonIdIndex = this.getTargetElementIdIndex(event);
     const tempActiveButtons = [false, false, false, false, false];
+    const tempRecipeRatings = this.recipeData.ratings.slice();
 
-    for (let buttonIndex = 0; buttonIndex < +buttonIdIndex + 1; buttonIndex++) {
-      tempActiveButtons[buttonIndex] = true;
+    if (buttonIdIndex === this.starButtonIndexClicked) {
+      this.activeStarButtonsArray = tempActiveButtons;
+      this.starButtonIndexClicked = -1;
+      tempRecipeRatings.splice(tempRecipeRatings.length - 1, 1);
+      if (this.makeButtonActive) {
+        this.makeButtonClickHandler();
+      }
+    } else if (this.starButtonIndexClicked !== -1) {
+      for (
+        let buttonIndex = 0;
+        buttonIndex < +buttonIdIndex + 1;
+        buttonIndex++
+      ) {
+        tempActiveButtons[buttonIndex] = true;
+      }
+      this.activeStarButtonsArray = tempActiveButtons;
+      tempRecipeRatings[tempRecipeRatings.length - 1] = buttonIdIndex + 1;
+
+      this.starButtonIndexClicked = buttonIdIndex;
+      if (!this.makeButtonActive) {
+        this.makeButtonClickHandler();
+      }
+    } else {
+      for (
+        let buttonIndex = 0;
+        buttonIndex < +buttonIdIndex + 1;
+        buttonIndex++
+      ) {
+        tempActiveButtons[buttonIndex] = true;
+      }
+      this.activeStarButtonsArray = tempActiveButtons;
+      tempRecipeRatings.push(buttonIdIndex + 1);
+
+      this.starButtonIndexClicked = buttonIdIndex;
+      if (!this.makeButtonActive) {
+        this.makeButtonClickHandler();
+      }
     }
-    this.activeStarButtonsArray = tempActiveButtons;
+    this.recipeData.ratings = tempRecipeRatings;
     this.starButtonMouseClickEventOccured = true;
   }
 
   makeButtonHoverHandler() {
     if (!this.makeButtonClickEventOccured) {
-      this.makeButtonActive = !this.makeButtonActive;
-    } else {
-      if (this.makeButtonClickEventOccured) {
-        this.makeButtonClickEventOccured = false;
-      }
+      this.makeButtonHoverActive = !this.makeButtonHoverActive;
     }
   }
 
   makeButtonClickHandler() {
-    this.makeButtonActive = true;
-    this.makeButtonClickEventOccured = true;
+    if (this.makeButtonActive) {
+      this.makeButtonClickEventOccured = false;
+      this.makeButtonActive = false;
+      this.makeButtonHoverActive = false;
+      this.recipeData.numberOfMakes = this.recipeData.numberOfMakes - 1;
+    } else {
+      this.makeButtonClickEventOccured = true;
+      this.makeButtonHoverActive = true;
+      this.makeButtonActive = true;
+      this.recipeData.numberOfMakes = this.recipeData.numberOfMakes + 1;
+    }
   }
 }

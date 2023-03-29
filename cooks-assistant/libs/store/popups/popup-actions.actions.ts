@@ -20,5 +20,7 @@ export const PopupActions = createActionGroup({
     }>(),
     'Update SuccessPopupActive': props<{ successPopupActive: boolean }>(),
     'Update SuccessPopupText': props<{ successPopupText: string }>(),
+    'Update SearchPopupActive': props<{ searchPopupActive: boolean }>(),
+    'Update SearchPopupInputText': props<{ searchPopupInputText: string }>(),
   },
 });

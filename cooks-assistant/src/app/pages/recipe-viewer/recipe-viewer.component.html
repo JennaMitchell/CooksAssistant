@@ -3,9 +3,22 @@
   <logged-out-nav-bar *ngIf="!loggedIn"></logged-out-nav-bar>
   <login-popup *ngIf="loginPopupActive"></login-popup>
   <signup-popup *ngIf="signupPopupActive"></signup-popup>
+  <error-popup *ngIf="errorPopupActive"></error-popup>
 
   <div class="recipe-viewer-main-container">
-    <recipe-template-one-viewer></recipe-template-one-viewer>
+    <recipe-template-one-viewer
+      *ngIf="+retrievedData.selectedTemplateIndex === 1"
+      [recipeData]="retrievedData"
+    ></recipe-template-one-viewer>
+    <recipe-template-two-viewer
+      *ngIf="+retrievedData.selectedTemplateIndex === 2"
+      [recipeData]="retrievedData"
+    ></recipe-template-two-viewer>
+    <recipe-template-three-viewer
+      *ngIf="+retrievedData.selectedTemplateIndex === 3"
+      [recipeData]="retrievedData"
+    ></recipe-template-three-viewer>
+
     <recipe-viewer-review-bar></recipe-viewer-review-bar>
   </div>
 </div>

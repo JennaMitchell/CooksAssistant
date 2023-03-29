@@ -122,7 +122,7 @@ export class CreateRecipeButtonComponent {
     dataToBeSent['username'] = this.username;
     dataToBeSent['selectedTemplateIndex'] = this.selectedTemplateIndex;
     dataToBeSent['tags'] = this.selectedTags;
-    dataToBeSent['rating'] = 0;
+    dataToBeSent['ratings'] = [];
     dataToBeSent['numberOfMakes'] = 0;
 
     if (dataToBeSent['description'].length === 0) {

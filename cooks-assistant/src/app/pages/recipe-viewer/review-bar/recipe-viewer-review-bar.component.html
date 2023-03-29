@@ -27,18 +27,22 @@
     class="recipe-viewer-review-bar-make-button"
     (mouseenter)="makeButtonHoverHandler()"
     (mouseleave)="makeButtonHoverHandler()"
+    (click)="makeButtonClickHandler()"
+    [ngClass]="{
+      'recipe-viewer-review-bar-make-button-active': makeButtonActive
+    }"
   >
     <img
       src="../../../../assets/images/icons/homepage/number-of-makes-icon-white.png"
       alt="number of makes icon"
       class="recipe-viewer-review-bar-make-button-icon"
-      *ngIf="!makeButtonActive"
+      *ngIf="!makeButtonHoverActive"
     />
     <img
       src="../../../../assets/images/icons/homepage/number-of-makes-icon.png"
       alt="number of makes icon"
       class="recipe-viewer-review-bar-make-button-icon"
-      *ngIf="makeButtonActive"
+      *ngIf="makeButtonHoverActive"
     />
   </button>
   <!-- <button class="recipe-viewer-review-bar-sumbit-button">Submit</button> -->

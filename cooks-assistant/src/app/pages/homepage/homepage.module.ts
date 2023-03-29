@@ -20,6 +20,7 @@ import { ErrorPopupModule } from 'src/app/popups/error/error-popup.module';
 import { LoggedInNavBarModule } from 'src/app/nav-bar/logged-in-nav-bar/logged-in-nav-bar.module';
 import { LoggedOutNavBarModule } from 'src/app/nav-bar/logged-out-nav-bar/logged-out-nav-bar.module';
 import { SuccessPopupModule } from 'src/app/popups/success/success-popup.module';
+import { SearchPopupModule } from 'src/app/popups/homepage/search-popup/search-popup.module';
 @NgModule({
   declarations: [Homepage, HomepageTopNavBar, HomepageRecipeCategories],
 
@@ -40,6 +41,7 @@ import { SuccessPopupModule } from 'src/app/popups/success/success-popup.module'
     LoggedInNavBarModule,
     LoggedOutNavBarModule,
     SuccessPopupModule,
+    SearchPopupModule,
   ],
 })
 export class HomepageModule {}
