@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loggedInSelector } from 'libs/store/auth/auth-selectors';
-import {
-  errorPopupActiveSelector,
-  signupPopupActiveSelector,
-} from 'libs/store/popups/popup-selectors';
+import { errorPopupActiveSelector } from 'libs/store/popups/popup-selectors';
 import { RecipeDataApiCalls } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 import { ActivatePopupService } from 'src/app/utilities/activate-popup-functions/activate-popup-functions.service';
 import { switchMap } from 'rxjs';
@@ -27,12 +24,6 @@ export class RecipeViewerComponent {
   ) {}
   loggedInObserver$ = this.store.select(loggedInSelector);
   loggedIn = false;
-
-  loginPopupActiveObserver$ = this.store.select(loggedInSelector);
-  loginPopupActive = false;
-
-  signupPopupActiveObserver$ = this.store.select(signupPopupActiveSelector);
-  signupPopupActive = false;
 
   errorPopupActiveObserver$ = this.store.select(errorPopupActiveSelector);
   errorPopupActive = false;
@@ -87,6 +78,20 @@ export class RecipeViewerComponent {
     this.x$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.returnIdSetter(params.get('id')!);
+
+        if (params.get('id')) {
+          const id = params.get('id') as string;
+          this.recipeDataApiCalls
+            .getRecipeDataById(id)
+            .then((data: GetRecipeDataSuccessfulResponseInterface) => {
+              console.log(data);
+              this.retrievedData = data.retrievedData[0];
+            })
+            .catch((err: Error) => {
+              this.activatePopupService.errorPopupHandler(err.message);
+            });
+        }
+
         return params.get('id')!;
       })
     );
@@ -96,12 +101,6 @@ export class RecipeViewerComponent {
       this.loggedIn = value;
     });
 
-    this.loginPopupActiveObserver$.subscribe((value) => {
-      this.loginPopupActive = value;
-    });
-    this.signupPopupActiveObserver$.subscribe((value) => {
-      this.signupPopupActive = value;
-    });
     this.errorPopupActiveObserver$.subscribe((value) => {
       this.errorPopupActive = value;
     });

@@ -13,16 +13,20 @@ import { HomepageCookingTimeSlideshowModule } from './homepage-cooking-times-sli
 import { HomepageSocialMediaSectionModule } from './homepage-social-media-section/homepage-social-media-section.module';
 import { HomepageFooterModule } from './homepage-footer/homepage-footer.module';
 import { StoreModule } from '@ngrx/store';
-import { LoginPopupModule } from 'src/app/popups/login/login-popup.module';
-import { SignupPopupModule } from 'src/app/popups/signup/signup-popup.module';
 
 import { ErrorPopupModule } from 'src/app/popups/error/error-popup.module';
 import { LoggedInNavBarModule } from 'src/app/nav-bar/logged-in-nav-bar/logged-in-nav-bar.module';
 import { LoggedOutNavBarModule } from 'src/app/nav-bar/logged-out-nav-bar/logged-out-nav-bar.module';
 import { SuccessPopupModule } from 'src/app/popups/success/success-popup.module';
-import { SearchPopupModule } from 'src/app/popups/homepage/search-popup/search-popup.module';
+import { SearchPopupModule } from 'src/app/popups/search-popup/search-popup.module';
+import { HomepageCategoryPopupComponent } from 'src/app/popups/homepage-category-popup/homepage-category-popup.component';
 @NgModule({
-  declarations: [Homepage, HomepageTopNavBar, HomepageRecipeCategories],
+  declarations: [
+    Homepage,
+    HomepageTopNavBar,
+    HomepageRecipeCategories,
+    HomepageCategoryPopupComponent,
+  ],
 
   imports: [
     RouterModule.forChild([{ path: '', component: Homepage }]),
@@ -35,8 +39,7 @@ import { SearchPopupModule } from 'src/app/popups/homepage/search-popup/search-p
     HomepageFooterModule,
     HomepageSocialMediaSectionModule,
     StoreModule,
-    LoginPopupModule,
-    SignupPopupModule,
+
     ErrorPopupModule,
     LoggedInNavBarModule,
     LoggedOutNavBarModule,

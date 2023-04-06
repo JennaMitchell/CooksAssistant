@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { lockWebpageViewPortSelector } from 'libs/store/popups/popup-selectors';
+import {
+  loginPopupActiveSelector,
+  signupPopupActiveSelector,
+} from 'libs/store/popups/popup-selectors';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +16,11 @@ export class AppComponent {
   lockWebpageViewPortSelectorObserver$ = this.store.select(
     lockWebpageViewPortSelector
   );
+  loginPopupActiveObserver$ = this.store.select(loginPopupActiveSelector);
+  signupPopupActiveObserver$ = this.store.select(signupPopupActiveSelector);
+
+  signupPopupActive = false;
+  loginPopupActive = false;
 
   ngOnInit() {
     this.lockWebpageViewPortSelectorObserver$.subscribe((value) => {
@@ -31,6 +40,13 @@ export class AppComponent {
             .classList.remove('app-lock-viewport');
         }
       }
+    });
+
+    this.loginPopupActiveObserver$.subscribe((value) => {
+      this.loginPopupActive = value;
+    });
+    this.signupPopupActiveObserver$.subscribe((value) => {
+      this.signupPopupActive = value;
     });
   }
 }

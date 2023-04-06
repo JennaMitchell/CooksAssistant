@@ -10,12 +10,8 @@ export const HomepageActions = createActionGroup({
     'Update SelectedHomepageMealNationality': props<{
       selectedMealNationality: string;
     }>(),
-  },
-});
-
-export const HomepageApiActions = createActionGroup({
-  source: 'Homeapge API',
-  events: {
-    'Retrive Homepage Data': props<{ dataHere: ReadonlyArray<string[]> }>(),
+    'Update HomepagePopularButtonClicked': props<{
+      homepagePopularButtonClicked: boolean;
+    }>(),
   },
 });

@@ -22,5 +22,20 @@ export const PopupActions = createActionGroup({
     'Update SuccessPopupText': props<{ successPopupText: string }>(),
     'Update SearchPopupActive': props<{ searchPopupActive: boolean }>(),
     'Update SearchPopupInputText': props<{ searchPopupInputText: string }>(),
+    'Update HomepageCategoryPopupActive': props<{
+      homepageCategoryPopupActive: boolean;
+    }>(),
+    'Update HomepageCategoryPopupSelectedCategory': props<{
+      homepageCategoryPopupSelectedCategory: string;
+    }>(),
+    'Update RecipeBrowserSelectedLessThanRating': props<{
+      recipeBrowserSelectedLessThanRating: number;
+    }>(),
+    'Update RecipeBrowserSelectedGreaterThanRating': props<{
+      recipeBrowserSelectedGreaterThanRating: number;
+    }>(),
+    'Update RecipeBrowserGetAllRatings': props<{
+      recipeBrowserGetAllRatings: boolean;
+    }>(),
   },
 });

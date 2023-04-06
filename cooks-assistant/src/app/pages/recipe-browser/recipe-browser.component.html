@@ -12,6 +12,13 @@
       "
       [recipeEntry]="entryOfRetrievedRecipeCards"
     ></recipe-browser-recipe-card>
+
+    <p
+      class="recipe-browser-no-data-found"
+      *ngIf="retrievedRecipeCards.length === 0"
+    >
+      No Recipes Found
+    </p>
     <recipe-page-results-navigator
       [numberOfPages]="numberOfPages"
     ></recipe-page-results-navigator>

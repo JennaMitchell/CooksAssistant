@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { RecipeCreatorFunctions } from '../../../../utilities/recipe-creator-functions/recipe-creator-function.service';
 
-import { dishImagesData } from '../../../../constants/constants';
+import { dishImagesData } from '../../../../constants/dish-image-data';
 import { ActivatePopupService } from '../../../../utilities/activate-popup-functions/activate-popup-functions.service';
 import { RecipeTemplateSavedDataInterface } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 // interface TextAreaContainersIdsObjectInterface {

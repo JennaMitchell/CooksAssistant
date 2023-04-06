@@ -1,4 +1,6 @@
+import { Injectable } from '@angular/core';
 import { databaseUrl } from 'src/app/constants/constants';
+import { ApiErrorService } from '../api-error-handler/api-error-handler.service';
 
 export interface RecipeTemplateSavedDataInterface {
   title: string;
@@ -43,7 +45,11 @@ export interface GetRecipeDataSuccessfulResponseInterface {
   status: number;
 }
 
+@Injectable({
+  providedIn: 'root',
+})
 export class RecipeDataApiCalls {
+  constructor(private apiErrorService: ApiErrorService) {}
   getAllRecipeData = async () => {
     try {
       const fetchedResponse = await fetch(
@@ -87,8 +93,59 @@ export class RecipeDataApiCalls {
           method: 'GET',
         }
       );
-      console.log(fetchedResponse);
+
       const awaitedResponse = await fetchedResponse.json();
+      this.apiErrorService.apiCallErrorHandler(
+        fetchedResponse.status,
+        awaitedResponse
+      );
+
+      return awaitedResponse as GetRecipeDataSuccessfulResponseInterface;
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
+    }
+  };
+  getRecipeDataByTitle = async (title: string) => {
+    try {
+      const fetchedResponse = await fetch(
+        `${databaseUrl}/recipes/get-recipe-by-title/${title}`,
+        {
+          method: 'GET',
+        }
+      );
+
+      const awaitedResponse = await fetchedResponse.json();
+      this.apiErrorService.apiCallErrorHandler(
+        fetchedResponse.status,
+        awaitedResponse
+      );
+
+      return awaitedResponse as GetRecipeDataSuccessfulResponseInterface;
+    } catch (err) {
+      let message;
+
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
+    }
+  };
+  getRecipeDataByRating = async (greaterValue: number, lessValue: number) => {
+    try {
+      const fetchedResponse = await fetch(
+        `${databaseUrl}/recipes/get-recipe-by-rating/greaterValue=${greaterValue}&&lessThan=${lessValue}`,
+        {
+          method: 'GET',
+        }
+      );
+
+      const awaitedResponse = await fetchedResponse.json();
+      this.apiErrorService.apiCallErrorHandler(
+        fetchedResponse.status,
+        awaitedResponse
+      );
 
       return awaitedResponse as GetRecipeDataSuccessfulResponseInterface;
     } catch (err) {

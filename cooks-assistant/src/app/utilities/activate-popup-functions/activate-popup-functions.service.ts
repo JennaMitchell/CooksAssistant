@@ -32,4 +32,19 @@ export class ActivatePopupService {
       PopupActions.updateSuccesspopuptext({ successPopupText: message })
     );
   }
+
+  searchPopupActiveHandler() {
+    this.store.dispatch(
+      PopupActions.updateSearchpopupactive({ searchPopupActive: true })
+    );
+    this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
+  }
+  homepageCategoryPopupHandler() {
+    this.store.dispatch(
+      PopupActions.updateHomepagecategorypopupactive({
+        homepageCategoryPopupActive: true,
+      })
+    );
+    this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
+  }
 }

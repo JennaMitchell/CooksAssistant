@@ -5,9 +5,8 @@ import { Store } from '@ngrx/store';
 
 import {
   errorPopupActiveSelector,
-  lockWebpageViewPortSelector,
-  loginPopupActiveSelector,
-  signupPopupActiveSelector,
+  homepageCategoryPopupActiveSelector,
+  searchPopupActiveSelector,
   successPopupActiveSelector,
 } from 'libs/store/popups/popup-selectors';
 import { loggedInSelector } from 'libs/store/auth/auth-selectors';
@@ -19,17 +18,19 @@ import { loggedInSelector } from 'libs/store/auth/auth-selectors';
   providers: [HomepageApiCallServiceFunctions],
 })
 export class Homepage {
-  loginPopupActiveObserver$ = this.store.select(loginPopupActiveSelector);
-  signupPopupActiveObserver$ = this.store.select(signupPopupActiveSelector);
   loggedInObserver$ = this.store.select(loggedInSelector);
   errorPopupActiveObserver$ = this.store.select(errorPopupActiveSelector);
   successPopupActiveObserver$ = this.store.select(successPopupActiveSelector);
+  searchPopupActiveObserver$ = this.store.select(searchPopupActiveSelector);
+  homepageCategoryPopupActiveObserver$ = this.store.select(
+    homepageCategoryPopupActiveSelector
+  );
 
-  signupPopupActive: any;
-  loginPopupActive: any;
   loggedIn: any;
   errorPopupActive: any;
   successPopupActive = false;
+  searchPoupActive = false;
+  homepageCategoryPopupActive = false;
 
   constructor(
     private homepageApiActions: HomepageApiCallServiceFunctions,
@@ -52,13 +53,6 @@ export class Homepage {
       });
   }
   ngOnInit() {
-    this.signupPopupActiveObserver$.subscribe((value) => {
-      this.signupPopupActive = value;
-    });
-
-    this.loginPopupActiveObserver$.subscribe((value) => {
-      this.loginPopupActive = value;
-    });
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;
     });
@@ -67,6 +61,12 @@ export class Homepage {
     });
     this.successPopupActiveObserver$.subscribe((value) => {
       this.successPopupActive = value;
+    });
+    this.searchPopupActiveObserver$.subscribe((value) => {
+      this.searchPoupActive = value;
+    });
+    this.homepageCategoryPopupActiveObserver$.subscribe((value) => {
+      this.homepageCategoryPopupActive = value;
     });
   }
 }

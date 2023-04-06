@@ -19,3 +19,9 @@ export const selectedHomepageMealNationalitySelector = createSelector(
   selectHomepageStore,
   (state: HomepageStateInterface) => state.selectedHomepageMealNationality
 );
+export const homepagePopularButtonClickedSelector = createSelector(
+  selectHomepageStore,
+  (state: HomepageStateInterface) => {
+    return state.homepagePopularButtonClicked;
+  }
+);

@@ -9,6 +9,12 @@ import {
 } from '../../../constants/constants';
 
 import { RecipeDataApiCalls } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
+import { Store } from '@ngrx/store';
+import { PopupActions } from 'libs/store/popups/popup-actions.actions';
+
+interface StarRatingsInterface {
+  [key: string]: any;
+}
 @Component({
   selector: 'recipe-browser-nav-menu',
   templateUrl: './recipe-browser-nav-menu.component.html',
@@ -16,10 +22,12 @@ import { RecipeDataApiCalls } from 'src/app/utilities/api-call-functions/recipe-
   providers: [RecipeDataApiCalls],
 })
 export class RecipeBrowerNavBarComponent {
-  constructor() {}
+  constructor(private store: Store) {}
 
   @Input('menuMoveOut') menuMoveOut = false;
   @Output() userSelectedTagsEvent = new EventEmitter<string[]>();
+  @Output() ratingTagClickedEvent = new EventEmitter<number[]>();
+  searchInputContainerActive = false;
 
   recipeCourseTagData = recipeCourseTagData;
   recipeCourseTitles: string[] = [];
@@ -35,7 +43,34 @@ export class RecipeBrowerNavBarComponent {
 
   activeDropDownButton = '';
 
+  activeRating = -1;
+
   selectedSubDropDownsTags: string[] = [];
+  searchString = 'search';
+
+  starRatingsObject: StarRatingsInterface = {
+    one: {
+      activeStarArray: ['full', 'empty', 'empty', 'empty', 'empty'],
+      id: 'recipe-browser-nav-manu-star-container-1',
+    },
+    two: {
+      activeStarArray: ['full', 'full', 'empty', 'empty', 'empty'],
+      id: 'recipe-browser-nav-manu-star-container-2',
+    },
+    three: {
+      activeStarArray: ['full', 'full', 'full', 'empty', 'empty'],
+      id: 'recipe-browser-nav-manu-star-container-3',
+    },
+    four: {
+      activeStarArray: ['full', 'full', 'full', 'full', 'empty'],
+      id: 'recipe-browser-nav-manu-star-container-4',
+    },
+    five: {
+      activeStarArray: ['full', 'full', 'full', 'full', 'full'],
+      id: 'recipe-browser-nav-manu-star-container-5',
+    },
+  };
+  starRatingObjectKeysArray: string[] = ['one', 'two', 'three', 'four', 'five'];
 
   titlesArrayCreator(data: any) {
     let tempArray: string[] = [];
@@ -218,5 +253,95 @@ export class RecipeBrowerNavBarComponent {
     }
 
     this.userSelectedTagsEvent.emit(this.selectedSubDropDownsTags);
+  }
+
+  searchInputContainerClickHandler() {
+    const inputElement = document.getElementsByClassName(
+      'recipe-browser-search-input'
+    )[0] as HTMLInputElement;
+    inputElement.focus();
+    this.searchInputContainerActive = true;
+  }
+
+  searchInputEnterKeyPressHandler(event: KeyboardEvent) {
+    const keyPressed = event.key;
+    if (keyPressed === 'Enter') {
+      const inputElement = document.getElementsByClassName(
+        'recipe-browser-search-input'
+      )[0] as HTMLInputElement;
+      const inputText = inputElement.value;
+      this.store.dispatch(
+        PopupActions.updateSearchpopupinputtext({
+          searchPopupInputText: inputText,
+        })
+      );
+    }
+  }
+
+  ratingButtonClickHandler(event: MouseEvent) {
+    let targetElement = event.target as HTMLButtonElement;
+
+    let targetElementId = targetElement.id;
+
+    if (targetElementId.length === 0) {
+      targetElement = targetElement.parentElement as HTMLButtonElement;
+      targetElementId = targetElement.id;
+    }
+
+    const splitId = targetElementId.split('-');
+    const ratingToLookUp = +splitId[splitId.length - 1];
+
+    if (ratingToLookUp > 0 && ratingToLookUp < 5) {
+      if (this.activeRating === ratingToLookUp) {
+        this.activeRating = -1;
+      } else {
+        this.activeRating = ratingToLookUp;
+      }
+      if (this.activeRating === -1) {
+        this.store.dispatch(
+          PopupActions.updateRecipebrowsergetallratings({
+            recipeBrowserGetAllRatings: true,
+          })
+        );
+      } else {
+        let greaterThanValue = 0;
+        let lessThanValue = 0;
+        switch (ratingToLookUp) {
+          case 1:
+            greaterThanValue = 1;
+            lessThanValue = 2;
+            break;
+          case 2:
+            greaterThanValue = 2;
+            lessThanValue = 3;
+            break;
+          case 3:
+            greaterThanValue = 3;
+            lessThanValue = 4;
+            break;
+          case 4:
+            greaterThanValue = 4;
+            lessThanValue = 5;
+            break;
+          case 5:
+            greaterThanValue = 5;
+            lessThanValue = 5;
+            break;
+          default:
+            break;
+        }
+
+        this.store.dispatch(
+          PopupActions.updateRecipebrowserselectedgreaterthanrating({
+            recipeBrowserSelectedGreaterThanRating: greaterThanValue,
+          })
+        );
+        this.store.dispatch(
+          PopupActions.updateRecipebrowserselectedlessthanrating({
+            recipeBrowserSelectedLessThanRating: lessThanValue,
+          })
+        );
+      }
+    }
   }
 }

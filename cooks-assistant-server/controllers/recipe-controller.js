@@ -16,6 +16,28 @@ exports.getAllRecipeData = async (req, res) => {
   }
 };
 
+exports.getRecipeDataByRating = async (req, res) => {
+  try {
+    const greaterThan = req.params.greaterThan;
+    const lessThan = req.params.lessThan;
+
+    const result = await RecipeCardSchema.find({
+      ratings: { $gte: greaterThan, $lte: lessThan },
+    });
+
+    return res.status(201).json({
+      message: "Data Retrieved!",
+      retrievedData: result,
+      status: 201,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: `Server Error!`,
+      error: [{ error: "Server Error" }],
+    });
+  }
+};
+
 exports.getRecipeDataWithFilter = async (req, res) => {
   try {
     const filter = JSON.parse(req.params.filter);
@@ -36,11 +58,32 @@ exports.getRecipeDataWithFilter = async (req, res) => {
 
 exports.getRecipeDataById = async (req, res) => {
   try {
-    console.log(39);
     const id = req.params.sentId;
-    console.log(id);
+
     const result = await RecipeCardSchema.find({ _id: id });
-    console.log(result);
+
+    return res.status(201).json({
+      message: "Data Retrieved!",
+      retrievedData: result,
+      status: 201,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: `Server Error!`,
+      error: [{ error: "Server Error" }],
+    });
+  }
+};
+exports.getRecipeDataByTitle = async (req, res) => {
+  try {
+    const title = req.params.title;
+
+    const result = await RecipeCardSchema.find({
+      title: {
+        $regex: title,
+      },
+    });
+
     return res.status(201).json({
       message: "Data Retrieved!",
       retrievedData: result,
@@ -89,7 +132,6 @@ exports.createNewRecipe = async (req, res, next) => {
       status: 201,
     });
   } catch (err) {
-    console.log(err);
     return res.status(401).json({
       message: "Server Error",
       error: [{ error: err }],

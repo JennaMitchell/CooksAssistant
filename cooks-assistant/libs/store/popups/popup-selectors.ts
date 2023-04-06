@@ -1,5 +1,4 @@
-import { createSelector, createFeatureSelector, select } from '@ngrx/store';
-import { AppStateInterface } from '../app-interface';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 import { PopupStateInterface } from './popup-reducers';
 
@@ -88,5 +87,34 @@ export const searchPopupInputTextSelector = createSelector(
   selectPopupStateSlice,
   (state) => {
     return state.searchPopupInputText;
+  }
+);
+
+export const homepageCategoryPopupActiveSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.homepageCategoryPopupActive;
+  }
+);
+export const homepageCategoryPopupSelectedCategorySelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.homepageCategoryPopupSelectedCategory;
+  }
+);
+
+export const recipeBrowserSelectedRatingSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return {
+      lessThan: state.recipeBrowserSelectedLessThanRating,
+      greaterThan: state.recipeBrowserSelectedGreaterThanRating,
+    };
+  }
+);
+export const recipeBrowserGetAllRatingsSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.recipeBrowserGetAllRatings;
   }
 );

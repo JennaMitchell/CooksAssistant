@@ -25,15 +25,20 @@
       <div
         class="recipe-template-three-info-text-area-container"
         *ngFor="
-          let ingredientsText of templateData.ingredientsList;
+          let ingredientsText of blankTemplateData.ingredientsList;
           let ingredientsIndex = index
         "
         id="{{ ingredientListIds[ingredientsIndex] }}"
       >
         <textarea
           class="recipe-template-three-text-area recipe-template-three-ingredients-text-area"
-          (change)="textAreaInputHandler($event, 'ingredient')"
-          >{{ ingredientsText }}</textarea
+          (keyup)="textAreaInputHandler($event, 'ingredient')"
+          placeholder="Enter an Ingredient"
+          >{{
+            listElementDefaultValuesWhenNewItemAddedArray.ingredients[
+              ingredientsIndex
+            ]
+          }}</textarea
         >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +47,7 @@
           stroke-width="1.5"
           stroke="currentColor"
           class="w-6 h-6 recipe-template-three-text-area-delete-icon"
-          (click)="deleteTextAreaHandler($event)"
+          (click)="deleteTextAreaHandler($event, 'ingredients')"
         >
           <path
             stroke-linecap="round"
@@ -77,15 +82,20 @@
       <div
         class="recipe-template-three-info-text-area-container"
         *ngFor="
-          let directionsText of templateData.directionsList;
+          let directionsText of blankTemplateData.directionsList;
           let directionsIndex = index
         "
         id="{{ directionsListIds[directionsIndex] }}"
       >
         <textarea
           class="recipe-template-three-text-area recipe-template-three-directions-text-area"
-          (change)="textAreaInputHandler($event, 'direction')"
-          >{{ directionsText }}</textarea
+          (keyup)="textAreaInputHandler($event, 'direction')"
+          placeholder="Enter a Direction"
+          >{{
+            listElementDefaultValuesWhenNewItemAddedArray.ingredients[
+              directionsIndex
+            ]
+          }}</textarea
         >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +104,7 @@
           stroke-width="1.5"
           stroke="currentColor"
           class="w-6 h-6 recipe-template-three-text-area-delete-icon"
-          (click)="deleteTextAreaHandler($event)"
+          (click)="deleteTextAreaHandler($event, 'directions')"
         >
           <path
             stroke-linecap="round"
@@ -108,16 +118,20 @@
   <div class="recipe-template-three-description-top-container">
     <img
       class="recipe-template-three-food-image"
-      [alt]="dishImagesData[templateData.selectedRecipeDishImageIndex].altText"
+      [alt]="
+        dishImagesData[userEnteredTemplateData.selectedRecipeDishImageIndex]
+          .altText
+      "
       [src]="
-        dishImagesData[templateData.selectedRecipeDishImageIndex].imageLocation
+        dishImagesData[userEnteredTemplateData.selectedRecipeDishImageIndex]
+          .imageLocation
       "
     />
     <textarea
       class="recipe-template-three-recipe-title"
-      (change)="textAreaInputHandler($event, 'title')"
-      >{{ templateData.title }}</textarea
-    >
+      (keyup)="textAreaInputHandler($event, 'title')"
+      placeholder="Please Enter a Title"
+    ></textarea>
     <p class="recipe-template-three-tags-title">Tags</p>
     <button
       class="recipe-template-three-tags-edit-button recipe-template-three-edit-button"
@@ -199,8 +213,9 @@
       />
       <textarea
         class="recipe-template-three-quick-info-text-area"
-        (change)="textAreaInputHandler($event, 'servings')"
-        >{{ templateData.servings }}</textarea
+        (keyup)="textAreaInputHandler($event, 'servings')"
+        placeholder="4 Servings"
+        >{{ userEnteredTemplateData.servings }}</textarea
       >
       <img
         class="recipe-template-three-quick-info-icon recipe-template-three-time-to-cook-icon"
@@ -209,14 +224,15 @@
       />
       <textarea
         class="recipe-template-three-quick-info-text-area recipe-template-three-time-to-cook"
-        (change)="textAreaInputHandler($event, 'cookingTime')"
-        >{{ templateData.cookingTime }}</textarea
+        (keyup)="textAreaInputHandler($event, 'cookingTime')"
+        placeholder="10 MIN"
+        >{{ userEnteredTemplateData.cookingTime }}</textarea
       >
     </div>
 
     <textarea
       class="recipe-template-three-description-text-area"
-      (change)="textAreaInputHandler($event, 'description')"
+      (keyup)="textAreaInputHandler($event, 'description')"
     >
 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum eveniet sed omnis praesentium rem eligendi animi cupiditate repellat, illo nemo, quisquam laudantium, ipsa ipsam commodi voluptatibus quia ut numquam odio!</textarea
     >
@@ -226,13 +242,19 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum eveniet sed omni
 
       <div
         class="recipe-template-three-info-text-area-container"
-        *ngFor="let notesText of templateData.notes; let notesIndex = index"
+        *ngFor="
+          let notesText of blankTemplateData.notes;
+          let notesIndex = index
+        "
         id="{{ notesListIds[notesIndex] }}"
       >
         <textarea
           class="recipe-template-three-text-area recipe-template-three-notes-text-area"
-          (change)="textAreaInputHandler($event, 'notes')"
-          >{{ notesText }}</textarea
+          (keyup)="textAreaInputHandler($event, 'notes')"
+          placeholder="Please Enter a Note"
+          >{{
+            listElementDefaultValuesWhenNewItemAddedArray.notes[notesIndex]
+          }}</textarea
         >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -241,7 +263,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum eveniet sed omni
           stroke-width="1.5"
           stroke="currentColor"
           class="w-6 h-6 recipe-template-three-text-area-delete-icon"
-          (click)="deleteTextAreaHandler($event)"
+          (click)="deleteTextAreaHandler($event, 'notes')"
         >
           <path
             stroke-linecap="round"

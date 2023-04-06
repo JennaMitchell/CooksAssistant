@@ -38,6 +38,7 @@
     class="homepage-nav-button"
     (mouseenter)="onCategoriesButtonHover()"
     (mouseleave)="onCategoriesButtonHover()"
+    (click)="popupButtonClickHandler()"
   >
     <div class="homepage-nav-button-stack-recipe">
       <img
@@ -59,6 +60,7 @@
     class="homepage-nav-button"
     (mouseenter)="onPopularButtonHover()"
     (mouseleave)="onPopularButtonHover()"
+    (click)="categoryButtonClickHandler()"
   >
     <div class="homepage-nav-button-stack-recipe">
       <img
@@ -78,8 +80,10 @@
 
   <button
     class="homepage-nav-button"
+    a
     (mouseenter)="onSearchButtonHover()"
     (mouseleave)="onSearchButtonHover()"
+    (click)="searchButtonClickHandler()"
   >
     <div class="homepage-nav-button-stack-recipe">
       <img

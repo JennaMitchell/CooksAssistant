@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RecipeTemplateSavedDataInterfaceWithId } from '../../../../app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 import { Input } from '@angular/core';
-import { dishImagesData } from '../../../constants/constants';
+import { dishImagesData } from '../../../constants/dish-image-data';
 
 @Component({
   selector: 'recipe-browser-recipe-card',

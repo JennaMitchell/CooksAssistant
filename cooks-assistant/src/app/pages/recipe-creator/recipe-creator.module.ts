@@ -10,8 +10,7 @@ import { TemplateSelectorPopupModule } from 'src/app/popups/recipe-creator/templ
 import { ErrorPopupModule } from 'src/app/popups/error/error-popup.module';
 import { LoggedOutNavBarModule } from 'src/app/nav-bar/logged-out-nav-bar/logged-out-nav-bar.module';
 import { LoggedInNavBarModule } from 'src/app/nav-bar/logged-in-nav-bar/logged-in-nav-bar.module';
-import { LoginPopupModule } from 'src/app/popups/login/login-popup.module';
-import { SignupPopupModule } from 'src/app/popups/signup/signup-popup.module';
+
 import { TagsSelectorPopupModule } from 'src/app/popups/recipe-creator/tags-selector/tags-selector-popup.module';
 import { DishImageChangerPopupModule } from 'src/app/popups/recipe-creator/dish-image-changer/dish-image-changer.module';
 
@@ -29,8 +28,7 @@ import { DishImageChangerPopupModule } from 'src/app/popups/recipe-creator/dish-
     ErrorPopupModule,
     LoggedInNavBarModule,
     LoggedOutNavBarModule,
-    LoginPopupModule,
-    SignupPopupModule,
+
     TagsSelectorPopupModule,
     DishImageChangerPopupModule,
   ],

@@ -198,14 +198,8 @@ export class SignupPopupComponent {
         username: this.generatedUsername,
         password: this.generatedPassword,
       })
-      .then((data) => {
-        if (data.error.length === 0) {
-          return data.response.json();
-        } else {
-          throw new Error(`${data.error}`);
-        }
-      })
       .then((jsonedData: any) => {
+        console.log(jsonedData);
         this.store.dispatch(
           AuthActions.updateEmail({ email: this.generatedEmail })
         );
@@ -228,6 +222,8 @@ export class SignupPopupComponent {
         this.closingButtonHandler();
       })
       .catch((err) => {
+        console.log(err);
+
         this.store.dispatch(
           PopupActions.updateErrormessage({ errorMessage: err.toString() })
         );

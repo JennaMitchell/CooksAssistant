@@ -1,5 +1,7 @@
 <div class="recipe-template-one-main-container">
-  <create-recipe-button [templateData]="templateData"></create-recipe-button>
+  <create-recipe-button
+    [templateData]="userEnteredTemplateData"
+  ></create-recipe-button>
   <div class="recipe-template-one-image-container">
     <button
       class="recipe-template-one-photo-edit-button recipe-template-one-edit-button"
@@ -23,24 +25,33 @@
     </button>
     <img
       class="recipe-template-one-food-image"
-      [alt]="dishImagesData[templateData.selectedRecipeDishImageIndex].altText"
+      [alt]="
+        dishImagesData[userEnteredTemplateData.selectedRecipeDishImageIndex]
+          .altText
+      "
       [src]="
-        dishImagesData[templateData.selectedRecipeDishImageIndex].imageLocation
+        dishImagesData[userEnteredTemplateData.selectedRecipeDishImageIndex]
+          .imageLocation
       "
     />
     <div class="recipe-template-one-title-container">
       <textarea
         class="recipe-template-one-title"
         id="recipe-template-one-recipe-title"
-        (input)="textAreaInputHandler($event, 'title')"
-        >{{ templateData.title }}</textarea
-      >
+        (keyup)="textAreaInputHandler($event, 'title')"
+        placeholder="Enter a Title"
+      ></textarea>
+
       <textarea
         class="recipe-template-one-quote-text"
         id="recipe-template-one-recipe-quote"
-        (input)="textAreaInputHandler($event, 'quote')"
-        >{{ templateData.quote }}</textarea
-      >
+        (keyup)="textAreaInputHandler($event, 'quote')"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="4"
+        matInput
+        placeholder="Enter a Quote"
+      ></textarea>
     </div>
   </div>
 
@@ -104,26 +115,27 @@
         <p class="recipe-template-info-bar-info-text">SERVINGS:</p>
         <input
           class="recipe-template-info-bar-info-input recipe-template-info-bar-servings-input"
-          value="3"
+          placeholder="##"
           maxlength="3"
+          (keyup)="textAreaInputHandler($event, 'servings')"
         />
       </div>
       <div class="recipe-template-one-info-bar-info-container">
         <p class="recipe-template-info-bar-info-text">PREPPING TIME:</p>
         <input
           class="recipe-template-info-bar-info-input recipe-template-info-bar-prep-time-input"
-          value="3 MIN"
+          placeholder="# MIN"
           maxlength="16"
-          (change)="textAreaInputHandler($event, 'prepTime')"
+          (keyup)="textAreaInputHandler($event, 'prepTime')"
         />
       </div>
       <div class="recipe-template-one-info-bar-info-container">
         <p class="recipe-template-info-bar-info-text">COOKING TIME:</p>
         <input
           class="recipe-template-info-bar-info-input recipe-template-info-bar-prep-time-input"
-          value="3 MIN"
+          placeholder="# MIN"
           maxlength="16"
-          (input)="textAreaInputHandler($event, 'cookingTime')"
+          (keyup)="textAreaInputHandler($event, 'cookingTime')"
         />
       </div>
     </div>
@@ -154,16 +166,22 @@
         <div
           class="recipe-template-one-text-area-container"
           *ngFor="
-            let ingredientText of templateData.ingredientsList;
+            let ingredientText of blankTemplateData.ingredientsList;
             let ingredientIndex = index
           "
           id="{{ ingredientListIds[ingredientIndex] }}"
         >
           <textarea
             class="recipe-template-one-text-area recipe-template-one-ingredient-input"
-            (input)="textAreaInputHandler($event, 'ingredient')"
-            >{{ ingredientText }}</textarea
+            (keyup)="textAreaInputHandler($event, 'ingredient')"
+            placeholder="Enter Ingredient"
+            >{{
+              listElementDefaultValuesWhenNewItemAddedArray.ingredients[
+                ingredientIndex
+              ]
+            }}</textarea
           >
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -171,7 +189,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-6 h-6 recipe-template-one-text-area-delete-icon"
-            (click)="deleteTextAreaHandler($event)"
+            (click)="deleteTextAreaHandler($event, 'ingredients')"
           >
             <path
               stroke-linecap="round"
@@ -204,18 +222,27 @@
         </button>
         <h6 class="recipe-template-one-ingredients-title">Directions</h6>
         <div
-          class="recipe-template-one-text-area-container"
+          class="recipe-template-one-text-area-container recipe-template-one-text-area-container-directions"
           *ngFor="
-            let directionsText of templateData.directionsList;
+            let directionsText of blankTemplateData.directionsList;
             let directionsIndex = index
           "
           id="{{ directionsListIds[directionsIndex] }}"
         >
+          <p class="recipe-template-one-text-area-index">
+            {{ directionsIndex + 1 }}.
+          </p>
           <textarea
             class="recipe-template-one-direction-input recipe-template-one-text-area"
-            (input)="textAreaInputHandler($event, 'direction')"
-            >{{ directionsText }}</textarea
+            (keyup)="textAreaInputHandler($event, 'direction')"
+            placeholder="Enter a Direction"
+            >{{
+              listElementDefaultValuesWhenNewItemAddedArray.directions[
+                directionsIndex
+              ]
+            }}</textarea
           >
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -223,7 +250,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-6 h-6 recipe-template-one-text-area-delete-icon"
-            (click)="deleteTextAreaHandler($event)"
+            (click)="deleteTextAreaHandler($event, 'directions')"
           >
             <path
               stroke-linecap="round"
@@ -257,15 +284,19 @@
         </svg>
       </button>
       <div
-        class="recipe-template-one-text-area-container"
-        *ngFor="let noteText of templateData.notes; let noteIndex = index"
+        class="recipe-template-one-text-area-container recipe-template-one-text-area-container-notes"
+        *ngFor="let noteText of blankTemplateData.notes; let noteIndex = index"
         id="{{ notesListIds[noteIndex] }}"
       >
         <textarea
           class="recipe-template-one-notes-area"
-          (input)="textAreaInputHandler($event, 'note')"
-          >{{ noteText }}</textarea
+          (keyup)="textAreaInputHandler($event, 'note')"
+          placeholder="Enter a Note"
+          >{{
+            listElementDefaultValuesWhenNewItemAddedArray.notes[noteIndex]
+          }}</textarea
         >
+
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -273,7 +304,7 @@
           stroke-width="1.5"
           stroke="currentColor"
           class="w-6 h-6 recipe-template-one-text-area-delete-icon"
-          (click)="deleteTextAreaHandler($event)"
+          (click)="deleteTextAreaHandler($event, 'notes')"
         >
           <path
             stroke-linecap="round"

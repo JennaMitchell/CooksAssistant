@@ -16,6 +16,7 @@
 .recipe-template-two-title-half-container,
 .recipe-template-two-recipe-half-container {
   min-width: 100%;
+  width: 100%;
   max-width: 100%;
   height: max-content;
   align-self: center;
@@ -26,6 +27,9 @@
 
   padding: 60px 30px;
 }
+.recipe-template-two-recipe-half-container {
+  padding: 110px 30px;
+}
 .recipe-template-two-title-half-container {
   grid-column: 1 / span 1;
 
@@ -34,17 +38,25 @@
   background-repeat: no-repeat;
 
   background-position: 100%;
+  width: max(100%, 100%);
+  height: max(100%, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .recipe-template-two-recipe-half-container {
   grid-column: 2 / span 1;
   background-color: #fef6e1;
   height: max(100%, 100%);
+
   justify-content: space-evenly;
 }
 .recipe-template-two-title-container {
   display: flex;
   flex-direction: column;
   max-height: max-content;
+  width: max(100%, 100%);
+  height: max-content;
 
   gap: 10px;
   align-items: flex-start;
@@ -58,7 +70,8 @@
   font-size: var(--r32);
   font-weight: bold;
   resize: none;
-
+  width: 100%;
+  max-width: 100%;
   border: none;
   background-color: inherit;
   color: #361e14;
@@ -71,7 +84,8 @@
   font-size: var(--r26);
   font-style: italic;
   resize: none;
-  max-width: max-content;
+  width: 100%;
+  max-width: 100%;
   border: none;
   background-color: inherit;
   color: #361e14;
@@ -131,8 +145,8 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
-  max-width: calc(150 * var(--pixelToRem));
-  max-height: calc(150 * var(--pixelToRem));
+  max-width: calc(120 * var(--pixelToRem));
+  max-height: calc(120 * var(--pixelToRem));
   object-fit: fill;
 }
 

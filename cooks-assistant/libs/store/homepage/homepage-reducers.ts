@@ -6,12 +6,14 @@ export interface HomepageStateInterface {
   selectedHomepageMealTime: string;
   selectedHomepageMealPreference: string;
   selectedHomepageMealNationality: string;
+  homepagePopularButtonClicked: boolean;
 }
 
 export const initialHomepageState: HomepageStateInterface = {
   selectedHomepageMealTime: '',
   selectedHomepageMealPreference: '',
   selectedHomepageMealNationality: '',
+  homepagePopularButtonClicked: false,
 };
 
 export const homepageReducers = createReducer(
@@ -38,6 +40,14 @@ export const homepageReducers = createReducer(
     (_state, { selectedMealNationality }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
       tempObject['selectedHomepageMealNationality'] = selectedMealNationality;
+      return tempObject;
+    }
+  ),
+  on(
+    HomepageActions.updateHomepagepopularbuttonclicked,
+    (_state, { homepagePopularButtonClicked }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['homepagePopularButtonClicked'] = homepagePopularButtonClicked;
       return tempObject;
     }
   )

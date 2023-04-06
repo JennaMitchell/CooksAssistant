@@ -63,6 +63,9 @@ export class RecipeCreatorFunctions {
       case 'description':
         copyOfLocalRecipeData.description = elementTextValue;
         break;
+      case 'servings':
+        copyOfLocalRecipeData.servings = elementTextValue;
+        break;
 
       default:
         break;
@@ -116,18 +119,6 @@ export class RecipeCreatorFunctions {
 
     return templateDataCopy;
   }
-  textHeightSizer(element: HTMLTextAreaElement) {
-    element.style.height = element.scrollHeight + 'px';
-    element.style.overflowY = 'hidden';
-  }
-
-  textAreaInputHandler(targetElement: HTMLTextAreaElement) {
-    targetElement.style.height = '0';
-    targetElement.style.height = targetElement.scrollHeight + 'px';
-    targetElement.style.resize = 'none';
-
-    this.textHeightSizer(targetElement);
-  }
 
   addTextFieldButtonHandler(
     templateData: RecipeTemplateUserDataInterface,
@@ -141,7 +132,7 @@ export class RecipeCreatorFunctions {
     switch (type) {
       case 'ingredients':
         tempList = tempObject.ingredientsList;
-        tempList.push('New Ingredient');
+        tempList.push('');
         copyOfIdsArray.push(
           `recipe-template-one-ingredients-textarea-${copyOfIdsArray.length}`
         );
@@ -220,27 +211,82 @@ export class RecipeCreatorFunctions {
       }
 
       if (textAreaContainerIdType.length !== 0) {
-        // Removing the text Area from the entered data array
-        const copyOfTemplateDataIngredientsList = JSON.parse(
-          JSON.stringify(templateDataCopy.ingredientsList)
-        );
+        switch (textAreaContainerIdType) {
+          case 'ingredients':
+            // Removing the text Area from the entered data array
 
-        copyOfTemplateDataIngredientsList.splice(textAreaIndexNumber, 1);
+            const copyOfTemplateDataIngredientsList = JSON.parse(
+              JSON.stringify(templateDataCopy.ingredientsList)
+            );
 
-        // Updating the text area  data array
-        templateDataCopy.ingredientsList = copyOfTemplateDataIngredientsList;
+            copyOfTemplateDataIngredientsList.splice(textAreaIndexNumber, 1);
 
-        // updating the id array with the new relevant ids
+            // Updating the text area  data array
 
-        const prefixIdString =
-          textAreaContainersIdsObject[textAreaContainerIdType];
+            templateDataCopy.ingredientsList =
+              copyOfTemplateDataIngredientsList;
+            // updating the id array with the new relevant ids
 
-        for (
-          let indexOfNewIds = 0;
-          indexOfNewIds < copyOfTemplateDataIngredientsList.length;
-          indexOfNewIds++
-        ) {
-          updatedIdsArray[indexOfNewIds] = prefixIdString + indexOfNewIds;
+            const tempPrefixIdString =
+              textAreaContainersIdsObject[textAreaContainerIdType];
+
+            for (
+              let indexOfNewIds = 0;
+              indexOfNewIds < copyOfTemplateDataIngredientsList.length;
+              indexOfNewIds++
+            ) {
+              updatedIdsArray[indexOfNewIds] =
+                tempPrefixIdString + indexOfNewIds;
+            }
+            break;
+          case 'directions':
+            // Removing the text Area from the entered data array
+            const copyOfTemplateDataDirectionsList = JSON.parse(
+              JSON.stringify(templateDataCopy.directionsList)
+            );
+            copyOfTemplateDataDirectionsList.splice(textAreaIndexNumber, 1);
+            // Updating the text area  data array
+            templateDataCopy.directionsList = copyOfTemplateDataDirectionsList;
+            // updating the id array with the new relevant ids
+            const prefixIdString =
+              textAreaContainersIdsObject[textAreaContainerIdType];
+
+            for (
+              let indexOfNewIds = 0;
+              indexOfNewIds < copyOfTemplateDataDirectionsList.length;
+              indexOfNewIds++
+            ) {
+              updatedIdsArray[indexOfNewIds] = prefixIdString + indexOfNewIds;
+            }
+            break;
+          case 'notes':
+            // Removing the text Area from the entered data array
+
+            const copyOfTemplateDataNotesList = JSON.parse(
+              JSON.stringify(templateDataCopy.notes)
+            );
+
+            copyOfTemplateDataNotesList.splice(textAreaIndexNumber, 1);
+
+            // Updating the text area  data array
+
+            templateDataCopy.notes = copyOfTemplateDataNotesList;
+            // updating the id array with the new relevant ids
+
+            const notesPrefixIdString =
+              textAreaContainersIdsObject[textAreaContainerIdType];
+
+            for (
+              let indexOfNewIds = 0;
+              indexOfNewIds < copyOfTemplateDataNotesList.length;
+              indexOfNewIds++
+            ) {
+              updatedIdsArray[indexOfNewIds] =
+                notesPrefixIdString + indexOfNewIds;
+            }
+            break;
+          default:
+            break;
         }
       }
     }
@@ -254,8 +300,13 @@ export class RecipeCreatorFunctions {
       indexOfTextArea < textAreas.length;
       indexOfTextArea++
     ) {
-      this.textHeightSizer(textAreas[indexOfTextArea]);
-      this.textAreaInputHandler(textAreas[indexOfTextArea]);
+      const targetElement = textAreas[indexOfTextArea] as HTMLTextAreaElement;
+
+      targetElement.style.height = '0';
+      targetElement.style.height = targetElement.scrollHeight + 'px';
+      targetElement.style.resize = 'none';
+      targetElement.style.overflowY = 'hidden';
+      targetElement.rows = 1;
     }
   }
 }

@@ -23,9 +23,10 @@
     <homepage-social-media-section></homepage-social-media-section>
     <homepage-footer></homepage-footer>
   </div>
-  <login-popup *ngIf="loginPopupActive"></login-popup>
-  <signup-popup *ngIf="signupPopupActive"></signup-popup>
   <error-popup *ngIf="errorPopupActive"></error-popup>
   <success-popup *ngIf="successPopupActive"></success-popup>
-  <search-popup></search-popup>
+  <search-popup *ngIf="searchPoupActive"></search-popup>
+  <homepage-category-popup
+    *ngIf="homepageCategoryPopupActive"
+  ></homepage-category-popup>
 </div>

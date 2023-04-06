@@ -23,21 +23,25 @@
     <div class="recipe-template-two-title-container">
       <textarea
         class="recipe-template-two-title"
-        (change)="textAreaInputHandler($event, 'title')"
-        >{{ templateData.title }}</textarea
-      >
+        (keyup)="textAreaInputHandler($event, 'title')"
+        placeholder="Enter a Title"
+      ></textarea>
       <textarea
         class="recipe-template-two-quote"
-        (change)="textAreaInputHandler($event, 'quote')"
-        >{{ templateData.quote }}</textarea
-      >
+        (keyup)="textAreaInputHandler($event, 'quote')"
+        placeholder="Enter a Quote"
+      ></textarea>
     </div>
 
     <img
       class="recipe-template-two-food-image"
-      [alt]="dishImagesData[templateData.selectedRecipeDishImageIndex].altText"
+      [alt]="
+        dishImagesData[userEnteredTemplateData.selectedRecipeDishImageIndex]
+          .altText
+      "
       [src]="
-        dishImagesData[templateData.selectedRecipeDishImageIndex].imageLocation
+        dishImagesData[userEnteredTemplateData.selectedRecipeDishImageIndex]
+          .imageLocation
       "
     />
   </div>
@@ -121,15 +125,20 @@
       <div
         class="recipe-template-two-info-text-area-container"
         *ngFor="
-          let ingredientsText of templateData.ingredientsList;
+          let ingredientsText of blankTemplateData.ingredientsList;
           let ingredientIndex = index
         "
         id="{{ ingredientListIds[ingredientIndex] }}"
       >
         <textarea
           class="recipe-template-two-text-area"
-          (change)="textAreaInputHandler($event, 'ingredient')"
-          >{{ ingredientsText }}</textarea
+          (keyup)="addTextAreaHandler('ingredient')"
+          placeholder="Please enter an ingredient"
+          >{{
+            listElementDefaultValuesWhenNewItemAddedArray.ingredients[
+              ingredientIndex
+            ]
+          }}</textarea
         >
 
         <svg
@@ -139,7 +148,7 @@
           stroke-width="1.5"
           stroke="currentColor"
           class="w-6 h-6 recipe-template-two-text-area-delete-icon"
-          (click)="deleteTextAreaHandler($event)"
+          (click)="deleteTextAreaHandler($event, 'ingredients')"
         >
           <path
             stroke-linecap="round"
@@ -175,15 +184,20 @@
       <div
         class="recipe-template-two-info-text-area-container"
         *ngFor="
-          let directionsText of templateData.directionsList;
+          let directionsText of blankTemplateData.directionsList;
           let directionIndex = index
         "
         id="{{ directionsListIds[directionIndex] }}"
       >
         <textarea
           class="recipe-template-two-text-area recipe-template-two-directions-text-area"
-          (change)="textAreaInputHandler($event, 'direction')"
-          >{{ directionsText }}</textarea
+          (keyup)="textAreaInputHandler($event, 'direction')"
+          placeholder="Please enter a direction"
+          >{{
+            listElementDefaultValuesWhenNewItemAddedArray.ingredients[
+              directionIndex
+            ]
+          }}</textarea
         >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +206,7 @@
           stroke-width="1.5"
           stroke="currentColor"
           class="w-6 h-6 recipe-template-two-text-area-delete-icon"
-          (click)="deleteTextAreaHandler($event)"
+          (click)="deleteTextAreaHandler($event, 'directions')"
         >
           <path
             stroke-linecap="round"

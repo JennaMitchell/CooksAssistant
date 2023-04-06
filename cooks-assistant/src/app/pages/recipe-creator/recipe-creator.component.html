@@ -89,7 +89,7 @@
       />
       <img
         class="recipe-creator-user-button-icon"
-        src="../../../assets/images/icons/recipe-creator/icons/recipe-cards/recipe-cards.png"
+        src="../../../assets/images/icons/recipe-creator/recipe-cards/recipe-cards.png"
         *ngIf="recipeCardHover"
       />
     </button>
@@ -111,8 +111,6 @@
     *ngIf="changeRecipeTemplatePopupActive"
   ></template-selector-popup>
   <error-popup *ngIf="errorPopupActive"></error-popup>
-  <login-popup *ngIf="loginPopupActive"></login-popup>
-  <signup-popup *ngIf="signupPopupActive"></signup-popup>
   <tags-selector-popup *ngIf="tagsPopupActive"></tags-selector-popup>
   <dish-image-changer-popup
     *ngIf="recipeChangeImagePopupActive"

@@ -23,6 +23,11 @@ export interface PopupStateInterface {
   successPopupText: string;
   searchPopupActive: boolean;
   searchPopupInputText: string;
+  homepageCategoryPopupActive: boolean;
+  homepageCategoryPopupSelectedCategory: string;
+  recipeBrowserSelectedLessThanRating: number;
+  recipeBrowserSelectedGreaterThanRating: number;
+  recipeBrowserGetAllRatings: boolean;
 }
 
 export const initialPopupState: PopupStateInterface = {
@@ -39,6 +44,11 @@ export const initialPopupState: PopupStateInterface = {
   successPopupText: '',
   searchPopupActive: false,
   searchPopupInputText: '',
+  homepageCategoryPopupActive: false,
+  homepageCategoryPopupSelectedCategory: '',
+  recipeBrowserSelectedLessThanRating: -1,
+  recipeBrowserSelectedGreaterThanRating: -1,
+  recipeBrowserGetAllRatings: false,
 };
 
 export const popupReducers = createReducer(
@@ -114,5 +124,63 @@ export const popupReducers = createReducer(
     const tempObject = JSON.parse(JSON.stringify(_state));
     tempObject['successPopupText'] = successPopupText;
     return tempObject;
-  })
+  }),
+  on(PopupActions.updateSearchpopupactive, (_state, { searchPopupActive }) => {
+    const tempObject = JSON.parse(JSON.stringify(_state));
+    tempObject['searchPopupActive'] = searchPopupActive;
+    return tempObject;
+  }),
+  on(
+    PopupActions.updateSearchpopupinputtext,
+    (_state, { searchPopupInputText }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['searchPopupInputText'] = searchPopupInputText;
+      return tempObject;
+    }
+  ),
+  on(
+    PopupActions.updateHomepagecategorypopupactive,
+    (_state, { homepageCategoryPopupActive }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['homepageCategoryPopupActive'] = homepageCategoryPopupActive;
+      return tempObject;
+    }
+  ),
+  on(
+    PopupActions.updateHomepagecategorypopupselectedcategory,
+    (_state, { homepageCategoryPopupSelectedCategory }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['homepageCategoryPopupSelectedCategory'] =
+        homepageCategoryPopupSelectedCategory;
+      return tempObject;
+    }
+  ),
+  on(
+    PopupActions.updateRecipebrowserselectedlessthanrating,
+    (_state, { recipeBrowserSelectedLessThanRating }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['recipeBrowserSelectedLessThanRating'] =
+        recipeBrowserSelectedLessThanRating;
+      return tempObject;
+    }
+  ),
+
+  on(
+    PopupActions.updateRecipebrowserselectedgreaterthanrating,
+    (_state, { recipeBrowserSelectedGreaterThanRating }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['recipeBrowserSelectedGreaterThanRating'] =
+        recipeBrowserSelectedGreaterThanRating;
+      return tempObject;
+    }
+  ),
+
+  on(
+    PopupActions.updateRecipebrowsergetallratings,
+    (_state, { recipeBrowserGetAllRatings }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['recipeBrowserGetAllRatings'] = recipeBrowserGetAllRatings;
+      return tempObject;
+    }
+  )
 );

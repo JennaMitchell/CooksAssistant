@@ -80,3 +80,12 @@
   background-color: var(--main800);
   color: white;
 }
+.recipe-browser-no-data-found {
+  color: black;
+  padding: 0px;
+  margin: 0px;
+  font-size: var(--r20);
+  font-family: var(--google-font);
+  justify-self: flex-start;
+  align-self: flex-start;
+}

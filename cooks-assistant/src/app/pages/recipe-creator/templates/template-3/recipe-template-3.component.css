@@ -147,7 +147,7 @@
 }
 .recipe-template-three-quick-info-text-area {
   min-width: 50px;
-  width: 60px;
+  width: 80px;
   max-width: max-content;
   font-family: var(--recipe-template-three-font);
   font-size: var(--r16);

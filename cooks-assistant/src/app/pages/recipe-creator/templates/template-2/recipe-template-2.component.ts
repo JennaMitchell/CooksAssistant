@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import {
+  RecipeCreatorFunctions,
+  ReturnedCreatorRecipeDataAndIdsInterface,
+} from '../../../../utilities/recipe-creator-functions/recipe-creator-function.service';
+import { changeRecipeTemplatePopupActiveSelector } from '../../../../../../libs/store/popups/popup-selectors';
 import { RecipeCreatorActions } from 'libs/store/recipe-creator/recipe-creator-actions.actions';
 import {
   userHasEnteredDataSelector,
@@ -8,15 +13,10 @@ import {
   selectedTagsSelector,
   userSelectedRecipeDishImageIndexSelector,
 } from 'libs/store/recipe-creator/recipe-creator-selectors';
-import { changeRecipeTemplatePopupActiveSelector } from '../../../../../../libs/store/popups/popup-selectors';
-import {
-  RecipeCreatorFunctions,
-  ReturnedCreatorRecipeDataAndIdsInterface,
-} from '../../../../utilities/recipe-creator-functions/recipe-creator-function.service';
 import { PopupActions } from 'libs/store/popups/popup-actions.actions';
-import { dishImagesData } from '../../../../constants/constants';
+import { dishImagesData } from '../../../../constants/dish-image-data';
 import { ActivatePopupService } from '../../../../utilities/activate-popup-functions/activate-popup-functions.service';
-import { Input } from '@angular/core';
+
 interface TextAreaContainersIdsObjectInterface {
   [key: string]: string;
 }
@@ -28,20 +28,27 @@ interface TextAreaContainersIdsObjectInterface {
 })
 export class RecipeTemplateTwo {
   @Input('editButtonsActive') editButtonsActive = true;
+
   constructor(
     private store: Store,
     private recipeCreatorFunctions: RecipeCreatorFunctions,
     private activatePopupService: ActivatePopupService
   ) {}
+
   dishImagesData = dishImagesData;
 
   editPhotoButtonMouseEnter = false;
+  userSelectedRecipeDishImageIndexObserver$ = this.store.select(
+    userSelectedRecipeDishImageIndexSelector
+  );
 
+  editPhotoButtonMouseEnterHandler() {
+    this.editPhotoButtonMouseEnter = !this.editPhotoButtonMouseEnter;
+  }
   selectedTagsObserver$ = this.store.select(selectedTagsSelector);
   selectedTags: string[] = [];
   selectedTagsButtonIds: string[] = [];
 
-  activeTextAreaId = '';
   changeRecipeTemplatePopupActiveSelectorObserver$ = this.store.select(
     changeRecipeTemplatePopupActiveSelector
   );
@@ -49,6 +56,7 @@ export class RecipeTemplateTwo {
     selectedRecipeTemplateUserData
   );
 
+  activeTextAreaId = '';
   userEnteredData = false;
   userHasEnteredDataSelectorObserver$ = this.store.select(
     userHasEnteredDataSelector
@@ -63,12 +71,9 @@ export class RecipeTemplateTwo {
     directionsList: [''],
     notes: [''],
     description: '',
-    selectedRecipeDishImageIndex: 2,
+    selectedRecipeDishImageIndex: 0,
   };
   userEnteredDataFromStore = false;
-  userSelectedRecipeDishImageIndexObserver$ = this.store.select(
-    userSelectedRecipeDishImageIndexSelector
-  );
 
   textAreaContainersIdsObject: TextAreaContainersIdsObjectInterface = {
     ingredients: 'recipe-template-two-ingredients-textarea-',
@@ -81,27 +86,43 @@ export class RecipeTemplateTwo {
 
   acceptedListIdTypes = ['ingredients', 'directions', 'notes'];
 
-  templateData = {
-    title: 'Savory French Toast',
-    quote: 'A gluten-free version of French Toast',
-    servings: '3',
-    prepTime: '3 MIN',
-    cookingTime: '3 MIN',
-    ingredientsList: ['300ml'],
-    directionsList: ['1. This line of text needs to break onto the next line'],
-    notes: ['- Add notes to your recipe to add any addition details'],
+  listElementDefaultValuesWhenNewItemAddedArray = {
+    ingredients: [''],
+    directions: [''],
+    notes: [''],
+  };
+
+  userEnteredTemplateData = {
+    title: '',
+    quote: '',
+    servings: '',
+    prepTime: '',
+    cookingTime: '',
+    ingredientsList: [''],
+    directionsList: [''],
+    notes: [''],
+    description: '',
+    selectedRecipeDishImageIndex: 2,
+  };
+
+  blankTemplateData = {
+    title: '',
+    quote: '',
+    servings: '',
+    prepTime: '',
+    cookingTime: '',
+    ingredientsList: [''],
+    directionsList: [''],
+    notes: [''],
     description: '',
     selectedRecipeDishImageIndex: 2,
   };
 
   editTagsButtonMouseEnter = false;
-  editPhotoButtonMouseEnterHandler() {
-    this.editPhotoButtonMouseEnter = !this.editPhotoButtonMouseEnter;
-  }
-
   dishImageEditButtonHandler() {
     this.activatePopupService.activateRecipeCreatorDishImagePopup();
   }
+
   deleteTagButtonHandler(event: MouseEvent) {
     let targetElement = event.target as HTMLElement;
     let targetId = targetElement.id;
@@ -137,26 +158,41 @@ export class RecipeTemplateTwo {
   }
 
   textAreaInputHandler(event: Event, textAreaType: string) {
-    const targetElement = event.target as HTMLTextAreaElement;
-    this.recipeCreatorFunctions.textAreaInputHandler(targetElement);
-    this.templateData = this.recipeCreatorFunctions.updateLocalRecipeData(
-      this.templateData,
-      textAreaType,
-      event
-    );
     this.userEnteredData = true;
+    this.userEnteredTemplateData =
+      this.recipeCreatorFunctions.updateLocalRecipeData(
+        this.userEnteredTemplateData,
+        textAreaType,
+        event
+      );
   }
 
-  deleteTextAreaHandler(event: MouseEvent) {
+  deleteTextAreaHandler(event: MouseEvent, type: string) {
     let retrievedData: ReturnedCreatorRecipeDataAndIdsInterface;
+
     retrievedData = this.recipeCreatorFunctions.deleteEntryButtonHandler(
       event,
       this.acceptedListIdTypes,
-      this.templateData,
+      this.userEnteredTemplateData,
       this.textAreaContainersIdsObject
     );
-    this.templateData = retrievedData.templateData;
-    this.ingredientListIds = retrievedData.idsArray;
+    this.userEnteredTemplateData = retrievedData.templateData;
+    this.blankTemplateData = retrievedData.templateData;
+
+    switch (type) {
+      case 'ingredients':
+        this.ingredientListIds = retrievedData.idsArray;
+        break;
+      case 'directions':
+        this.directionsListIds = retrievedData.idsArray;
+        break;
+      case 'notes':
+        this.ingredientListIds = retrievedData.idsArray;
+        break;
+
+      default:
+        break;
+    }
   }
 
   addTextAreaHandler(type: string) {
@@ -165,32 +201,40 @@ export class RecipeTemplateTwo {
     switch (type) {
       case 'ingredients':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
-          this.templateData,
+          this.userEnteredTemplateData,
           this.ingredientListIds,
           type
         );
-        this.templateData = retrievedData.templateData;
+        this.userEnteredTemplateData = retrievedData.templateData;
+        this.blankTemplateData = retrievedData.templateData;
         this.ingredientListIds = retrievedData.idsArray;
-
+        this.listElementDefaultValuesWhenNewItemAddedArray.ingredients =
+          retrievedData.templateData.ingredientsList;
         break;
       case 'directions':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
-          this.templateData,
+          this.userEnteredTemplateData,
           this.directionsListIds,
           type
         );
-        this.templateData = retrievedData.templateData;
+        this.userEnteredTemplateData = retrievedData.templateData;
+        this.blankTemplateData = retrievedData.templateData;
         this.directionsListIds = retrievedData.idsArray;
+        this.listElementDefaultValuesWhenNewItemAddedArray.directions =
+          retrievedData.templateData.directionsList;
 
         break;
       case 'notes':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
-          this.templateData,
+          this.userEnteredTemplateData,
           this.notesListIds,
           type
         );
-        this.templateData = retrievedData.templateData;
+        this.userEnteredTemplateData = retrievedData.templateData;
+        this.blankTemplateData = retrievedData.templateData;
         this.notesListIds = retrievedData.idsArray;
+        this.listElementDefaultValuesWhenNewItemAddedArray.notes =
+          retrievedData.templateData.notes;
 
         break;
       default:
@@ -203,7 +247,7 @@ export class RecipeTemplateTwo {
       if (value) {
         this.store.dispatch(
           RecipeCreatorActions.updateRecipetemplateuserdata({
-            recipeTemplateUserData: this.templateData,
+            recipeTemplateUserData: this.userEnteredTemplateData,
           })
         );
       }
@@ -215,7 +259,9 @@ export class RecipeTemplateTwo {
     this.userHasEnteredDataSelectorObserver$.subscribe((value) => {
       this.userEnteredDataFromStore = value;
       if (value) {
-        this.templateData = this.selectedRecipeTemplateUserDataFromStore;
+        this.userEnteredTemplateData =
+          this.selectedRecipeTemplateUserDataFromStore;
+        this.blankTemplateData = this.selectedRecipeTemplateUserDataFromStore;
       }
     });
 
@@ -224,19 +270,20 @@ export class RecipeTemplateTwo {
         return tag.charAt(0).toUpperCase() + tag.slice(1);
       });
       this.selectedTagsButtonIds = value.map((tag: string) => {
-        return 'recipe-template-1-' + tag + '-button';
+        return 'recipe-template-two-' + tag + '-button';
       });
     });
     this.userSelectedRecipeDishImageIndexObserver$.subscribe(
       (value: number) => {
         if (value !== -1) {
-          this.templateData.selectedRecipeDishImageIndex = value;
+          this.userEnteredTemplateData.selectedRecipeDishImageIndex = value;
         }
       }
     );
+    this.recipeCreatorFunctions.textAreaResizeAllFunction();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.recipeCreatorFunctions.textAreaResizeAllFunction();
   }
 }

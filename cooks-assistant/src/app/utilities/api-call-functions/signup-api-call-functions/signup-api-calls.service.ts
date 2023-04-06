@@ -1,5 +1,11 @@
 import { databaseUrl } from 'src/app/constants/constants';
+import { ApiErrorService } from '../api-error-handler/api-error-handler.service';
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root',
+})
 export class SignupApiCallsService {
+  constructor(private apiErrorHandlerService: ApiErrorService) {}
   signupCall = async (signupData: any) => {
     try {
       const fetchedResponse = await fetch(`${databaseUrl}/auth/signup`, {
@@ -10,11 +16,14 @@ export class SignupApiCallsService {
         body: JSON.stringify(signupData),
       });
 
-      if (fetchedResponse.status === 401) {
-        throw new Error('Server Error');
-      }
+      const jsonedResponse = await fetchedResponse.json();
+      console.log(jsonedResponse);
+      this.apiErrorHandlerService.apiCallErrorHandler(
+        fetchedResponse.status,
+        jsonedResponse
+      );
 
-      return { response: fetchedResponse, error: '' };
+      return jsonedResponse;
     } catch (err) {
       let message;
       if (err instanceof Error) message = err.message;

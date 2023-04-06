@@ -46,7 +46,6 @@ exports.signup = async (req, res, next) => {
       status: 201,
     });
   } catch (err) {
-    console.log(err);
     return res.status(401).json({
       message: `Server Error!`,
       error: [{ error: "Server Error" }],
@@ -102,7 +101,6 @@ exports.login = async (req, res, next) => {
       username: loadedUser.username,
     });
   } catch (err) {
-    console.log(err);
     return res.status(401).json({
       message: `Server Error!`,
       error: [{ error: "Server Error" }],

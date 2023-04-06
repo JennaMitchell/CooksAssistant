@@ -74,6 +74,7 @@ export const recipeCreatorReducers = createReducer(
     RecipeCreatorActions.updateSelectedtemplateindex,
     (_state, { selectedTemplateIndex }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
+      console.log(selectedTemplateIndex);
       tempObject['selectedTemplateIndex'] = selectedTemplateIndex;
       return tempObject;
     }

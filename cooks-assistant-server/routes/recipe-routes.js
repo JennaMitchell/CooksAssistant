@@ -25,4 +25,12 @@ router.get(
 );
 
 router.get("/get-recipe-by-id/:sentId", recipeController.getRecipeDataById);
+router.get(
+  "/get-recipe-by-title/:title",
+  recipeController.getRecipeDataByTitle
+);
+router.get(
+  "/get-recipe-by-rating/:greaterThan&&:lessThan",
+  recipeController.getRecipeDataByRating
+);
 module.exports = router;

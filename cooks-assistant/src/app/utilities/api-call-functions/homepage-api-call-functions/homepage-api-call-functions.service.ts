@@ -1,6 +1,12 @@
 import { databaseUrl } from 'src/app/constants/constants';
+import { Injectable } from '@angular/core';
+import { ApiErrorService } from '../api-error-handler/api-error-handler.service';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class HomepageApiCallServiceFunctions {
+  constructor(private apiErrorHandlerService: ApiErrorService) {}
   getAllRecipeData = async () => {
     try {
       const fetchedResponse = await fetch(
@@ -9,7 +15,12 @@ export class HomepageApiCallServiceFunctions {
           method: 'GET',
         }
       );
-      console.log(fetchedResponse);
+
+      this.apiErrorHandlerService.apiCallErrorHandler(
+        fetchedResponse.status,
+        await fetchedResponse.json()
+      );
+
       return fetchedResponse;
     } catch (err) {
       let message;
@@ -28,7 +39,11 @@ export class HomepageApiCallServiceFunctions {
         },
         body: JSON.stringify(recipeData),
       });
-      console.log(fetchedResponse);
+      this.apiErrorHandlerService.apiCallErrorHandler(
+        fetchedResponse.status,
+        await fetchedResponse.json()
+      );
+
       return fetchedResponse;
     } catch (err) {
       let message;

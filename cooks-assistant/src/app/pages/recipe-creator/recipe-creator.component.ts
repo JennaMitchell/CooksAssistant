@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   errorPopupActiveSelector,
-  loginPopupActiveSelector,
   recipeCreatorBackgroundPopupActiveSelector,
-  signupPopupActiveSelector,
   recipeTagsPopupActiveSelector,
   recipeChangeImagePopupActiveSelector,
 } from 'libs/store/popups/popup-selectors';
@@ -44,13 +42,6 @@ export class RecipeCreatorComponent {
   backgroundChangerActiveValue = false;
   loggedInObserver$ = this.store.select(loggedInSelector);
   loggedIn = false;
-
-  loginPopupActiveObserver$ = this.store.select(loginPopupActiveSelector);
-
-  signupPopupActiveObserver$ = this.store.select(signupPopupActiveSelector);
-
-  loginPopupActive = false;
-  signupPopupActive = false;
 
   selectedTemplateIndexSelectorObserver$ = this.store.select(
     selectedTemplateIndexSelector
@@ -133,13 +124,6 @@ export class RecipeCreatorComponent {
     });
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;
-    });
-
-    this.loginPopupActiveObserver$.subscribe((value) => {
-      this.loginPopupActive = value;
-    });
-    this.signupPopupActiveObserver$.subscribe((value) => {
-      this.signupPopupActive = value;
     });
     this.tagsPopupActiveObserver$.subscribe((value) => {
       this.tagsPopupActive = value;

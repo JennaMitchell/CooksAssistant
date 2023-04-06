@@ -1,8 +1,7 @@
 <div class="recipe-viewer-backdrop">
   <logged-in-nav-bar *ngIf="loggedIn"></logged-in-nav-bar>
   <logged-out-nav-bar *ngIf="!loggedIn"></logged-out-nav-bar>
-  <login-popup *ngIf="loginPopupActive"></login-popup>
-  <signup-popup *ngIf="signupPopupActive"></signup-popup>
+
   <error-popup *ngIf="errorPopupActive"></error-popup>
 
   <div class="recipe-viewer-main-container">
