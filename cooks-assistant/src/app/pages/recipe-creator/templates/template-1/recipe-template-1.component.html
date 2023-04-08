@@ -164,22 +164,19 @@
         </button>
         <h6 class="recipe-template-one-ingredients-title">Ingredients</h6>
         <div
-          class="recipe-template-one-text-area-container"
+          class="recipe-template-one-text-area-container recipe-template-one-text-area-container-ingredients"
           *ngFor="
-            let ingredientText of blankTemplateData.ingredientsList;
+            let ingredientText of listElementDefaultValuesWhenNewItemAddedArray.ingredients;
             let ingredientIndex = index
           "
           id="{{ ingredientListIds[ingredientIndex] }}"
         >
+          <p class="recipe-template-one-text-area-index">-</p>
           <textarea
             class="recipe-template-one-text-area recipe-template-one-ingredient-input"
             (keyup)="textAreaInputHandler($event, 'ingredient')"
             placeholder="Enter Ingredient"
-            >{{
-              listElementDefaultValuesWhenNewItemAddedArray.ingredients[
-                ingredientIndex
-              ]
-            }}</textarea
+            >{{ ingredientText }}</textarea
           >
 
           <svg
@@ -288,6 +285,7 @@
         *ngFor="let noteText of blankTemplateData.notes; let noteIndex = index"
         id="{{ notesListIds[noteIndex] }}"
       >
+        <p class="recipe-template-one-text-area-index">-</p>
         <textarea
           class="recipe-template-one-notes-area"
           (keyup)="textAreaInputHandler($event, 'note')"

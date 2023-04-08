@@ -70,13 +70,14 @@
       <div class="recipe-template-one-ingredients-container">
         <h6 class="recipe-template-one-ingredients-title">Ingredients</h6>
         <div
-          class="recipe-template-one-text-area-container"
+          class="recipe-template-one-text-area-container recipe-template-viewer-text-area"
           *ngFor="
             let ingredientText of recipeData.ingredientsList;
             let ingredientIndex = index
           "
         >
-          <!-- id="{{ ingredientListIds[ingredientIndex] }}" -->
+          <p class="recipe-template-one-text-area-index">-</p>
+
           <p
             class="recipe-template-one-text-area recipe-template-one-ingredient-input"
           >
@@ -87,12 +88,15 @@
       <div class="recipe-template-one-direction-container">
         <h6 class="recipe-template-one-ingredients-title">Directions</h6>
         <div
-          class="recipe-template-one-text-area-container"
+          class="recipe-template-one-text-area-container recipe-template-viewer-text-area"
           *ngFor="
             let directionsText of recipeData.directionsList;
             let directionsIndex = index
           "
         >
+          <p class="recipe-template-one-text-area-index">
+            {{ directionsIndex + 1 }}.
+          </p>
           <!--  id="{{ directionsListIds[directionsIndex] }}" -->
           <p
             class="recipe-template-one-direction-input recipe-template-one-text-area"
@@ -106,10 +110,10 @@
       <h6 class="recipe-template-one-notes-title">Notes</h6>
 
       <div
-        class="recipe-template-one-text-area-container"
+        class="recipe-template-one-text-area-container recipe-template-viewer-text-area"
         *ngFor="let noteText of recipeData.notes; let noteIndex = index"
       >
-        <!-- id="{{ notesListIds[noteIndex] }}" -->
+        <p class="recipe-template-one-text-area-index">-</p>
         <p class="recipe-template-one-notes-area">{{ noteText }}</p>
       </div>
     </div>

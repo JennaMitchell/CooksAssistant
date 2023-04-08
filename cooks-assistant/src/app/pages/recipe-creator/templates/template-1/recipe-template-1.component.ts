@@ -165,6 +165,29 @@ export class RecipeTemplateOne {
         textAreaType,
         event
       );
+    console.log(168);
+    console.log(this.userEnteredTemplateData);
+  }
+
+  textAreaValueResetHandler() {
+    const ingriedentTextAreaElements = document.getElementsByClassName(
+      'recipe-template-one-ingredient-input'
+    );
+
+    for (
+      let indexOfIngriedentTextAreaElements = 0;
+      indexOfIngriedentTextAreaElements < ingriedentTextAreaElements.length;
+      indexOfIngriedentTextAreaElements++
+    ) {
+      const x = ingriedentTextAreaElements[
+        indexOfIngriedentTextAreaElements
+      ] as HTMLTextAreaElement;
+      console.log(x);
+      x.value =
+        this.userEnteredTemplateData.ingredientsList[
+          indexOfIngriedentTextAreaElements
+        ];
+    }
   }
 
   deleteTextAreaHandler(event: MouseEvent, type: string) {
@@ -208,8 +231,9 @@ export class RecipeTemplateOne {
         this.userEnteredTemplateData = retrievedData.templateData;
         this.blankTemplateData = retrievedData.templateData;
         this.ingredientListIds = retrievedData.idsArray;
+
         this.listElementDefaultValuesWhenNewItemAddedArray.ingredients =
-          retrievedData.templateData.ingredientsList;
+          this.userEnteredTemplateData.ingredientsList;
         break;
       case 'directions':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
@@ -217,12 +241,13 @@ export class RecipeTemplateOne {
           this.directionsListIds,
           type
         );
+
         this.userEnteredTemplateData = retrievedData.templateData;
         this.blankTemplateData = retrievedData.templateData;
         this.directionsListIds = retrievedData.idsArray;
         this.listElementDefaultValuesWhenNewItemAddedArray.directions =
           retrievedData.templateData.directionsList;
-
+        console.log(retrievedData.templateData);
         break;
       case 'notes':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
@@ -240,6 +265,7 @@ export class RecipeTemplateOne {
       default:
         break;
     }
+    this.textAreaValueResetHandler();
   }
 
   ngOnInit() {
@@ -285,5 +311,7 @@ export class RecipeTemplateOne {
 
   ngAfterViewChecked() {
     this.recipeCreatorFunctions.textAreaResizeAllFunction();
+    this.textAreaValueResetHandler();
+    /// add var to set ingreiednt or other reset based on key event trigger
   }
 }

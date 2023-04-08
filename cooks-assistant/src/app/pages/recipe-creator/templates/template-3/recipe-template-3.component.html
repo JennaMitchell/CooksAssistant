@@ -30,6 +30,7 @@
         "
         id="{{ ingredientListIds[ingredientsIndex] }}"
       >
+        <p class="recipe-template-three-text-area-index">-</p>
         <textarea
           class="recipe-template-three-text-area recipe-template-three-ingredients-text-area"
           (keyup)="textAreaInputHandler($event, 'ingredient')"
@@ -87,6 +88,9 @@
         "
         id="{{ directionsListIds[directionsIndex] }}"
       >
+        <p class="recipe-template-three-text-area-index">
+          {{ directionsIndex + 1 }}.
+        </p>
         <textarea
           class="recipe-template-three-text-area recipe-template-three-directions-text-area"
           (keyup)="textAreaInputHandler($event, 'direction')"
@@ -233,9 +237,8 @@
     <textarea
       class="recipe-template-three-description-text-area"
       (keyup)="textAreaInputHandler($event, 'description')"
-    >
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum eveniet sed omnis praesentium rem eligendi animi cupiditate repellat, illo nemo, quisquam laudantium, ipsa ipsam commodi voluptatibus quia ut numquam odio!</textarea
-    >
+      placeholder="Enter a Description"
+    ></textarea>
 
     <div class="recipe-template-three-notes-container">
       <p class="recipe-template-three-notes-title">Notes</p>
@@ -248,6 +251,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum eveniet sed omni
         "
         id="{{ notesListIds[notesIndex] }}"
       >
+        <p class="recipe-template-three-text-area-index">-</p>
         <textarea
           class="recipe-template-three-text-area recipe-template-three-notes-text-area"
           (keyup)="textAreaInputHandler($event, 'notes')"

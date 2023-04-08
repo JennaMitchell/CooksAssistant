@@ -24,8 +24,9 @@ export class RecipeCreatorFunctions {
 
     let ingredientIndex = -1;
     let splitId: string[] = targetId.split('-');
-    if (splitId.length === 0) {
+    if (targetId.length === 0) {
       const parentElement = targetElement.parentElement as HTMLElement;
+      console.log(parentElement);
       targetId = targetElement.id;
       splitId = parentElement.id.split('-');
     }

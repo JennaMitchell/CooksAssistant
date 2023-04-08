@@ -131,5 +131,11 @@ export class RecipeCreatorComponent {
     this.recipeChangeImagePopupActiveObserver$.subscribe((value: boolean) => {
       this.recipeChangeImagePopupActive = value;
     });
+
+    const backDropElement = document.getElementsByClassName(
+      'recipe-creator-backdrop'
+    )[0] as HTMLDivElement;
+    const parentBackDropElement = backDropElement.parentElement as HTMLElement;
+    parentBackDropElement.style.overflow = 'hidden';
   }
 }

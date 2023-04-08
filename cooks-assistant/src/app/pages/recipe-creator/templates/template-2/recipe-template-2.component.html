@@ -123,13 +123,14 @@
       </button>
 
       <div
-        class="recipe-template-two-info-text-area-container"
+        class="recipe-template-two-info-text-area-container recipe-template-two-info-text-area-container-ingredients"
         *ngFor="
           let ingredientsText of blankTemplateData.ingredientsList;
           let ingredientIndex = index
         "
         id="{{ ingredientListIds[ingredientIndex] }}"
       >
+        <p class="recipe-template-two-text-area-index">-</p>
         <textarea
           class="recipe-template-two-text-area"
           (keyup)="addTextAreaHandler('ingredient')"
@@ -189,6 +190,9 @@
         "
         id="{{ directionsListIds[directionIndex] }}"
       >
+        <p class="recipe-template-two-text-area-index">
+          {{ directionIndex + 1 }}.
+        </p>
         <textarea
           class="recipe-template-two-text-area recipe-template-two-directions-text-area"
           (keyup)="textAreaInputHandler($event, 'direction')"

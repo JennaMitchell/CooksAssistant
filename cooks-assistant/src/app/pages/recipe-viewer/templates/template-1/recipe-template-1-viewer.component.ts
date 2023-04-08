@@ -13,6 +13,7 @@ import { RecipeTemplateSavedDataInterface } from 'src/app/utilities/api-call-fun
   templateUrl: './recipe-template-1-viewer.component.html',
   styleUrls: [
     '../../../recipe-creator/templates/template-1/recipe-template-1.component.css',
+    './recipe-template-1-viewer.component.css',
   ],
   providers: [RecipeCreatorFunctions, ActivatePopupService],
 })
