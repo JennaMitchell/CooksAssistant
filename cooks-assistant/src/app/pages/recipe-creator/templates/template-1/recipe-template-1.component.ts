@@ -38,6 +38,8 @@ export class RecipeTemplateOne {
   dishImagesData = dishImagesData;
 
   editPhotoButtonMouseEnter = false;
+  addListElementType = '';
+  addListElementclassNameToRetreive = '';
   userSelectedRecipeDishImageIndexObserver$ = this.store.select(
     userSelectedRecipeDishImageIndexSelector
   );
@@ -74,12 +76,18 @@ export class RecipeTemplateOne {
     selectedRecipeDishImageIndex: 0,
   };
   userEnteredDataFromStore = false;
+  textAreaClassNamesToRetrieveObject = {
+    ingredients: 'recipe-template-one-ingredient-textarea',
+    directions: 'recipe-template-one-directions-textarea',
+    notes: 'recipe-template-one-notes-textarea',
+  };
 
   textAreaContainersIdsObject: TextAreaContainersIdsObjectInterface = {
     ingredients: 'recipe-template-one-ingredients-textarea-',
     directions: 'recipe-template-one-directions-textarea-',
     notes: 'recipe-template-one-notes-textarea-',
   };
+
   ingredientListIds = ['recipe-template-one-ingredients-textarea-0'];
   directionsListIds = ['recipe-template-one-directions-textarea-0'];
   notesListIds = ['recipe-template-one-notes-textarea-0'];
@@ -159,34 +167,30 @@ export class RecipeTemplateOne {
 
   textAreaInputHandler(event: Event, textAreaType: string) {
     this.userEnteredData = true;
+
     this.userEnteredTemplateData =
       this.recipeCreatorFunctions.updateLocalRecipeData(
         this.userEnteredTemplateData,
         textAreaType,
         event
       );
-    console.log(168);
-    console.log(this.userEnteredTemplateData);
-  }
 
-  textAreaValueResetHandler() {
-    const ingriedentTextAreaElements = document.getElementsByClassName(
-      'recipe-template-one-ingredient-input'
-    );
+    switch (textAreaType) {
+      case 'ingredient':
+        this.listElementDefaultValuesWhenNewItemAddedArray.ingredients =
+          this.userEnteredTemplateData.ingredientsList;
+        break;
+      case 'direction':
+        this.listElementDefaultValuesWhenNewItemAddedArray.directions =
+          this.userEnteredTemplateData.directionsList;
+        break;
+      case 'note':
+        this.listElementDefaultValuesWhenNewItemAddedArray.notes =
+          this.userEnteredTemplateData.notes;
+        break;
 
-    for (
-      let indexOfIngriedentTextAreaElements = 0;
-      indexOfIngriedentTextAreaElements < ingriedentTextAreaElements.length;
-      indexOfIngriedentTextAreaElements++
-    ) {
-      const x = ingriedentTextAreaElements[
-        indexOfIngriedentTextAreaElements
-      ] as HTMLTextAreaElement;
-      console.log(x);
-      x.value =
-        this.userEnteredTemplateData.ingredientsList[
-          indexOfIngriedentTextAreaElements
-        ];
+      default:
+        break;
     }
   }
 
@@ -199,6 +203,7 @@ export class RecipeTemplateOne {
       this.userEnteredTemplateData,
       this.textAreaContainersIdsObject
     );
+
     this.userEnteredTemplateData = retrievedData.templateData;
     this.blankTemplateData = retrievedData.templateData;
 
@@ -233,7 +238,15 @@ export class RecipeTemplateOne {
         this.ingredientListIds = retrievedData.idsArray;
 
         this.listElementDefaultValuesWhenNewItemAddedArray.ingredients =
-          this.userEnteredTemplateData.ingredientsList;
+          retrievedData.templateData.ingredientsList;
+
+        this.addListElementType = 'ingredients';
+        this.addListElementclassNameToRetreive =
+          this.textAreaClassNamesToRetrieveObject['ingredients'];
+        console.log(
+          this.listElementDefaultValuesWhenNewItemAddedArray.ingredients
+        );
+
         break;
       case 'directions':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
@@ -247,7 +260,14 @@ export class RecipeTemplateOne {
         this.directionsListIds = retrievedData.idsArray;
         this.listElementDefaultValuesWhenNewItemAddedArray.directions =
           retrievedData.templateData.directionsList;
-        console.log(retrievedData.templateData);
+        this.addListElementType = 'directions';
+        this.addListElementclassNameToRetreive =
+          this.textAreaClassNamesToRetrieveObject['directions'];
+
+        console.log(
+          this.listElementDefaultValuesWhenNewItemAddedArray.ingredients
+        );
+
         break;
       case 'notes':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
@@ -260,12 +280,14 @@ export class RecipeTemplateOne {
         this.notesListIds = retrievedData.idsArray;
         this.listElementDefaultValuesWhenNewItemAddedArray.notes =
           retrievedData.templateData.notes;
+        this.addListElementType = 'notes';
+        this.addListElementclassNameToRetreive =
+          this.textAreaClassNamesToRetrieveObject['notes'];
 
         break;
       default:
         break;
     }
-    this.textAreaValueResetHandler();
   }
 
   ngOnInit() {
@@ -311,7 +333,11 @@ export class RecipeTemplateOne {
 
   ngAfterViewChecked() {
     this.recipeCreatorFunctions.textAreaResizeAllFunction();
-    this.textAreaValueResetHandler();
-    /// add var to set ingreiednt or other reset based on key event trigger
+    [this.addListElementclassNameToRetreive, this.addListElementType] =
+      this.recipeCreatorFunctions.textAreaValueResetHandler(
+        this.addListElementclassNameToRetreive,
+        this.userEnteredTemplateData,
+        this.addListElementType
+      );
   }
 }

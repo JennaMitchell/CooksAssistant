@@ -43,10 +43,12 @@
 }
 .homepage-new-recipe-slideshow-slide-tracker-button:hover {
   background-color: var(--main800);
+  cursor: pointer;
 }
 .homepage-new-recipe-slideshow-slide-tracker-arrow-button:hover {
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 
 .homepage-new-recipe-slideshow-slide-tracker-dots {

@@ -5,15 +5,13 @@ import { RecipeCreatorFunctions } from '../../../../utilities/recipe-creator-fun
 import { dishImagesData } from '../../../../constants/dish-image-data';
 import { ActivatePopupService } from '../../../../utilities/activate-popup-functions/activate-popup-functions.service';
 import { RecipeTemplateSavedDataInterface } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
-// interface TextAreaContainersIdsObjectInterface {
-//   [key: string]: string;
-// }
+
 @Component({
   selector: 'recipe-template-one-viewer',
   templateUrl: './recipe-template-1-viewer.component.html',
   styleUrls: [
     '../../../recipe-creator/templates/template-1/recipe-template-1.component.css',
-    './recipe-template-1-viewer.component.css',
+    '../recipe-template-viewer-shared-css.component.css',
   ],
   providers: [RecipeCreatorFunctions, ActivatePopupService],
 })

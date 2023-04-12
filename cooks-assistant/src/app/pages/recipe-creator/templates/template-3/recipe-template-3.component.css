@@ -108,9 +108,11 @@
   top: 50%;
   transform: translateY(-50%);
 }
-.recipe-template-three-text-area-delete-icon:hover {
+.recipe-template-three-text-area-delete-icon:hover,
+.recipe-template-three-add-text-button:hover {
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 .recipe-template-three-food-image {
   width: max(100%, 100%);
@@ -190,16 +192,13 @@
   color: #333333;
   margin-bottom: 10px;
 }
-.recipe-template-three-notes-text-area {
+.recipe-template-three-notes-textarea {
   font-size: var(--r16);
   padding: 0px;
   margin: 0px;
   color: #333333;
   border: none;
   background-color: transparent;
-}
-.recipe-template-three-notes-text-area {
-  color: #333333;
   font-family: var(--recipe-template-three-font);
   text-align: left;
 }
@@ -226,10 +225,7 @@
   top: 5px;
   right: 10px;
 }
-.recipe-template-three-add-text-button:hover {
-  background-color: black;
-  color: white;
-}
+
 .recipe-template-three-tags-container {
   position: absolute;
   top: 20px;
@@ -296,6 +292,7 @@
 .recipe-template-three-delete-tag-button:hover {
   background-color: #333333;
   color: white;
+  cursor: pointer;
 }
 .recipe-template-three-closing-icon {
   width: max(100%, 100%);
@@ -336,6 +333,7 @@
 
 .recipe-template-three-edit-button:hover {
   background-color: #333333;
+  cursor: pointer;
 }
 .recipe-template-three-edit-button-icon {
   width: max(100%, 100%);

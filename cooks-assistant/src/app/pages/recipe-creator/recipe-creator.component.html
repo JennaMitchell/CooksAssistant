@@ -95,22 +95,22 @@
     </button>
 
     <recipe-template-one
-      *ngIf="selectedTemplateIndexSelector === 0"
+      *ngIf="selectedTemplateIndexSelector === 1"
       [editButtonsActive]="hideEditButtonsActive"
     ></recipe-template-one>
     <recipe-template-two
-      *ngIf="selectedTemplateIndexSelector === 1"
+      *ngIf="selectedTemplateIndexSelector === 2"
       [editButtonsActive]="hideEditButtonsActive"
     ></recipe-template-two>
     <recipe-template-three
-      *ngIf="selectedTemplateIndexSelector === 2"
+      *ngIf="selectedTemplateIndexSelector === 3"
       [editButtonsActive]="hideEditButtonsActive"
     ></recipe-template-three>
   </div>
   <template-selector-popup
     *ngIf="changeRecipeTemplatePopupActive"
   ></template-selector-popup>
-  <error-popup *ngIf="errorPopupActive"></error-popup>
+
   <tags-selector-popup *ngIf="tagsPopupActive"></tags-selector-popup>
   <dish-image-changer-popup
     *ngIf="recipeChangeImagePopupActive"

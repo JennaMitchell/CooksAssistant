@@ -26,6 +26,7 @@
 .recipe-browser-recipe-page-results-navigator-arrow-button:hover {
   background-color: var(--main600);
   color: white;
+  cursor: pointer;
 }
 
 .recipe-browser-recipe-page-results-navigator-button-icon {
@@ -55,6 +56,7 @@
 .recipe-browser-recipe-page-results-navigator-page-button:hover {
   background-color: var(--main600);
   color: white;
+  cursor: pointer;
 }
 
 .recipe-browser-recipe-page-results-navigator-page-dots {

@@ -48,6 +48,13 @@ export class RecipeTemplateTwo {
   selectedTagsObserver$ = this.store.select(selectedTagsSelector);
   selectedTags: string[] = [];
   selectedTagsButtonIds: string[] = [];
+  addListElementType = '';
+  addListElementclassNameToRetreive = '';
+  textAreaClassNamesToRetrieveObject = {
+    ingredients: 'recipe-template-two-ingredient-textarea',
+    directions: 'recipe-template-two-directions-textarea',
+    notes: 'recipe-template-two-notes-textarea',
+  };
 
   changeRecipeTemplatePopupActiveSelectorObserver$ = this.store.select(
     changeRecipeTemplatePopupActiveSelector
@@ -165,6 +172,23 @@ export class RecipeTemplateTwo {
         textAreaType,
         event
       );
+    switch (textAreaType) {
+      case 'ingredient':
+        this.listElementDefaultValuesWhenNewItemAddedArray.ingredients =
+          this.userEnteredTemplateData.ingredientsList;
+        break;
+      case 'direction':
+        this.listElementDefaultValuesWhenNewItemAddedArray.directions =
+          this.userEnteredTemplateData.directionsList;
+        break;
+      case 'note':
+        this.listElementDefaultValuesWhenNewItemAddedArray.notes =
+          this.userEnteredTemplateData.notes;
+        break;
+
+      default:
+        break;
+    }
   }
 
   deleteTextAreaHandler(event: MouseEvent, type: string) {
@@ -285,5 +309,12 @@ export class RecipeTemplateTwo {
 
   ngAfterViewChecked() {
     this.recipeCreatorFunctions.textAreaResizeAllFunction();
+
+    [this.addListElementclassNameToRetreive, this.addListElementType] =
+      this.recipeCreatorFunctions.textAreaValueResetHandler(
+        this.addListElementclassNameToRetreive,
+        this.userEnteredTemplateData,
+        this.addListElementType
+      );
   }
 }

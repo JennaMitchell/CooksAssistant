@@ -17,7 +17,7 @@ export class SignupApiCallsService {
       });
 
       const jsonedResponse = await fetchedResponse.json();
-      console.log(jsonedResponse);
+
       this.apiErrorHandlerService.apiCallErrorHandler(
         fetchedResponse.status,
         jsonedResponse

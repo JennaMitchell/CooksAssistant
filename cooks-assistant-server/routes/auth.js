@@ -1,6 +1,7 @@
 const express = require("express");
 const { body } = require("express-validator");
 const authController = require("../controllers/auth-controller");
+const isAuth = require("../middlewear/is-auth");
 const router = express.Router();
 const UserSchema = require("../models/user-schema");
 router.put(
@@ -48,5 +49,10 @@ router.post("/login", [
       );
     }),
 ]);
+router.put(
+  "/update-userRatedRecipesArray",
+  isAuth,
+  authController.updateUserRatedRecipesArray
+);
 
 module.exports = router;

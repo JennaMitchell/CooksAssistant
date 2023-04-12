@@ -34,6 +34,7 @@
 }
 .homepage-footer-company-info-link:hover {
   color: var(--main1000);
+  cursor: pointer;
 }
 .homepage-footer-company-social-media-link {
   width: calc((20 / var(--base) * 1rem));
@@ -48,4 +49,5 @@
 }
 .homepage-footer-company-social-media-link:hover {
   background-color: var(--main200);
+  cursor: pointer;
 }

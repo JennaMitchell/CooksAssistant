@@ -36,6 +36,7 @@
 .homepage-slideshow-button-right:hover {
   color: black;
   background-color: white;
+  cursor: pointer;
 }
 .homepage-slideshow-button-left {
   left: -100px;

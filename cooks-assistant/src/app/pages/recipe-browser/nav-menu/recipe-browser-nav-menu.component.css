@@ -85,6 +85,7 @@
 .recipe-browser-nav-menu-category-button:hover {
   border-bottom: 4px solid white;
   color: var(--main200);
+  cursor: pointer;
 }
 
 .recipe-browser-nav-menu-category-button-active {
@@ -122,6 +123,7 @@
 }
 .recipe-browser-nav-menu-option-button:hover {
   border-bottom: 4px solid black;
+  cursor: pointer;
 }
 .recipe-browser-nav-menu-option-button-active {
   border-bottom: 4px solid black;
@@ -193,6 +195,7 @@
 }
 .recipe-browser-nav-menu-ratings-star-button:hover {
   background-color: var(--main100);
+  cursor: pointer;
 }
 .recipe-browser-nav-menu-ratings-star-button-active {
   background-color: var(--main100);

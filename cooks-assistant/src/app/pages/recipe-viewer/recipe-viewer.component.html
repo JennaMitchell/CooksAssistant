@@ -2,8 +2,6 @@
   <logged-in-nav-bar *ngIf="loggedIn"></logged-in-nav-bar>
   <logged-out-nav-bar *ngIf="!loggedIn"></logged-out-nav-bar>
 
-  <error-popup *ngIf="errorPopupActive"></error-popup>
-
   <div class="recipe-viewer-main-container">
     <recipe-template-one-viewer
       *ngIf="+retrievedData.selectedTemplateIndex === 1"
@@ -18,6 +16,9 @@
       [recipeData]="retrievedData"
     ></recipe-template-three-viewer>
 
-    <recipe-viewer-review-bar></recipe-viewer-review-bar>
+    <recipe-viewer-review-bar
+      *ngIf="loggedIn"
+      [recipeData]="retrievedData"
+    ></recipe-viewer-review-bar>
   </div>
 </div>

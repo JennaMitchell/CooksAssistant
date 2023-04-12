@@ -3,11 +3,7 @@ const { body } = require("express-validator");
 const recipeController = require("../controllers/recipe-controller");
 const isAuth = require("../middlewear/is-auth");
 const router = express.Router();
-// const {
-//   acceptedRecipeCuisineTag,
-//   acceptedRecipePreferenceTags,
-//   acceptedRecipeTimes,
-// } = require("../utilities/constants");
+
 router.get("/get-all-recipe-data", recipeController.getAllRecipeData);
 router.put(
   "/new-recipe",
@@ -17,6 +13,12 @@ router.put(
     body("cookingTime").trim().not().isEmpty(),
   ],
   recipeController.createNewRecipe
+);
+
+router.put(
+  "/update-user-data-createdRecipesIdArray",
+  isAuth,
+  recipeController.updateCreatedRecipesIdArray
 );
 
 router.get(
@@ -33,4 +35,14 @@ router.get(
   "/get-recipe-by-rating/:greaterThan&&:lessThan",
   recipeController.getRecipeDataByRating
 );
+router.put(
+  "/update-recipe-rating/:id",
+  recipeController.updateRecipeDataRatings
+);
+
+router.put(
+  "/update-recipe-numberOfMakes/:id",
+  recipeController.updateRecipeDataNumberOfMakes
+);
+
 module.exports = router;

@@ -39,9 +39,9 @@ export const initialRecipeCreatorState: RecipeCreatorStateInterface = {
     selectedRecipeDishImageIndex: 0,
   },
   userHasEnteredData: false,
-  selectedTemplateIndex: 0,
+  selectedTemplateIndex: 1,
   selectedTags: [],
-  userSelectedRecipeDishImageIndex: -1,
+  userSelectedRecipeDishImageIndex: 0,
 };
 
 export const recipeCreatorReducers = createReducer(

@@ -1,10 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { RecipeTemplateSavedDataInterface } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
+import {
+  loggedInSelector,
+  recipesRatedIdsArraySelector,
+} from 'libs/store/auth/auth-selectors';
 
-// interface TextAreaContainersIdsObjectInterface {
-//   [key: string]: string;
-// }
+import { RecipeDataApiCalls } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
+import { ActivatePopupService } from 'src/app/utilities/activate-popup-functions/activate-popup-functions.service';
+import { UserRatedRecipeEntryInterface } from 'libs/store/auth/auth-reducers';
+import {
+  usernameSelector,
+  tokenSelector,
+} from 'libs/store/auth/auth-selectors';
+
 @Component({
   selector: 'recipe-viewer-review-bar',
   templateUrl: './recipe-viewer-review-bar.component.html',
@@ -12,8 +20,12 @@ import { RecipeTemplateSavedDataInterface } from 'src/app/utilities/api-call-fun
   providers: [],
 })
 export class RecipeViewerReviewBar {
-  constructor(private store: Store) {}
-  @Input('recipeData') recipeData: RecipeTemplateSavedDataInterface = {
+  constructor(
+    private store: Store,
+    private recipeDataApiCalls: RecipeDataApiCalls,
+    private activatePopupService: ActivatePopupService
+  ) {}
+  @Input('recipeData') recipeData = {
     title: '',
     quote: '',
     servings: '',
@@ -27,8 +39,9 @@ export class RecipeViewerReviewBar {
     username: '',
     selectedTemplateIndex: 0,
     tags: [''],
-    ratings: [],
+    ratings: [0],
     numberOfMakes: 0,
+    _id: '',
   };
 
   starButtonsIds = [
@@ -45,6 +58,35 @@ export class RecipeViewerReviewBar {
   makeButtonHoverActive = false;
   makeButtonActive = false;
   makeButtonClickEventOccured = false;
+  loggedInObserver$ = this.store.select(loggedInSelector);
+  loggedIn = false;
+  usernameObserver$ = this.store.select(usernameSelector);
+  username = '';
+  userTokenObserver$ = this.store.select(tokenSelector);
+  userToken = '';
+
+  recipesRatedIdArrayObserver$ = this.store.select(
+    recipesRatedIdsArraySelector
+  );
+  recipesRatedIdArray: UserRatedRecipeEntryInterface[] = [];
+
+  xObserver$ = this.store.select(recipesRatedIdsArraySelector);
+
+  ngOnInit() {
+    this.loggedInObserver$.subscribe((value) => {
+      this.loggedIn = value;
+    });
+    this.recipesRatedIdArrayObserver$.subscribe((value) => {
+      this.recipesRatedIdArray = value;
+    });
+
+    this.usernameObserver$.subscribe((value) => {
+      this.username = value;
+    });
+    this.userTokenObserver$.subscribe((value) => {
+      this.userToken = value;
+    });
+  }
 
   getTargetElementIdIndex(event: Event) {
     let targetElement = event.target as HTMLElement;
@@ -68,7 +110,7 @@ export class RecipeViewerReviewBar {
     }
   }
 
-  starButtonClickHandler(event: Event) {
+  async starButtonClickHandler(event: Event) {
     const buttonIdIndex = this.getTargetElementIdIndex(event);
     const tempActiveButtons = [false, false, false, false, false];
     const tempRecipeRatings = this.recipeData.ratings.slice();
@@ -112,7 +154,36 @@ export class RecipeViewerReviewBar {
       }
     }
     this.recipeData.ratings = tempRecipeRatings;
+
     this.starButtonMouseClickEventOccured = true;
+    console.log(this.recipeData.ratings);
+
+    if (this.userToken.length !== 0) {
+      try {
+        const copyOfRecipesRatedIdArray = this.recipesRatedIdArray.slice();
+        copyOfRecipesRatedIdArray.push({
+          recipeId: this.recipeData._id,
+          rating: this.starButtonIndexClicked + 1,
+        });
+        await this.recipeDataApiCalls.updateRecipeRatingData(
+          this.recipeData._id,
+          this.recipeData.ratings
+        );
+
+        const response = await this.recipeDataApiCalls.updateUserRatingArray(
+          this.username,
+          copyOfRecipesRatedIdArray,
+          this.userToken
+        );
+
+        this.activatePopupService.successPopupHandler(response.message || '');
+      } catch (err) {
+        let message;
+        if (err instanceof Error) message = err.message;
+        else message = String(err);
+        this.activatePopupService.errorPopupHandler(message);
+      }
+    }
   }
 
   makeButtonHoverHandler() {
@@ -133,5 +204,14 @@ export class RecipeViewerReviewBar {
       this.makeButtonActive = true;
       this.recipeData.numberOfMakes = this.recipeData.numberOfMakes + 1;
     }
+
+    this.recipeDataApiCalls
+      .updateRecipeNumberOfMakes(
+        this.recipeData._id,
+        this.recipeData.numberOfMakes
+      )
+      .then((response) => {
+        this.activatePopupService.successPopupHandler(response.message || '');
+      });
   }
 }

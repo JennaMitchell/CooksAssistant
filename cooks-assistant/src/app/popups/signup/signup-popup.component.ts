@@ -197,9 +197,10 @@ export class SignupPopupComponent {
         email: this.generatedEmail,
         username: this.generatedUsername,
         password: this.generatedPassword,
+        recipesRatedIdArray: [],
+        recipesCreatedIdsArray: [],
       })
       .then((jsonedData: any) => {
-        console.log(jsonedData);
         this.store.dispatch(
           AuthActions.updateEmail({ email: this.generatedEmail })
         );

@@ -28,6 +28,7 @@ export interface PopupStateInterface {
   recipeBrowserSelectedLessThanRating: number;
   recipeBrowserSelectedGreaterThanRating: number;
   recipeBrowserGetAllRatings: boolean;
+  refreshWarningPopupActive: boolean;
 }
 
 export const initialPopupState: PopupStateInterface = {
@@ -49,6 +50,7 @@ export const initialPopupState: PopupStateInterface = {
   recipeBrowserSelectedLessThanRating: -1,
   recipeBrowserSelectedGreaterThanRating: -1,
   recipeBrowserGetAllRatings: false,
+  refreshWarningPopupActive: false,
 };
 
 export const popupReducers = createReducer(
@@ -174,12 +176,19 @@ export const popupReducers = createReducer(
       return tempObject;
     }
   ),
-
   on(
     PopupActions.updateRecipebrowsergetallratings,
     (_state, { recipeBrowserGetAllRatings }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
       tempObject['recipeBrowserGetAllRatings'] = recipeBrowserGetAllRatings;
+      return tempObject;
+    }
+  ),
+  on(
+    PopupActions.updateRefreshwarningpopupactive,
+    (_state, { refreshWarningPopupActive }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['refreshWarningPopupActive'] = refreshWarningPopupActive;
       return tempObject;
     }
   )

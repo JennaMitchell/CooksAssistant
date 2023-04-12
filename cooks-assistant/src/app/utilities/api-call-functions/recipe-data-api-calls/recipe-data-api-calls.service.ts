@@ -155,4 +155,100 @@ export class RecipeDataApiCalls {
       throw new Error(`${message}`);
     }
   };
+
+  updateRecipeRatingData = async (id: string, newRatingArray: number[]) => {
+    try {
+      const fetchedResponse = await fetch(
+        `${databaseUrl}/recipes/update-recipe-rating/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newRatingArray),
+        }
+      );
+
+      const awaitedResponse = await fetchedResponse.json();
+
+      this.apiErrorService.apiCallErrorHandler(
+        fetchedResponse.status,
+        awaitedResponse
+      );
+
+      return awaitedResponse;
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
+    }
+  };
+
+  updateRecipeNumberOfMakes = async (id: string, newNumberOfMakes: number) => {
+    try {
+      console.log(190);
+      const fetchedResponse = await fetch(
+        `${databaseUrl}/recipes/update-recipe-numberOfMakes/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ numberOfMakes: newNumberOfMakes }),
+        }
+      );
+
+      const awaitedResponse = await fetchedResponse.json();
+
+      this.apiErrorService.apiCallErrorHandler(
+        fetchedResponse.status,
+        awaitedResponse
+      );
+
+      return awaitedResponse;
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
+    }
+  };
+
+  updateUserRatingArray = async (
+    username: string,
+    newRecipeRatingArray: { recipeId: string; rating: number }[],
+    userToken: string
+  ) => {
+    try {
+      const fetchedResponse = await fetch(
+        `${databaseUrl}/auth/update-userRatedRecipesArray`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + userToken,
+          },
+          body: JSON.stringify({
+            username: username,
+            recipeRatingArray: newRecipeRatingArray,
+          }),
+        }
+      );
+
+      const awaitedResponse = await fetchedResponse.json();
+
+      this.apiErrorService.apiCallErrorHandler(
+        fetchedResponse.status,
+        awaitedResponse
+      );
+
+      return awaitedResponse;
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
+    }
+  };
 }

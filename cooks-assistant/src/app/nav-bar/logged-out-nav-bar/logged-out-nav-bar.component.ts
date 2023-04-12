@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PopupActions } from 'libs/store/popups/popup-actions.actions';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'logged-out-nav-bar',
@@ -8,8 +9,10 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./logged-out-nav-bar.component.css'],
 })
 export class LoggedOutNavBar {
+  constructor(private store: Store, private router: Router) {}
   loginButtonHover = false;
   registerButtonHover = false;
+  homeButtonHover = false;
 
   onLoginButtonHover() {
     this.loginButtonHover = !this.loginButtonHover;
@@ -17,8 +20,14 @@ export class LoggedOutNavBar {
   onRegisterButtonHover() {
     this.registerButtonHover = !this.registerButtonHover;
   }
+  onHomeButtonHover() {
+    this.homeButtonHover = !this.homeButtonHover;
+  }
 
-  constructor(private store: Store) {}
+  homeButtonClickHandler() {
+    this.router.navigate(['/']);
+  }
+
   loginButtonHandler() {
     this.store.dispatch(PopupActions.updateLockwebpageviewport({ lock: true }));
     this.store.dispatch(

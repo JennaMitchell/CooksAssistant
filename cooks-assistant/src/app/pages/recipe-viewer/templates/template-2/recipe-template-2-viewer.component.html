@@ -31,24 +31,28 @@
       <p class="recipe-template-two-info-title">Ingredients</p>
 
       <div
-        class="recipe-template-two-info-text-area-container"
+        class="recipe-template-two-info-text-area-container recipe-template-viewer-text-area"
         *ngFor="
           let ingredientsText of recipeData.ingredientsList;
           let ingredientIndex = index
         "
       >
+        <p class="recipe-template-two-text-area-index">-</p>
         <p class="recipe-template-two-text-area">{{ ingredientsText }}</p>
       </div>
     </div>
     <div class="recipe-template-two-info-container">
       <p class="recipe-template-two-info-title">Directions</p>
       <div
-        class="recipe-template-two-info-text-area-container"
+        class="recipe-template-two-info-text-area-container recipe-template-viewer-text-area"
         *ngFor="
           let directionsText of recipeData.directionsList;
           let directionIndex = index
         "
       >
+        <p class="recipe-template-two-text-area-index">
+          {{ directionIndex + 1 }}.
+        </p>
         <p
           class="recipe-template-two-text-area recipe-template-two-directions-text-area"
         >

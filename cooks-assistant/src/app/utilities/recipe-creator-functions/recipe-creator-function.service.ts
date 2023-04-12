@@ -10,6 +10,46 @@ export interface ReturnedCreatorRecipeDataAndIdsInterface {
 }
 
 export class RecipeCreatorFunctions {
+  textAreaValueResetHandler(
+    classNameToRetreive: string,
+    userEnteredTemplateData: any,
+    elementListType: string
+  ) {
+    const retrievedTextAreaElements =
+      document.getElementsByClassName(classNameToRetreive);
+
+    for (
+      let indexOfRetrievedTextAreaElements = 0;
+      indexOfRetrievedTextAreaElements < retrievedTextAreaElements.length;
+      indexOfRetrievedTextAreaElements++
+    ) {
+      const textAreaElement = retrievedTextAreaElements[
+        indexOfRetrievedTextAreaElements
+      ] as HTMLTextAreaElement;
+
+      switch (elementListType) {
+        case 'ingredients':
+          textAreaElement.value =
+            userEnteredTemplateData.ingredientsList[
+              indexOfRetrievedTextAreaElements
+            ];
+          break;
+        case 'directions':
+          textAreaElement.value =
+            userEnteredTemplateData.directionsList[
+              indexOfRetrievedTextAreaElements
+            ];
+          break;
+        case 'notes':
+          textAreaElement.value =
+            userEnteredTemplateData.notes[indexOfRetrievedTextAreaElements];
+          break;
+        default:
+          break;
+      }
+    }
+    return ['', ''];
+  }
   updateLocalRecipeData(
     localRecipeData: RecipeTemplateUserDataInterface,
     textAreaType: string,
@@ -26,7 +66,7 @@ export class RecipeCreatorFunctions {
     let splitId: string[] = targetId.split('-');
     if (targetId.length === 0) {
       const parentElement = targetElement.parentElement as HTMLElement;
-      console.log(parentElement);
+
       targetId = targetElement.id;
       splitId = parentElement.id.split('-');
     }
@@ -141,7 +181,7 @@ export class RecipeCreatorFunctions {
         break;
       case 'directions':
         tempList = tempObject.directionsList;
-        tempList.push(`${tempObject.directionsList.length + 1}. New Direction`);
+        tempList.push(``);
         copyOfIdsArray.push(
           `recipe-template-one-directions-textarea-${copyOfIdsArray.length}`
         );
@@ -150,7 +190,7 @@ export class RecipeCreatorFunctions {
         break;
       case 'notes':
         tempList = tempObject.notes;
-        tempList.push(`-  New Note Added`);
+        tempList.push(``);
         copyOfIdsArray.push(
           `recipe-template-one-notes-textarea-${copyOfIdsArray.length}`
         );
@@ -212,6 +252,7 @@ export class RecipeCreatorFunctions {
       }
 
       if (textAreaContainerIdType.length !== 0) {
+        console.log(textAreaContainerIdType);
         switch (textAreaContainerIdType) {
           case 'ingredients':
             // Removing the text Area from the entered data array

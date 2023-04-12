@@ -132,7 +132,7 @@
       >
         <p class="recipe-template-two-text-area-index">-</p>
         <textarea
-          class="recipe-template-two-text-area"
+          class="recipe-template-two-text-area recipe-template-two-ingredient-textarea"
           (keyup)="addTextAreaHandler('ingredient')"
           placeholder="Please enter an ingredient"
           >{{
@@ -194,11 +194,11 @@
           {{ directionIndex + 1 }}.
         </p>
         <textarea
-          class="recipe-template-two-text-area recipe-template-two-directions-text-area"
+          class="recipe-template-two-text-area recipe-template-two-directions-textarea"
           (keyup)="textAreaInputHandler($event, 'direction')"
           placeholder="Please enter a direction"
           >{{
-            listElementDefaultValuesWhenNewItemAddedArray.ingredients[
+            listElementDefaultValuesWhenNewItemAddedArray.directions[
               directionIndex
             ]
           }}</textarea

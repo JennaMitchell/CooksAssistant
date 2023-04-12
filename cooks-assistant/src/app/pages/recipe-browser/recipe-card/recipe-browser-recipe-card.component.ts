@@ -29,7 +29,7 @@ export class RecipeBrowerRecipeCardComponent {
     numberOfMakes: 0,
     _id: '',
   };
-  constructor(private store: Store) {}
+
   dishImagesData = dishImagesData;
 
   dishImageLocation = `../../../../../${

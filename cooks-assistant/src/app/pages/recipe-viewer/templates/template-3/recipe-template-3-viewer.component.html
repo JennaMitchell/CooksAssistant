@@ -4,12 +4,13 @@
       <p class="recipe-template-three-ingredients-title">INGREDIENTS</p>
 
       <div
-        class="recipe-template-three-info-text-area-container"
+        class="recipe-template-three-info-text-area-container recipe-template-viewer-text-area"
         *ngFor="
           let ingredientsText of recipeData.ingredientsList;
           let ingredientsIndex = index
         "
       >
+        <p class="recipe-template-three-text-area-index">-</p>
         <p
           class="recipe-template-three-text-area recipe-template-three-ingredients-text-area"
         >
@@ -20,12 +21,15 @@
     <div class="recipe-template-three-directions-container">
       <p class="recipe-template-three-directions-title">DIRECTIONS</p>
       <div
-        class="recipe-template-three-info-text-area-container"
+        class="recipe-template-three-info-text-area-container recipe-template-viewer-text-area"
         *ngFor="
           let directionsText of recipeData.directionsList;
           let directionsIndex = index
         "
       >
+        <p class="recipe-template-three-text-area-index">
+          {{ directionsIndex + 1 }}.
+        </p>
         <p
           class="recipe-template-three-text-area recipe-template-three-directions-text-area"
         >
@@ -79,18 +83,17 @@
     </div>
 
     <p class="recipe-template-three-description-text-area">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum eveniet
-      sed omnis praesentium rem eligendi animi cupiditate repellat, illo nemo,
-      quisquam laudantium, ipsa ipsam commodi voluptatibus quia ut numquam odio!
+      {{ recipeData.description }}
     </p>
 
     <div class="recipe-template-three-notes-container">
       <p class="recipe-template-three-notes-title">Notes</p>
 
       <div
-        class="recipe-template-three-info-text-area-container"
+        class="recipe-template-three-info-text-area-container recipe-template-viewer-text-area"
         *ngFor="let notesText of recipeData.notes; let notesIndex = index"
       >
+        <p class="recipe-template-three-text-area-index">-</p>
         <p
           class="recipe-template-three-text-area recipe-template-three-notes-text-area"
         >

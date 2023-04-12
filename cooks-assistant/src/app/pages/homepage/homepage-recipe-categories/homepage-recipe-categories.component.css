@@ -91,6 +91,7 @@
 .homepage-category-button-container:hover {
   background-color: var(--main100);
   color: black;
+  cursor: pointer;
 }
 
 .homepage-category-button-container-active {

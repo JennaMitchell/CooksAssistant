@@ -19,16 +19,14 @@ import { loggedInSelector } from 'libs/store/auth/auth-selectors';
 })
 export class Homepage {
   loggedInObserver$ = this.store.select(loggedInSelector);
-  errorPopupActiveObserver$ = this.store.select(errorPopupActiveSelector);
-  successPopupActiveObserver$ = this.store.select(successPopupActiveSelector);
+
   searchPopupActiveObserver$ = this.store.select(searchPopupActiveSelector);
   homepageCategoryPopupActiveObserver$ = this.store.select(
     homepageCategoryPopupActiveSelector
   );
 
   loggedIn: any;
-  errorPopupActive: any;
-  successPopupActive = false;
+
   searchPoupActive = false;
   homepageCategoryPopupActive = false;
 
@@ -56,12 +54,7 @@ export class Homepage {
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;
     });
-    this.errorPopupActiveObserver$.subscribe((value) => {
-      this.errorPopupActive = value;
-    });
-    this.successPopupActiveObserver$.subscribe((value) => {
-      this.successPopupActive = value;
-    });
+
     this.searchPopupActiveObserver$.subscribe((value) => {
       this.searchPoupActive = value;
     });

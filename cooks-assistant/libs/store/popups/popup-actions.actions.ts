@@ -37,5 +37,8 @@ export const PopupActions = createActionGroup({
     'Update RecipeBrowserGetAllRatings': props<{
       recipeBrowserGetAllRatings: boolean;
     }>(),
+    'Update RefreshWarningPopupActive': props<{
+      refreshWarningPopupActive: boolean;
+    }>(),
   },
 });

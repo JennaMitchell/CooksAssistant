@@ -143,6 +143,7 @@
 .homepage-new-recipe-make-button:hover {
   background-color: var(--main100);
   color: black;
+  cursor: pointer;
 }
 .homepage-new-recipe-card-cooking-time-container {
   display: flex;

@@ -135,6 +135,7 @@
 .login-popup-login-button:hover {
   color: black;
   background-color: var(--main200);
+  cursor: pointer;
 }
 .login-popup-signup-container {
   display: flex;
@@ -166,4 +167,5 @@
 }
 .login-popup-signup-text-button:hover {
   color: var(--main200);
+  cursor: pointer;
 }

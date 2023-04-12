@@ -69,6 +69,7 @@
 .tag-selector-popup-submit-button:hover {
   color: black;
   background-color: var(--main100);
+  cursor: pointer;
 }
 .tag-selector-popup-sub-title {
   margin: 0px;
@@ -122,6 +123,7 @@
   background-color: var(--main100);
   color: black;
   border: 4px solid var(--popup-choice-button-active-color);
+  cursor: pointer;
 }
 
 .tag-selector-tag-button-active {
@@ -163,6 +165,7 @@
 .tag-selector-submit-button:hover {
   background-color: var(--main100);
   color: black;
+  cursor: pointer;
 }
 
 .disableButton {

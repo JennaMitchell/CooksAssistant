@@ -54,4 +54,5 @@
 .success-popup-closing-icon:hover {
   background-color: white;
   color: black;
+  cursor: pointer;
 }

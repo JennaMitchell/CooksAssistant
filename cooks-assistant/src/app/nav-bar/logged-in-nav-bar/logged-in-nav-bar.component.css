@@ -1,4 +1,4 @@
-.homepage-user-bar {
+.homepage-logged-in-user-bar {
   position: absolute;
   width: min(1000px, 100vw);
   max-height: max-content;
@@ -14,7 +14,7 @@
   left: 50%;
   transform: translateX(-50%);
 }
-.homepage-login-button {
+.homepage-logged-in-nav-bar-button {
   max-width: max-content;
   max-height: max-content;
   font-size: var(--r12);
@@ -31,16 +31,17 @@
   transition: all 0.5s;
 }
 
-.homepage-login-button-round-left-corner {
+.homepage-logged-in-nav-bar-button-round-left-corner {
   border-bottom-left-radius: 10px;
 }
-.homepage-login-button-round-right-corner {
+.homepage-logged-in-nav-bar-button-round-right-corner {
   border-bottom-right-radius: 10px;
 }
 
-.homepage-login-button:hover {
+.homepage-logged-in-nav-bar-button:hover {
   background-color: var(--main100);
   color: black;
+  cursor: pointer;
 }
 .homepage-nav-login-break {
   height: max(80%, 80%);
@@ -52,7 +53,7 @@
   border-radius: 50%;
   transform: translateY(-52%);
 }
-.homepage-login-button-logo {
+.homepage-logged-in-nav-bar-button-logo {
   width: max(20px, 20px);
   height: max(20px, 20px);
   object-fit: fill;

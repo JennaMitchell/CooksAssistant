@@ -19,8 +19,11 @@ import { LoginPopupModule } from './popups/login/login-popup.module';
 import { SignupPopupModule } from './popups/signup/signup-popup.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { RefreshWarningPopupComponent } from './popups/refresh-warning/refresh-warning.component';
+import { ErrorPopupModule } from './popups/error/error-popup.module';
+import { SuccessPopupModule } from './popups/success/success-popup.module';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RefreshWarningPopupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -39,6 +42,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
     EffectsModule.forRoot([]),
     BrowserAnimationsModule,
+    ErrorPopupModule,
+    SuccessPopupModule,
   ],
   providers: [ApiErrorService],
   bootstrap: [AppComponent],

@@ -117,6 +117,7 @@
 
 .recipe-template-one-edit-button:hover {
   background-color: black;
+  cursor: pointer;
 }
 .recipe-template-one-edit-button-icon {
   width: max(100%, 100%);
@@ -155,11 +156,6 @@
   justify-content: center;
   padding: 2px;
 }
-.recipe-template-one-delete-tag-button:hover {
-  background-color: white;
-  color: black;
-}
-
 .recipe-template-one-add-entry-button {
   width: max(20px, 20px);
   height: max(20px, 20px);
@@ -176,19 +172,19 @@
   transition: all 0.5s;
 }
 
-.recipe-template-one-add-entry-button:hover {
+.recipe-template-one-add-entry-button:hover,
+.recipe-template-one-add-text-button:hover,
+.recipe-template-one-delete-tag-button:hover {
   background-color: black;
   color: white;
+  cursor: pointer;
 }
 .recipe-template-one-add-entry-button-icon {
   width: max(100%, 100%);
   height: max(100%, 100%);
   color: inherit;
 }
-.recipe-template-one-add-text-button:hover {
-  background-color: black;
-  color: white;
-}
+
 .recipe-template-one-add-ingredient-direction-button {
   top: 0px;
   right: 10px;
@@ -366,6 +362,7 @@
 .recipe-template-one-text-area-delete-icon:hover {
   background-color: black;
   color: white;
+  cursor: pointer;
 }
 
 .recipe-template-one-text-area {
@@ -444,6 +441,6 @@
   height: max-content;
   max-height: max-content;
 }
-.recipe-template-one-direction-input {
+.recipe-template-one-directions-textarea {
   text-align: left;
 }

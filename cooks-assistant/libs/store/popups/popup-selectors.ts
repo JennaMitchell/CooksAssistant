@@ -118,3 +118,9 @@ export const recipeBrowserGetAllRatingsSelector = createSelector(
     return state.recipeBrowserGetAllRatings;
   }
 );
+export const refreshWarningPopupActiveSelector = createSelector(
+  selectPopupStateSlice,
+  (state) => {
+    return state.refreshWarningPopupActive;
+  }
+);

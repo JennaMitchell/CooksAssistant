@@ -60,6 +60,7 @@
 .recipe-viewer-review-bar-make-button:hover,
 .recipe-viewer-review-bar-star-button:hover {
   background-color: var(--main100);
+  cursor: pointer;
 }
 
 .recipe-viewer-review-bar-make-button-active {

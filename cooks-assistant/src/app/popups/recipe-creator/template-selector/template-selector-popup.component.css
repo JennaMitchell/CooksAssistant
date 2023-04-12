@@ -67,6 +67,7 @@
 .template-selector-popup-submit-button:hover {
   color: black;
   background-color: var(--main200);
+  cursor: pointer;
 }
 .template-selector-recipe-template-photo-containers {
   width: max(100%, 100%);
@@ -92,6 +93,7 @@
 }
 .template-selector-template-button:hover {
   border: 4px solid var(--input-active-color);
+  cursor: pointer;
 }
 .template-selector-active-template-button {
   border: 4px solid var(--input-active-color);

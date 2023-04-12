@@ -39,11 +39,6 @@ export class RecipeBrowerComponent {
   loggedInObserver$ = this.store.select(loggedInSelector);
   loggedIn = false;
 
-  errorPopupActiveObserver$ = this.store.select(errorPopupActiveSelector);
-  errorPopupActive = false;
-
-  successPopupActiveObserver$ = this.store.select(successPopupActiveSelector);
-  successPopupActive = false;
   searchPopupInputTextObserver$ = this.store.select(
     searchPopupInputTextSelector
   );
@@ -72,13 +67,6 @@ export class RecipeBrowerComponent {
   ngOnInit() {
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;
-    });
-
-    this.errorPopupActiveObserver$.subscribe((value) => {
-      this.errorPopupActive = value;
-    });
-    this.successPopupActiveObserver$.subscribe((value) => {
-      this.successPopupActive = value;
     });
 
     this.userClickedRatingsObserver$.subscribe((value) => {

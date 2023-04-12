@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loggedInSelector } from 'libs/store/auth/auth-selectors';
-import { errorPopupActiveSelector } from 'libs/store/popups/popup-selectors';
 import { RecipeDataApiCalls } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
 import { ActivatePopupService } from 'src/app/utilities/activate-popup-functions/activate-popup-functions.service';
 import { switchMap } from 'rxjs';
@@ -24,9 +23,6 @@ export class RecipeViewerComponent {
   ) {}
   loggedInObserver$ = this.store.select(loggedInSelector);
   loggedIn = false;
-
-  errorPopupActiveObserver$ = this.store.select(errorPopupActiveSelector);
-  errorPopupActive = false;
 
   x$: any;
   retrievedData: RecipeTemplateSavedDataInterfaceWithId = {
@@ -53,7 +49,7 @@ export class RecipeViewerComponent {
       .getRecipeDataById(id)
       .then((data: GetRecipeDataSuccessfulResponseInterface) => {
         this.retrievedData = data.retrievedData[0];
-
+        console.log(this.retrievedData);
         const tempTagsArray = this.retrievedData.tags.map((tag) => {
           if (tag.length !== 0) {
             const firstLetter = tag[0].toUpperCase();
@@ -84,8 +80,17 @@ export class RecipeViewerComponent {
           this.recipeDataApiCalls
             .getRecipeDataById(id)
             .then((data: GetRecipeDataSuccessfulResponseInterface) => {
-              console.log(data);
               this.retrievedData = data.retrievedData[0];
+              const tempTagsArray = this.retrievedData.tags.map((tag) => {
+                if (tag.length !== 0) {
+                  const firstLetter = tag[0].toUpperCase();
+                  const finalWord = firstLetter + tag.slice(1, tag.length);
+                  return finalWord;
+                } else {
+                  return '';
+                }
+              });
+              this.retrievedData.tags = tempTagsArray;
             })
             .catch((err: Error) => {
               this.activatePopupService.errorPopupHandler(err.message);
@@ -99,10 +104,6 @@ export class RecipeViewerComponent {
 
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;
-    });
-
-    this.errorPopupActiveObserver$.subscribe((value) => {
-      this.errorPopupActive = value;
     });
   }
 }

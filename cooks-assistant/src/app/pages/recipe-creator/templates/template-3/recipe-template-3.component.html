@@ -32,7 +32,7 @@
       >
         <p class="recipe-template-three-text-area-index">-</p>
         <textarea
-          class="recipe-template-three-text-area recipe-template-three-ingredients-text-area"
+          class="recipe-template-three-text-area recipe-template-three-ingredient-textarea"
           (keyup)="textAreaInputHandler($event, 'ingredient')"
           placeholder="Enter an Ingredient"
           >{{
@@ -96,7 +96,7 @@
           (keyup)="textAreaInputHandler($event, 'direction')"
           placeholder="Enter a Direction"
           >{{
-            listElementDefaultValuesWhenNewItemAddedArray.ingredients[
+            listElementDefaultValuesWhenNewItemAddedArray.directions[
               directionsIndex
             ]
           }}</textarea
@@ -253,7 +253,7 @@
       >
         <p class="recipe-template-three-text-area-index">-</p>
         <textarea
-          class="recipe-template-three-text-area recipe-template-three-notes-text-area"
+          class="recipe-template-three-text-area recipe-template-three-notes-textarea"
           (keyup)="textAreaInputHandler($event, 'notes')"
           placeholder="Please Enter a Note"
           >{{

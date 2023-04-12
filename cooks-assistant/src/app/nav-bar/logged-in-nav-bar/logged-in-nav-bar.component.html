@@ -1,46 +1,73 @@
-<div class="homepage-user-bar">
+<div class="homepage-logged-in-user-bar">
   <button
-    class="homepage-login-button homepage-login-button-round-left-corner"
-    (mouseenter)="onLoginButtonHover()"
-    (mouseleave)="onLoginButtonHover()"
-    (click)="loginButtonHandler()"
+    class="homepage-logged-in-nav-bar-button homepage-logged-in-nav-bar-button-round-left-corner"
+    (mouseenter)="onHomeButtonHover()"
+    (mouseleave)="onHomeButtonHover()"
+    (click)="homeButtonClickHandler()"
+  >
+    Home
+    <img
+      src="assets/images/icons/homepage/frying-pan-white.png"
+      alt="Chef Hat Logo"
+      class="homepage-logged-in-nav-bar-button-logo"
+      [ngClass]="{
+        homepagehidelogo: homeButtonHover,
+        homepageshowlogo: !homeButtonHover
+      }"
+    />
+    <img
+      src="assets/images/icons/homepage/frying-pan-black.png"
+      alt="Chef Hat Logo"
+      class="homepage-logged-in-nav-bar-button-logo"
+      [ngClass]="{
+        homepagehidelogo: !homeButtonHover,
+        homepageshowlogo: homeButtonHover
+      }"
+    />
+    <div class="homepage-nav-login-break"></div>
+  </button>
+  <button
+    class="homepage-logged-in-nav-bar-button"
+    (mouseenter)="onLogoutButtonHover()"
+    (mouseleave)="onLogoutButtonHover()"
+    (click)="logoutHandler()"
   >
     <img
       src="assets/images/icons/homepage/user-white.png"
       alt="User Icon"
-      class="homepage-login-button-logo"
+      class="homepage-logged-in-nav-bar-button-logo"
       id="chef-hat-logo-white"
       [ngClass]="{
-        homepagehidelogo: loginButtonHover === true,
-        homepageshowlogo: loginButtonHover === false
+        homepagehidelogo: logoutButtonHover,
+        homepageshowlogo: !logoutButtonHover
       }"
     />
     <img
       src="assets/images/icons/homepage/user-black.png"
       alt="User Icon"
-      class="homepage-login-button-logo"
+      class="homepage-logged-in-nav-bar-button-logo"
       id="chef-hat-logo-black"
       [ngClass]="{
-        homepagehidelogo: loginButtonHover === false,
-        homepageshowlogo: loginButtonHover === true
+        homepagehidelogo: !logoutButtonHover,
+        homepageshowlogo: logoutButtonHover
       }"
     />
-    Settings
+    Logout
 
     <div class="homepage-nav-login-break"></div>
   </button>
 
   <button
-    class="homepage-login-button"
-    (mouseenter)="onRegisterButtonHover()"
-    (mouseleave)="onRegisterButtonHover()"
-    (click)="signupButtonHandler()"
+    class="homepage-logged-in-nav-bar-button"
+    (mouseenter)="onRecipesButtonHover()"
+    (mouseleave)="onRecipesButtonHover()"
+    (click)="recipesButtonClickHandler()"
   >
     Recipes
     <img
       src="assets/images/icons/homepage/chef-hat-white.png"
       alt="Chef Hat Logo"
-      class="homepage-login-button-logo"
+      class="homepage-logged-in-nav-bar-button-logo"
       [ngClass]="{
         homepagehidelogo: registerButtonHover === true,
         homepageshowlogo: registerButtonHover === false
@@ -49,7 +76,7 @@
     <img
       src="assets/images/icons/homepage/chef-hat-black.png"
       alt="Chef Hat Logo"
-      class="homepage-login-button-logo"
+      class="homepage-logged-in-nav-bar-button-logo"
       [ngClass]="{
         homepagehidelogo: registerButtonHover === false,
         homepageshowlogo: registerButtonHover === true
@@ -63,7 +90,7 @@
     (click)="createButtonClickHandler()"
   >
     <button
-      class="homepage-login-button homepage-login-button-round-right-corner"
+      class="homepage-logged-in-nav-bar-button homepage-logged-in-nav-bar-button-round-right-corner"
       (mouseenter)="onCreateButtonHover()"
       (mouseleave)="onCreateButtonHover()"
     >
@@ -71,19 +98,19 @@
       <img
         src="assets/images/icons/homepage/new-recipe-icon-white.png"
         alt="Create Logo"
-        class="homepage-login-button-logo"
+        class="homepage-logged-in-nav-bar-button-logo"
         [ngClass]="{
-          homepagehidelogo: createButtonHover === true,
-          homepageshowlogo: createButtonHover === false
+          homepagehidelogo: createButtonHover,
+          homepageshowlogo: !createButtonHover
         }"
       />
       <img
         src="assets/images/icons/homepage/new-recipe-icon.png"
         alt="Create Logo"
-        class="homepage-login-button-logo"
+        class="homepage-logged-in-nav-bar-button-logo"
         [ngClass]="{
-          homepagehidelogo: createButtonHover === false,
-          homepageshowlogo: createButtonHover === true
+          homepagehidelogo: !createButtonHover,
+          homepageshowlogo: createButtonHover
         }"
       />
     </button>

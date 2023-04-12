@@ -1,4 +1,4 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector, select } from '@ngrx/store';
 
 import { AuthStateInterface } from './auth-reducers';
 
@@ -27,4 +27,16 @@ export const emailSelector = createSelector(
 export const userIdSelector = createSelector(
   selectAuthStore,
   (state: AuthStateInterface) => state.userId
+);
+export const recipesRatedIdsArraySelector = createSelector(
+  selectAuthStore,
+  (state: AuthStateInterface) => {
+    return state.recipesRatedIdsArray;
+  }
+);
+export const recipesCreatedIdsArraySelector = createSelector(
+  selectAuthStore,
+  (state: AuthStateInterface) => {
+    return state.recipesCreatedIdsArray;
+  }
 );

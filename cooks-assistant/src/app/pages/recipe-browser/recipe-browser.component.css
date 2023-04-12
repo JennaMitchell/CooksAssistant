@@ -64,6 +64,7 @@
   background-color: white;
   box-shadow: 0px 0px 10px black;
   color: var(--main800);
+  cursor: pointer;
 }
 .recipe-browser-nav-menu-icon {
   width: max(100%, 100%);

@@ -101,6 +101,7 @@
 
 .recipe-creator-user-button:hover {
   background-color: var(--main200);
+  cursor: pointer;
 }
 
 .recipe-creator-user-button-icon {
@@ -120,4 +121,5 @@
 }
 .recipe-creator-hide-edit-buttons:hover {
   color: black;
+  cursor: pointer;
 }

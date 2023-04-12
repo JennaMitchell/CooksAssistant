@@ -74,7 +74,7 @@ export class TemplateSelectorPopup {
   submitButtonHandler() {
     this.store.dispatch(
       RecipeCreatorActions.updateSelectedtemplateindex({
-        selectedTemplateIndex: this.selectedTemplateIndex,
+        selectedTemplateIndex: this.selectedTemplateIndex + 1,
       })
     );
     this.closingButtonHandler();

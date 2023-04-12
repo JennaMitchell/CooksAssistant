@@ -58,10 +58,4 @@ export class LoginApiCallsService {
       throw new Error(`${message}`);
     }
   };
-
-  logoutCall = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiryDate');
-    localStorage.removeItem('userId');
-  };
 }

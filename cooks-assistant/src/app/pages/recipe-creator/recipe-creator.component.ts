@@ -34,8 +34,6 @@ export class RecipeCreatorComponent {
   tagsPopupActiveObserver$ = this.store.select(recipeTagsPopupActiveSelector);
   tagsPopupActive = false;
 
-  errorPopupActiveObserver$ = this.store.select(errorPopupActiveSelector);
-  errorPopupActive = false;
   backgroundChangerActiveObserver$ = this.store.select(
     recipeCreatorBackgroundPopupActiveSelector
   );
@@ -119,9 +117,7 @@ export class RecipeCreatorComponent {
     this.changeRecipeTemplatePopupActiveObserver$.subscribe((value) => {
       this.changeRecipeTemplatePopupActive = value;
     });
-    this.errorPopupActiveObserver$.subscribe((value) => {
-      this.errorPopupActive = value;
-    });
+
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;
     });

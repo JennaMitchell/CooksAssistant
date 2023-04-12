@@ -15,4 +15,5 @@
 .recipe-creator-create-button:hover {
   background-color: var(--main200);
   color: black;
+  cursor: pointer;
 }

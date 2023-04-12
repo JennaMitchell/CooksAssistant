@@ -87,4 +87,5 @@
 .search-popup-closing-button:hover {
   color: black;
   background-color: var(--main200);
+  cursor: pointer;
 }

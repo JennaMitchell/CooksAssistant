@@ -1,4 +1,5 @@
 const RecipeCardSchema = require("../models/recipe-data");
+const UserSchema = require("../models/user-schema");
 const { validationResult } = require("express-validator");
 exports.getAllRecipeData = async (req, res) => {
   try {
@@ -119,7 +120,7 @@ exports.createNewRecipe = async (req, res, next) => {
       directionsList: req.body.directionsList,
       notes: req.body.notes,
       username: req.body.username,
-      selectedTemplateIndex: req.body.selectedRecipeDishImageIndex,
+      selectedTemplateIndex: req.body.selectedTemplateIndex,
       description: "",
       selectedRecipeDishImageIndex: req.body.selectedRecipeDishImageIndex,
       ratings: req.body.ratings,
@@ -129,12 +130,103 @@ exports.createNewRecipe = async (req, res, next) => {
 
     return res.status(201).json({
       message: "Recipe Card Added !",
+      newRecipeCard: newRecipeCard,
       status: 201,
     });
   } catch (err) {
     return res.status(401).json({
       message: "Server Error",
       error: [{ error: err }],
+    });
+  }
+};
+
+exports.getRecipeDataByTitle = async (req, res) => {
+  try {
+    const title = req.params.title;
+    const result = await RecipeCardSchema.find({
+      title: {
+        $regex: title,
+      },
+    });
+
+    return res.status(201).json({
+      message: "Data Retrieved!",
+      retrievedData: result,
+      status: 201,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: `Server Error!`,
+      error: [{ error: "Server Error" }],
+    });
+  }
+};
+
+exports.updateRecipeDataRatings = async (req, res) => {
+  try {
+    const recipeId = req.params.id;
+    const newRatingsArray = req.body;
+
+    const recipeToUpdate = await RecipeCardSchema.findById({ _id: recipeId });
+
+    recipeToUpdate.ratings = newRatingsArray;
+
+    recipeToUpdate.save();
+
+    return res.status(201).json({
+      message: "Recipe Rating Updated!",
+      status: 201,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: `Server Error!`,
+      error: [{ error: "Server Error" }],
+    });
+  }
+};
+
+exports.updateRecipeDataNumberOfMakes = async (req, res) => {
+  try {
+    const recipeId = req.params.id;
+    const newNumberOfMakes = req.body.numberOfMakes;
+
+    const recipeToUpdate = await RecipeCardSchema.findById({ _id: recipeId });
+
+    recipeToUpdate.numberOfMakes = newNumberOfMakes;
+
+    recipeToUpdate.save();
+
+    return res.status(201).json({
+      message: "Recipe Number of Makes Updated!",
+      status: 201,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: `Server Error!`,
+      error: [{ error: "Server Error" }],
+    });
+  }
+};
+exports.updateCreatedRecipesIdArray = async (req, res) => {
+  try {
+    const username = req.body.username;
+    const newCreatedIdsArray = req.body.createdIdsArray;
+
+    const userDataToUpdate = await UserSchema.find({ username: username });
+
+    userDataToUpdate[0].recipesCreatedIdsArray = newCreatedIdsArray;
+
+    userDataToUpdate[0].save();
+
+    return res.status(201).json({
+      message: "User Data Updated!",
+      status: 201,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: `Server Error!`,
+      error: [{ error: "Server Error" }],
     });
   }
 };

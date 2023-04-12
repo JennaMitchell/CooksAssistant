@@ -66,6 +66,7 @@
 .signup-popup-signup-button:hover {
   color: black;
   background-color: var(--main200);
+  cursor: pointer;
 }
 .signup-popup-input-container {
   width: max(100%, 100%);
@@ -86,6 +87,7 @@
 }
 .signup-popup-input-container:hover {
   border-color: var(--input-active-color);
+  cursor: pointer;
 }
 .signup-popup-input-label {
   color: var(--main600);
@@ -169,4 +171,5 @@
 }
 .signup-popup-login-text-button:hover {
   color: var(--main200);
+  cursor: pointer;
 }
