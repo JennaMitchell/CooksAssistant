@@ -38,6 +38,8 @@ export class RecipeTemplateThree {
   dishImagesData = dishImagesData;
 
   editPhotoButtonMouseEnter = false;
+  addListElementType = '';
+  addListElementclassNameToRetreive = '';
   userSelectedRecipeDishImageIndexObserver$ = this.store.select(
     userSelectedRecipeDishImageIndexSelector
   );
@@ -48,13 +50,6 @@ export class RecipeTemplateThree {
   selectedTagsObserver$ = this.store.select(selectedTagsSelector);
   selectedTags: string[] = [];
   selectedTagsButtonIds: string[] = [];
-  addListElementType = '';
-  addListElementclassNameToRetreive = '';
-  textAreaClassNamesToRetrieveObject = {
-    ingredients: 'recipe-template-three-ingredient-textarea',
-    directions: 'recipe-template-three-directions-textarea',
-    notes: 'recipe-template-three-notes-textarea',
-  };
 
   changeRecipeTemplatePopupActiveSelectorObserver$ = this.store.select(
     changeRecipeTemplatePopupActiveSelector
@@ -81,12 +76,18 @@ export class RecipeTemplateThree {
     selectedRecipeDishImageIndex: 0,
   };
   userEnteredDataFromStore = false;
+  textAreaClassNamesToRetrieveObject = {
+    ingredients: 'recipe-template-three-ingredient-textarea',
+    directions: 'recipe-template-three-directions-textarea',
+    notes: 'recipe-template-three-notes-textarea',
+  };
 
   textAreaContainersIdsObject: TextAreaContainersIdsObjectInterface = {
     ingredients: 'recipe-template-three-ingredients-textarea-',
     directions: 'recipe-template-three-directions-textarea-',
     notes: 'recipe-template-three-notes-textarea-',
   };
+
   ingredientListIds = ['recipe-template-three-ingredients-textarea-0'];
   directionsListIds = ['recipe-template-three-directions-textarea-0'];
   notesListIds = ['recipe-template-three-notes-textarea-0'];
@@ -101,9 +102,9 @@ export class RecipeTemplateThree {
 
   userEnteredTemplateData = {
     title: '',
-    quote: '',
+    quote: 'NA',
     servings: '',
-    prepTime: '',
+    prepTime: 'NA',
     cookingTime: '',
     ingredientsList: [''],
     directionsList: [''],
@@ -114,9 +115,9 @@ export class RecipeTemplateThree {
 
   blankTemplateData = {
     title: '',
-    quote: '',
+    quote: 'NA',
     servings: '',
-    prepTime: '',
+    prepTime: 'NA',
     cookingTime: '',
     ingredientsList: [''],
     directionsList: [''],
@@ -166,12 +167,14 @@ export class RecipeTemplateThree {
 
   textAreaInputHandler(event: Event, textAreaType: string) {
     this.userEnteredData = true;
+
     this.userEnteredTemplateData =
       this.recipeCreatorFunctions.updateLocalRecipeData(
         this.userEnteredTemplateData,
         textAreaType,
         event
       );
+
     switch (textAreaType) {
       case 'ingredient':
         this.listElementDefaultValuesWhenNewItemAddedArray.ingredients =
@@ -200,6 +203,7 @@ export class RecipeTemplateThree {
       this.userEnteredTemplateData,
       this.textAreaContainersIdsObject
     );
+
     this.userEnteredTemplateData = retrievedData.templateData;
     this.blankTemplateData = retrievedData.templateData;
 
@@ -218,6 +222,7 @@ export class RecipeTemplateThree {
         break;
     }
   }
+
   addTextAreaHandler(type: string) {
     let retrievedData: ReturnedCreatorRecipeDataAndIdsInterface;
 
@@ -231,8 +236,13 @@ export class RecipeTemplateThree {
         this.userEnteredTemplateData = retrievedData.templateData;
         this.blankTemplateData = retrievedData.templateData;
         this.ingredientListIds = retrievedData.idsArray;
+
         this.listElementDefaultValuesWhenNewItemAddedArray.ingredients =
           retrievedData.templateData.ingredientsList;
+
+        this.addListElementType = 'ingredients';
+        this.addListElementclassNameToRetreive =
+          this.textAreaClassNamesToRetrieveObject['ingredients'];
         break;
       case 'directions':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
@@ -240,12 +250,15 @@ export class RecipeTemplateThree {
           this.directionsListIds,
           type
         );
+
         this.userEnteredTemplateData = retrievedData.templateData;
         this.blankTemplateData = retrievedData.templateData;
         this.directionsListIds = retrievedData.idsArray;
         this.listElementDefaultValuesWhenNewItemAddedArray.directions =
           retrievedData.templateData.directionsList;
-
+        this.addListElementType = 'directions';
+        this.addListElementclassNameToRetreive =
+          this.textAreaClassNamesToRetrieveObject['directions'];
         break;
       case 'notes':
         retrievedData = this.recipeCreatorFunctions.addTextFieldButtonHandler(
@@ -258,11 +271,78 @@ export class RecipeTemplateThree {
         this.notesListIds = retrievedData.idsArray;
         this.listElementDefaultValuesWhenNewItemAddedArray.notes =
           retrievedData.templateData.notes;
+        this.addListElementType = 'notes';
+        this.addListElementclassNameToRetreive =
+          this.textAreaClassNamesToRetrieveObject['notes'];
 
         break;
       default:
         break;
     }
+  }
+
+  createButtonClicked(clickedStatus: boolean) {
+    if (clickedStatus) {
+      this.resetLocalVar();
+    }
+  }
+  resetLocalVar() {
+    this.editPhotoButtonMouseEnter = false;
+    this.addListElementType = '';
+    this.addListElementclassNameToRetreive = '';
+    this.selectedTags = [];
+    this.selectedTagsButtonIds = [];
+    this.activeTextAreaId = '';
+    this.userEnteredData = false;
+    this.userHasEnteredDataSelectorObserver$ = this.store.select(
+      userHasEnteredDataSelector
+    );
+    this.selectedRecipeTemplateUserDataFromStore = {
+      title: '',
+      quote: '',
+      servings: '',
+      prepTime: '',
+      cookingTime: '',
+      ingredientsList: [''],
+      directionsList: [''],
+      notes: [''],
+      description: '',
+      selectedRecipeDishImageIndex: 0,
+    };
+    this.userEnteredDataFromStore = false;
+    this.ingredientListIds = ['recipe-template-three-ingredients-textarea-0'];
+    this.directionsListIds = ['recipe-template-three-directions-textarea-0'];
+    this.notesListIds = ['recipe-template-one-notes-textarea-0'];
+    this.listElementDefaultValuesWhenNewItemAddedArray = {
+      ingredients: [''],
+      directions: [''],
+      notes: [''],
+    };
+    this.userEnteredTemplateData = {
+      title: '',
+      quote: 'NA',
+      servings: '',
+      prepTime: 'NA',
+      cookingTime: '',
+      ingredientsList: [''],
+      directionsList: [''],
+      notes: [''],
+      description: '',
+      selectedRecipeDishImageIndex: 1,
+    };
+    this.blankTemplateData = {
+      title: '',
+      quote: 'NA',
+      servings: '',
+      prepTime: 'NA',
+      cookingTime: '',
+      ingredientsList: [''],
+      directionsList: [''],
+      notes: [''],
+      description: '',
+      selectedRecipeDishImageIndex: 1,
+    };
+    this.editTagsButtonMouseEnter = false;
   }
 
   ngOnInit() {
@@ -299,11 +379,16 @@ export class RecipeTemplateThree {
     this.userSelectedRecipeDishImageIndexObserver$.subscribe(
       (value: number) => {
         if (value !== -1) {
-          this.userEnteredTemplateData.selectedRecipeDishImageIndex = value;
+          const copyOfUserEnteredTemplateData = JSON.parse(
+            JSON.stringify(this.userEnteredTemplateData)
+          );
+          copyOfUserEnteredTemplateData.selectedRecipeDishImageIndex = value;
+          this.userEnteredTemplateData = copyOfUserEnteredTemplateData;
         }
       }
     );
     this.recipeCreatorFunctions.textAreaResizeAllFunction();
+    this.resetLocalVar();
   }
 
   ngAfterViewChecked() {

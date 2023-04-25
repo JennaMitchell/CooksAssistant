@@ -22,15 +22,27 @@ exports.getRecipeDataByRating = async (req, res) => {
     const greaterThan = req.params.greaterThan;
     const lessThan = req.params.lessThan;
 
-    const result = await RecipeCardSchema.find({
-      ratings: { $gte: greaterThan, $lte: lessThan },
-    });
+    if (+greaterThan === 5 && +lessThan === 5) {
+      const result = await RecipeCardSchema.find({
+        ratings: 5,
+      });
 
-    return res.status(201).json({
-      message: "Data Retrieved!",
-      retrievedData: result,
-      status: 201,
-    });
+      return res.status(201).json({
+        message: "Data Retrieved!",
+        retrievedData: result,
+        status: 201,
+      });
+    } else {
+      const result = await RecipeCardSchema.find({
+        ratings: { $gte: +greaterThan, $lte: +lessThan },
+      });
+
+      return res.status(201).json({
+        message: "Data Retrieved!",
+        retrievedData: result,
+        status: 201,
+      });
+    }
   } catch (err) {
     return res.status(401).json({
       message: `Server Error!`,
@@ -41,7 +53,8 @@ exports.getRecipeDataByRating = async (req, res) => {
 
 exports.getRecipeDataWithFilter = async (req, res) => {
   try {
-    const filter = JSON.parse(req.params.filter);
+    const filter = req.params.filter;
+
     const result = await RecipeCardSchema.find({ tags: { $all: filter } });
 
     return res.status(201).json({
@@ -210,13 +223,13 @@ exports.updateRecipeDataNumberOfMakes = async (req, res) => {
 };
 exports.updateCreatedRecipesIdArray = async (req, res) => {
   try {
+    console.log(225);
     const username = req.body.username;
+    console.log(username);
     const newCreatedIdsArray = req.body.createdIdsArray;
-
+    console.log(newCreatedIdsArray);
     const userDataToUpdate = await UserSchema.find({ username: username });
-
     userDataToUpdate[0].recipesCreatedIdsArray = newCreatedIdsArray;
-
     userDataToUpdate[0].save();
 
     return res.status(201).json({

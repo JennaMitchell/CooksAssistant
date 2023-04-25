@@ -12,9 +12,6 @@ import { RecipeDataApiCalls } from 'src/app/utilities/api-call-functions/recipe-
 import { Store } from '@ngrx/store';
 import { PopupActions } from 'libs/store/popups/popup-actions.actions';
 
-interface StarRatingsInterface {
-  [key: string]: any;
-}
 @Component({
   selector: 'recipe-browser-nav-menu',
   templateUrl: './recipe-browser-nav-menu.component.html',
@@ -26,7 +23,7 @@ export class RecipeBrowerNavBarComponent {
 
   @Input('menuMoveOut') menuMoveOut = false;
   @Output() userSelectedTagsEvent = new EventEmitter<string[]>();
-  @Output() ratingTagClickedEvent = new EventEmitter<number[]>();
+
   searchInputContainerActive = false;
 
   recipeCourseTagData = recipeCourseTagData;
@@ -48,7 +45,7 @@ export class RecipeBrowerNavBarComponent {
   selectedSubDropDownsTags: string[] = [];
   searchString = 'search';
 
-  starRatingsObject: StarRatingsInterface = {
+  starRatingsObject = {
     one: {
       activeStarArray: ['full', 'empty', 'empty', 'empty', 'empty'],
       id: 'recipe-browser-nav-manu-star-container-1',
@@ -291,7 +288,7 @@ export class RecipeBrowerNavBarComponent {
     const splitId = targetElementId.split('-');
     const ratingToLookUp = +splitId[splitId.length - 1];
 
-    if (ratingToLookUp > 0 && ratingToLookUp < 5) {
+    if (ratingToLookUp > 0 && ratingToLookUp <= 5) {
       if (this.activeRating === ratingToLookUp) {
         this.activeRating = -1;
       } else {

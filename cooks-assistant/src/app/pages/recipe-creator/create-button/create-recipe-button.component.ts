@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   recipesCreatedIdsArraySelector,
@@ -37,6 +37,8 @@ export class CreateRecipeButtonComponent {
     description: '',
     selectedRecipeDishImageIndex: 0,
   };
+
+  @Output() createButtonClicked = new EventEmitter<boolean>();
   constructor(
     private store: Store,
     private recipeCreatorApiService: RecipeCreatorApiService,
@@ -66,6 +68,11 @@ export class CreateRecipeButtonComponent {
     userSelectedRecipeDishImageIndexSelector
   );
   userSelectedRecipeDishImageIndex = 0;
+
+  emitToTemplate() {
+    this.createButtonClicked.emit(true);
+  }
+
   userDataChecker(dataToBeSent: RecipeTemplateSavedDataInterface) {
     if (dataToBeSent.title.length === 0) {
       this.activePopupService.errorPopupHandler('Error: Please enter a title');
@@ -122,7 +129,6 @@ export class CreateRecipeButtonComponent {
     });
     this.selectedTemplateIndexObserver$.subscribe((value) => {
       this.selectedTemplateIndex = value;
-      console.log(value);
     });
     this.tokenSelectorObserver$.subscribe((value) => {
       this.userToken = value;
@@ -132,7 +138,6 @@ export class CreateRecipeButtonComponent {
     });
     this.userSelectedRecipeDishImageIndexObserver$.subscribe((value) => {
       this.userSelectedRecipeDishImageIndex = value;
-      console.log(value);
     });
 
     this.recipesCreatedIdsArrayObserver$.subscribe((value) => {
@@ -162,7 +167,6 @@ export class CreateRecipeButtonComponent {
       this.recipeCreatorApiService
         .recipeCreatorCall(dataToBeSent, this.userToken)
         .then((data: any) => {
-          console.log(data);
           copyOfRecipesCreatedIdsArray = this.recipesCreatedIdsArray.slice();
           copyOfRecipesCreatedIdsArray.push(data.newRecipeCard._id);
 
@@ -180,6 +184,9 @@ export class CreateRecipeButtonComponent {
               recipesCreatedIdsArray: copyOfRecipesCreatedIdsArray,
             })
           );
+        })
+        .then(() => {
+          this.emitToTemplate();
         })
         .then(() => {
           this.store.dispatch(

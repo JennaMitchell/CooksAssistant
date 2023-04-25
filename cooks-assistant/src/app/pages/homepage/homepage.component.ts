@@ -4,10 +4,8 @@ import { HomepageApiCallServiceFunctions } from '../../utilities/api-call-functi
 import { Store } from '@ngrx/store';
 
 import {
-  errorPopupActiveSelector,
   homepageCategoryPopupActiveSelector,
   searchPopupActiveSelector,
-  successPopupActiveSelector,
 } from 'libs/store/popups/popup-selectors';
 import { loggedInSelector } from 'libs/store/auth/auth-selectors';
 
@@ -30,26 +28,8 @@ export class Homepage {
   searchPoupActive = false;
   homepageCategoryPopupActive = false;
 
-  constructor(
-    private homepageApiActions: HomepageApiCallServiceFunctions,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
-  tempButtonHandler() {
-    this.homepageApiActions
-      .addNewRecipe({
-        title: 'Roasted Chicken breast with cherry',
-        cookingTimeInMinutes: '20',
-        tags: ['Gluten', 'Spicy', 'Veggies', 'Dinner'],
-        imageUrl: 'assets/images/food/basamic-chicken.jpg',
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
   ngOnInit() {
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;

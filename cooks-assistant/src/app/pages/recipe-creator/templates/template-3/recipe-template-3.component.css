@@ -1,4 +1,5 @@
 .recipe-template-three-main-container {
+  position: relative;
   width: max(1000px, 1000px);
   height: 100%;
   max-height: max-content;
@@ -11,7 +12,7 @@
   justify-content: center;
 
   box-sizing: border-box;
-  position: relative;
+
   background-color: #fef6e1;
 }
 
@@ -31,6 +32,8 @@
   gap: 100px;
 
   box-sizing: border-box;
+  position: relative;
+  columns: 1 / span 1;
 }
 .recipe-template-three-description-top-container {
   min-height: 100%;
@@ -151,8 +154,8 @@
 }
 .recipe-template-three-quick-info-text-area {
   min-width: 50px;
-  width: 80px;
-  max-width: max-content;
+  width: max-content;
+  max-width: 100px;
   font-family: var(--recipe-template-three-font);
   font-size: var(--r16);
   padding: 0px;
@@ -231,9 +234,11 @@
   top: 20px;
   right: 380px;
   border: 2px solid white;
-  border-radius: 10px;
+
   width: max(225px, 225px);
-  height: max(100px, 100px);
+  min-height: 50px;
+  height: max-content;
+  max-height: 100px;
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;

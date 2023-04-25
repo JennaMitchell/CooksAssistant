@@ -33,17 +33,20 @@
   </button>
   <slide-display
     [configuration]="activeConfigurationNumber"
-    [slideTitle]="dishCategories[0]"
+    [slideTitle]="activeDishCategory"
+    [retrievedDataFromParent]="displayData"
     *ngIf="activeSlides[0]"
   ></slide-display>
   <slide-display
     [configuration]="activeConfigurationNumber"
-    [slideTitle]="dishCategories[1]"
+    [slideTitle]="activeDishCategory"
+    [retrievedDataFromParent]="displayData"
     *ngIf="activeSlides[1]"
   ></slide-display>
   <slide-display
     [configuration]="activeConfigurationNumber"
-    [slideTitle]="dishCategories[2]"
+    [slideTitle]="activeDishCategory"
+    [retrievedDataFromParent]="displayData"
     *ngIf="activeSlides[2]"
   ></slide-display>
 </div>

@@ -49,7 +49,7 @@ export class RecipeViewerComponent {
       .getRecipeDataById(id)
       .then((data: GetRecipeDataSuccessfulResponseInterface) => {
         this.retrievedData = data.retrievedData[0];
-        console.log(this.retrievedData);
+
         const tempTagsArray = this.retrievedData.tags.map((tag) => {
           if (tag.length !== 0) {
             const firstLetter = tag[0].toUpperCase();

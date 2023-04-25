@@ -12,11 +12,15 @@
       key="homepage-category-button-i"
       id="{{ dataEntry.id }}"
       (click)="categoryButtonClickHandler($event)"
+      [ngClass]="{
+        'homepage-category-button-container-active':
+          dataEntry.title === selectedHomepageMealPreferenceValue
+      }"
     >
       <img
         class="homepage-category-button-logo"
         alt="category-icon"
-        src="{{ dataEntry.logoLocation }}"
+        src="{{ dataEntry.iconLocation }}"
       />
       <p class="homepage-category-button-text">{{ dataEntry.title }}</p>
     </button>
@@ -36,11 +40,16 @@
       key="homepage-category-button-i"
       id="{{ nationalityButtonDataEntry.id }}"
       (click)="categoryButtonClickHandler($event)"
+      [ngClass]="{
+        'homepage-category-button-container-active':
+          nationalityButtonDataEntry.title ===
+          selectedHomepageMealNationalityValue
+      }"
     >
       <img
         class="homepage-category-button-logo"
         alt="category-icon"
-        src="{{ nationalityButtonDataEntry.logoLocation }}"
+        src="{{ nationalityButtonDataEntry.iconLocation }}"
       />
       <p class="homepage-category-button-text">
         {{ nationalityButtonDataEntry.title }}
@@ -61,11 +70,15 @@
       key="homepage-category-button-i"
       id="{{ mealsButtonDataEntry.id }}"
       (click)="categoryButtonClickHandler($event)"
+      [ngClass]="{
+        'homepage-category-button-container-active':
+          mealsButtonDataEntry.title === selectedHomepageMealTimeValue
+      }"
     >
       <img
         class="homepage-category-button-logo"
         alt="category-icon"
-        src="{{ mealsButtonDataEntry.logoLocation }}"
+        src="{{ mealsButtonDataEntry.iconLocation }}"
       />
       <p class="homepage-category-button-text">
         {{ mealsButtonDataEntry.title }}

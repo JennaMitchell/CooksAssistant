@@ -252,7 +252,6 @@ export class RecipeCreatorFunctions {
       }
 
       if (textAreaContainerIdType.length !== 0) {
-        console.log(textAreaContainerIdType);
         switch (textAreaContainerIdType) {
           case 'ingredients':
             // Removing the text Area from the entered data array

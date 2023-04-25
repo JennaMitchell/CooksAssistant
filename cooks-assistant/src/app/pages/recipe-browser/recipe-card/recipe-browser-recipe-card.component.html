@@ -36,23 +36,27 @@
         class="recipe-browser-recipe-card-rating-container"
         *ngIf="recipeEntry.ratings.length !== 0"
       >
+        <p class="recipe-browser-recipe-card-recipe-text">
+          {{ averagedRating }}
+        </p>
         <img
           class="recipe-browser-recipe-card-user-interaction-icon"
           alt="star icon"
           src="assets/images/rating-star/full-star-rating.png"
         />
-        <p class="recipe-browser-recipe-card-recipe-text">( 4.5 )</p>
       </div>
       <div
         class="recipe-browser-recipe-card-number-of-makes-container"
         *ngIf="recipeEntry.numberOfMakes !== 0"
       >
+        <p class="recipe-browser-recipe-card-recipe-text">
+          {{ recipeEntry.numberOfMakes }}
+        </p>
         <img
           class="recipe-browser-recipe-card-user-interaction-icon"
           alt="star icon"
           src="assets/images/icons/homepage/number-of-makes-icon.png"
         />
-        <p class="recipe-browser-recipe-card-recipe-text">300</p>
       </div>
     </div>
   </a>

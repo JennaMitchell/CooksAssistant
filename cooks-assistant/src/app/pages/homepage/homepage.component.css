@@ -1,21 +1,18 @@
 .homepage-backdrop {
   background-image: url("../../../assets/images/homepage/homepage-background.jpg");
-  background-position: fill;
   background-repeat: no-repeat;
-  background-size: contain;
-
-  background-size: 100%;
-
+  background-size: cover;
+  min-height: max-content;
   height: max-content;
   max-height: max-content;
   max-width: 100vw;
+
   min-width: 100vw;
   position: relative;
   display: flex;
   padding: 0px;
   margin: 0px;
   overflow: hidden;
-  box-sizing: content-box;
 }
 .homepage-main-container {
   background-color: var(--lightwhite);
@@ -82,4 +79,17 @@
   justify-content: space-between;
   flex-direction: column;
   height: max(1275px, 1275px);
+}
+@media (max-width: 1000px) {
+  .homepage-backdrop {
+    width: max-content;
+    max-width: max-content;
+    box-sizing: border-box;
+    padding: 20px 40px;
+  }
+  .homepage-main-container {
+    width: max-content;
+    max-width: max-content;
+    min-width: max-content;
+  }
 }

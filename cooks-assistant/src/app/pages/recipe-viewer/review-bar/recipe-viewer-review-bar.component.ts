@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   loggedInSelector,
+  recipesMadeIdsArraySelector,
   recipesRatedIdsArraySelector,
 } from 'libs/store/auth/auth-selectors';
 
@@ -12,7 +13,7 @@ import {
   usernameSelector,
   tokenSelector,
 } from 'libs/store/auth/auth-selectors';
-
+import { UserMakeRecipeEntryInterface } from 'libs/store/auth/auth-reducers';
 @Component({
   selector: 'recipe-viewer-review-bar',
   templateUrl: './recipe-viewer-review-bar.component.html',
@@ -52,6 +53,8 @@ export class RecipeViewerReviewBar {
     'recipe-viewer-star-rating-4',
   ];
 
+  recipesMadeIdsArrayObserver$ = this.store.select(recipesMadeIdsArraySelector);
+  recipeMadesIdsArray: UserMakeRecipeEntryInterface[] = [];
   activeStarButtonsArray = [false, false, false, false, false];
   starButtonMouseClickEventOccured = false;
   starButtonIndexClicked = -1;
@@ -86,6 +89,56 @@ export class RecipeViewerReviewBar {
     this.userTokenObserver$.subscribe((value) => {
       this.userToken = value;
     });
+    this.recipesMadeIdsArrayObserver$.subscribe((value) => {
+      this.recipeMadesIdsArray = value;
+    });
+  }
+
+  ngAfterContentInit() {
+    this.activeStarButtonsArray = [];
+    const tempActiveStarButtonsArray: boolean[] = [];
+    // Extracting the previous user data
+    let previousUserRating = -1;
+    for (
+      let indexOfRecipeMadesIdsArray = 0;
+      indexOfRecipeMadesIdsArray < this.recipeMadesIdsArray.length;
+      indexOfRecipeMadesIdsArray++
+    ) {
+      const selectedPreviousRecipeId =
+        this.recipeMadesIdsArray[indexOfRecipeMadesIdsArray].recipeId;
+      if (selectedPreviousRecipeId === this.recipeData._id) {
+        this.makeButtonActive = true;
+        break;
+      }
+    }
+    for (
+      let indexOfRecipesRatedIdArray = 0;
+      indexOfRecipesRatedIdArray < this.recipesRatedIdArray.length;
+      indexOfRecipesRatedIdArray++
+    ) {
+      const selectedPreviousRecipeId =
+        this.recipesRatedIdArray[indexOfRecipesRatedIdArray].recipeId;
+      if (selectedPreviousRecipeId === this.recipeData._id) {
+        previousUserRating =
+          this.recipesRatedIdArray[indexOfRecipesRatedIdArray].rating;
+        break;
+      }
+    }
+
+    if (previousUserRating !== -1) {
+      for (
+        let indexOfActiveStarButtonsArray = 0;
+        indexOfActiveStarButtonsArray < this.activeStarButtonsArray.length;
+        indexOfActiveStarButtonsArray++
+      ) {
+        if (previousUserRating > indexOfActiveStarButtonsArray) {
+          tempActiveStarButtonsArray.push(true);
+        } else {
+          tempActiveStarButtonsArray.push(false);
+        }
+      }
+      this.activeStarButtonsArray = tempActiveStarButtonsArray;
+    }
   }
 
   getTargetElementIdIndex(event: Event) {
@@ -156,7 +209,6 @@ export class RecipeViewerReviewBar {
     this.recipeData.ratings = tempRecipeRatings;
 
     this.starButtonMouseClickEventOccured = true;
-    console.log(this.recipeData.ratings);
 
     if (this.userToken.length !== 0) {
       try {
@@ -213,5 +265,44 @@ export class RecipeViewerReviewBar {
       .then((response) => {
         this.activatePopupService.successPopupHandler(response.message || '');
       });
+
+    const newUserRecipesMadeArrays = this.recipeMadesIdsArray.slice();
+
+    if (this.makeButtonActive) {
+      newUserRecipesMadeArrays.push({
+        recipeId: this.recipeData._id,
+        made: true,
+      });
+      this.recipeDataApiCalls.updateUserRecipesMadeArray(
+        this.username,
+        newUserRecipesMadeArrays,
+        this.userToken
+      );
+    } else {
+      const tempCopyNewUserRecipesMadeArrays = newUserRecipesMadeArrays.slice();
+      for (
+        let indexOfUserRecipeMadeArray = 0;
+        indexOfUserRecipeMadeArray < newUserRecipesMadeArrays.length;
+        indexOfUserRecipeMadeArray++
+      ) {
+        if (
+          newUserRecipesMadeArrays[indexOfUserRecipeMadeArray].recipeId ===
+          this.recipeData._id
+        ) {
+          tempCopyNewUserRecipesMadeArrays.splice(
+            indexOfUserRecipeMadeArray,
+            1
+          );
+          break;
+        }
+      }
+
+      // this.recipeMadesIdsArray = tempCopyNewUserRecipesMadeArrays;
+      this.recipeDataApiCalls.updateUserRecipesMadeArray(
+        this.username,
+        tempCopyNewUserRecipesMadeArrays,
+        this.userToken
+      );
+    }
   }
 }

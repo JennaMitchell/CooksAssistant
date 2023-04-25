@@ -6,6 +6,12 @@ export interface UserRatedRecipeEntryInterface {
   recipeId: string;
   rating: number;
 }
+
+export interface UserMakeRecipeEntryInterface {
+  recipeId: string;
+  made: boolean;
+}
+
 export interface AuthStateInterface {
   token: string;
   username: string;
@@ -14,6 +20,7 @@ export interface AuthStateInterface {
   userId: string;
   recipesRatedIdsArray: UserRatedRecipeEntryInterface[];
   recipesCreatedIdsArray: string[];
+  recipesMadeIdsArray: UserMakeRecipeEntryInterface[];
 }
 
 export const initialAuthState: AuthStateInterface = {
@@ -24,6 +31,7 @@ export const initialAuthState: AuthStateInterface = {
   userId: '',
   recipesRatedIdsArray: [],
   recipesCreatedIdsArray: [],
+  recipesMadeIdsArray: [],
 };
 
 export const authReducers = createReducer(
@@ -66,6 +74,14 @@ export const authReducers = createReducer(
     (_state, { recipesCreatedIdsArray }) => {
       const tempObject = JSON.parse(JSON.stringify(_state));
       tempObject['recipesCreatedIdsArray'] = recipesCreatedIdsArray;
+      return tempObject;
+    }
+  ),
+  on(
+    AuthActions.updateRecipesmadeidsarray,
+    (_state, { recipesMadeIdsArray }) => {
+      const tempObject = JSON.parse(JSON.stringify(_state));
+      tempObject['recipesMadeIdsArray'] = recipesMadeIdsArray;
       return tempObject;
     }
   )

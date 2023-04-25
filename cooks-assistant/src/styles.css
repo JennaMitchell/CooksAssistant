@@ -25,7 +25,7 @@ body {
   --pastel-blue: #3d405b;
 
   --input-error-color: rgb(255, 97, 97);
-  --input-active-color: rgb(27, 27, 255);
+  --input-active-color: rgb(2, 238, 2);
 
   --popup-choice-button-active-color: rgb(2, 238, 2);
 
@@ -67,5 +67,11 @@ body {
   overflow-y: hidden;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

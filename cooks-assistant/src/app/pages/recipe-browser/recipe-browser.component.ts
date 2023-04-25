@@ -7,10 +7,8 @@ import { RecipeTemplateSavedDataInterfaceWithId } from '../../../app/utilities/a
 
 import { ActivatePopupService } from 'src/app/utilities/activate-popup-functions/activate-popup-functions.service';
 import {
-  errorPopupActiveSelector,
   recipeBrowserGetAllRatingsSelector,
   recipeBrowserSelectedRatingSelector,
-  successPopupActiveSelector,
 } from 'libs/store/popups/popup-selectors';
 
 import {
@@ -64,6 +62,38 @@ export class RecipeBrowerComponent {
 
   retrievedRecipeCards: RecipeTemplateSavedDataInterfaceWithId[] = [];
 
+  activeRetrievedRecipeCards: RecipeTemplateSavedDataInterfaceWithId[] = [];
+  activePageNumberFromPageNavBar = 0;
+
+  activePageNumberFromChildComponent(pageNumber: number) {
+    this.activePageNumberFromPageNavBar = pageNumber;
+    this.activeRetrievedRecipeCardsUpdater(this.activePageNumberFromPageNavBar);
+  }
+
+  activeRetrievedRecipeCardsUpdater(pageNumber: number) {
+    let startingIndexOfActiveCards =
+      pageNumber * this.numberOfItemsPerPage - this.numberOfItemsPerPage;
+
+    let endingIndexOfActiveCards =
+      (pageNumber - 1) * this.numberOfItemsPerPage +
+      this.numberOfItemsPerPage -
+      1;
+
+    if (pageNumber === 1) {
+      startingIndexOfActiveCards = 1;
+      endingIndexOfActiveCards = this.numberOfItemsPerPage;
+    }
+
+    if (endingIndexOfActiveCards > this.retrievedRecipeCards.length) {
+      endingIndexOfActiveCards = this.retrievedRecipeCards.length;
+    }
+
+    this.activeRetrievedRecipeCards = this.retrievedRecipeCards.slice(
+      startingIndexOfActiveCards - 1,
+      endingIndexOfActiveCards
+    );
+  }
+
   ngOnInit() {
     this.loggedInObserver$.subscribe((value) => {
       this.loggedIn = value;
@@ -78,8 +108,8 @@ export class RecipeBrowerComponent {
           .getRecipeDataByRating(greaterValue, lessValue)
           .then((data: GetRecipeDataSuccessfulResponseInterface) => {
             this.retrievedRecipeCards = data.retrievedData;
-
             this.numberOfPagesCalculator(this.retrievedRecipeCards);
+            this.activeRetrievedRecipeCardsUpdater(1);
           })
           .catch((err: Error) => {
             this.activatePopupService.errorPopupHandler(err.message);
@@ -105,6 +135,7 @@ export class RecipeBrowerComponent {
           .then((data: GetRecipeDataSuccessfulResponseInterface) => {
             this.retrievedRecipeCards = data.retrievedData;
             this.numberOfPagesCalculator(this.retrievedRecipeCards);
+            this.activeRetrievedRecipeCardsUpdater(1);
             return data;
           })
           .catch((err: Error) => {
@@ -131,6 +162,7 @@ export class RecipeBrowerComponent {
                 homepageCategoryPopupSelectedCategory: '',
               })
             );
+            this.activeRetrievedRecipeCardsUpdater(1);
             return data;
           })
           .catch((err: Error) => {
@@ -146,6 +178,7 @@ export class RecipeBrowerComponent {
           .then((data: GetRecipeDataSuccessfulResponseInterface) => {
             this.retrievedRecipeCards = data.retrievedData;
             this.numberOfPagesCalculator(this.retrievedRecipeCards);
+            this.activeRetrievedRecipeCardsUpdater(1);
             return data;
           })
           .catch((err: Error) => {
@@ -162,7 +195,9 @@ export class RecipeBrowerComponent {
         .getAllRecipeData()
         .then((data: GetRecipeDataSuccessfulResponseInterface) => {
           this.retrievedRecipeCards = data.retrievedData;
-          this.numberOfPagesCalculator(this.retrievedRecipeCards);
+          this.numberOfPagesCalculator(data.retrievedData);
+
+          this.activeRetrievedRecipeCardsUpdater(1);
           return data;
         })
         .catch((err: Error) => {
@@ -179,6 +214,7 @@ export class RecipeBrowerComponent {
               homepageCategoryPopupSelectedCategory: '',
             })
           );
+          this.activeRetrievedRecipeCardsUpdater(1);
           return data;
         })
         .catch((err: Error) => {
@@ -196,6 +232,7 @@ export class RecipeBrowerComponent {
               homepageCategoryPopupSelectedCategory: '',
             })
           );
+          this.activeRetrievedRecipeCardsUpdater(1);
           return data;
         })
         .catch((err: Error) => {
@@ -216,6 +253,7 @@ export class RecipeBrowerComponent {
                 homepagePopularButtonClicked: false,
               })
             );
+            this.activeRetrievedRecipeCardsUpdater(1);
           })
           .catch((err: Error) => {
             this.activatePopupService.errorPopupHandler(err.message);
@@ -267,10 +305,5 @@ export class RecipeBrowerComponent {
   }
   recipeNavMenuClickHandler() {
     this.recipeNavMenuActive = !this.recipeNavMenuActive;
-  }
-
-  ratingMenuClickHandler(greaterThen: number, lessThen: number) {
-    if (greaterThen > 0 && greaterThen <= 5 && lessThen > 0 && lessThen <= 5) {
-    }
   }
 }

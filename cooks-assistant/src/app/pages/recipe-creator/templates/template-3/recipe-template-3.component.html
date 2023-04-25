@@ -1,3 +1,7 @@
+<create-recipe-button
+  [templateData]="userEnteredTemplateData"
+  (createButtonClicked)="createButtonClicked($event)"
+></create-recipe-button>
 <div class="recipe-template-three-main-container">
   <div class="recipe-template-three-directions-ingredients-top-container">
     <div class="recipe-template-three-ingredients-container">
@@ -93,7 +97,7 @@
         </p>
         <textarea
           class="recipe-template-three-text-area recipe-template-three-directions-text-area"
-          (keyup)="textAreaInputHandler($event, 'direction')"
+          (keyup)="textAreaInputHandler($event, 'directions')"
           placeholder="Enter a Direction"
           >{{
             listElementDefaultValuesWhenNewItemAddedArray.directions[
@@ -218,7 +222,7 @@
       <textarea
         class="recipe-template-three-quick-info-text-area"
         (keyup)="textAreaInputHandler($event, 'servings')"
-        placeholder="4 Servings"
+        placeholder="## Servings"
         >{{ userEnteredTemplateData.servings }}</textarea
       >
       <img
@@ -229,7 +233,7 @@
       <textarea
         class="recipe-template-three-quick-info-text-area recipe-template-three-time-to-cook"
         (keyup)="textAreaInputHandler($event, 'cookingTime')"
-        placeholder="10 MIN"
+        placeholder="## MIN"
         >{{ userEnteredTemplateData.cookingTime }}</textarea
       >
     </div>

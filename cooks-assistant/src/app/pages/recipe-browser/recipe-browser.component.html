@@ -4,7 +4,7 @@
   <div class="recipe-browser-main-container">
     <recipe-browser-recipe-card
       *ngFor="
-        let entryOfRetrievedRecipeCards of retrievedRecipeCards;
+        let entryOfRetrievedRecipeCards of activeRetrievedRecipeCards;
         let indexOfCard = index
       "
       [recipeEntry]="entryOfRetrievedRecipeCards"
@@ -18,6 +18,9 @@
     </p>
     <recipe-page-results-navigator
       [numberOfPages]="numberOfPages"
+      (activeNumberOfPagesRetriever)="
+        activePageNumberFromChildComponent($event)
+      "
     ></recipe-page-results-navigator>
   </div>
 

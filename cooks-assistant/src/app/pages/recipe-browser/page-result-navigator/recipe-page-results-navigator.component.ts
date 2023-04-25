@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'recipe-page-results-navigator',
@@ -11,7 +10,9 @@ import { Observable } from 'rxjs';
 export class RecipePageResultsNavigatorComponent {
   constructor(private store: Store) {}
 
-  @Input('numberOfPages') numberOfPages = 3;
+  @Input('numberOfPages') numberOfPages = 0;
+  @Output('activeNumberOfPagesRetriever') activeNumberOfPagesRetriever =
+    new EventEmitter<number>();
   activePageNumber = 1;
   rightDotsActive = false;
   leftDotsActive = true;
@@ -20,16 +21,16 @@ export class RecipePageResultsNavigatorComponent {
 
   middlePageButtonValue = this.numberOfPages - 1;
 
-  ngOnChanges() {
+  ngAfterContentChecked() {
     this.numberOfPagesHandler(this.numberOfPages);
-  }
-
-  ngOnInit() {
-    this.numberOfPagesHandler(this.numberOfPages);
+    this.middlePageButtonValueHandler();
+    this.rightDotsActiveLogicHandler();
+    this.middlePageButtonValueHandler();
+    this.leftDotsActiveLogicHandler();
   }
 
   numberOfPagesHandler(tempNumberOfPages: number) {
-    if (+tempNumberOfPages === 1) {
+    if (+tempNumberOfPages === 1 || tempNumberOfPages === 0) {
       this.rightDotsActive = false;
       this.leftDotsActive = false;
       this.arrowButtonsActive = false;
@@ -43,6 +44,11 @@ export class RecipePageResultsNavigatorComponent {
       this.middlePageButtonActive = true;
       this.rightDotsActive = true;
       this.leftDotsActive = false;
+      this.arrowButtonsActive = true;
+    } else {
+      this.middlePageButtonActive = true;
+      this.rightDotsActive = false;
+      this.leftDotsActive = true;
       this.arrowButtonsActive = true;
     }
   }
@@ -58,7 +64,7 @@ export class RecipePageResultsNavigatorComponent {
   }
 
   leftDotsActiveLogicHandler() {
-    if (this.activePageNumber === this.numberOfPages) {
+    if (this.activePageNumber >= this.numberOfPages - 1) {
       this.leftDotsActive = false;
     } else {
       this.leftDotsActive = true;
@@ -82,6 +88,7 @@ export class RecipePageResultsNavigatorComponent {
     this.rightDotsActiveLogicHandler();
     this.middlePageButtonValueHandler();
     this.leftDotsActiveLogicHandler();
+    this.activeNumberOfPagesRetriever.emit(this.activePageNumber);
   }
 
   rightArrowButtonHandler() {
@@ -93,6 +100,7 @@ export class RecipePageResultsNavigatorComponent {
     this.rightDotsActiveLogicHandler();
     this.middlePageButtonValueHandler();
     this.leftDotsActiveLogicHandler();
+    this.activeNumberOfPagesRetriever.emit(this.activePageNumber);
   }
 
   pageNumberButtonHandler(event: MouseEvent) {
@@ -106,5 +114,6 @@ export class RecipePageResultsNavigatorComponent {
     this.rightDotsActiveLogicHandler();
     this.middlePageButtonValueHandler();
     this.leftDotsActiveLogicHandler();
+    this.activeNumberOfPagesRetriever.emit(this.activePageNumber);
   }
 }

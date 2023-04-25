@@ -38,6 +38,15 @@ export class RecipeBrowerRecipeCardComponent {
 
   newTagActive = false;
 
+  averagedRating = 0;
+
+  ngAfterContentChecked() {
+    this.dishImageLocation = `../../../../../${
+      dishImagesData[this.recipeEntry.selectedRecipeDishImageIndex]
+        .imageLocation
+    }`;
+  }
+
   ngOnInit() {
     const topCardElements = document.getElementsByClassName(
       'recipe-browser-recipe-card'
@@ -58,6 +67,16 @@ export class RecipeBrowerRecipeCardComponent {
       this.recipeEntry.numberOfMakes === 0
     ) {
       this.newTagActive = true;
+    }
+
+    if (this.recipeEntry.ratings.length !== 0) {
+      let ratingTotal = 0;
+
+      this.recipeEntry.ratings.map((value) => {
+        ratingTotal = ratingTotal + value;
+      });
+
+      this.averagedRating = ratingTotal / this.recipeEntry.ratings.length;
     }
   }
 }

@@ -19,6 +19,7 @@ exports.signup = async (req, res, next) => {
   const recievedPassword = req.body.password;
   const recipeRatedIdsArray = req.body.recipesRatedIdArray;
   const recipesCreatedIdsArray = req.body.recipesCreatedIdsArray;
+  const recipesMadeIdsArray = req.body.recipesMadeIdsArray;
 
   try {
     const hashedPw = await bcrypt.hash(recievedPassword, 12);
@@ -30,6 +31,7 @@ exports.signup = async (req, res, next) => {
       username: recievedUsername,
       recipeRatedIdsArray: recipeRatedIdsArray,
       recipesCreatedIdsArray: recipesCreatedIdsArray,
+      recipesMadeIdsArray: recipesMadeIdsArray,
       createdAt: currentDate,
     });
     const result = await newUser.save();
@@ -114,16 +116,57 @@ exports.login = async (req, res, next) => {
 
 exports.updateUserRatedRecipesArray = async (req, res) => {
   try {
-    console.log(req.body);
     const username = req.body.username;
     const newRatedArray = req.body.recipeRatingArray;
-    console.log(username);
-    console.log(newRatedArray);
+
     const userDataToUpdate = await UserSchema.find({ username: username });
-    console.log(userDataToUpdate);
+
     userDataToUpdate[0].recipesRatedIdArray = newRatedArray;
     userDataToUpdate[0].save();
 
+    return res.status(201).json({
+      message: "User Recipe Ratings Array Updated!",
+      status: 201,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: `Server Error!`,
+      error: [{ error: "Server Error" }],
+    });
+  }
+};
+exports.updateUserRatedRecipesArray = async (req, res) => {
+  try {
+    const username = req.body.username;
+    const newRatedArray = req.body.recipeRatingArray;
+
+    const userDataToUpdate = await UserSchema.find({ username: username });
+
+    userDataToUpdate[0].recipesRatedIdArray = newRatedArray;
+    userDataToUpdate[0].save();
+
+    return res.status(201).json({
+      message: "User Recipe Ratings Array Updated!",
+      status: 201,
+    });
+  } catch (err) {
+    return res.status(401).json({
+      message: `Server Error!`,
+      error: [{ error: "Server Error" }],
+    });
+  }
+};
+exports.updateUserRecipesMadeArray = async (req, res) => {
+  try {
+    const username = req.body.username;
+    const newRecipesMadeIdsArray = req.body.recipeMadeArray;
+    console.log(163);
+
+    const userDataToUpdate = await UserSchema.find({ username: username });
+
+    userDataToUpdate[0].recipesMadeIdsArray = newRecipesMadeIdsArray;
+
+    userDataToUpdate[0].save();
     return res.status(201).json({
       message: "User Recipe Ratings Array Updated!",
       status: 201,

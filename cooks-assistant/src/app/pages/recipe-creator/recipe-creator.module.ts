@@ -13,6 +13,7 @@ import { LoggedInNavBarModule } from 'src/app/nav-bar/logged-in-nav-bar/logged-i
 
 import { TagsSelectorPopupModule } from 'src/app/popups/recipe-creator/tags-selector/tags-selector-popup.module';
 import { DishImageChangerPopupModule } from 'src/app/popups/recipe-creator/dish-image-changer/dish-image-changer.module';
+import { CreateRecipeButtonModule } from './create-button/create-recipe-button.module';
 
 @NgModule({
   declarations: [RecipeCreatorComponent],
@@ -31,6 +32,7 @@ import { DishImageChangerPopupModule } from 'src/app/popups/recipe-creator/dish-
 
     TagsSelectorPopupModule,
     DishImageChangerPopupModule,
+    CreateRecipeButtonModule,
   ],
 })
 export class RecipeCreatorModule {}

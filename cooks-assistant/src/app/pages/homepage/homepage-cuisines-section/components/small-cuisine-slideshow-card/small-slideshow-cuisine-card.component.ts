@@ -9,4 +9,5 @@ import { RecipeTagFilter } from 'src/app/utilities/recipe-tag-filter/recipe-tag-
 export class SmallSlideShowCuisineCard {
   @Input('title') title = '';
   @Input('imageUrl') imageUrl = '';
+  @Input('recipeId') recipeId = '';
 }

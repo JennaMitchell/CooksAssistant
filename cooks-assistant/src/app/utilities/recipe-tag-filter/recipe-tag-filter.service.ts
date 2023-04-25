@@ -1,43 +1,60 @@
+import {
+  preferenceButtonData,
+  nationalityButtonData,
+  mealsTimesButtonData,
+  recipeCourseTagData,
+  mainIngredientsData,
+} from '../../../app/constants/constants';
 export class RecipeTagFilter {
-  recipeTagFilter = (tagsArray: string[]) => {
-    const finalTagPictureArray = [];
+  preferenceButtonData = preferenceButtonData;
+  nationalityButtonData = nationalityButtonData;
+  mealsTimesButtonData = mealsTimesButtonData;
+  recipeCourseTagData = recipeCourseTagData;
+  mainIngredientsData = mainIngredientsData;
 
-    for (let indexOfTag = 0; indexOfTag < tagsArray.length; indexOfTag++) {
-      switch (tagsArray[indexOfTag]) {
-        case 'Meat':
-          finalTagPictureArray.push('assets/images/icons/food/beef-icon.png');
-          break;
-        case 'Veggies':
-          finalTagPictureArray.push(
-            'assets/images/icons/food/vegetarian-icon.png'
-          );
-          break;
-        case 'Spicy':
-          finalTagPictureArray.push('assets/images/icons/food/spicy-icon.png');
-          break;
-        case 'Gluten':
-          finalTagPictureArray.push('assets/images/icons/food/grain-icon.png');
-          break;
-        case 'Dinner':
-          finalTagPictureArray.push(
-            'assets/images/icons/meal-times/dinner.png'
-          );
-          break;
-        case 'Lunch':
-          finalTagPictureArray.push('assets/images/icons/meal-times/lunch.png');
-          break;
-        case 'Breakfast':
-          finalTagPictureArray.push(
-            'assets/images/icons/meal-times/breakfast.png'
-          );
-          break;
-        case 'Sweet':
-          finalTagPictureArray.push('assets/images/icons/food/sweet-icon.png');
-          break;
-        default:
-          break;
-      }
+  recipeTagFilter = (tagToFind: string) => {
+    if (tagToFind.length === 0) {
+      return { title: '', iconLocation: '', id: '', altText: '' };
     }
-    return finalTagPictureArray;
+
+    const lowercaseTagToFind = tagToFind.toLowerCase();
+
+    const foundPrefrenceData = this.preferenceButtonData.filter(
+      (dataEntry) => dataEntry.title.toLowerCase() === lowercaseTagToFind
+    );
+    if (foundPrefrenceData.length !== 0) {
+      return foundPrefrenceData[0];
+    }
+
+    const foundNationalityData = this.nationalityButtonData.filter(
+      (dataEntry) => dataEntry.title.toLowerCase() === lowercaseTagToFind
+    );
+
+    if (foundNationalityData.length !== 0) {
+      return foundNationalityData[0];
+    }
+
+    const foundMealsTimesButtonData = this.mealsTimesButtonData.filter(
+      (dataEntry) => dataEntry.title.toLowerCase() === lowercaseTagToFind
+    );
+
+    if (foundMealsTimesButtonData.length !== 0) {
+      return foundMealsTimesButtonData[0];
+    }
+
+    const foundRecipeCourseTagData = this.recipeCourseTagData.filter(
+      (dataEntry) => dataEntry.title.toLowerCase() === lowercaseTagToFind
+    );
+    if (foundRecipeCourseTagData.length !== 0) {
+      return foundRecipeCourseTagData[0];
+    }
+
+    const foundMainIngredientsData = this.mainIngredientsData.filter(
+      (dataEntry) => dataEntry.title.toLowerCase() === lowercaseTagToFind
+    );
+    if (foundMainIngredientsData.length !== 0) {
+      return foundMainIngredientsData[0];
+    }
+    return { title: '', iconLocation: '', id: '', altText: '' };
   };
 }

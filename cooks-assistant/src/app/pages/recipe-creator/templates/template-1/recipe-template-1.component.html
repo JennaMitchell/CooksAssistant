@@ -1,6 +1,7 @@
 <div class="recipe-template-one-main-container">
   <create-recipe-button
     [templateData]="userEnteredTemplateData"
+    (createButtonClicked)="createButtonClicked($event)"
   ></create-recipe-button>
   <div class="recipe-template-one-image-container">
     <button

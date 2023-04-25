@@ -5,6 +5,7 @@ import { RandomStringGeneratorsService } from 'src/app/utilities/random-string-g
 import { SignupApiCallsService } from 'src/app/utilities/api-call-functions/signup-api-call-functions/signup-api-calls.service';
 import { AuthActions } from 'libs/store/auth/auth.actions';
 import { ActivatePopupService } from 'src/app/utilities/activate-popup-functions/activate-popup-functions.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'signup-popup',
   templateUrl: './signup-popup.component.html',
@@ -29,7 +30,8 @@ export class SignupPopupComponent {
     private store: Store,
     private randomStringGenerators: RandomStringGeneratorsService,
     private signupApiCallsService: SignupApiCallsService,
-    private activatePopupService: ActivatePopupService
+    private activatePopupService: ActivatePopupService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -199,6 +201,7 @@ export class SignupPopupComponent {
         password: this.generatedPassword,
         recipesRatedIdArray: [],
         recipesCreatedIdsArray: [],
+        recipesMadeIdsArray: [],
       })
       .then((jsonedData: any) => {
         this.store.dispatch(
@@ -218,13 +221,22 @@ export class SignupPopupComponent {
           AuthActions.updateUsername({ username: this.generatedUsername })
         );
 
+        window.setTimeout(() => {
+          this.store.dispatch(AuthActions.updateEmail({ email: '' }));
+          this.store.dispatch(AuthActions.updateLoggedin({ loggedIn: false }));
+
+          this.store.dispatch(AuthActions.updateToken({ token: '' }));
+
+          this.store.dispatch(AuthActions.updateUserid({ userId: '' }));
+
+          this.store.dispatch(AuthActions.updateUsername({ username: '' }));
+          this.router.navigateByUrl('/');
+        }, 3600000);
         this.activatePopupService.successPopupHandler('Success: User Created');
 
         this.closingButtonHandler();
       })
       .catch((err) => {
-        console.log(err);
-
         this.store.dispatch(
           PopupActions.updateErrormessage({ errorMessage: err.toString() })
         );

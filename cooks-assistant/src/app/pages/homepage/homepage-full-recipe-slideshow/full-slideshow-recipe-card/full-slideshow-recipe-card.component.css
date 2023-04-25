@@ -5,11 +5,15 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  position: relative;
 
   max-width: calc(700 / var(--base) * 1rem);
+  width: calc(700 / var(--base) * 1rem);
   min-width: calc(700 / var(--base) * 1rem);
   min-height: calc(375 / var(--base) * 1rem);
+  height: calc(375 / var(--base) * 1rem);
   max-height: calc(375 / var(--base) * 1rem);
+  z-index: 2;
 }
 .homepage-new-recipe-info-container {
   grid-column: 2 / span 1;
@@ -26,7 +30,7 @@
   gap: 5px;
   position: relative;
 }
-.homepage-new-recipe-flag {
+.homepage-recipe-icon {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -58,11 +62,12 @@
 }
 .homepage-new-recipe-card-tags-container {
   display: flex;
-  flex-basis: 100%;
+  flex-wrap: wrap;
   width: max(100%, 100%);
   max-height: max-content;
   padding-left: 10px;
-  gap: 10px;
+  row-gap: 5px;
+  column-gap: 5px;
 }
 .homepage-new-recipe-card-tag {
   max-width: max-content;
@@ -107,7 +112,6 @@
   justify-content: center;
   gap: 5px;
   padding-left: 10px;
-  box-sizing: border-box;
 }
 .homepage-new-recipe-count-icon {
   max-width: calc(30 / var(--base) * 1rem);
@@ -144,6 +148,7 @@
 .homepage-new-recipe-make-button:hover {
   background-color: var(--main100);
   color: black;
+  cursor: pointer;
 }
 .homepage-new-recipe-card-cooking-time-container {
   display: flex;

@@ -243,9 +243,6 @@ export class RecipeTemplateOne {
         this.addListElementType = 'ingredients';
         this.addListElementclassNameToRetreive =
           this.textAreaClassNamesToRetrieveObject['ingredients'];
-        console.log(
-          this.listElementDefaultValuesWhenNewItemAddedArray.ingredients
-        );
 
         break;
       case 'directions':
@@ -263,10 +260,6 @@ export class RecipeTemplateOne {
         this.addListElementType = 'directions';
         this.addListElementclassNameToRetreive =
           this.textAreaClassNamesToRetrieveObject['directions'];
-
-        console.log(
-          this.listElementDefaultValuesWhenNewItemAddedArray.ingredients
-        );
 
         break;
       case 'notes':
@@ -288,6 +281,70 @@ export class RecipeTemplateOne {
       default:
         break;
     }
+  }
+
+  createButtonClicked(clickedStatus: boolean) {
+    if (clickedStatus) {
+      this.resetLocalVar();
+    }
+  }
+  resetLocalVar() {
+    this.editPhotoButtonMouseEnter = false;
+    this.addListElementType = '';
+    this.addListElementclassNameToRetreive = '';
+    this.selectedTags = [];
+    this.selectedTagsButtonIds = [];
+    this.activeTextAreaId = '';
+    this.userEnteredData = false;
+    this.userHasEnteredDataSelectorObserver$ = this.store.select(
+      userHasEnteredDataSelector
+    );
+    this.selectedRecipeTemplateUserDataFromStore = {
+      title: '',
+      quote: '',
+      servings: '',
+      prepTime: '',
+      cookingTime: '',
+      ingredientsList: [''],
+      directionsList: [''],
+      notes: [''],
+      description: '',
+      selectedRecipeDishImageIndex: 0,
+    };
+    this.userEnteredDataFromStore = false;
+    this.ingredientListIds = ['recipe-template-one-ingredients-textarea-0'];
+    this.directionsListIds = ['recipe-template-one-directions-textarea-0'];
+    this.notesListIds = ['recipe-template-one-notes-textarea-0'];
+    this.listElementDefaultValuesWhenNewItemAddedArray = {
+      ingredients: [''],
+      directions: [''],
+      notes: [''],
+    };
+    this.userEnteredTemplateData = {
+      title: '',
+      quote: '',
+      servings: '',
+      prepTime: '',
+      cookingTime: '',
+      ingredientsList: [''],
+      directionsList: [''],
+      notes: [''],
+      description: '',
+      selectedRecipeDishImageIndex: 1,
+    };
+    this.blankTemplateData = {
+      title: '',
+      quote: '',
+      servings: '',
+      prepTime: '',
+      cookingTime: '',
+      ingredientsList: [''],
+      directionsList: [''],
+      notes: [''],
+      description: '',
+      selectedRecipeDishImageIndex: 1,
+    };
+    this.editTagsButtonMouseEnter = false;
   }
 
   ngOnInit() {
@@ -324,11 +381,16 @@ export class RecipeTemplateOne {
     this.userSelectedRecipeDishImageIndexObserver$.subscribe(
       (value: number) => {
         if (value !== -1) {
-          this.userEnteredTemplateData.selectedRecipeDishImageIndex = value;
+          const copyOfUserEnteredTemplateData = JSON.parse(
+            JSON.stringify(this.userEnteredTemplateData)
+          );
+          copyOfUserEnteredTemplateData.selectedRecipeDishImageIndex = value;
+          this.userEnteredTemplateData = copyOfUserEnteredTemplateData;
         }
       }
     );
     this.recipeCreatorFunctions.textAreaResizeAllFunction();
+    this.resetLocalVar();
   }
 
   ngAfterViewChecked() {

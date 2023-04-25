@@ -55,4 +55,10 @@ router.put(
   authController.updateUserRatedRecipesArray
 );
 
+router.put(
+  "/update-userMadeRecipesArray",
+  isAuth,
+  authController.updateUserRecipesMadeArray
+);
+
 module.exports = router;

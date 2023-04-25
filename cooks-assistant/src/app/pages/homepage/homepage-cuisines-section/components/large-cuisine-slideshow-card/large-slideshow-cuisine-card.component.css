@@ -14,6 +14,9 @@
 .homepage-slideshow-large-card-image-container {
   flex: 1;
   position: relative;
+  width: max(100%, 100%);
+
+  height: max(100%, 100%);
 }
 .homepage-slideshow-large-card-image {
   width: max(100%, 100%);
@@ -62,7 +65,7 @@
 .homepage-slideshow-large-card-tag-image {
   width: max(20px, 20px);
   height: max(20px, 20px);
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* homepage-slideshow-large-card-tag-container */

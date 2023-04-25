@@ -8,11 +8,15 @@ export const AuthActions = createActionGroup({
     'Update LoggedIn': props<{ loggedIn: boolean }>(),
     'Update Email': props<{ email: string }>(),
     'Update UserId': props<{ userId: string }>(),
+
     'Update RecipesRatedIdArray': props<{
       recipesRatedIdArray: UserRatedRecipeEntryInterface[];
     }>(),
     'Update RecipesCreatedIdsArray': props<{
       recipesCreatedIdsArray: string[];
+    }>(),
+    'Update RecipesMadeIdsArray': props<{
+      recipesMadeIdsArray: UserRatedRecipeEntryInterface[];
     }>(),
   },
 });

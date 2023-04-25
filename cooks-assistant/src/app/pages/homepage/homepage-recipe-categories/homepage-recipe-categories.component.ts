@@ -15,7 +15,7 @@ import {
 } from '../../../constants/constants';
 interface ButtonData {
   title: string;
-  logoLocation: string;
+  iconLocation: string;
   id: string;
 }
 @Component({
@@ -45,7 +45,7 @@ export class HomepageRecipeCategories {
     selectedHomepageMealNationalitySelector
   );
 
-  selectedHomepageMealTimeValue: string = '';
+  selectedHomepageMealTimeValue = '';
   selectedHomepageMealPreferenceValue = '';
   selectedHomepageMealNationalityValue = '';
 

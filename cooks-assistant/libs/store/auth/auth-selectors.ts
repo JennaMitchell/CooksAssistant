@@ -40,3 +40,9 @@ export const recipesCreatedIdsArraySelector = createSelector(
     return state.recipesCreatedIdsArray;
   }
 );
+export const recipesMadeIdsArraySelector = createSelector(
+  selectAuthStore,
+  (state: AuthStateInterface) => {
+    return state.recipesMadeIdsArray;
+  }
+);

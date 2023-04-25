@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   recipesRatedIdArray: { type: Array, required: true },
   recipesCreatedIdsArray: { type: Array, required: true },
   createdAt: { type: Date, expires: 3600 },
+  recipesMadeIdsArray: { type: Array, required: true },
 });
 
 module.exports = mongoose.model("UserSchema", UserSchema);

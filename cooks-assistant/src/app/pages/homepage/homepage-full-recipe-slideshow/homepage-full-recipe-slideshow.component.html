@@ -1,17 +1,33 @@
 <div class="homepage-new-recipe-slideshow-backdrop">
-  <homepage-preference-card
-    recipeTitle="{{ tempData[currentlySelectedRecipeNumber].title }}"
-    [recipeTags]="tempData[currentlySelectedRecipeNumber].tags"
-    recipeDescription="{{ tempData[currentlySelectedRecipeNumber].title }}"
+  <img
+    class="homepage-new-recipe-slideshow-backdropImage"
+    *ngIf="displayData.length !== 0"
+    src="
+    {{
+      dishImagesData[
+        displayData[currentlySelectedRecipeNumber].selectedRecipeDishImageIndex
+      ].imageLocation
+    }}
+  "
+    alt="backdrop image"
+  />
+
+  <homepage-full-slideshow-recipe-card
+    *ngIf="displayData.length !== 0"
+    recipeTitle="{{ displayData[currentlySelectedRecipeNumber].title }}"
+    [recipeTags]="displayData[currentlySelectedRecipeNumber].tags"
+    recipeDescription="{{ displayData[currentlySelectedRecipeNumber].quote }}"
     numberOfMakes="{{ displayReadyNumberOfMakes }}"
     numberOfReviews="{{ displayReadyNumberOfReviews }}"
     cookingTime="{{ displayReadyCookingTime }}"
     [postiveRatingArray]="postiveRatingArray"
     [negativeRatingArray]="negativeRatingArray"
     [halfStarActive]="halfStarActive"
-    flagLocation="{{ flagLocation }}"
-    nationOrigin="{{ nationOrigin }}"
-  ></homepage-preference-card>
+    iconLocation="{{ iconLocation }}"
+    iconAltText="{{ iconAltText }}"
+    slideshowType="{{ slideShowType }}"
+    (click)="makeButtonClick()"
+  ></homepage-full-slideshow-recipe-card>
 
   <div class="homepage-new-recipe-slideshow-slide-tracker">
     <svg

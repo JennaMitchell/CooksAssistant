@@ -1,91 +1,112 @@
 import { Component } from '@angular/core';
 import { RecipeTagFilter } from 'src/app/utilities/recipe-tag-filter/recipe-tag-filter.service';
-
-interface DataEntryInterface {
-  title: string;
-  cookingTimeInMinutes: string;
-  tags: string[];
-  imageUrl: string;
-  rating: number;
-  numberOfMakes: string;
-  numberOfReviews: number;
-  countryMadeIn: string;
-}
+import { RecipeDataApiCalls } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
+import { ActivatePopupService } from 'src/app/utilities/activate-popup-functions/activate-popup-functions.service';
+import { RecipeTemplateSavedDataInterfaceWithId } from 'src/app/utilities/api-call-functions/recipe-data-api-calls/recipe-data-api-calls.service';
+import { dishImagesData } from 'src/app/constants/dish-image-data';
+import { Store } from '@ngrx/store';
+import { selectedHomepageMealNationalitySelector } from 'libs/store/homepage/homepage-selectors';
 @Component({
   selector: 'homepage-cuisines-section',
   templateUrl: './homepage-cuisines-section.component.html',
   styleUrls: ['./homepage-cuisines-section.component.css'],
-  providers: [RecipeTagFilter],
+  providers: [RecipeTagFilter, RecipeDataApiCalls, ActivatePopupService],
 })
 export class HomepageCuisinesSection {
-  constructor(private tagFilterService: RecipeTagFilter) {}
-  renderReadyIcon = [];
-  dataTagArray: string[][] = [];
+  constructor(
+    private recipeDataApiCallsService: RecipeDataApiCalls,
+    private activatePopupService: ActivatePopupService,
+    private store: Store,
+    private tagFilterService: RecipeTagFilter
+  ) {}
 
-  tempData: DataEntryInterface[] = [
-    {
-      title: 'Roasted Chicken breast with cherry',
-      cookingTimeInMinutes: '20',
-      tags: ['Gluten', 'Spicy', 'Veggies', 'Dinner'],
-      imageUrl: 'assets/images/food/basamic-chicken.jpg',
-      rating: 5,
-      numberOfMakes: '1000000',
-      numberOfReviews: 100,
-      countryMadeIn: 'France',
-    },
-    {
-      title: 'Chicken Salad',
-      cookingTimeInMinutes: '10',
-      tags: ['Chicken', 'Veggies', 'Lunch'],
-      imageUrl: 'assets/images/food/chicken-salad.jpg',
-      rating: 2.5,
-      numberOfMakes: '1000',
-      numberOfReviews: 3210,
-      countryMadeIn: 'France',
-    },
-    {
-      title: 'French Toast',
-      cookingTimeInMinutes: '30',
-      tags: ['Gluten', 'Breakfast', 'Sweet'],
-      imageUrl: 'assets/images/food/french-toast.jpg',
-      rating: 3,
-      numberOfMakes: '300000',
-      numberOfReviews: 200,
-      countryMadeIn: 'Russia',
-    },
-    {
-      title: 'Meat Platter',
-      cookingTimeInMinutes: '60',
-      tags: ['Meat', 'Dinner'],
-      imageUrl: 'assets/images/food/meat-platter.jpg',
-      rating: 4.2,
-      numberOfMakes: '302000',
-      numberOfReviews: 1010000,
-      countryMadeIn: 'USA',
-    },
-    {
-      title: 'Veggie Salad',
-      cookingTimeInMinutes: '100',
-      tags: ['Vegetrainian', 'Veggies'],
-      imageUrl: 'assets/images/food/veggie-salad.jpg',
-      rating: 4.5,
-      numberOfMakes: '100',
-      numberOfReviews: 23400000,
-      countryMadeIn: 'India',
-    },
-  ];
-  ngOnInit() {
-    let tempIconArray = [];
+  dishImagesData = dishImagesData;
+  displayData: RecipeTemplateSavedDataInterfaceWithId[] = [];
+  dataTagArray: string[][] = [];
+  activeConfigurationNumber = 0;
+  activeSlideNumber = 0;
+  allFalseSlides = [false, false, false, false, false, false];
+  activeSlides = [true, false, false, false, false, false];
+  selectedHomepageMealNationalitySelectorObserver$ = this.store.select(
+    selectedHomepageMealNationalitySelector
+  );
+  selectedHomepageMealNationality = '';
+
+  renderReadyIcons: {
+    title: string;
+    iconLocation: string;
+    id: string;
+    altText: string;
+  }[] = [];
+
+  async getDataByCategory(categoryToRetrieve: string) {
+    try {
+      const retrievedResponse =
+        await this.recipeDataApiCallsService.getRecipeDataWithFilter(
+          categoryToRetrieve
+        );
+
+      let retrievedData: RecipeTemplateSavedDataInterfaceWithId[] = [];
+
+      if (retrievedResponse.retrievedData) {
+        retrievedData = retrievedResponse.retrievedData;
+      }
+
+      if (retrievedData.length > 5) {
+        this.displayData = retrievedData.slice(0, 5);
+      } else {
+        this.displayData = retrievedData;
+      }
+      const tempActiveSlidesArray: boolean[] = this.allFalseSlides.slice();
+      for (
+        let indexOfDisplayData = 0;
+        indexOfDisplayData < this.displayData.length;
+        indexOfDisplayData++
+      ) {
+        tempActiveSlidesArray[indexOfDisplayData] = true;
+      }
+      this.activeSlides = tempActiveSlidesArray;
+      this.tagsArrayCreator(this.displayData[0].tags);
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+
+      this.activatePopupService.errorPopupHandler(message);
+    }
+  }
+
+  tagsArrayCreator(tagsArray: string[]) {
+    const retirevedTagsImageArray: {
+      title: string;
+      iconLocation: string;
+      id: string;
+      altText: string;
+    }[] = [];
     for (
-      let tempDataIndex = 0;
-      tempDataIndex < this.tempData.length;
-      tempDataIndex++
+      let tagsArrayIndex = 0;
+      tagsArrayIndex < tagsArray.length;
+      tagsArrayIndex++
     ) {
-      tempIconArray.push(
-        this.tagFilterService.recipeTagFilter(this.tempData[tempDataIndex].tags)
+      retirevedTagsImageArray.push(
+        this.tagFilterService.recipeTagFilter(tagsArray[tagsArrayIndex])
       );
     }
+    if (retirevedTagsImageArray.length > 3) {
+      this.renderReadyIcons = retirevedTagsImageArray.slice(0, 3);
+    } else {
+      this.renderReadyIcons = retirevedTagsImageArray;
+    }
+  }
+  ngOnInit() {
+    this.selectedHomepageMealNationalitySelectorObserver$.subscribe((value) => {
+      this.selectedHomepageMealNationality = value;
 
-    this.dataTagArray = tempIconArray;
+      if (value.length === 0) {
+        this.getDataByCategory('chinense');
+      } else {
+        this.getDataByCategory(value);
+      }
+    });
   }
 }

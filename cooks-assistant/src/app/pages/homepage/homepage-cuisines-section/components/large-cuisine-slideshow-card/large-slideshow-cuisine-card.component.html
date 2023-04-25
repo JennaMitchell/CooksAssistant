@@ -10,12 +10,12 @@
   <div class="homepage-slideshow-large-card-border-break"></div>
   <div class="homepage-slideshow-large-card-detail-container">
     <p class="homepage-slideshow-large-card-time-to-cook">
-      Cooking Time: {{ cookingTime }}
+      Time: {{ displayedCookingTime }}
     </p>
     <div class="homepage-slideshow-large-card-tag-container">
       <img
-        *ngFor="let tagImage of tagsImageArray; let i = index"
-        src="{{ tagImage }}"
+        *ngFor="let tagImage of tagsImageArray"
+        src="{{ tagImage.iconLocation }}"
         alt="tag"
         class="homepage-slideshow-large-card-tag-image"
       />

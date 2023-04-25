@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { databaseUrl } from 'src/app/constants/constants';
 import { ApiErrorService } from '../api-error-handler/api-error-handler.service';
-
+import { UserMakeRecipeEntryInterface } from 'libs/store/auth/auth-reducers';
 export interface RecipeTemplateSavedDataInterface {
   title: string;
   quote: string;
@@ -135,7 +135,7 @@ export class RecipeDataApiCalls {
   getRecipeDataByRating = async (greaterValue: number, lessValue: number) => {
     try {
       const fetchedResponse = await fetch(
-        `${databaseUrl}/recipes/get-recipe-by-rating/greaterValue=${greaterValue}&&lessThan=${lessValue}`,
+        `${databaseUrl}/recipes/get-recipe-by-rating/${greaterValue}&&${lessValue}`,
         {
           method: 'GET',
         }
@@ -187,7 +187,6 @@ export class RecipeDataApiCalls {
 
   updateRecipeNumberOfMakes = async (id: string, newNumberOfMakes: number) => {
     try {
-      console.log(190);
       const fetchedResponse = await fetch(
         `${databaseUrl}/recipes/update-recipe-numberOfMakes/${id}`,
         {
@@ -232,6 +231,43 @@ export class RecipeDataApiCalls {
           body: JSON.stringify({
             username: username,
             recipeRatingArray: newRecipeRatingArray,
+          }),
+        }
+      );
+
+      const awaitedResponse = await fetchedResponse.json();
+
+      this.apiErrorService.apiCallErrorHandler(
+        fetchedResponse.status,
+        awaitedResponse
+      );
+
+      return awaitedResponse;
+    } catch (err) {
+      let message;
+      if (err instanceof Error) message = err.message;
+      else message = String(err);
+      throw new Error(`${message}`);
+    }
+  };
+
+  updateUserRecipesMadeArray = async (
+    username: string,
+    newRecipesMadeArray: UserMakeRecipeEntryInterface[],
+    userToken: string
+  ) => {
+    try {
+      const fetchedResponse = await fetch(
+        `${databaseUrl}/auth/update-userMadeRecipesArray`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + userToken,
+          },
+          body: JSON.stringify({
+            username: username,
+            recipeMadeArray: newRecipesMadeArray,
           }),
         }
       );

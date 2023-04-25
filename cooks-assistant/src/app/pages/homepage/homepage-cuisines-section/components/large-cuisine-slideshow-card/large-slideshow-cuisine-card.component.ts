@@ -14,12 +14,19 @@ export class LargeSlideShowCuisineCard {
   @Input('title') title = '';
   @Input('imageUrl') imageUrl = '';
   @Input('cookingTime') cookingTime = '';
-  @Input('tagsImageArray') tagsImageArray: string[] = [];
+  @Input('tagsImageArray') tagsImageArray: {
+    title: string;
+    iconLocation: string;
+    id: string;
+    altText: string;
+  }[] = [];
+  @Input('recipeId') recipeId = '';
+  displayedCookingTime = '';
 
   ngOnInit() {
-    this.cookingTime =
+    this.displayedCookingTime =
       this.cookingTimeStringConverterService.cookingTimeStringConverter(
-        +this.cookingTime
+        this.cookingTime
       );
   }
 }

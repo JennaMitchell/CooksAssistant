@@ -1,4 +1,8 @@
 <div class="recipe-template-two-main-container">
+  <create-recipe-button
+    [templateData]="userEnteredTemplateData"
+    (createButtonClicked)="createButtonClicked($event)"
+  ></create-recipe-button>
   <div class="recipe-template-two-title-half-container">
     <button
       class="recipe-template-two-photo-edit-button recipe-template-two-edit-button"
@@ -195,7 +199,7 @@
         </p>
         <textarea
           class="recipe-template-two-text-area recipe-template-two-directions-textarea"
-          (keyup)="textAreaInputHandler($event, 'direction')"
+          (keyup)="textAreaInputHandler($event, 'directions')"
           placeholder="Please enter a direction"
           >{{
             listElementDefaultValuesWhenNewItemAddedArray.directions[

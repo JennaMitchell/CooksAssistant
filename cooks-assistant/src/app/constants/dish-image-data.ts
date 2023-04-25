@@ -216,4 +216,34 @@ export const dishImagesData = [
     imageLocation: 'assets/images/food/corn-bread.png',
     altText: 'corn bread',
   },
+  {
+    title: 'Peach Porkchop',
+    imageLocation: 'assets/images/food/peach-pork-chop-steak.jpg',
+    altText: 'peach porkchop',
+  },
+  {
+    title: 'Cauliflower Steaks',
+    imageLocation: 'assets/images/food/cauliflower-steaks.jpg',
+    altText: 'cauliflower steaks',
+  },
+  {
+    title: 'Guacamole Dip',
+    imageLocation: 'assets/images/food/guacamole-dip.jpg',
+    altText: 'guacamole dip',
+  },
+  {
+    title: 'Churros',
+    imageLocation: 'assets/images/food/churros.jpg',
+    altText: 'churros',
+  },
+  {
+    title: 'Pumpkin Pancakes',
+    imageLocation: 'assets/images/food/pumpkin-pancakes.jpg',
+    altText: 'pumpkin pancakes',
+  },
+  {
+    title: 'Chickpea Curry',
+    imageLocation: 'assets/images/food/chickpea-curry.jpg',
+    altText: 'chickpea curry',
+  },
 ];

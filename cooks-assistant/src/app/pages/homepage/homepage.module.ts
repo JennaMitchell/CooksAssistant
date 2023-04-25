@@ -6,10 +6,10 @@ import { RouterModule } from '@angular/router';
 import { HomepageTopNavBar } from './homepage-top-nav-bar/homepage-top-nav-bar.component';
 import { CommonModule } from '@angular/common';
 import { HomepageRecipeSlideshowModule } from './homepage-recipe-slideshow/homepage-recipe-slideshow.module';
-import { HomepagePreferenceSlideshowModule } from './homepage-preference-slides/homepage-preference-slideshow.module';
+import { HomepageFullRecipeSlideshowModule } from './homepage-full-recipe-slideshow/homepage-full-recipe-slideshow';
 import { HomepageRecipeCategories } from './homepage-recipe-categories/homepage-recipe-categories.component';
 import { HomepageCuisineSectionModule } from './homepage-cuisines-section/homepage-cuisines-section.module';
-import { HomepageCookingTimeSlideshowModule } from './homepage-cooking-times-slideshow/homepage-cooking-time-recipe-slideshow.module';
+
 import { HomepageSocialMediaSectionModule } from './homepage-social-media-section/homepage-social-media-section.module';
 import { HomepageFooterModule } from './homepage-footer/homepage-footer.module';
 import { StoreModule } from '@ngrx/store';
@@ -32,10 +32,10 @@ import { HomepageCategoryPopupComponent } from 'src/app/popups/homepage-category
     RouterModule.forChild([{ path: '', component: Homepage }]),
     CommonModule,
     HomepageRecipeSlideshowModule,
-    HomepagePreferenceSlideshowModule,
+    HomepageFullRecipeSlideshowModule,
 
     HomepageCuisineSectionModule,
-    HomepageCookingTimeSlideshowModule,
+
     HomepageFooterModule,
     HomepageSocialMediaSectionModule,
     StoreModule,

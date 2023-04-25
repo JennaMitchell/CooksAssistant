@@ -10,8 +10,8 @@ export interface HomepageStateInterface {
 }
 
 export const initialHomepageState: HomepageStateInterface = {
-  selectedHomepageMealTime: '',
-  selectedHomepageMealPreference: '',
+  selectedHomepageMealTime: 'dinner',
+  selectedHomepageMealPreference: 'chicken',
   selectedHomepageMealNationality: '',
   homepagePopularButtonClicked: false,
 };

@@ -25,15 +25,15 @@ export class TemplateSelectorPopup {
 
   recipeTemplatesImageData = [
     {
-      imageLocation: 'url(../../../../assets/images/food/chicken-salad.jpg)',
+      imageLocation: 'url(../../../../assets/images/templates/template-1.png)',
       id: 'template-selector-template-button-0',
     },
     {
-      imageLocation: 'url(../../../../assets/images/food/meat-plater.jpg)',
+      imageLocation: 'url(../../../../assets/images/templates/template-2.png)',
       id: 'template-selector-template-button-1',
     },
     {
-      imageLocation: 'url(../../../../assets/images/food/veggie-salad.jpg)',
+      imageLocation: 'url(../../../../assets/images/templates/template-3.png)',
       id: 'template-selector-template-button-2',
     },
   ];

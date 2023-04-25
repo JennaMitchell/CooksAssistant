@@ -123,3 +123,16 @@
   color: black;
   cursor: pointer;
 }
+@media (max-width: 1000px) {
+  .recipe-creator-backdrop {
+    width: max-content;
+    max-width: max-content;
+    box-sizing: border-box;
+    padding: 50px 100px;
+  }
+  .recipe-creator-main-container {
+    width: max-content;
+    max-width: max-content;
+    min-width: max-content;
+  }
+}
