@@ -19,6 +19,7 @@ import {
 import { Router } from '@angular/router';
 import { dishImagesData } from 'src/app/constants/dish-image-data';
 import { IconImageRetrieverService } from 'src/app/utilities/icon-image-retriever-service/icon-image-retreiver-service.service';
+import { MediaQueryService } from 'src/app/utilities/media-queries-service/media-queries.service';
 @Component({
   selector: 'homepage-full-recipe-slideshow',
   templateUrl: './homepage-full-recipe-slideshow.component.html',
@@ -28,19 +29,20 @@ import { IconImageRetrieverService } from 'src/app/utilities/icon-image-retrieve
     CookingTimeStringConverterService,
     NumberOfViewsReturnStringService,
     IconImageRetrieverService,
+    MediaQueryService,
   ],
 })
 export class HomepageFullRecipeSlideshow {
   @Input('slideshowType') slideShowType = '';
   constructor(
     private numberOfViewsReturnStringService: NumberOfViewsReturnStringService,
-
     private store: Store,
     private router: Router,
     private recipeDataApiCalls: RecipeDataApiCalls,
     private activatePopupService: ActivatePopupService,
     private cookingTimeStringConverterService: CookingTimeStringConverterService,
-    private iconImageRetrieverService: IconImageRetrieverService
+    private iconImageRetrieverService: IconImageRetrieverService,
+    private mediaQueryService: MediaQueryService
   ) {}
   currentlySelectedRecipeNumber = 0;
   numberOfMakesArray: string[] = [];
@@ -75,6 +77,21 @@ export class HomepageFullRecipeSlideshow {
   dishImagesData = dishImagesData;
 
   displayData: RecipeTemplateSavedDataInterfaceWithId[] = [];
+  mobileMenuButtonActive = false;
+  windowWidth1050Pixels = false;
+  // windowWidth650Pixels = false;
+  /// pick up here
+
+  homepageFullRecipeSlideWindowResizeHandler() {
+    this.windowWidth1050Pixels = window.matchMedia(
+      '(max-width: 1050px)'
+    ).matches;
+  }
+
+  mobileMenuClickHandler() {
+    this.mobileMenuButtonActive = !this.mobileMenuButtonActive;
+  }
+
   async getDataByCategory(categoryToRetrieve: string) {
     try {
       const retrievedResponse =
@@ -105,7 +122,10 @@ export class HomepageFullRecipeSlideshow {
   }
 
   ngOnInit() {
-    // this.infoPreper(this.tempData[0]);
+    this.mediaQueryService.moduleTopContainer100PercentWidthUpdate(
+      'homepage-new-recipe-slideshow-backdrop'
+    );
+
     this.selectedHomepageMealPreferenceObserver$.subscribe((value: string) => {
       this.selectedHomepageMealPreference = value;
       if (this.slideShowType === 'preference') {
@@ -142,6 +162,10 @@ export class HomepageFullRecipeSlideshow {
     });
 
     this.infoPreper(this.displayData[0]);
+    this.homepageFullRecipeSlideWindowResizeHandler();
+    window.addEventListener('resize', () => {
+      this.homepageFullRecipeSlideWindowResizeHandler();
+    });
   }
 
   infoPreper(tempDataEntry: RecipeTemplateSavedDataInterfaceWithId) {

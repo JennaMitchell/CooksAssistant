@@ -1,3 +1,10 @@
+export interface ButtonDataInterface {
+  title: string;
+  iconLocation: string;
+  id: string;
+  altText: string;
+}
+
 export const databaseUrl = 'http://localhost:5000';
 export const capitalLettersArray = [
   'A',

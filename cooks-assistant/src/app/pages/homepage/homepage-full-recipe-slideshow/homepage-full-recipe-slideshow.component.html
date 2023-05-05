@@ -1,4 +1,32 @@
 <div class="homepage-new-recipe-slideshow-backdrop">
+  <button
+    class="homepage-new-recipe-slideshow-preview-popup-button"
+    (click)="mobileMenuClickHandler()"
+    [ngClass]="{
+      'homepage-new-recipe-slideshow-preview-popup-button-active':
+        mobileMenuButtonActive
+    }"
+    *ngIf="windowWidth1050Pixels"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6 homepage-new-recipe-slideshow-preview-popup-button-icon"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+      />
+    </svg>
+  </button>
+  <homepage-mobile-preview-popup
+    *ngIf="mobileMenuButtonActive && windowWidth1050Pixels"
+    [buttonsArrayType]="slideShowType"
+  ></homepage-mobile-preview-popup>
   <img
     class="homepage-new-recipe-slideshow-backdropImage"
     *ngIf="displayData.length !== 0"

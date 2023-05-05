@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RefreshWarningPopupComponent } from './popups/refresh-warning/refresh-warning.component';
 import { ErrorPopupModule } from './popups/error/error-popup.module';
 import { SuccessPopupModule } from './popups/success/success-popup.module';
+import { mediaQueryReducers } from 'libs/store/media-queries/media-queries-reducers';
 @NgModule({
   declarations: [AppComponent, RefreshWarningPopupComponent],
   imports: [
@@ -38,6 +39,7 @@ import { SuccessPopupModule } from './popups/success/success-popup.module';
       popup: popupReducers,
       auth: authReducers,
       recipeCreator: recipeCreatorReducers,
+      mediaQuery: mediaQueryReducers,
     }),
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
     EffectsModule.forRoot([]),
