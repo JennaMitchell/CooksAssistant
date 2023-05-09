@@ -23,8 +23,13 @@ import { RefreshWarningPopupComponent } from './popups/refresh-warning/refresh-w
 import { ErrorPopupModule } from './popups/error/error-popup.module';
 import { SuccessPopupModule } from './popups/success/success-popup.module';
 import { mediaQueryReducers } from 'libs/store/media-queries/media-queries-reducers';
+import { TermsOfServicePopupComponent } from './popups/terms-of-service/terms-of-service-popup.component';
 @NgModule({
-  declarations: [AppComponent, RefreshWarningPopupComponent],
+  declarations: [
+    AppComponent,
+    RefreshWarningPopupComponent,
+    TermsOfServicePopupComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

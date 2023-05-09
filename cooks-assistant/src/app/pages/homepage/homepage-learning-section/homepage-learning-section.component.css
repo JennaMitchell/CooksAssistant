@@ -57,3 +57,45 @@
     max-height: 400px;
   }
 }
+@media (max-width: 550px) {
+  .homepage-learning-section-title {
+    width: max(300px, 300px);
+    font-size: var(--r32);
+    line-height: var(--r32);
+  }
+  .homepage-learning-section-title-underline {
+    width: max(100%, 100%);
+    height: max(30px, 30px);
+    object-fit: fill;
+  }
+}
+@media (max-width: 360px) {
+  .homepage-learning-section-title {
+    width: max(250px, 250px);
+    font-size: var(--r26);
+    line-height: var(--r26);
+  }
+  .homepage-learning-section-title-container {
+    padding: 10px 20px;
+  }
+  .homepage-learning-section-title-underline {
+    width: max(100%, 100%);
+    height: max(30px, 30px);
+    object-fit: fill;
+  }
+}
+@media (max-width: 340px) {
+  .homepage-learning-section-title {
+    width: max(200px, 200px);
+    font-size: var(--r22);
+    line-height: var(--r22);
+  }
+  .homepage-learning-section-title-container {
+    padding: 10px 20px;
+  }
+  .homepage-learning-section-title-underline {
+    width: max(100%, 100%);
+    height: max(30px, 30px);
+    object-fit: fill;
+  }
+}

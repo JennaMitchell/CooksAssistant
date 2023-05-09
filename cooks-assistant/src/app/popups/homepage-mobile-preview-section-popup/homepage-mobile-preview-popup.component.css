@@ -16,6 +16,7 @@
   background-color: var(--main800);
   color: white;
   box-shadow: 0px 0px 20px black;
+  z-index: 2;
 }
 .homepage-mobile-preview-popup-main-container-four {
   grid-template-rows: 1fr 1fr 1fr 1fr;
@@ -47,13 +48,14 @@
   color: black;
 }
 .homepage-mobile-preview-button-image-container {
-  width: max(100%, 100%);
-  height: max(100%, 100%);
+  width: max(30px, 30px);
+  height: max(30px, 30px);
   position: relative;
   box-sizing: border-box;
+  justify-self: center;
 }
 .homepage-mobile-preview-button-image {
-  width: max(60%, 60%);
+  width: max(100%, 100%);
   height: max(100%, 100%);
   position: absolute;
   top: 50%;

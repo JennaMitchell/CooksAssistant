@@ -25,10 +25,10 @@ export class Homepage {
   loggedIn: any;
   searchPoupActive = false;
   homepageCategoryPopupActive = false;
-  windowWidth1050Pixels = false;
+  windowWidth1005Pixels = false;
   homepageWindowResizeHandler() {
-    this.windowWidth1050Pixels = window.matchMedia(
-      '(max-width: 1050px)'
+    this.windowWidth1005Pixels = window.matchMedia(
+      '(max-width: 1005px)'
     ).matches;
   }
 

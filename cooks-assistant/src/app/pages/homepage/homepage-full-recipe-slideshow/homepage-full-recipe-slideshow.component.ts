@@ -46,9 +46,6 @@ export class HomepageFullRecipeSlideshow {
   ) {}
   currentlySelectedRecipeNumber = 0;
   numberOfMakesArray: string[] = [];
-  rightDotsActive = false;
-  leftDotsActive = true;
-  middleSlideActive = true;
   postiveRatingArray: boolean[] = [];
   negativeRatingArray: boolean[] = [];
   postiveRatingActive = false;
@@ -79,8 +76,10 @@ export class HomepageFullRecipeSlideshow {
   displayData: RecipeTemplateSavedDataInterfaceWithId[] = [];
   mobileMenuButtonActive = false;
   windowWidth1050Pixels = false;
-  // windowWidth650Pixels = false;
-  /// pick up here
+
+  currentSelectedRecipeHandler(activeRecipeNumber: number) {
+    this.currentlySelectedRecipeNumber = activeRecipeNumber;
+  }
 
   homepageFullRecipeSlideWindowResizeHandler() {
     this.windowWidth1050Pixels = window.matchMedia(
@@ -291,128 +290,6 @@ export class HomepageFullRecipeSlideshow {
       tempNegativeStarArray[negativeStarRating] = true;
     }
     this.negativeRatingArray = tempNegativeStarArray;
-  }
-
-  toggleRightLogicButton() {
-    const rightSquareButton = document.getElementById(
-      'homepage-new-recipe-slideshow-right-tracker-button'
-    );
-    rightSquareButton?.classList.toggle(
-      'homepage-new-recipe-slideshow-slide-tracker-button-active'
-    );
-  }
-  toggleCenterLogicButton() {
-    const centerSquareButton = document.getElementById(
-      'homepage-new-recipe-slideshow-center-tracker-button'
-    );
-    centerSquareButton?.classList.toggle(
-      'homepage-new-recipe-slideshow-slide-tracker-button-active'
-    );
-  }
-  toggleCenterLogicButtonWithCheck() {
-    const centerSquareButton = document.getElementById(
-      'homepage-new-recipe-slideshow-center-tracker-button'
-    );
-    if (
-      !centerSquareButton?.classList.contains(
-        'homepage-new-recipe-slideshow-slide-tracker-button-active'
-      )
-    ) {
-      centerSquareButton?.classList.toggle(
-        'homepage-new-recipe-slideshow-slide-tracker-button-active'
-      );
-    }
-  }
-  toggleRightLogicButtonWithCheck() {
-    const rightSquareButton = document.getElementById(
-      'homepage-new-recipe-slideshow-right-tracker-button'
-    );
-    if (
-      rightSquareButton?.classList.contains(
-        'homepage-new-recipe-slideshow-slide-tracker-button-active'
-      )
-    ) {
-      rightSquareButton?.classList.toggle(
-        'homepage-new-recipe-slideshow-slide-tracker-button-active'
-      );
-    }
-  }
-  toggleLeftLogicButton() {
-    const leftSquareButton = document.getElementById(
-      'homepage-new-recipe-slideshow-left-tracker-button'
-    );
-    leftSquareButton?.classList.toggle(
-      'homepage-new-recipe-slideshow-slide-tracker-button-active'
-    );
-  }
-  toggleLeftLogicButtonWithCheck() {
-    const leftSquareButton = document.getElementById(
-      'homepage-new-recipe-slideshow-left-tracker-button'
-    );
-    if (
-      leftSquareButton?.classList.contains(
-        'homepage-new-recipe-slideshow-slide-tracker-button-active'
-      )
-    ) {
-      leftSquareButton?.classList.toggle(
-        'homepage-new-recipe-slideshow-slide-tracker-button-active'
-      );
-    }
-  }
-
-  slideButtonLogicChecker() {
-    if (this.currentlySelectedRecipeNumber === 0) {
-      this.rightDotsActive = false;
-      this.leftDotsActive = true;
-      this.middleSlideActive = true;
-      this.toggleLeftLogicButton();
-      this.toggleRightLogicButtonWithCheck();
-      this.toggleCenterLogicButton();
-    } else if (
-      this.currentlySelectedRecipeNumber ===
-      this.displayData.length - 1
-    ) {
-      this.rightDotsActive = false;
-      this.leftDotsActive = true;
-      this.middleSlideActive = true;
-      this.toggleLeftLogicButtonWithCheck();
-      this.toggleRightLogicButton();
-      this.toggleCenterLogicButton();
-    } else {
-      this.rightDotsActive = true;
-      this.leftDotsActive = true;
-      this.middleSlideActive = true;
-      this.toggleCenterLogicButtonWithCheck();
-
-      this.toggleLeftLogicButtonWithCheck();
-      this.toggleRightLogicButtonWithCheck();
-    }
-  }
-
-  onLeftArrowClick() {
-    if (this.currentlySelectedRecipeNumber === 0) {
-      this.currentlySelectedRecipeNumber = this.displayData.length - 1;
-
-      this.toggleLeftLogicButtonWithCheck();
-      this.toggleRightLogicButton();
-    } else {
-      this.currentlySelectedRecipeNumber =
-        this.currentlySelectedRecipeNumber - 1;
-      this.slideButtonLogicChecker();
-    }
-    this.infoPreper(this.displayData[this.currentlySelectedRecipeNumber]);
-  }
-  onRightArrowClick() {
-    if (this.currentlySelectedRecipeNumber === this.displayData.length - 1) {
-      this.currentlySelectedRecipeNumber = 0;
-      this.toggleLeftLogicButton();
-      this.toggleRightLogicButtonWithCheck();
-    } else {
-      this.currentlySelectedRecipeNumber =
-        this.currentlySelectedRecipeNumber + 1;
-      this.slideButtonLogicChecker();
-    }
-    this.infoPreper(this.displayData[this.currentlySelectedRecipeNumber]);
   }
 
   makeButtonClick() {

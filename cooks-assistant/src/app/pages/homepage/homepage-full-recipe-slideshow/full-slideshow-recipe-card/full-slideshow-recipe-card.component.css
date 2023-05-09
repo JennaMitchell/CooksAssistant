@@ -295,9 +295,24 @@
     min-width: 100%;
     width: 100%;
     max-width: 100%;
-  }
-  .homepage-new-recipe-card-main-container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
+  }
+
+  .homepage-new-recipe-info-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    grid-column: 1 / span 1;
+  }
+  .homepage-recipe-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    max-width: calc(30 / var(--base) * 1rem);
+    min-width: calc(30 / var(--base) * 1rem);
+    min-height: calc(20 / var(--base) * 1rem);
+    max-height: calc(20 / var(--base) * 1rem);
   }
 }

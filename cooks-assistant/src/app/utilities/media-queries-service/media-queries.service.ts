@@ -9,4 +9,17 @@ export class MediaQueryService {
     const moduleNamePlate = topElement.parentElement as HTMLElement;
     moduleNamePlate.style.height = 'max(100%,100%)';
   }
+
+  moduleMultipleTopContainer100PercentWidthUpdate(classToGet: string) {
+    const topElements = document.getElementsByClassName(classToGet);
+    for (
+      let indexOfTopElements = 0;
+      indexOfTopElements < topElements.length;
+      indexOfTopElements++
+    ) {
+      const moduleNamePlate = topElements[indexOfTopElements]
+        .parentElement as HTMLElement;
+      moduleNamePlate.style.width = 'max(100%,100%)';
+    }
+  }
 }

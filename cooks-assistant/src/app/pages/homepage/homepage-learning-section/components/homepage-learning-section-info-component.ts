@@ -35,15 +35,10 @@ export class HomepageLearningSectionInfoComponent {
 
   @Output('updateActiveSection') updateActiveSection =
     new EventEmitter<string>();
-  ngAfterContentInit() {
-    console.log(this.absolutePosition.trim());
-  }
 
   sectionClickHandler(event: MouseEvent) {
     let targetElement = event.target as HTMLElement;
-
     let targetId = targetElement.id;
-    console.log(targetId);
     let extractedIdToEmit = '';
     if (targetId.length === 0) {
       targetElement = targetElement.parentElement as HTMLElement;
@@ -57,11 +52,11 @@ export class HomepageLearningSectionInfoComponent {
       targetElement = targetElement.parentElement as HTMLElement;
       targetId = targetElement.id;
     }
-    console.log(targetId);
+
     if (targetId.length !== 0) {
       const splitId = targetId.split('-');
-      console.log(splitId);
       extractedIdToEmit = splitId[splitId.length - 1];
+
       this.updateActiveSection.emit(extractedIdToEmit);
     }
   }

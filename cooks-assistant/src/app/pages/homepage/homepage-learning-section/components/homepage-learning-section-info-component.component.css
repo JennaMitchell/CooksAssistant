@@ -87,16 +87,18 @@
 }
 .homepage-learning-content-container-left {
   left: 50px;
-  top: 25%;
+  top: 2.5%;
 }
 .homepage-learning-content-container-right {
-  right: 50px;
-  top: 25%;
+  left: 30%;
+  top: 20%;
 }
 .homepage-learning-content-container-center {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
+  box-shadow: 0px 0px 15px black;
 }
 @media (max-width: 810px) {
   .homepage-learning-content-container {
@@ -105,5 +107,26 @@
   }
   .homepage-learning-content-container:hover {
     box-shadow: 0px 0px 15px black;
+  }
+}
+@media (max-width: 550px) {
+  .homepage-learning-content-container-left {
+    left: -5%;
+  }
+  .homepage-learning-content-container-right {
+    left: 38%;
+  }
+}
+@media (max-width: 360px) {
+  .homepage-learning-content-container-right {
+    left: 30%;
+  }
+}
+@media (max-width: 320px) {
+  .homepage-learning-content-container-left {
+    left: -7.5%;
+  }
+  .homepage-learning-content-container-right {
+    left: 15%;
   }
 }

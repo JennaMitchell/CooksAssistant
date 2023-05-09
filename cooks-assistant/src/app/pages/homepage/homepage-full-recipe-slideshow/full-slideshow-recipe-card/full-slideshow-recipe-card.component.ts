@@ -25,7 +25,7 @@ export class FullSlideshowRecipeCard {
   renderReadyTags: string[] = [];
 
   ngOnInit() {
-    this.mediaQueryService.moduleTopContainer100PercentWidthUpdate(
+    this.mediaQueryService.moduleMultipleTopContainer100PercentWidthUpdate(
       'homepage-new-recipe-card-main-container'
     );
   }

@@ -15,10 +15,7 @@ import { HomepageActions } from 'libs/store/homepage/homepage.actions';
   providers: [MediaQueryService],
 })
 export class HomepageMobilePreviewPopupComponent {
-  constructor(
-    private store: Store,
-    private mediaQueryService: MediaQueryService
-  ) {}
+  constructor(private store: Store) {}
 
   @Input('buttonsArrayType') buttonsArrayType = '';
   numberOfRows = '';
@@ -100,8 +97,30 @@ export class HomepageMobilePreviewPopupComponent {
         break;
     }
   }
+  updateParentElement() {
+    const topElements = document.getElementsByClassName(
+      'homepage-mobile-preview-popup-main-container'
+    );
 
-  ngAfterContentInit() {
+    for (
+      let indexOfTopElements = 0;
+      indexOfTopElements < topElements.length;
+      indexOfTopElements++
+    ) {
+      const moduleNamePlate = topElements[indexOfTopElements]
+        .parentElement as HTMLElement;
+      moduleNamePlate.style.position = 'absolute';
+      moduleNamePlate.style.top = '0px';
+      moduleNamePlate.style.left = '0px';
+      moduleNamePlate.style.width = '200px';
+      moduleNamePlate.style.height = 'max(100%,100%)';
+    }
+  }
+
+  ngOnInit() {
     this.butttonDataRetriever();
+  }
+  ngAfterViewInit() {
+    this.updateParentElement();
   }
 }

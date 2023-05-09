@@ -69,20 +69,45 @@ export class HomepageLearningSectionComponent {
     },
   ];
 
-  absolutePositionObjectArray: { [key: string]: string[] } = {
-    bake: ['center', 'left', 'right'],
-    home: ['left', 'center', 'right'],
-    grilling: ['right', 'left', 'center'],
-  };
-
-  mobileActiveSection = 'bake';
+  mobileActiveSectionPositionArray = ['center', 'left', 'right'];
   windowWidth810Pixels = false;
   homepageLearningSectionWindowResizeHandler() {
     this.windowWidth810Pixels = window.matchMedia('(max-width: 810px)').matches;
   }
 
   updateActiveSection(clickedSection: string) {
-    this.mobileActiveSection = clickedSection;
+    let clickedSectionsPositionIndex = 0;
+
+    switch (clickedSection) {
+      case 'bake':
+        clickedSectionsPositionIndex = 0;
+        break;
+      case 'home':
+        clickedSectionsPositionIndex = 1;
+        break;
+      case 'grilling':
+        clickedSectionsPositionIndex = 2;
+        break;
+
+      default:
+        break;
+    }
+
+    // const clickedlSectionsCurrentPosition =currentConfigurationArray[clickedSectionsPositionIndex];
+    const currentCenterSectionPosition =
+      this.mobileActiveSectionPositionArray.indexOf('center');
+    const copyOfMobileActiveSectionPositionArray =
+      this.mobileActiveSectionPositionArray.slice();
+
+    const clickedSectionsCurrentPosition =
+      this.mobileActiveSectionPositionArray[clickedSectionsPositionIndex];
+
+    copyOfMobileActiveSectionPositionArray[clickedSectionsPositionIndex] =
+      'center';
+    copyOfMobileActiveSectionPositionArray[currentCenterSectionPosition] =
+      clickedSectionsCurrentPosition;
+    this.mobileActiveSectionPositionArray =
+      copyOfMobileActiveSectionPositionArray;
   }
 
   ngOnInit() {
